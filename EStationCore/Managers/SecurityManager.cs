@@ -347,14 +347,22 @@ namespace EStationCore.Managers
         /// <returns></returns>
         public IEnumerable UserSpaces(Guid profileGuid)
         {
-            return EnumsHelper.GetAllValuesAndDescriptions<UserSpace>().Select(role =>
-                                new ViewCard()
-                                {
-                                    Info1 = role.Key,
-                                    Info2 = role.Value.ToString(),
-                                    Info3 = Roles.IsUserInRole(Membership.GetUser(profileGuid)?.UserName, role.Value.ToString()) ? "Blue" : "Red",
-                                    Bool1 = Roles.IsUserInRole(Membership.GetUser(profileGuid)?.UserName, role.Value.ToString())
-                                });
+            try
+            {
+                return EnumsHelper.GetAllValuesAndDescriptions<UserSpace>().Select(role =>
+                    new ViewCard()
+                    {
+                        Info1 = role.Key,
+                        Info2 = role.Value.ToString(),
+                        Info3 = Roles.IsUserInRole(Membership.GetUser(profileGuid)?.UserName, role.Value.ToString()) ? "Blue" : "Red",
+                        Bool1 = Roles.IsUserInRole(Membership.GetUser(profileGuid)?.UserName, role.Value.ToString())
+                    });                
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e);
+                return null;
+            }
         }
 
 

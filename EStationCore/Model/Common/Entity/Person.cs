@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database;
+using EStationCore.Model.Comm.Entity;
 using EStationCore.Model.Common.Enums;
 
 namespace EStationCore.Model.Common.Entity
@@ -92,6 +93,11 @@ namespace EStationCore.Model.Common.Entity
         /// Les Documents de la personne
         /// </summary>
         public virtual ICollection<Document> Documents { get; set; } = new HashSet<Document>();
-        
+
+        /// <summary>
+        /// Les Documents de la personne
+        /// </summary>
+        public virtual ICollection<Chat> Chats { get; set; } = new HashSet<Chat>();
+
     }
 }

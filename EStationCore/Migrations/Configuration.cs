@@ -34,27 +34,16 @@ namespace EStationCore.Migrations
             //Staff_SeedFromSql(context);
             //Student_SeedFromSql(context);
 
-            //var sqlStudentPeople = Resources.dbo_People_data;
-            //var sqlStudents = Resources.Students_data;
-            //var sqlStaffs = Resources.dbo_Staffs_data;
-            //var sqlSubjects = Resources.dbo_Subjects_data;
-            //var sqlFilieres = Resources.dbo_Filieres_data;
-            //var sqlClasses = Resources.dbo_Classes_data;
-
-            //ef.Database.ExecuteSqlCommand("DELETE FROM Classes");
-            //ef.Database.ExecuteSqlCommand("DELETE FROM Filieres");
-            //ef.Database.ExecuteSqlCommand("DELETE FROM Subjects");
-            //ef.Database.ExecuteSqlCommand("DELETE FROM Staffs");
-            //ef.Database.ExecuteSqlCommand("DELETE FROM Students");
-            //ef.Database.ExecuteSqlCommand("DELETE FROM People");
+            var sqlPeople = Resources.dbo_People_data;
+            var sqlStaffs = Resources.dbo_Staffs_data;
+            
+            ef.Database.ExecuteSqlCommand("DELETE FROM Staffs");
+            ef.Database.ExecuteSqlCommand("DELETE FROM People");
 
 
-            //ef.Database.ExecuteSqlCommand(sqlStudentPeople);
-            //ef.Database.ExecuteSqlCommand(sqlStudents);
-            //ef.Database.ExecuteSqlCommand(sqlStaffs);
-            //ef.Database.ExecuteSqlCommand(sqlSubjects);
-            //ef.Database.ExecuteSqlCommand(sqlFilieres);
-            //ef.Database.ExecuteSqlCommand(sqlClasses);           
+            ef.Database.ExecuteSqlCommand(sqlPeople);
+            ef.Database.ExecuteSqlCommand(sqlStaffs);
+                    
 
             var admin = new Staff
             {
@@ -87,7 +76,7 @@ namespace EStationCore.Migrations
             var x = ef.Set<Person>().ToList();
             x.ForEach(s => s.PhotoIdentity = GetRandomImg());
 
-            MessageBox.Show("Seed Done");
+            MessageBox.Show(Resources.Seed_Done);
         }
 
         private static byte[] GetRandomImg()

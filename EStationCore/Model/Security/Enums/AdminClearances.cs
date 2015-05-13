@@ -2,65 +2,38 @@
 
 namespace EStationCore.Model.Security.Enums
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    
     public enum AdminClearances
     {
-
-        /// <summary>
-        /// Administrateur
-        /// </summary>
-        [Description("Gerer les Utilisateurs/Roles")]
+      
+        [Description("Gerer les Roles")]
         SuperUser,
 
-        /// <summary>
-        /// Ajouter/Modifier les informations d'un autre Staff
-        /// </summary>
-        [Description("Ajouter des Staffs")]
+        
+        [Description("Ajouter des Personnels")]
         StaffWrite,
 
-        /// <summary>
-        /// Supprimer les informations d'un autre Staff
-        /// </summary>
-        [Description("Supprimer des Staffs")]
+        
+        [Description("Supprimer des Personnels")]
         StaffDelete,
 
-        /// <summary>
-        /// Ajouter/Modifier les informations d'un autre Etudiant
-        /// </summary>
-        [Description("Ajouter des Nouveaux Etudiant")]
-        StudentWrite,
+        
+        [Description("Ajouter des Nouveaux Clients")]
+        CustomerWrite,
 
-        /// <summary>
-        /// Supprimer les informations d'un Etudiant
-        /// </summary>
-        [Description("Archiver des Etudiants")]
-        StudentDelete,
+        
+        [Description("Archiver des Clients")]
+        CustomerDelete,
 
-        /// <summary>
-        /// Peux Ajouter des Recues de Finance
-        /// </summary>
+        
         [Description("Ajouter des Salaires")]
         FinanceWrite,
 
-        /// <summary>
-        /// Recevoir de L'Argent
-        /// </summary>
+        
         [Description("Ajouter des Depenses/Recettes")]
         Treasurer,
 
-        /// <summary>
-        /// Ajouter/Modifier les informations d'une matiere
-        /// </summary>
-        [Description("Planifier des Cours")]
-        StudyWrite,
-
-        /// <summary>
-        /// Archiver les informations d'une matiere
-        /// </summary>
-        [Description("Supprimer des Cours")]
-        StudyDelete
+        
 
     }
 }

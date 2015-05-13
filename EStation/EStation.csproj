@@ -59,6 +59,9 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elysium">
+      <HintPath>..\packages\Elysium.Theme.2.0.4\lib\net45\Elysium.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +84,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -138,8 +142,20 @@
     <Compile Include="Ext\TabSizeConverter.cs" />
     <Compile Include="Ressources\MyForm.cs" />
     <Compile Include="Ressources\MyWindowStyle.cs" />
+    <Compile Include="Views\Clients\CustomerDetails.xaml.cs">
+      <DependentUpon>CustomerDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\AddDocument.xaml.cs">
+      <DependentUpon>AddDocument.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Common\ComingSoon.xaml.cs">
       <DependentUpon>ComingSoon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\FileSelector.xaml.cs">
+      <DependentUpon>FileSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -152,6 +168,45 @@
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\ListSelector.xaml.cs">
+      <DependentUpon>ListSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\PersonDocuments.xaml.cs">
+      <DependentUpon>PersonDocuments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\StaffPicker.xaml.cs">
+      <DependentUpon>StaffPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\AddEmploy.xaml.cs">
+      <DependentUpon>AddEmploy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\AddSalary.xaml.cs">
+      <DependentUpon>AddSalary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\AddStaff.xaml.cs">
+      <DependentUpon>AddStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffDetails.xaml.cs">
+      <DependentUpon>StaffDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffEmployments.xaml.cs">
+      <DependentUpon>StaffEmployments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffFinanceView.xaml.cs">
+      <DependentUpon>StaffFinanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffPresentation.xaml.cs">
+      <DependentUpon>StaffPresentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffSalary.xaml.cs">
+      <DependentUpon>StaffSalary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Hr\StaffsView.xaml.cs">
+      <DependentUpon>StaffsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Security\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
@@ -199,7 +254,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Clients\CustomerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Common\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\AddDocument.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Common\ComingSoon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\FileSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -216,6 +287,58 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\ListSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\PersonDocuments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\SearchBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\StaffPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\AddEmploy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\AddSalary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\AddStaff.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffEmployments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffFinanceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffPresentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffSalary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Hr\StaffsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -284,7 +407,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Hr\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +460,25 @@
       <Progid>EStation</Progid>
       <DefaultIcon>favicon.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icon\Doc.png" />
+    <Resource Include="Ressources\Icon\finance.png" />
+    <Resource Include="Ressources\Icon\No.png" />
+    <Resource Include="Ressources\Icon\Pay.png" />
+    <Resource Include="Ressources\Icon\Paycheck.png" />
+    <Resource Include="Ressources\Icon\print.png" />
+    <Resource Include="Ressources\Icon\Retrait.png" />
+    <Resource Include="Ressources\Icon\Role.png" />
+    <Resource Include="Ressources\Icon\Setting.png" />
+    <Resource Include="Ressources\Icon\statistic.png" />
+    <Resource Include="Ressources\Icon\Tresor.png" />
+    <Resource Include="Ressources\Icon\Up.png" />
+    <Resource Include="Ressources\Icon\Versemet.png" />
+    <Resource Include="Ressources\Icon\yes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icon\Caisse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

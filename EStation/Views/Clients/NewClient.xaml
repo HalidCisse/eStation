@@ -123,7 +123,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                    <TextBlock Text="Civilié" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Civilité" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     <ComboBox Name="_CIVILITE_" SelectedValue="{Binding Person.Title, UpdateSourceTrigger=PropertyChanged}" Width="170" VerticalAlignment="Bottom" HorizontalAlignment="Right" SelectedValuePath="Value" DisplayMemberPath="Key" />
                 </StackPanel>
 

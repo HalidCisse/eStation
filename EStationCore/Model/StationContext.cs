@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using EStationCore.Model.Comm.Entity;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Hr.Entity;
 using EStationCore.Model.Oil.Entity;
@@ -29,6 +30,11 @@ namespace EStationCore.Model
         /// Les Personnels
         /// </summary>
         public virtual DbSet<Staff> Staffs { get; set; }
+
+        /// <summary>
+        /// Message Privé, Email, Multicast ou Annonce
+        /// </summary>
+        public virtual DbSet<Conversation> Conversations { get; set; }
 
         /// <summary>
         /// Les Pomps

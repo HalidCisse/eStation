@@ -1,6 +1,4 @@
-﻿
-
-using EStationCore.Managers;
+﻿using EStationCore.Managers;
 
 namespace EStationCore
 {
@@ -25,7 +23,28 @@ namespace EStationCore
         public SecurityManager Authentication = new SecurityManager();
 
 
+        /// <summary>
+        /// Gestion des Ressources Financieres
+        /// </summary>
+        public EconomatManager Economat = new EconomatManager();
 
+
+        /// <summary>
+        /// Gestion des Documents Etudiants et Staffs
+        /// </summary>
+        public DocumentsManager Documents = new DocumentsManager();
+
+
+        ///// <summary>
+        ///// Messagerie
+        ///// </summary>
+        //public CommManager Comm = new CommManager();
+
+
+        ///// <summary>
+        ///// Analytics
+        ///// </summary>
+        //public AnalyticsManager Analytics = new AnalyticsManager();
 
 
 

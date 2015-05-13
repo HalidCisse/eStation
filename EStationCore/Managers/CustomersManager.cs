@@ -11,6 +11,7 @@ using EStationCore.Model;
 using EStationCore.Model.Common.Entity;
 using EStationCore.Model.Common.Views;
 using EStationCore.Model.Customer.Entity;
+using EStationCore.Model.Customer.Views;
 using EStationCore.Model.Hr.Entity;
 using EStationCore.Model.Security.Entity;
 
@@ -22,12 +23,12 @@ namespace EStationCore.Managers
         #region CRUD
 
         /// <summary>
-        /// Represente un enseignant, proff, staff, qui a la possibilite de se connecter a l'Eschool
+        /// Represente un client
         /// </summary>
         /// <param name="newCustomer"></param>
         /// <exception cref="InvalidOperationException">CAN_NOT_CREAT_STAFF_PROFILE</exception>
         /// <returns></returns>
-        [PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.CustomerWrite)]
+        //[PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.CustomerWrite)]
         public bool AddCustomer(Customer newCustomer) 
         {
             Guard.WhenArgument(newCustomer.Person.FullName, "CUSTOMER_NAME_CAN_NOT_BE_EMPTY").IsNullOrEmpty().IsEqual("Inconnue").Throw();
@@ -58,7 +59,7 @@ namespace EStationCore.Managers
         /// </summary>
         /// <param name="myCustomer"></param>
         /// <returns></returns>
-        [PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.StaffWrite)]
+        //[PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.StaffWrite)]
         public bool UpdateCustomer(Customer myCustomer)
         {
             using (var db = new StationContext())
@@ -84,18 +85,19 @@ namespace EStationCore.Managers
         /// </summary>
         /// <param name="customerGuid"></param>
         /// <returns></returns>
-        [PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.StaffDelete)]
-        public bool DeleteStaff(Guid customerGuid)
+        //[PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.StaffDelete)]
+        public bool Delete(Guid customerGuid)
         {
             using (var db = new StationContext())
             {
                 var theMan = db.Customers.Find(customerGuid);
 
                 Guard.WhenArgument(theMan, "CAN_NOT_FIND_STAFF_REFERENCE").IsNull().Throw();
-                
+
                 theMan.Person.DeleteDate = DateTime.Now;
                 theMan.Person.IsDeleted = true;
-                theMan.Person.DeleteUserGuid = Guid.Empty;
+                // ReSharper disable once PossibleNullReferenceException
+                theMan.Person.DeleteUserGuid = (Guid)Membership.GetUser().ProviderUserKey;
 
                 db.Customers.Attach(theMan);
                 db.Entry(theMan).State = EntityState.Modified;
@@ -110,37 +112,43 @@ namespace EStationCore.Managers
         #region HELPERS
 
 
+        public IEnumerable<CustomerCard> GetCustomersCards()
+        {
+            using (var db = new StationContext())
+                return db.Customers.Where(s => !s.Person.IsDeleted)
+                    .OrderBy(s => s.Person.FirstName)
+                    .Include(s => s.Person)
+                    .ToList()
+                    .Select(student => new CustomerCard(student));
+        }
+
+
         /// <summary>
         /// Renvoi la list des Staff 
         /// </summary>
         /// <param name="searchString">Parametre de Recherche</param>
         /// <param name="maxResult">Nombre max de Resultat</param>
         /// <returns></returns>        
-        public HashSet<SearchCard> Search(string searchString, int maxResult = 7)
+        public IEnumerable<CustomerCard> Search(string searchString, int maxResult = 7)
         {
-            searchString = searchString.Trim();
-            List<Guid> searchResult;
+            searchString = searchString?.Trim();
 
             if (!string.IsNullOrEmpty(searchString))
                 using (var db = new StationContext())
                 {
-                    searchResult = db.Customers.Where(s => (s.Person.FirstName + " " + s.Person.LastName).Contains(searchString) ||
-                                                         (s.Person.LastName + " " + s.Person.FirstName).Contains(searchString) ||
-                                                         s.Person.EmailAdress.Equals(searchString, StringComparison.CurrentCultureIgnoreCase) ||                                                        
-                                                         s.Matricule.Equals(searchString, StringComparison.CurrentCultureIgnoreCase)
-                        ).Take(maxResult).Select(s => s.CustomerGuid).ToList();
+                    return db.Customers.Where(s => (s.Person.FirstName + " " + s.Person.LastName).Contains(searchString) ||
+                                                        (s.Person.LastName + " " + s.Person.FirstName).Contains(searchString) ||
+                                                         s.Person.EmailAdress.Contains(searchString) ||
+                                                         s.Matricule.Equals(searchString)
+                                     ).Take(7)
+                                     .Include(s => s.Person)
+                                     .ToList()
+                                     .Select(s => new CustomerCard(s));
                 }
-            else{
-                using (var db = new StationContext())
-                    searchResult = db.Customers.Take(7).Select(s => s.CustomerGuid).ToList();                
-            }
-
-            var results = new HashSet<SearchCard>();
-
-            foreach (var result in searchResult)
-                results.Add(new SearchCard(result, true));
-
-            return results;
+            using (var db = new StationContext())
+                return db.Customers.Include(s => s.Person)
+                                  .ToList()
+                                  .Select(s => new CustomerCard(s));           
         }
 
        

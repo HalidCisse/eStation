@@ -14,12 +14,6 @@ namespace EStationCore.Managers {
         public TreasuryManager Treasury = new TreasuryManager();
 
 
-        ///// <summary>
-        ///// Gestion Des Ressources Financiere
-        ///// </summary>
-        //public StudentsFinanceManager StudentsFinance = new StudentsFinanceManager();
-
-
         /// <summary>
         /// Gestion Des Salaire
         /// </summary>

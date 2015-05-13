@@ -61,6 +61,25 @@ namespace EStationCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [dbo].[People] ([PersonGuid], [Title], [FirstName], [LastName], [HealthState], [Nationality], [IdentityNumber], [BirthDate], [BirthPlace], [PhoneNumber], [EmailAdress], [HomeAdress], [RegistrationDate], [AddUserGuid], [DateAdded], [LastEditDate], [LastEditUserGuid], [IsDeleted], [DeleteUserGuid], [DeleteDate]) VALUES (N&apos;a1bc1aa1-1efc-42ff-bc12-004726372948&apos;, 0, N&apos;Samira&apos;, N&apos;Khalis&apos;, 0, N&apos;Maroc&apos;, N&apos;PO-124547&apos;, N&apos;1995-03-30 00:00:00&apos;, N&apos;Rabat&apos;, N&apos;+212 624-965872&apos;, N&apos;Samira@gmail.com&apos;, NULL, NULL,  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string dbo_People_data {
+            get {
+                return ResourceManager.GetString("dbo_People_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [dbo].[Staffs] ([StaffGuid], [PersonGuid], [Matricule], [PositionPrincipale], [DepartementPrincipale], [Division], [Qualification], [Diploma], [DiplomaLevel], [Experiences], [FormerJob], [Grade], [HiredDate], [Statut]) VALUES (N&apos;39690a52-3685-4c78-bf7a-0e1588323f71&apos;, N&apos;6d26fe5c-c26f-450e-8481-ec46bb112042&apos;, N&apos;SZ-315-8783&apos;, NULL, N&apos;Pompiste&apos;, NULL, N&apos;Doctorat En Mathematique&apos;, NULL, NULL, 21, NULL, N&apos;Junior&apos;, NULL, 0)
+        ///INSERT INTO [dbo].[Staffs] ([StaffGuid], [PersonGuid], [Matricule], [PositionP [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string dbo_Staffs_data {
+            get {
+                return ResourceManager.GetString("dbo_Staffs_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap defaultStaff {
@@ -307,6 +326,15 @@ namespace EStationCore.Properties {
             get {
                 object obj = ResourceManager.GetObject("portrait9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seed Done.
+        /// </summary>
+        internal static string Seed_Done {
+            get {
+                return ResourceManager.GetString("Seed_Done", resourceCulture);
             }
         }
         

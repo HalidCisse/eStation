@@ -24,6 +24,24 @@
     <BitmapImage x:Key="UserIcon" UriSource="../Ressources/Icon/UserIcon.png" />
 
 
-    
-    
+
+    <BitmapImage x:Key="EconomatIcon"          UriSource="../Ressources/Icon/finance.png" />
+    <BitmapImage x:Key="PayIcon"           UriSource="../Ressources/Icon/Pay.png" />
+    <BitmapImage x:Key="PaycheckIcon"      UriSource="../Ressources/Icon/Paycheck.png" />
+    <BitmapImage x:Key="RetraitIcon"       UriSource="../Ressources/Icon/Retrait.png" />
+    <BitmapImage x:Key="VersemetIcon"      UriSource="../Ressources/Icon/Versemet.png" />   
+    <BitmapImage x:Key="CaisseIcon"        UriSource="../Ressources/Icon/Caisse.png" />
+    <BitmapImage x:Key="TresorIcon"        UriSource="../Ressources/Icon/Tresor.png" />
+    <BitmapImage x:Key="TresorDownIcon"        UriSource="../Resources/Down.png" />
+    <BitmapImage x:Key="StatistiqueIcon" UriSource="../Ressources/Icon/statistic.png" />
+
+
+    <!--<BitmapImage x:Key="ThreeIcon" UriSource="../Ressources/Icon/threeIcon.png" />
+    <BitmapImage x:Key="SearchIcon" UriSource="../Ressources/Icon/search.png" />
+    <BitmapImage x:Key="EmailIcon" UriSource="../Ressources/Icon/email.png" />-->
+    <BitmapImage x:Key="DocIcon" UriSource="../Ressources/Icon/Doc.png" />
+    <BitmapImage x:Key="RoleIcon" UriSource="../Ressources/Icon/Role.png" />
+
+
+
 </ResourceDictionary>

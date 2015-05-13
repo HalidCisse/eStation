@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using EStation.Views.Clients;
+using EStation.Views.Hr;
 using EStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
@@ -59,7 +60,7 @@ namespace EStation.Views.Common
 
         private void _STAFF_BUTTON_OnClick(object sender, RoutedEventArgs e) => new Task(() => {
             Dispatcher.BeginInvoke(new Action(()
-               => { NavigationService?.Navigate(new ComingSoon(), UriKind.Relative); }));
+               => { NavigationService?.Navigate(new StaffsView(), UriKind.Relative); }));
         }).Start();
 
         private void _POMPS_BUTTON_OnClick(object sender, RoutedEventArgs e) => new Task(() => {

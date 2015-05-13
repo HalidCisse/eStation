@@ -22,9 +22,9 @@ namespace EStation.Ext
             if(string.IsNullOrEmpty(theString)||theString.Length<3)
                 return new ValidationResult(false, "Min 3 caractères");
 
-            //var theMan = App.DataS.HumanResource.GetStaff(theString);
-            //return theMan!=null ? new ValidationResult(false, theMan.Person.FullName+" dispose ce matricule") :
-            return    new ValidationResult(true, null);
+            var theMan = App.EStation.HumanResource.GetStaff(theString);
+            return theMan!=null ? new ValidationResult(false, theMan.Person.FullName+" dispose ce matricule") :
+                new ValidationResult(true, null);
         }
     }
 }

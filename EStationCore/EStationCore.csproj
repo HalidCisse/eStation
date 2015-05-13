@@ -66,7 +66,10 @@
     <Compile Include="CoreService.cs" />
     <Compile Include="Helpers\MembershipUserCreateStatus.cs" />
     <Compile Include="Helpers\PayRollHelper.cs" />
+    <Compile Include="Managers\AnalyticsManager.cs" />
+    <Compile Include="Managers\CommManager.cs" />
     <Compile Include="Managers\CustomersManager.cs" />
+    <Compile Include="Managers\DocumentsManager.cs" />
     <Compile Include="Managers\EconomatManager.cs" />
     <Compile Include="Managers\HrManager.cs" />
     <Compile Include="Managers\MetaManager.cs" />
@@ -91,7 +94,14 @@
     <Compile Include="Model\Common\Enums\TypeHuile.cs" />
     <Compile Include="Model\Common\Views\SearchCard.cs" />
     <Compile Include="Model\Common\Views\ViewCard.cs" />
+    <Compile Include="Model\Comm\Entity\Chat.cs" />
+    <Compile Include="Model\Comm\Entity\Conversation.cs" />
+    <Compile Include="Model\Comm\Entity\Message.cs" />
+    <Compile Include="Model\Comm\Enums\MessageType.cs" />
+    <Compile Include="Model\Comm\Views\ChatCard.cs" />
+    <Compile Include="Model\Comm\Views\MessageCard.cs" />
     <Compile Include="Model\Customer\Entity\Customer.cs" />
+    <Compile Include="Model\Customer\Views\CustomerCard.cs" />
     <Compile Include="Model\Fuel\Entity\Carburant.cs" />
     <Compile Include="Model\Fuel\Entity\Citerne.cs" />
     <Compile Include="Model\Fuel\Entity\Colonne.cs" />
@@ -111,6 +121,7 @@
     <Compile Include="Model\Hr\Enums\PaymentType.cs" />
     <Compile Include="Model\Hr\Enums\PayType.cs" />
     <Compile Include="Model\Hr\Enums\TransactionType.cs" />
+    <Compile Include="Model\Hr\Views\DepStaffCard.cs" />
     <Compile Include="Model\Hr\Views\EmploymentCard.cs" />
     <Compile Include="Model\Hr\Views\PayrollCard.cs" />
     <Compile Include="Model\Hr\Views\SalaryCard.cs" />
@@ -134,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Customer\Enums\" />
-    <Folder Include="Model\Customer\Views\" />
     <Folder Include="Model\Fuel\Enums\" />
     <Folder Include="Model\Fuel\Views\" />
     <Folder Include="Model\Oil\Enums\" />
@@ -247,6 +257,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dbo.People.data.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dbo.Staffs.data.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

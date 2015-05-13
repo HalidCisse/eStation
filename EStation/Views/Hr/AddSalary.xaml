@@ -1,0 +1,87 @@
+﻿<Window x:Class="EStation.Views.Hr.AddSalary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ext="clr-namespace:EStation.Ext"
+        WindowStartupLocation="CenterOwner"
+        Height="500" Width="600" Style="{StaticResource MyForm}" FontFamily="Helvetica">
+
+	<Window.Resources>
+
+			<Style TargetType="TextBlock">
+				<Setter Property="FontSize" Value="20"/>
+				<Setter Property="FontFamily" Value="Verdana"/>
+				<Setter Property="FontWeight" Value="Light"/>
+				<Setter Property="Foreground" Value="Gray"/>
+			</Style>
+
+			<Style TargetType="ComboBox">            
+				<Setter Property="FontSize" Value="20"/>            
+				<Setter Property="Width" Value="250"/>
+				<Setter Property="Height" Value="30"/>
+			</Style>
+
+		</Window.Resources>
+	<AdornerDecorator>
+		<Grid Name="_GRID" Margin="10,-30,10,20" >
+            <Grid.CommandBindings>
+                <CommandBinding Command="Save" CanExecute="Save_CanExecute" Executed="save_Executed" />
+            </Grid.CommandBindings>
+            <Grid.RowDefinitions>
+				<RowDefinition Height="100"/>
+				<RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+				<RowDefinition Height="50"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,30">
+				<Image Source="{StaticResource PaycheckIcon}" Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+				<Grid Height="40" Margin="15,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+					<TextBlock Name="_TITLE_TEXT" Text="REMUNERATIONS" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
+					<Border Background="Blue" Width="350" Height="7"  VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+				</Grid>
+			</Grid>
+        
+			<StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+				<TextBlock Text="Libellé" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+				<TextBox x:Name="_DESIGNATION"  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error" >
+					<TextBox.Text>
+						<Binding Path="Designation" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+							<Binding.ValidationRules>
+								<ext:NameValidator ValidatesOnTargetUpdated="True"/>
+							</Binding.ValidationRules>
+						</Binding>
+					</TextBox.Text>
+				</TextBox>
+			</StackPanel>
+        
+			 <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Montant" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:CalculatorUpDown Name="_REMUNERATION" Value="{Binding Remuneration, UpdateSourceTrigger=PropertyChanged}" Increment="100" FormatString="C2" HorizontalAlignment="Left" Width="250" Height="30" />
+            </StackPanel>  
+            
+             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Date Debut" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <DatePicker Name="_START_SALARY" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}"  Width="250" Height="30" HorizontalAlignment="Left" />
+            </StackPanel>
+            
+             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Date Fin" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <DatePicker Name="_END_SALARY" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}"  Width="250" Height="30" HorizontalAlignment="Left" />
+            </StackPanel>
+        					
+            <xctk:WatermarkTextBox x:Name="_DESCRIPTION" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Watermark="Description" Height="70" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Stretch" />
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
+                <Button Name="_ENREGISTRER" Content="Enregistrer" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Command="Save" />
+                <Button Name="_ANNULER" Content="Annuler" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Click="Annuler_Click"/>
+            </Grid>
+        </Grid>
+	</AdornerDecorator>
+</Window>

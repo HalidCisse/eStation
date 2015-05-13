@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="EStation.Views.Common.ListSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" Height="30"
+             d:DesignWidth="264">
+       
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>       
+        <Button Name="_BACKWARD_BUTTON" Content="&#xf0d9;" FontSize="40" Width="20" Height="40" Grid.Column="0" Style="{DynamicResource ToolButtonStyle}" Click="BackwardButton_OnClick"/>
+        <Label Name="_THE_LABEL" Content="SelectedKey" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Foreground="White" FontSize="15" FontWeight="ExtraLight" Grid.Column="1" Margin="0,0,10,0" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+           
+        </Label>
+            <ComboBox Name="_THE_COMBO_BOX" Grid.Column="0" SelectedValuePath="Value" DisplayMemberPath="Key" Visibility="Collapsed" SelectionChanged="TheComboBox_OnSelectionChanged"/>
+        <Button Name="_FORWARD_BUTTON" Content="&#xf0da;" FontSize="40" Height="40" Width="20" Grid.Column="2" Style="{DynamicResource ToolButtonStyle}" Click="ForwardButton_OnClick" />
+    </Grid>
+        
+</UserControl>
