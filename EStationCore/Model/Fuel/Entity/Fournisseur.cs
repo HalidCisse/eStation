@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    internal class Fournisseur
+    public class Fournisseur
     {
         [Key]
         public Guid FournisseurGuid { get; set; }

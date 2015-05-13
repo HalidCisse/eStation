@@ -1,21 +1,29 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using EStationCore.Model.Sale.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
+using CLib.Database;
+
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    internal class Prelevement 
+    public class Prelevement : Tracable
     {
         [Key]
         public Guid PrelevementGuid { get; set; }
 
+        public Guid PompeGuid { get; set; }
+
+        public Guid CiterneGuid { get; set; }
+
+        public DateTime? DatePrelevement { get; set; }
 
 
-        public Pompe Pompe { get; set; }
 
-        public Journal Journal { get; set; }
+        [ForeignKey("PompeGuid")]
+        public virtual Pompe Pompe { get; set; }
 
-
+        [ForeignKey("CiterneGuid")]
+        public virtual Citerne Citerne { get; set; }
 
     }
 }

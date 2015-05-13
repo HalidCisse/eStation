@@ -9,11 +9,11 @@ namespace EStationCore.Model.Fuel.Entity
         [Key]
         public Guid ColonneGuid { get; set; }
 
-        public string Nom { get; set; }
+        public string Libel { get; set; }
 
 
 
-        public List<Pompe> Pompes { get; set; }
+        public virtual ICollection<Pompe> Pompes { get; set; } = new HashSet<Pompe>();
 
 
     }

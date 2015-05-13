@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -26,6 +27,7 @@ namespace EStation
 
         private void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)
         {
+            FormsAuthentication.SignOut();
             Thread.CurrentPrincipal = null;
 
             new Task(() =>

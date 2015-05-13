@@ -102,14 +102,14 @@
     <Compile Include="Model\Comm\Views\MessageCard.cs" />
     <Compile Include="Model\Customer\Entity\Customer.cs" />
     <Compile Include="Model\Customer\Views\CustomerCard.cs" />
-    <Compile Include="Model\Fuel\Entity\Carburant.cs" />
+    <Compile Include="Model\Fuel\Entity\Fuel.cs" />
     <Compile Include="Model\Fuel\Entity\Citerne.cs" />
     <Compile Include="Model\Fuel\Entity\Colonne.cs" />
     <Compile Include="Model\Fuel\Entity\Commande.cs" />
     <Compile Include="Model\Fuel\Entity\Fournisseur.cs" />
     <Compile Include="Model\Fuel\Entity\Pompe.cs" />
     <Compile Include="Model\Fuel\Entity\Prelevement.cs" />
-    <Compile Include="Model\Fuel\Entity\Stock.cs" />
+    <Compile Include="Model\Fuel\Entity\StockFuel.cs" />
     <Compile Include="Model\Hr\Entity\BillPayOff.cs" />
     <Compile Include="Model\Hr\Entity\Employement.cs" />
     <Compile Include="Model\Hr\Entity\Paycheck.cs" />

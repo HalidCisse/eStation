@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CLib.Database;
+
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    public class Pompe
+    public class Pompe : Tracable
     {
 
         [Key]
@@ -14,20 +17,28 @@ namespace EStationCore.Model.Fuel.Entity
 
         public Guid CiterneGuid { get; set; }
 
-        public int CompteurMecanique { get; set; }
-
-        public double CompteurElectronique1 { get; set; }
-
-        public double CompteurElectronique2 { get; set; }
-
-        public double CompteurElectronique3 { get; set; }
+        public Guid FuelGuid { get; set; }
 
 
+        public string Matricule { get; set; }
+
+        public double FullCounter { get; set; }
+
+        public int PistolNumber { get; set; }
+
+
+
+       
 
         [ForeignKey("CiterneGuid")]
         public virtual Citerne Citerne { get; set; }
 
         [ForeignKey("ColonneGuid")]
         public virtual Colonne Colonne { get; set; }
+
+
+        public virtual ICollection<Prelevement> Prelevements { get; set; } = new HashSet<Prelevement>();
+
+
     }
 }

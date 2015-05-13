@@ -32,9 +32,11 @@ namespace EStation
                     mainWindow._USER_NAME_LABEL.Visibility = Visibility.Collapsed;
                     mainWindow._POPUP_BUTTON.Visibility = Visibility.Collapsed;
                     Keyboard.Focus(_PSEUDO);
-
-	                _PSEUDO.Text = "Halid";   //"halid";
-                    _PASSWORD.Password ="pass00."; //"halid5.";
+                    #if (DEBUG)
+                    {
+                        _PSEUDO.Text = "Halid";   //"halid";
+                        _PASSWORD.Password = "pass00."; //"halid5.";
+                    }	                
                 }));
             }).Start();
         
@@ -102,18 +104,19 @@ namespace EStation
         }
 
 
-        private void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
+        private async void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
         {
+            _BUSY_INDICATOR.IsBusy = true;
+            var img = await Task.FromResult(App.EStation.Authentication.GetUserPic(_PSEUDO.Text));
+            _USER_IMAGE.DataContext = img ?? ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
+            _BUSY_INDICATOR.IsBusy = false;
             //FormsAuthentication.SignOut();
         }
 
 
         private async void _PSEUDO_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _BUSY_INDICATOR.IsBusy=true;
-            var img = await Task.FromResult(App.EStation.Authentication.GetUserPic(_PSEUDO.Text));
-            _USER_IMAGE.DataContext=img??ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
-            _BUSY_INDICATOR.IsBusy=false;
+            
 
             //_BUSY_INDICATOR.IsBusy=true;
 

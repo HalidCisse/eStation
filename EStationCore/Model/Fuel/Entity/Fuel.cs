@@ -1,22 +1,21 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using CLib.Database;
+
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    internal class Carburant
+    public class Fuel : Tracable
     {
         [Key]
         public Guid CarburantGuid { get; set; }
 
 
-        public string Nom { get; set; }
+        public string Libel { get; set; }
 
+        public string TypeFuel { get; set; }
 
-        public string TypeCarburant { get; set; }
-
-
-        public double Seuil { get; set; }
-
+        public double Threshold { get; set; }
 
 
 

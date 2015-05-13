@@ -2,7 +2,7 @@
 
 namespace EStationCore.Model.Common.Enums
 {
-    internal enum StockType
+    public enum StockType
     {
 
         /// <summary>

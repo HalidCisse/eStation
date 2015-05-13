@@ -5,7 +5,7 @@ using EStationCore.Model.Fuel.Entity;
 
 namespace EStationCore.Model.Sale.Entity
 {
-    internal class Journal
+    public class Journal
     {
         [Key]
         public Guid JournalGuid { get; set; }
