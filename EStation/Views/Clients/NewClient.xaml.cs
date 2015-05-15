@@ -9,7 +9,7 @@ using CLib;
 using CLib.Validation;
 using EStationCore.Model.Common.Entity;
 using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Customer.Entity;
+using EStationCore.Model.Customers.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EStation.Views.Clients

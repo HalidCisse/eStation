@@ -22,8 +22,8 @@ namespace EStationCore.Model.Fuel.Entity
         [ForeignKey("PompeGuid")]
         public virtual Pompe Pompe { get; set; }
 
-        [ForeignKey("CiterneGuid")]
-        public virtual Citerne Citerne { get; set; }
+        //[ForeignKey("CiterneGuid")]
+        //public virtual Citerne Citerne { get; set; }
 
     }
 }

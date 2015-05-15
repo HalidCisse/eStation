@@ -16,10 +16,10 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\Halid\Documents\GitHub\Publish\Estation\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -29,7 +29,6 @@
     <TargetCulture>fr</TargetCulture>
     <ProductName>EStation</ProductName>
     <PublisherName>Halid Cisse</PublisherName>
-    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -181,6 +180,27 @@
     <Compile Include="Views\Common\StaffPicker.xaml.cs">
       <DependentUpon>StaffPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fuel\AddCiterne.xaml.cs">
+      <DependentUpon>AddCiterne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\AddPompe.xaml.cs">
+      <DependentUpon>AddPompe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\AddFuel.xaml.cs">
+      <DependentUpon>AddFuel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\CarburantView.xaml.cs">
+      <DependentUpon>CarburantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\CiterneView.xaml.cs">
+      <DependentUpon>CiterneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\ColonneView.xaml.cs">
+      <DependentUpon>ColonneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\FuelStockView.xaml.cs">
+      <DependentUpon>FuelStockView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Hr\AddEmploy.xaml.cs">
       <DependentUpon>AddEmploy.xaml</DependentUpon>
     </Compile>
@@ -305,6 +325,34 @@
     <Page Include="Views\Common\StaffPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Fuel\AddCiterne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\AddPompe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\AddFuel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\CarburantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\CiterneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\ColonneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\FuelStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Hr\AddEmploy.xaml">
       <Generator>MSBuild:Compile</Generator>

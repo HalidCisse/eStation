@@ -24,7 +24,7 @@ namespace EStationCore.Model
         /// <summary>
         /// Les Clients
         /// </summary>
-        public virtual DbSet<Customer.Entity.Customer> Customers { get; set; }
+        public virtual DbSet<Customers.Entity.Customer> Customers { get; set; }
 
         /// <summary>
         /// Les Personnels
@@ -41,20 +41,28 @@ namespace EStationCore.Model
         /// </summary>
         public virtual DbSet<Pompe> Pompes { get; set; }
 
-        /// <summary>
-        /// Les Colonne
-        /// </summary>
-        public virtual DbSet<Colonne> Colonnes { get; set; }
+        ///// <summary>
+        ///// Les Colonne
+        ///// </summary>
+        //public virtual DbSet<Colonne> Colonnes { get; set; }
 
         /// <summary>
         /// Les Citernes
         /// </summary>
         public virtual DbSet<Citerne> Citernes { get; set; }
 
+
+        /// <summary>
+        /// Les Carburant
+        /// </summary>
+        public virtual DbSet<Fuel.Entity.Fuel> Fuels { get; set; }
+
         /// <summary>
         /// Les Huile
         /// </summary>
         public virtual DbSet<Huile> Huiles { get; set; }
+
+
 
 
         #endregion

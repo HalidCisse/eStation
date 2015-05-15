@@ -1,9 +1,28 @@
 ﻿using EStationCore.Managers;
 
+
 namespace EStationCore
 {
     public class CoreService
     {
+
+        /// <summary>
+        /// System de Gestion Des Citernes
+        /// </summary>
+        public CiternesManager Citernes = new CiternesManager();
+
+
+        /// <summary>
+        /// System de Gestion Des Carburants
+        /// </summary>
+        public FuelManager Fuels = new FuelManager();
+
+
+        /// <summary>
+        /// System de Gestion Des Pompes
+        /// </summary>
+        public PompesManager Pompes = new PompesManager();
+
 
         /// <summary>
         /// System de Gestion Des Clients

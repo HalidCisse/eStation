@@ -17,7 +17,7 @@ namespace EStationCore.Model.Sale.Entity
 
 
         [ForeignKey("CustomerGuid")]
-        public virtual Customer.Entity.Customer Customer { get; set; }
+        public virtual Customers.Entity.Customer Customer { get; set; }
 
 
         public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();

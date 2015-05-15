@@ -3,17 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Security.Permissions;
 using System.Web.Security;
 using Bytes2you.Validation;
 using CLib;
 using EStationCore.Model;
 using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Customer.Entity;
-using EStationCore.Model.Customer.Views;
+using EStationCore.Model.Customers.Entity;
+using EStationCore.Model.Customers.Views;
 using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Security.Entity;
+using QueryableExtensions = System.Data.Entity.QueryableExtensions;
 
 namespace EStationCore.Managers
 {
@@ -146,7 +144,7 @@ namespace EStationCore.Managers
                                      .Select(s => new CustomerCard(s));
                 }
             using (var db = new StationContext())
-                return db.Customers.Include(s => s.Person)
+                return db.Customers.Include((s => s.Person))
                                   .ToList()
                                   .Select(s => new CustomerCard(s));           
         }
@@ -155,14 +153,14 @@ namespace EStationCore.Managers
         public Staff GetStaffByGuid(Guid staffGuid)
         {
             using (var db = new StationContext())
-                return db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
+                return QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
         }
 
         
         public IEnumerable GetAllCustomers()
         {
             using (var db = new StationContext())
-                return db.Customers.Include(s => s.Person).OrderBy(s => s.Person.FirstName).ToList();
+                return db.Customers.Include( (s => s.Person)).OrderBy(s => s.Person.FirstName).ToList();
         }
 
        
@@ -176,21 +174,21 @@ namespace EStationCore.Managers
         public Staff GetCustomerByEmail(string email)
         {
             using (var db = new StationContext())
-                return db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.Person.EmailAdress.Equals(email));
+                return QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.Person.EmailAdress.Equals(email));
         }
 
         
         public Customer GetCustomer(string customerMatricule)
         {
             using (var db = new StationContext())
-                return db.Customers.Include(s => s.Person).FirstOrDefault(s => s.Matricule.Equals(customerMatricule));
+                return db.Customers.Include((s => s.Person)).FirstOrDefault(s => s.Matricule.Equals(customerMatricule));
         }
 
      
         public Customer GetCustomer(Guid customerGuid)
         {
             using (var db = new StationContext())
-                return db.Customers.Include(s => s.Person).FirstOrDefault(s => s.CustomerGuid == customerGuid);
+                return db.Customers.Include( (s => s.Person)).FirstOrDefault(s => s.CustomerGuid == customerGuid);
         }
 
 
@@ -312,7 +310,7 @@ namespace EStationCore.Managers
             {
                 using (var db = new StationContext())
                 {
-                    var x = db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
+                    var x = QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
                     return x;
                 }
             }

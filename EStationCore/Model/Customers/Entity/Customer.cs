@@ -7,7 +7,7 @@ using EStationCore.Model.Common.Entity;
 using EStationCore.Model.Common.Enums;
 using EStationCore.Model.Sale.Entity;
 
-namespace EStationCore.Model.Customer.Entity
+namespace EStationCore.Model.Customers.Entity
 {
 
     /// <summary>

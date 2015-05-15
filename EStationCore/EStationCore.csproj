@@ -67,13 +67,16 @@
     <Compile Include="Helpers\MembershipUserCreateStatus.cs" />
     <Compile Include="Helpers\PayRollHelper.cs" />
     <Compile Include="Managers\AnalyticsManager.cs" />
+    <Compile Include="Managers\CiternesManager.cs" />
     <Compile Include="Managers\CommManager.cs" />
     <Compile Include="Managers\CustomersManager.cs" />
     <Compile Include="Managers\DocumentsManager.cs" />
     <Compile Include="Managers\EconomatManager.cs" />
+    <Compile Include="Managers\FuelManager.cs" />
     <Compile Include="Managers\HrManager.cs" />
     <Compile Include="Managers\MetaManager.cs" />
     <Compile Include="Managers\PayrollManager.cs" />
+    <Compile Include="Managers\PompesManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
     <Compile Include="Managers\TreasuryManager.cs" />
     <Compile Include="Migrations\201505121758349_m-.cs" />
@@ -100,16 +103,20 @@
     <Compile Include="Model\Comm\Enums\MessageType.cs" />
     <Compile Include="Model\Comm\Views\ChatCard.cs" />
     <Compile Include="Model\Comm\Views\MessageCard.cs" />
-    <Compile Include="Model\Customer\Entity\Customer.cs" />
-    <Compile Include="Model\Customer\Views\CustomerCard.cs" />
+    <Compile Include="Model\Customers\Entity\Customer.cs" />
+    <Compile Include="Model\Customers\Views\CustomerCard.cs" />
     <Compile Include="Model\Fuel\Entity\Fuel.cs" />
     <Compile Include="Model\Fuel\Entity\Citerne.cs" />
-    <Compile Include="Model\Fuel\Entity\Colonne.cs" />
     <Compile Include="Model\Fuel\Entity\Commande.cs" />
     <Compile Include="Model\Fuel\Entity\Fournisseur.cs" />
     <Compile Include="Model\Fuel\Entity\Pompe.cs" />
     <Compile Include="Model\Fuel\Entity\Prelevement.cs" />
+    <Compile Include="Model\Fuel\Entity\Price.cs" />
     <Compile Include="Model\Fuel\Entity\StockFuel.cs" />
+    <Compile Include="Model\Fuel\Views\CiterneCard.cs" />
+    <Compile Include="Model\Fuel\Views\ColonneCard.cs" />
+    <Compile Include="Model\Fuel\Views\FuelCard.cs" />
+    <Compile Include="Model\Fuel\Views\PompeCard.cs" />
     <Compile Include="Model\Hr\Entity\BillPayOff.cs" />
     <Compile Include="Model\Hr\Entity\Employement.cs" />
     <Compile Include="Model\Hr\Entity\Paycheck.cs" />
@@ -144,9 +151,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\Customer\Enums\" />
+    <Folder Include="Model\Customers\Enums\" />
     <Folder Include="Model\Fuel\Enums\" />
-    <Folder Include="Model\Fuel\Views\" />
     <Folder Include="Model\Oil\Enums\" />
     <Folder Include="Model\Oil\Views\" />
     <Folder Include="Model\Sale\Enums\" />

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace EStationCore.Model.Customer.Views
+namespace EStationCore.Model.Customers.Views
 {
     public class CustomerCard
     {       
-        public CustomerCard(Entity.Customer currentCustomer)
+        public CustomerCard(Customers.Entity.Customer currentCustomer)
         {
             CustomerGuid = currentCustomer.CustomerGuid;
             Title = currentCustomer.Person.Title.ToString();

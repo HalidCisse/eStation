@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using EStationCore.Model.Customer.Views;
-
+using EStationCore.Model.Customers.Views;
 
 
 namespace EStation.Views.Clients

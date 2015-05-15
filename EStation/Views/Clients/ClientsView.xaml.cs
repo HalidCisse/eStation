@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
 using EStation.Ext;
-using EStationCore.Model.Customer.Views;
+using EStationCore.Model.Customers.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
 

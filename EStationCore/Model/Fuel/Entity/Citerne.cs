@@ -15,6 +15,8 @@ namespace EStationCore.Model.Fuel.Entity
         public Guid FuelGuid { get; set; }
 
 
+        public string Libel { get; set; }
+
         public string Matricule { get; set; }
 
         public double Threshold { get; set; }

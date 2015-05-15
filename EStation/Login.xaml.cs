@@ -36,7 +36,8 @@ namespace EStation
                     {
                         _PSEUDO.Text = "Halid";   //"halid";
                         _PASSWORD.Password = "pass00."; //"halid5.";
-                    }	                
+                    }
+                    #endif                   
                 }));
             }).Start();
         

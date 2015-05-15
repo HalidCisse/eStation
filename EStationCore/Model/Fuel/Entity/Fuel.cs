@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database;
 
@@ -8,7 +9,7 @@ namespace EStationCore.Model.Fuel.Entity
     public class Fuel : Tracable
     {
         [Key]
-        public Guid CarburantGuid { get; set; }
+        public Guid FuelGuid { get; set; }
 
 
         public string Libel { get; set; }
@@ -16,8 +17,14 @@ namespace EStationCore.Model.Fuel.Entity
         public string TypeFuel { get; set; }
 
         public double Threshold { get; set; }
+       
+        public string Description { get; set; }
 
 
+
+        public virtual ICollection<Citerne> Citernes { get; set; } = new HashSet<Citerne>();
+
+        public virtual ICollection<Price> Prices { get; set; } = new HashSet<Price>();
 
     }
 }
