@@ -25,7 +25,6 @@ namespace EStationCore.Model.Fuel.Entity
 
 
 
-
         [ForeignKey("FuelGuid")]
         public virtual Fuel Fuel { get; set; }
 

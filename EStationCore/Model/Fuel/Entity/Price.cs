@@ -15,7 +15,8 @@ namespace EStationCore.Model.Fuel.Entity
 
         public Guid FuelGuid { get; set; }
 
-      
+
+        public double Value { get; set; }
 
         public DateTime? FromDate{ get; set; }
 

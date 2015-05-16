@@ -78,7 +78,7 @@
                                 </Label>
                             </Border>
 
-                            <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#25A0DA" >
+                            <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#25A0DA" Background="Beige">
                                 <ContentPresenter Margin="4"/>
                             </Border>
                         </Grid>
@@ -118,7 +118,7 @@
                             <Border Height="70" HorizontalAlignment="Stretch" CornerRadius="0" Background="#606F11" DockPanel.Dock="Top">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="{StaticResource PompIcon}" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
-                                    <TextBlock Text="{Binding Name}" FontSize="20" Foreground="White" FontWeight="ExtraBold" FontFamily="{StaticResource NameFontFamily}" Width="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Libel}" FontSize="20" Foreground="White" FontWeight="ExtraBold" FontFamily="{StaticResource NameFontFamily}" Width="200" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
 
@@ -130,7 +130,7 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding StudentsCount}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
-                                    <TextBlock Grid.Column="1" Text="Etudiants" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
+                                    <TextBlock Grid.Column="1" Text="data" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
                                 </Grid>
 
                                 <Grid Margin="0,10">
@@ -139,7 +139,7 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding InstructeursCount}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
-                                    <TextBlock Grid.Column="1" Text="Instructeurs" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
+                                    <TextBlock Grid.Column="1" Text="data" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
                                 </Grid>
 
                                 <Grid Margin="0,10">
@@ -148,7 +148,7 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding HeuresParSemaine}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
-                                    <TextBlock Text="/ Semaine" Grid.Column="1" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
+                                    <TextBlock Text="data" Grid.Column="1" FontSize="15" Margin="-30,0" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
                                 </Grid>
 
                             </StackPanel>
@@ -172,7 +172,7 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=ActualHeight }" />
             <Setter Property="Padding" Value="0,0,0,90" />
-            <Setter Property="ItemsSource" Value="{Binding ClassList}" />
+            <Setter Property="ItemsSource" Value="{Binding Pompes}" />
             <Setter Property="SelectedValuePath" Value="ClassGuid" />
 
         </Style>
@@ -199,7 +199,15 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <GroupBox Header="{Binding Path=Libel}" Style="{StaticResource GroupBoxStyle}">
+                        <!--Header="{Binding Path=Libel}" Style="{StaticResource GroupBoxStyle}"-->
+                        
+                        <!--<DockPanel Height="40" Background="Beige" Effect="{StaticResource Z-Depth1}" Width="690" Margin="10">                           
+                            <Border DockPanel.Dock="Top" Height="40" Background="#25A0DA">                               
+                                <TextBlock Text="{Binding Libel}" Margin="30,0,40,0" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="League Gothic"/>
+                            </Border>-->
+                            
                             <ListBox x:Name="POMPS_LIST" Style="{DynamicResource PompeStyle}" ContextMenu="{DynamicResource PompContext}" MouseDoubleClick="Pomps_MouseDoubleClick" SelectionChanged="Pomps_SelectionChanged"/>
+                        <!--</DockPanel>-->
                         </GroupBox>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
