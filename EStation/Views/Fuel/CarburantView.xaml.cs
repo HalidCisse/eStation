@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using EStationCore.Model.Fuel.Entity;
+using EStationCore.Model.Fuel.Views;
 
 
 namespace EStation.Views.Fuel
@@ -15,7 +17,6 @@ namespace EStation.Views.Fuel
 
             Refresh();
         }
-
 
        
         internal void Refresh()
@@ -48,6 +49,19 @@ namespace EStation.Views.Fuel
             wind.ShowDialog();
             Refresh();
         }
+
+
+        private void ChangeLitrage(object sender, RoutedEventArgs e)
+        {
+            var menuItem = (MenuItem)e.Source;
+            var menu = (ContextMenu)menuItem.Parent;
+            var key =((FuelCard) (((StackPanel)menu.PlacementTarget).DataContext)).FuelGuid;
+
+            var wind = new AddPrice(key) { Owner = Window.GetWindow(this) };
+            wind.ShowDialog();
+            Refresh();
+        }
+
 
 
     }

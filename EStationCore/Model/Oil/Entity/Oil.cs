@@ -4,14 +4,14 @@ using EStationCore.Model.Common.Enums;
 
 namespace EStationCore.Model.Oil.Entity
 {
-    public class Huile
+    public class Oil
     {
 
         [Key]
-        public Guid HuileGuid { get; set; }
+        public Guid OilGuid { get; set; }
 
 
-        public TypeHuile TypeHuile { get; set; }
+        public TypeHuile TypeOil { get; set; }
 
 
 

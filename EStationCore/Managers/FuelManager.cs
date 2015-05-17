@@ -29,7 +29,7 @@ namespace EStationCore.Managers
                 if (!myFuel.Prices.Any()) return db.SaveChanges() > 0;
 
                 if (myFuel.Prices.First().PriceGuid == Guid.Empty) myFuel.Prices.First().PriceGuid = Guid.NewGuid();
-                myFuel.Prices.First().FuelGuid = myFuel.FuelGuid;
+                myFuel.Prices.First().ProductGuid = myFuel.FuelGuid;
                 myFuel.Prices.First().FromDate = DateTime.Now;
                 db.Set<Price>().Add(myFuel.Prices.First());
 
@@ -69,10 +69,13 @@ namespace EStationCore.Managers
 
 
 
+        #region Helpers
+
+
         public IEnumerable<FuelCard> GetFuelCards()
         {
             using (var db = new StationContext())
-                return db.Fuels.ToList().Select(f=> new FuelCard(f));
+                return db.Fuels.ToList().Select(f => new FuelCard(f)).ToList();
         }
 
 
@@ -81,6 +84,26 @@ namespace EStationCore.Managers
             using (var db = new StationContext())
                 return db.Fuels.ToList();
         }
+
+
+        #endregion
+
+
+
+
+
+
+        #region Static Internal
+
+        internal static double GetFuelStock(Guid fuelGuid)
+        {
+            return 333;
+        }
+
+
+
+
+        #endregion
 
 
 

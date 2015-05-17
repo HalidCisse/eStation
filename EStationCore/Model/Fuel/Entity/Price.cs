@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CLib.Database;
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    public class Price
+    public class Price : Tracable
     {
         [Key]
         public Guid PriceGuid { get; set; }
 
-        public Guid FuelGuid { get; set; }
+        public Guid ProductGuid { get; set; }
 
 
         public double Value { get; set; }
@@ -22,11 +19,8 @@ namespace EStationCore.Model.Fuel.Entity
 
 
 
-        [ForeignKey("FuelGuid")]
+        [ForeignKey("ProductGuid")]
         public virtual Fuel Fuel { get; set; }
-
-        
-
 
     }
 }

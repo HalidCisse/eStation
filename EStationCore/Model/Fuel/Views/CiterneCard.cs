@@ -1,4 +1,5 @@
 ﻿using System;
+using EStationCore.Managers;
 using EStationCore.Model.Fuel.Entity;
 
 
@@ -12,16 +13,18 @@ namespace EStationCore.Model.Fuel.Views
         {
             CiterneGuid = citerne.CiterneGuid;
             Libel = citerne.Libel;
+            Fuel = citerne.Fuel.Libel;
+            CurrentStock = CiternesManager.GetCiterneStock(citerne.CiterneGuid).ToString("0.##") + " L en stock /" + citerne.MaxCapacity.ToString("0.##") + "L";
         }
 
 
-        public Guid CiterneGuid { get; set; }
+        public Guid CiterneGuid { get;  }
 
-        public string Libel { get; set; }
+        public string Libel { get;  }
 
-        
+        public string Fuel { get;  }
 
-
+        public string CurrentStock { get; }
 
     }
 }

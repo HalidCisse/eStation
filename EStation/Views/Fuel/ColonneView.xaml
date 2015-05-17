@@ -14,7 +14,7 @@
 
             <MenuItem Height="50" Margin="10,0" Click="ContextDel_Click" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
                 <MenuItem.Icon>
-                    <TextBlock Text="&#xf014;" FontFamily="pack://application:,,,/Ressources/Fonts/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
+                    <TextBlock Text="&#xf014;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
                 </MenuItem.Icon>
                 <MenuItem.Header>
                     <TextBlock Text="Supprimer" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
@@ -23,7 +23,7 @@
 
             <MenuItem Height="50" Margin="10,0" Click="ContextMod_OnClick" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
                 <MenuItem.Icon>
-                    <TextBlock Text="&#xf044;" FontFamily="pack://application:,,,/Ressources/Fonts/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
+                    <TextBlock Text="&#xf044;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
                 </MenuItem.Icon>
                 <MenuItem.Header>
                     <TextBlock Text="Modifier" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
@@ -32,7 +32,7 @@
 
             <MenuItem Height="50" Margin="10,0" Click="ContextDetail_OnClick" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
                 <MenuItem.Icon>
-                    <TextBlock Text="&#xf073;" FontFamily="pack://application:,,,/Ressources/Fonts/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
+                    <TextBlock Text="&#xf073;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
                 </MenuItem.Icon>
                 <MenuItem.Header>
                     <TextBlock Text="Emploi du Temps" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
@@ -66,7 +66,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GroupBox">
-                        <Grid Effect="{StaticResource Z-Depth3}">
+                        <Grid Effect="{StaticResource Z-Depth1}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*" />
@@ -78,7 +78,7 @@
                                 </Label>
                             </Border>
 
-                            <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#25A0DA" Background="Beige">
+                            <Border Grid.Row="1" BorderThickness="0,0,0,0" BorderBrush="#25A0DA" Background="Beige">
                                 <ContentPresenter Margin="4"/>
                             </Border>
                         </Grid>
@@ -94,21 +94,22 @@
 
                 <Style x:Key="ListBoxBoderStyle" TargetType="Border">
                     <Style.Resources>
-                        <LinearGradientBrush x:Key="BorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <!--<LinearGradientBrush x:Key="BorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                             <GradientStop Color="#606F11" Offset="0.1" />
                             <GradientStop Color="#081136FF" Offset="0.9" />
-                        </LinearGradientBrush>
+                        </LinearGradientBrush>-->
                     </Style.Resources>
 
                     <Setter Property="Background" Value="White"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+                    <Setter Property="BorderBrush" Value="Gainsboro"/>
                     <!--<Setter Property="Effect" Value="{StaticResource z-depth3}" />-->
-                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderThickness" Value="1" />
                     <Setter Property="CornerRadius" Value="2" />
                     <Setter Property="Margin" Value="10,10,10,10" />
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                     <Setter Property="Height" Value="200" />
                     <Setter Property="Width" Value="300" />
+                    <Setter Property="Effect" Value="{StaticResource Z-Depth1}" />
                 </Style>
 
                 <DataTemplate x:Key="ListBoxTemp">
@@ -173,7 +174,7 @@
             <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=ActualHeight }" />
             <Setter Property="Padding" Value="0,0,0,90" />
             <Setter Property="ItemsSource" Value="{Binding Pompes}" />
-            <Setter Property="SelectedValuePath" Value="ClassGuid" />
+            <Setter Property="SelectedValuePath" Value="PompeGuid" />
 
         </Style>
 

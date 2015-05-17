@@ -6,6 +6,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" Width="520" x:ClassModifier="internal" Background="Beige">
 
+    <UserControl.Resources>
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem Height="50" Margin="10,0" Click="ChangeLitrage" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xf155;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
+                </MenuItem.Icon>
+                <MenuItem.Header>
+                    <TextBlock Text="Charger Prix Litrage" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>          
+            
+        </ContextMenu>
+    </UserControl.Resources>
 
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="40" Background="#25A0DA">
@@ -22,10 +35,13 @@
         <ListBox x:Name="_CARBURANTS" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5,5" Width="500" Height="60" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding Libel}" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,0"/>
-                        <TextBlock Text="{Binding Threshold}" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
-                        <TextBlock Text="{Binding Description}" Foreground="DarkGray" FontFamily="Verdana" FontWeight="UltraLight" FontSize="10" Margin="05,0"/>
+                    <StackPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="490" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
+                        <Grid>
+                            <TextBlock Text="{Binding Libel}" HorizontalAlignment="Left" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="20" Margin="05,05"/>
+                            <TextBlock Text="{Binding CurrentPrice}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
+                        </Grid>
+                        <TextBlock Text="{Binding CiternesNumber}" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
+                        <TextBlock Text="{Binding CurrentStock}" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,05"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -73,11 +73,14 @@ namespace EStationCore.Managers
         }
 
 
+        #region Internal Static
 
+        internal static double GetCiterneStock(Guid citerneGuid)
+        {
+            return 333;
+        }
 
-
-
-
+        #endregion
 
     }
 }

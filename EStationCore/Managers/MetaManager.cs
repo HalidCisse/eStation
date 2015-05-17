@@ -9,7 +9,7 @@ namespace EStationCore.Managers {
         /// <summary>
         /// Gets the company name.
         /// </summary>
-        public string ProductName => "ESchool";
+        public string ProductName => "EStation";
 
 
         /// <summary>

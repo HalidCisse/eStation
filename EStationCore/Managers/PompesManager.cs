@@ -61,6 +61,24 @@ namespace EStationCore.Managers
                 return db.Pompes.Find(pompeGuid);
         }
 
+        public bool PostPrice(Price newPrice)
+        {
+            using (var db = new StationContext())
+            {
+                if (!db.Fuels.Any(f => f.FuelGuid == newPrice.ProductGuid))
+                    throw new InvalidOperationException("FUEL_REFERENCE_NOT_FOUND");
+
+
+                if (newPrice.PriceGuid == Guid.Empty) newPrice.PriceGuid = Guid.NewGuid();
+
+                newPrice.DateAdded = DateTime.Now;
+                newPrice.LastEditDate = DateTime.Now;
+
+                db.Set<Price>().Add(newPrice);
+                return db.SaveChanges() > 0;
+            }
+        }
+
 
         #endregion
 

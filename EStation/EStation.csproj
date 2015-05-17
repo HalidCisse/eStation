@@ -189,6 +189,9 @@
     <Compile Include="Views\Fuel\AddFuel.xaml.cs">
       <DependentUpon>AddFuel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fuel\AddPrice.xaml.cs">
+      <DependentUpon>AddPrice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Fuel\CarburantView.xaml.cs">
       <DependentUpon>CarburantView.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,9 @@
     </Compile>
     <Compile Include="Views\Fuel\FuelStockView.xaml.cs">
       <DependentUpon>FuelStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\OilView.xaml.cs">
+      <DependentUpon>OilView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Hr\AddEmploy.xaml.cs">
       <DependentUpon>AddEmploy.xaml</DependentUpon>
@@ -338,6 +344,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Fuel\AddPrice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Fuel\CarburantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -351,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fuel\FuelStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\OilView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,7 +6,6 @@ namespace EStationCore.Model.Fuel.Views
 {
     public class PompeCard
     {
-
         public PompeCard(Pompe pompe)
         {
             PompeGuid = pompe.PompeGuid;

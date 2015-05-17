@@ -60,7 +60,7 @@ namespace EStationCore.Model
         /// <summary>
         /// Les Huile
         /// </summary>
-        public virtual DbSet<Huile> Huiles { get; set; }
+        public virtual DbSet<Oil.Entity.Oil> Oils { get; set; }
 
 
 
