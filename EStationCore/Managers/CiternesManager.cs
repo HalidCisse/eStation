@@ -26,7 +26,7 @@ namespace EStationCore.Managers
                 db.Citernes.Add(myCiternes);
                 return db.SaveChanges() > 0;
             }
-        }
+        }       
 
         public bool Put(Citerne myCiternes)
         {
@@ -55,14 +55,31 @@ namespace EStationCore.Managers
                 return db.Citernes.Find(citerneGuid);
         }
 
+        public bool Stock(FuelStock fuelStock)
+        {
+            using (var db = new StationContext())
+            {
+                if (fuelStock.FuelStockGuid == Guid.Empty) fuelStock.FuelStockGuid = Guid.NewGuid();
+
+                fuelStock.DateAdded = DateTime.Now;
+                fuelStock.LastEditDate = DateTime.Now;
+
+                db.FuelStocks.Add(fuelStock);
+                return db.SaveChanges() > 0;
+            }
+        }
+
+
 
         #endregion
 
 
+        #region Helpers
+
         public IEnumerable GetCiternesCards()
         {
             using (var db = new StationContext())
-                return db.Citernes.ToList().Select(c=>new CiterneCard(c)).ToList();
+                return db.Citernes.ToList().Select(c => new CiterneCard(c)).ToList();
         }
 
 
@@ -71,6 +88,9 @@ namespace EStationCore.Managers
             using (var db = new StationContext())
                 return db.Citernes.ToList();
         }
+
+        #endregion
+
 
 
         #region Internal Static
@@ -81,6 +101,9 @@ namespace EStationCore.Managers
         }
 
         #endregion
+
+
+
 
     }
 }

@@ -6,7 +6,7 @@
       xmlns:ext="clr-namespace:EStation.Ext"
       xmlns:fuel="clr-namespace:EStation.Views.Fuel"
       mc:Ignorable="d" 
-     d:DesignHeight="550" d:DesignWidth="1080" Background="Beige">
+     d:DesignHeight="550" d:DesignWidth="1080" Background="Beige" x:ClassModifier="internal">
 
     <Page.Resources>
         <ext:TabItemWidthAdjustmentConverter x:Key="TabSizeConverter2" />
@@ -32,13 +32,9 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <!--<hr:StaffPresentation x:Name="_STAFF_CARD" Effect="{StaticResource Z-Depth2}" Margin="10" DateSelectionChanged="_STAFF_CARD_OnDateSelectionChanged"/>
+                        <fuel:Citernes x:Name="_CITERNES_LIST" Effect="{StaticResource Z-Depth2}" Margin="10" CiterneSelectionChanged="Citernes_OnCiterneSelectionChanged"/>                        
 
-                        <hr:StaffEmployments x:Name="_STAFF_EMPLOY" Effect="{StaticResource Z-Depth2}" Margin="10" EmploySelectionChanged="_STAFF_EMPLOY_OnEmploySelectionChanged"/>
-
-                        <hr:StaffSalary x:Name="_SALARY_LIST" Effect="{StaticResource Z-Depth2}" Margin="10" SourceChanged="_SALARY_LIST_OnSourceChanged"/>
-
-                        <hr:StaffFinanceView x:Name="_PAYCHECK_LIST" Effect="{StaticResource Z-Depth2}" Margin="10"/>-->
+                        <fuel:CiterneStock x:Name="_CITERNE_STOCK" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
                     </StackPanel>
                 </ScrollViewer>

@@ -15,7 +15,7 @@ namespace EStationCore.Model.Fuel.Views
             Libel = fuel.Libel;
             Threshold = fuel.Threshold.ToString("0.##");
 
-            CurrentPrice = fuel.Prices.OrderBy(p => p.FromDate).First().Value.ToString("0.##") + " dhs/L";
+            CurrentPrice = fuel.Prices.OrderByDescending(p => p.FromDate.GetValueOrDefault().Ticks).First().Value.ToString("0.##") + " dhs/L";
 
             CiternesNumber = fuel.Citernes.Count + " Citernes";
 

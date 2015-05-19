@@ -23,10 +23,10 @@ namespace EStationCore.Migrations
 
         protected override void Seed(StationContext context)
         {
-            SeedFromSql(context);
+            //SeedFromSql(context);
         }
 
-        private void SeedFromSql(StationContext ef)
+        private static void SeedFromSql(StationContext ef)
         {
             ef.Database.CreateIfNotExists();
 

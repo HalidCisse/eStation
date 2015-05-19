@@ -30,7 +30,6 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition/>
                 <RowDefinition />
-                <RowDefinition />
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
@@ -43,7 +42,7 @@
                 <Image Source="{StaticResource PompIcon}" Height="70" Width="70" VerticalAlignment="Center" DockPanel.Dock="Left"/>
 
                 <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50,0,0,0">
-                    <TextBlock Name="_TITLE_TEXT" Text="POMPE" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
+                    <TextBlock Name="_TITLE_TEXT" Text="PISTOLET" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
                     <Border Background="Blue" Width="350" Height="7"  VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 </Grid>
             </StackPanel>
@@ -66,7 +65,7 @@
                 <ComboBox x:Name="_CITERNES" SelectedValue="{Binding CiterneGuid}" SelectedValuePath="CiterneGuid" DisplayMemberPath="Libel" HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" />
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+            <!--<StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
                 <TextBlock Text="Numéro" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <TextBox x:Name="_NUMBER"  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error">
                     <TextBox.Text>
@@ -77,15 +76,15 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-            </StackPanel>
+            </StackPanel>-->
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Compteur (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:DoubleUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialCounter}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
-            <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
-                <TextBlock Text="Colonne" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <TextBlock Text="Pompe" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <TextBox  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error">
                     <TextBox.Text>
                         <Binding Path="Colonne" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -97,10 +96,10 @@
                 </TextBox>
             </StackPanel>
 
-            <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <!--<StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Nombre Pistolets" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:IntegerUpDown FormatString="" Increment="1" Minimum="1" Value="{Binding PistolNumber}" HorizontalAlignment="Left" Width="250" Height="30" />
-            </StackPanel>
+            </StackPanel>-->
                                  
             <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
                 <Button Name="_ENREGISTRER" Content="Enregistrer" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Command="Save" />

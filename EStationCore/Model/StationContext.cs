@@ -39,18 +39,17 @@ namespace EStationCore.Model
         /// <summary>
         /// Les Pomps
         /// </summary>
-        public virtual DbSet<Pompe> Pompes { get; set; }
-
-        ///// <summary>
-        ///// Les Colonne
-        ///// </summary>
-        //public virtual DbSet<Colonne> Colonnes { get; set; }
+        public virtual DbSet<Pompe> Pompes { get; set; }       
 
         /// <summary>
         /// Les Citernes
         /// </summary>
         public virtual DbSet<Citerne> Citernes { get; set; }
 
+        /// <summary>
+        /// Les Stocks
+        /// </summary>
+        public virtual DbSet<FuelStock> FuelStocks { get; set; }
 
         /// <summary>
         /// Les Carburant

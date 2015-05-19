@@ -15,6 +15,12 @@ namespace EStationCore.Model.Fuel.Entity
 
         public Guid CiterneGuid { get; set; }
 
+
+
+        public double Value { get; set; }
+
+        public double ActualPrice { get; set; }
+
         public DateTime? DatePrelevement { get; set; }
 
 

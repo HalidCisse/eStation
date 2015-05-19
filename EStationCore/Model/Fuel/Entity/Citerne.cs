@@ -21,7 +21,7 @@ namespace EStationCore.Model.Fuel.Entity
 
         public double Threshold { get; set; }
 
-        public int MaxCapacity { get; set; }
+        public double MaxCapacity { get; set; }
 
 
 
@@ -30,7 +30,7 @@ namespace EStationCore.Model.Fuel.Entity
 
         public virtual ICollection<Pompe> Pompes { get; set; } = new HashSet<Pompe>();
 
-        public virtual ICollection<StockFuel> Stocks { get; set; } = new HashSet<StockFuel>();
+        public virtual ICollection<FuelStock> Stocks { get; set; } = new HashSet<FuelStock>();
 
         public virtual ICollection<Prelevement> Prelevements { get; set; } = new HashSet<Prelevement>();
 

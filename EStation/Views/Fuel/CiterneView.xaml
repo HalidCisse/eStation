@@ -27,7 +27,10 @@
                             <TextBlock Text="{Binding Libel}" HorizontalAlignment="Left" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="20" Margin="05,05"/>
                             <TextBlock Text="{Binding Fuel}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
                         </Grid>
-                        <TextBlock Text="{Binding CurrentStock}" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
+                        <Grid>
+                            <TextBlock Text="{Binding CurrentStock}" HorizontalAlignment="Left" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
+                            <TextBlock Text="{Binding Pourcentage}" HorizontalAlignment="Right" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

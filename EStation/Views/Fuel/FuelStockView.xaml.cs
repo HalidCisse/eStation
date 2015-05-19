@@ -5,8 +5,7 @@ using System.Windows;
 
 namespace EStation.Views.Fuel
 {
-   
-    public partial class FuelStockView 
+    internal partial class FuelStockView 
     {
         public FuelStockView()
         {
@@ -15,6 +14,16 @@ namespace EStation.Views.Fuel
 
         private void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e) => new Task(() =>
         { Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); })); }).Start();
+
+        private void Citernes_OnCiterneSelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
 
 
 

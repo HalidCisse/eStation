@@ -195,6 +195,12 @@
     <Compile Include="Views\Fuel\CarburantView.xaml.cs">
       <DependentUpon>CarburantView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fuel\Citernes.xaml.cs">
+      <DependentUpon>Citernes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\CiterneStock.xaml.cs">
+      <DependentUpon>CiterneStock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Fuel\CiterneView.xaml.cs">
       <DependentUpon>CiterneView.xaml</DependentUpon>
     </Compile>
@@ -349,6 +355,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fuel\CarburantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\Citernes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\CiterneStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
