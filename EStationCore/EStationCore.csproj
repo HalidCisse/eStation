@@ -43,6 +43,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer">
+      <HintPath>..\packages\Humanizer.1.35.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -112,11 +115,12 @@
     <Compile Include="Model\Fuel\Entity\Pompe.cs" />
     <Compile Include="Model\Fuel\Entity\Prelevement.cs" />
     <Compile Include="Model\Fuel\Entity\Price.cs" />
-    <Compile Include="Model\Fuel\Entity\StockFuel.cs" />
+    <Compile Include="Model\Fuel\Entity\FuelStock.cs" />
     <Compile Include="Model\Fuel\Views\CiterneCard.cs" />
     <Compile Include="Model\Fuel\Views\ColonneCard.cs" />
     <Compile Include="Model\Fuel\Views\FuelCard.cs" />
     <Compile Include="Model\Fuel\Views\PompeCard.cs" />
+    <Compile Include="Model\Fuel\Views\StockCard.cs" />
     <Compile Include="Model\Hr\Entity\BillPayOff.cs" />
     <Compile Include="Model\Hr\Entity\Employement.cs" />
     <Compile Include="Model\Hr\Entity\Paycheck.cs" />

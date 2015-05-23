@@ -73,6 +73,9 @@
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer">
+      <HintPath>..\packages\Humanizer.1.35.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -191,6 +194,9 @@
     </Compile>
     <Compile Include="Views\Fuel\AddPrice.xaml.cs">
       <DependentUpon>AddPrice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fuel\AddStock.xaml.cs">
+      <DependentUpon>AddStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Fuel\CarburantView.xaml.cs">
       <DependentUpon>CarburantView.xaml</DependentUpon>
@@ -351,6 +357,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fuel\AddPrice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fuel\AddStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -555,6 +565,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\Icon\Caisse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icon\Tank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Icon\Bariq.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

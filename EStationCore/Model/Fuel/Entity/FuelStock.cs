@@ -14,14 +14,15 @@ namespace EStationCore.Model.Fuel.Entity
 
         
 
-        public string Fournisseur { get; set; }
+        public string Supplier { get; set; }
 
-        public double Quantite { get; set; }
+        public double Quantity { get; set; }
 
-        public double Price { get; set; }
+        public double Cost { get; set; }
+
+        public DateTime? DateIssued { get; set; }
 
         public string Description { get; set; }
-
 
 
 

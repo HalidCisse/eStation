@@ -35,14 +35,19 @@
         <ListBox x:Name="_CARBURANTS" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="490" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
-                        <Grid>
+                    <DockPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="490" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
+                        <Ellipse DockPanel.Dock="Left" Width="50" Height="50" VerticalAlignment="Center" Margin="5,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{StaticResource BariqIcon}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Grid DockPanel.Dock="Top">
                             <TextBlock Text="{Binding Libel}" HorizontalAlignment="Left" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="20" Margin="05,05"/>
                             <TextBlock Text="{Binding CurrentPrice}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
                         </Grid>
-                        <TextBlock Text="{Binding CiternesNumber}" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
-                        <TextBlock Text="{Binding CurrentStock}" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,05"/>
-                    </StackPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding CiternesNumber}" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding CurrentStock}" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,05"/>
+                    </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

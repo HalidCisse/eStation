@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using EStationCore.Model;
@@ -55,7 +56,13 @@ namespace EStationCore.Managers
                 return db.Citernes.Find(citerneGuid);
         }
 
-        public bool Stock(FuelStock fuelStock)
+        public FuelStock GetStock(Guid stockGuid)
+        {
+            using (var db = new StationContext())
+                return db.FuelStocks.Find(stockGuid);
+        }
+
+        public bool PostStock(FuelStock fuelStock)
         {
             using (var db = new StationContext())
             {
@@ -69,14 +76,45 @@ namespace EStationCore.Managers
             }
         }
 
+        public bool PutStock(FuelStock myStock)
+        {
+            using (var db = new StationContext())
+            {
+                myStock.LastEditDate = DateTime.Now;
+
+                db.FuelStocks.Attach(myStock);
+                db.Entry(myStock).State = EntityState.Modified;
+                return db.SaveChanges() > 0;
+            }
+        }
+
 
 
         #endregion
 
 
+
+
         #region Helpers
 
-        public IEnumerable GetCiternesCards()
+
+        public List<string> GetSuppliers()
+        {
+            using (var db = new StationContext())
+            {
+                var deps = (from s in db.FuelStocks.ToList() where !string.IsNullOrEmpty(s.Supplier) select s.Supplier).Distinct().ToList();
+
+                return !deps.Any()
+                    ? new List<string>
+                    {
+                        "Winxo",                        
+                    }
+                    : deps;
+            }
+        }
+
+
+        public IEnumerable<CiterneCard> GetCiternesCards()
         {
             using (var db = new StationContext())
                 return db.Citernes.ToList().Select(c => new CiterneCard(c)).ToList();
@@ -88,6 +126,15 @@ namespace EStationCore.Managers
             using (var db = new StationContext())
                 return db.Citernes.ToList();
         }
+
+
+        public IEnumerable<StockCard> GetCiterneStocks(Guid citerneGuid)
+        {
+            using (var db = new StationContext())
+                return db.Citernes.Find(citerneGuid)?.Stocks.ToList().Select(s => new StockCard(s)).ToList();
+        }
+
+
 
         #endregion
 
@@ -102,8 +149,6 @@ namespace EStationCore.Managers
 
         #endregion
 
-
-
-
+        
     }
 }

@@ -23,6 +23,10 @@
 
     <BitmapImage x:Key="UserIcon" UriSource="../Ressources/Icon/UserIcon.png" />
 
+    <BitmapImage x:Key="TankIcon" UriSource="../Ressources/Icon/Tank.png" />
+
+    <BitmapImage x:Key="BariqIcon" UriSource="../Ressources/Icon/Bariq.png" />
+
 
 
     <BitmapImage x:Key="EconomatIcon"          UriSource="../Ressources/Icon/finance.png" />

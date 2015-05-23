@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using EStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-
 namespace EStation.Views.Fuel
 {
-    internal partial class AddCiterne 
+    internal partial class AddFuelStock 
     {
         private bool _isAdd;
-        private int _errors;
-
-        public AddCiterne(Guid citerneToMod)
+       
+        public AddFuelStock(Guid currentCiterne , Guid stockToMod)
         {
             InitializeComponent();
 
@@ -22,34 +19,40 @@ namespace EStation.Views.Fuel
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _FUELS.ItemsSource = App.EStation.Fuels.GetFuels();
+                    _SUPPLIER.ItemsSource = App.EStation.Citernes.GetSuppliers();
 
-                    if (_FUELS.Items.Count == 0)
+                    if (currentCiterne == Guid.Empty)
                     {
-                        ModernDialog.ShowMessage("Ajouter au moins un Carburant", "EStation", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage("Selectionner une Citerne", "EStation", MessageBoxButton.OK);
                         Close();
                         return;
                     }
 
-                    if (citerneToMod == Guid.Empty)
+                    if (stockToMod == Guid.Empty)
                     {
                         _isAdd = true;
-
-                        _GRID.DataContext = new Citerne { Threshold = 100, FuelGuid = ((EStationCore.Model.Fuel.Entity.Fuel)_FUELS.Items.GetItemAt(0)).FuelGuid, MaxCapacity = 1000};
+                      
+                        _GRID.DataContext = new FuelStock
+                        {
+                            CiterneGuid = currentCiterne,
+                            Supplier = ((string)_SUPPLIER.Items.GetItemAt(0)),
+                            Quantity = 0,
+                            DateIssued = DateTime.Now,
+                            Cost = 0
+                        };                        
                     }
                     else
-                        _GRID.DataContext = App.EStation.Citernes.Get(citerneToMod);
+                        _GRID.DataContext = App.EStation.Citernes.GetStock(stockToMod);
                 }));
             }).Start();
         }
-
 
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                if (_isAdd) App.EStation.Citernes.Post((Citerne)_GRID.DataContext);
-                else App.EStation.Citernes.Put((Citerne)_GRID.DataContext);
+                if (_isAdd) App.EStation.Citernes.PostStock((FuelStock)_GRID.DataContext);
+                else App.EStation.Citernes.PutStock((FuelStock)_GRID.DataContext);
             }
             catch (Exception ex)
             {
@@ -60,22 +63,15 @@ namespace EStation.Views.Fuel
             e.Handled = true;
             Close();
         }
-
-        private void Validation_Error(object sender, ValidationErrorEventArgs e)
-        {
-            if (e.Action == ValidationErrorEventAction.Added)
-                _errors++;
-            else
-                _errors--;
-        }
-
+       
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _errors == 0;
+            e.CanExecute =true;
             e.Handled = true;
         }
-        
+
         private void Annuler_Click(object sender, RoutedEventArgs e) => Close();
+
 
     }
 }
