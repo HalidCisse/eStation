@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ext="clr-namespace:EStation.Ext"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
        Height="400" Width="600" Style="{StaticResource MyForm}" FontFamily="Helvetica" x:ClassModifier="internal">
@@ -41,8 +40,8 @@
             <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                 <Image Source="{StaticResource ComIcon}" Height="70" Width="70" VerticalAlignment="Center" DockPanel.Dock="Left"/>
 
-                <Grid Height="40" VerticalAlignment="Top" Margin="15,0,0,0">
-                    <TextBlock Name="_TITLE_TEXT" Text="STOCK" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
+                <Grid Height="40" VerticalAlignment="Top" Margin="50,0,0,0">
+                    <TextBlock Name="_TITLE_TEXT" Text="LIVRAISON" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
                     <Border Background="Blue" Width="350" Height="7"  VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 </Grid>
             </StackPanel>
@@ -55,7 +54,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Quantité (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="" Increment="100" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">

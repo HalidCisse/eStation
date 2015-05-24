@@ -13,7 +13,7 @@ namespace EStationCore.Model.Fuel.Entity
         public Guid ProductGuid { get; set; }
 
 
-        public double Value { get; set; }
+        public double ActualPrice { get; set; }
 
         public DateTime? FromDate{ get; set; }
 

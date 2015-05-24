@@ -21,9 +21,19 @@ namespace EStation.Views.Fuel
                 {
                     _SUPPLIER.ItemsSource = App.EStation.Citernes.GetSuppliers();
 
+                    var vide = App.EStation.Citernes.Get(currentCiterne).MaxCapacity -
+                               App.EStation.Citernes.GetCiterneFuelBalance(currentCiterne);
+
                     if (currentCiterne == Guid.Empty)
                     {
                         ModernDialog.ShowMessage("Selectionner une Citerne", "EStation", MessageBoxButton.OK);
+                        Close();
+                        return;
+                    }
+
+                    if (vide <= 0)
+                    {
+                        ModernDialog.ShowMessage("Cette Citerne Est Pleine", "EStation", MessageBoxButton.OK);
                         Close();
                         return;
                     }
@@ -43,6 +53,9 @@ namespace EStation.Views.Fuel
                     }
                     else
                         _GRID.DataContext = App.EStation.Citernes.GetStock(stockToMod);
+                   
+                    _QUANTITY.Maximum = vide;
+                    _TITLE_TEXT.Text = "LIVRAISON " + App.EStation.Citernes.Get(currentCiterne).Libel.ToUpper();
                 }));
             }).Start();
         }
@@ -51,8 +64,8 @@ namespace EStation.Views.Fuel
         {
             try
             {
-                if (_isAdd) App.EStation.Citernes.PostStock((FuelStock)_GRID.DataContext);
-                else App.EStation.Citernes.PutStock((FuelStock)_GRID.DataContext);
+                if (_isAdd) App.EStation.Citernes.Post((FuelStock)_GRID.DataContext);
+                else App.EStation.Citernes.Put((FuelStock)_GRID.DataContext);
             }
             catch (Exception ex)
             {

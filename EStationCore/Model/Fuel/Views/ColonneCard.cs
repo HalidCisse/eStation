@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -14,12 +15,13 @@ namespace EStationCore.Model.Fuel.Views
             using (var db = new StationContext())
                 Pompes = string.IsNullOrEmpty(colonne)
                     ? db.Pompes.ToList().Where(s => !s.IsDeleted && string.IsNullOrEmpty(s.Colonne)).Select(p=> new PompeCard(p)).ToList()
-                    : db.Pompes.ToList().Where(s => !s.IsDeleted && s.Colonne.Equals(colonne)).Select(p=> new PompeCard(p)).ToList();
+                    : db.Pompes.ToList().Where(s => !s.IsDeleted && s.Colonne.Equals(colonne, StringComparison.InvariantCultureIgnoreCase)).Select(p=> new PompeCard(p)).ToList();
         }
 
        
         public string Libel { get; }
       
+
         public List<PompeCard> Pompes { get; set; }
 
 

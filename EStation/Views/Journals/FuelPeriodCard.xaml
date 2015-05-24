@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="EStation.Views.Journals.FuelPeriodCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="350">
+
+    <Grid Name="_GRID" Width="300" Background="#25A0DA" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition Height="*"/>                        
+        </Grid.RowDefinitions>
+
+        <Label Content="PERIODE" Grid.Row="0" Foreground="#E9E9DE" Margin="10,10" HorizontalAlignment="Center" FontSize="20" FontFamily="League Gothic"/>
+
+        <StackPanel Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5">
+            <Label Content="DU" Margin="5,0" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <DatePicker Name="_FROM_PICKER" Foreground="#D0D0C6" BorderThickness="0" Background="Transparent" Width="110" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5">
+            <Label Content="AU" Margin="5,0" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <DatePicker Name="_TO_PICKER" Foreground="#D0D0C6" BorderThickness="0" Background="Transparent" Width="110" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
+        </StackPanel>
+
+        <Grid  Grid.Row="3" Margin="10,0">
+            <Label Content="Total Litres Vendue" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Name="_TOTAL_LITER" Foreground="#D0D0C6" HorizontalAlignment="Right" Margin="10,0" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+        </Grid>
+
+        <Grid  Grid.Row="4" Margin="10,0">
+            <Label Content="Montant Total" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Name="_TOTAL_SOLD" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
+        </Grid>
+
+        <ListBox Name="_CITERNES" Grid.Row="5" Margin="0,0,0,0" Background="Transparent" SelectionMode="Multiple" SelectedValuePath="CiterneGuid" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="False" SelectionChanged="Selector_OnSelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="5,5" Background="Transparent" BorderThickness=".0,.5,.0,.5" BorderBrush="Beige" Effect="{StaticResource Z-Depth1}" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Ellipse DockPanel.Dock="Left" Width="45" Height="45" VerticalAlignment="Center" Margin="5,0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{StaticResource TankIcon}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                
+                                <CheckBox IsEnabled="False" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected, Mode=TwoWay}" 
+                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <Grid Width="220">
+                                <TextBlock Text="{Binding Libel, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Fuel, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Pourcentage, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>                            
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+    </Grid>
+</UserControl>

@@ -55,7 +55,7 @@ namespace EStation.Views.Fuel
         {
             var menuItem = (MenuItem)e.Source;
             var menu = (ContextMenu)menuItem.Parent;
-            var key =((FuelCard) (((StackPanel)menu.PlacementTarget).DataContext)).FuelGuid;
+            var key =((FuelCard) (((DockPanel)menu.PlacementTarget).DataContext)).FuelGuid;
 
             var wind = new AddPrice(key) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();

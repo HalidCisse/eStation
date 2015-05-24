@@ -5,6 +5,7 @@ using System.Windows;
 using EStation.Views.Clients;
 using EStation.Views.Fuel;
 using EStation.Views.Hr;
+using EStation.Views.Journals;
 using EStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
@@ -46,7 +47,7 @@ namespace EStation.Views.Common
 
         private void _JOURNAL_BUTTON_OnClick(object sender, RoutedEventArgs e) => new Task(() => {
             Dispatcher.BeginInvoke(new Action(()
-               => { NavigationService?.Navigate(new ComingSoon(), UriKind.Relative); }));
+               => { NavigationService?.Navigate(new JournalView(), UriKind.Relative); }));
         }).Start();
 
         private void _CARBURANT_BUTTON_OnClick(object sender, RoutedEventArgs e) => new Task(() => {

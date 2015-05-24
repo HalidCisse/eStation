@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="STOCKAGE" Margin="30,0,40,0" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="League Gothic"/>
+            <TextBlock Name="_TITLE_TEXT" Text="LIVRAISONS" Margin="30,0,40,0" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="League Gothic"/>
 
             <Button Grid.Column="1" Name="_ADD_BUTTON" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Carburant"  Click="AddButton_OnClick"/>
         </Grid>

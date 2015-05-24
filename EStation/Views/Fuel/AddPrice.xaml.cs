@@ -27,9 +27,9 @@ namespace EStation.Views.Fuel
 
                     var productName = App.EStation.Fuels.Get(productGuid).Libel;
 
-                    _TITLE_TEXT.Text = "NOUVEAU PRIX DE " + productName;
+                    _TITLE_TEXT.Text = "NOUVEAU PRIX DE " + productName.ToUpper();
 
-                   _GRID.DataContext = new Price { ProductGuid = productGuid,  FromDate = DateTime.Now, Value = 0};                   
+                   _GRID.DataContext = new Price { ProductGuid = productGuid,  FromDate = DateTime.Today, ActualPrice = 0};                   
                 }));
             }).Start();
         }

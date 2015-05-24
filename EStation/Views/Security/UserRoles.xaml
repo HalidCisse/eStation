@@ -10,8 +10,8 @@
         <Border DockPanel.Dock="Top" Height="40" Background="#25A0DA" >           
             <TextBlock Name="_TITLE_TEXT" Text="Rôles et Responsabilité" Foreground="#EBE6E6"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Light" FontSize="25" FontFamily="League Gothic"/>
         </Border>
-        
-        <ListBox Background="Transparent" SelectedValuePath="Info2" BorderThickness="0" Name="_ROLES_LIST" Margin="0,0" VerticalAlignment="Top" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="False">
+
+        <ListBox Name="_ROLES_LIST" Background="Transparent" SelectedValuePath="Info2" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="False">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="5,10" Width="210" Background="Beige" BorderThickness=".1" BorderBrush="Gray" Effect="{StaticResource Z-Depth1}" CornerRadius="2,2,2,2" >

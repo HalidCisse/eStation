@@ -41,20 +41,11 @@ namespace EStation.Views.Fuel
             var list = (ListBox)menu.PlacementTarget;
             if (list?.SelectedValue == null) return;
 
-            //var wind = new AddClass((Guid)list.SelectedValue) { Owner = Window.GetWindow(this) };
-            //wind.ShowDialog();
-            //Refresh();
+            var wind = new AddPompe((Guid)list.SelectedValue) { Owner = Window.GetWindow(this) };
+            wind.ShowDialog();
+            Refresh();
         }
-
-        private void ContextDetail_OnClick(object sender, RoutedEventArgs e)
-        {
-            var list = ((FrameworkElement)sender).Tag as ListBox;
-
-            if (list?.SelectedValue == null) return;
-
-            //NavigationService?.Navigate(new ClassDetails(new Guid(list.SelectedValue.ToString())));
-        }
-
+      
         private void AddButon_Click(object sender, RoutedEventArgs e)
         {            
             var wind = new AddPompe(Guid.Empty) { Owner = Window.GetWindow(this) };
@@ -85,5 +76,16 @@ namespace EStation.Views.Fuel
         private void ColonneView_OnLoaded(object sender, RoutedEventArgs e) => Refresh();
 
 
+        private void ContextPrelev_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuItem = (MenuItem)e.Source;
+            var menu = (ContextMenu)menuItem.Parent;
+            var list = (ListBox)menu.PlacementTarget;
+            if (list?.SelectedValue == null) return;
+
+            var wind = new AddPrelevement((Guid)list.SelectedValue, Guid.Empty) { Owner = Window.GetWindow(this) };
+            wind.ShowDialog();
+            Refresh();
+        }
     }
 }

@@ -14,8 +14,10 @@ namespace EStationCore.Model.Fuel.Views
             CiterneGuid = citerne.CiterneGuid;
             Libel = citerne.Libel;
             Fuel = citerne.Fuel.Libel;
-            CurrentStock = CiternesManager.GetCiterneStock(citerne.CiterneGuid).ToString("0.##\\L") + " en stock /" + citerne.MaxCapacity.ToString("0.##\\L") ;
-            Pourcentage = ((CiternesManager.GetCiterneStock(citerne.CiterneGuid)*100)/citerne.MaxCapacity).ToString("0.##\\%");
+            var curBalance = CiternesManager.StaticGetCiterneFuelBalance(citerne.CiterneGuid);
+            CurrentStock = curBalance.ToString("0.##\\L") + " en stock /" + citerne.MaxCapacity.ToString("0.##\\L") ;
+            Pourcentage = ((curBalance * 100)/citerne.MaxCapacity).ToString("0.##\\%");
+            //FuelPrice = FuelManager.GetFuelCurrentPrice(citerne.Fuel.FuelGuid).ToString("0.##\\dhs/L");
         }
 
 
@@ -28,6 +30,8 @@ namespace EStationCore.Model.Fuel.Views
         public string CurrentStock { get; }
 
         public string Pourcentage { get; }
+
+        //public string FuelPrice { get; }
 
     }
 }

@@ -6,7 +6,6 @@ using System.Windows.Input;
 using EStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-
 namespace EStation.Views.Fuel
 {
     /// <summary>
@@ -64,10 +63,10 @@ namespace EStation.Views.Fuel
                 var newFuel =
                     ((EStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
 
-                if (_THRESHOLD.Value != null)
+                if (_UNIT_PRICE.Value != null)
                     newFuel.Prices.Add(new Price
                     {
-                        Value = (double) _THRESHOLD.Value
+                        ActualPrice = (double)_UNIT_PRICE.Value
                     });
 
                 if (_isAdd) App.EStation.Fuels.Post(newFuel);

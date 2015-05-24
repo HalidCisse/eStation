@@ -22,14 +22,12 @@ namespace EStationCore.Model.Fuel.Entity
 
         public string Number { get; set; }
 
-        public double InitialCounter { get; set; }
+        public double InitialMeter { get; set; }
 
         public int PistolNumber { get; set; }
 
 
-
        
-
         [ForeignKey("CiterneGuid")]
         public virtual Citerne Citerne { get; set; }
 

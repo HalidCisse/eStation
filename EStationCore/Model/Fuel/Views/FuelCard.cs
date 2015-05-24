@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using EStationCore.Managers;
+using Humanizer;
 
 
 namespace EStationCore.Model.Fuel.Views
@@ -15,11 +16,11 @@ namespace EStationCore.Model.Fuel.Views
             Libel = fuel.Libel;
             Threshold = fuel.Threshold.ToString("0.##");
 
-            CurrentPrice = fuel.Prices.OrderByDescending(p => p.FromDate.GetValueOrDefault().Ticks).First().Value.ToString("0.##") + " dhs/L";
+            CurrentPrice = FuelManager.GetFuelCurrentPrice(fuel.FuelGuid).ToString("0.##\\ dhs/L");  //fuel.Prices.OrderByDescending(p => p.FromDate.GetValueOrDefault().Ticks).First().ActualPrice.ToString("0.##\\ dhs/L") ;
 
-            CiternesNumber = fuel.Citernes.Count + " Citernes";
+            CiternesNumber = " Citerne".ToQuantity(fuel.Citernes.Count);
 
-            CurrentStock = FuelManager.GetFuelStock(fuel.FuelGuid).ToString("0.##") + " L en stock";
+            CurrentStock = FuelManager.GetFuelStock(fuel.FuelGuid).ToString("0.##\\ L en stock");
         }
 
 

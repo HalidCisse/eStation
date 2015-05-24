@@ -17,12 +17,14 @@ namespace EStationCore.Model.Fuel.Entity
 
 
 
-        public double Value { get; set; }
+        public double Meter { get; set; }
+
+        public double MeterE { get; set; }
 
         public double ActualPrice { get; set; }
 
         public DateTime? DatePrelevement { get; set; }
-
+            
 
 
         [ForeignKey("PompeGuid")]

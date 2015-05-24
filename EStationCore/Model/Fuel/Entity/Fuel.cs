@@ -14,7 +14,7 @@ namespace EStationCore.Model.Fuel.Entity
 
         public string Libel { get; set; }
 
-        public double CurrentPrice { get; set; }
+        public double ActualPrice { get; set; }
 
         public string TypeFuel { get; set; }
 

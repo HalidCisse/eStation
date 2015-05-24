@@ -41,7 +41,7 @@ namespace EStation.Views.Fuel
                         _GRID.DataContext = new Pompe
                         {
                             CiterneGuid = ((Citerne)_CITERNES.Items.GetItemAt(0)).CiterneGuid,
-                            InitialCounter = 0,
+                            InitialMeter = 0, 
                             PistolNumber = 1
                         };
                     }

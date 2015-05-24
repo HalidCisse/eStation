@@ -35,7 +35,7 @@ namespace EStationCore.Managers
 
                 return db.SaveChanges() > 0;
             }
-        }
+        }        
 
         public bool Put(Fuel myFuel)
         {
@@ -69,7 +69,33 @@ namespace EStationCore.Managers
 
 
 
-        #region Helpers
+        #region Views
+
+
+
+        public double GetTotalSold(List<Guid> citernesGuid, DateTime fromDate, DateTime toDate)
+        {
+            return 333;
+        }
+
+
+        public double GetTotalLiterSold(List<Guid> citernesGuid, DateTime fromDate, DateTime toDate)
+        {
+            return 333;
+        }
+
+
+        public double GetFuelBalance(Guid fuelGuid)
+        {           
+            using (var db = new StationContext())
+            {
+                var prelevs = db.Fuels.Find(fuelGuid).Citernes.Select(c => c.Prelevements).ToList().Select(p=> p.Sum(s=> s.MeterE)).Sum();
+                var stocks = db.Fuels.Find(fuelGuid).Citernes.Select(c => c.Stocks).ToList().Select(s=> s.Sum(d=> d.Quantity)).Sum();
+
+                var diff = stocks - prelevs;
+                return diff < 0 ? 0 : diff;
+            }               
+        }
 
 
         public IEnumerable<FuelCard> GetFuelCards()
@@ -90,22 +116,22 @@ namespace EStationCore.Managers
 
 
 
-
-
-
         #region Static Internal
+
+
+        internal static double GetFuelCurrentPrice(Guid fuelGuid)
+        {
+            using (var db = new StationContext())
+                return db.Fuels.Find(fuelGuid).Prices.Where(p => p.FromDate <= DateTime.Now).OrderByDescending(p => p.FromDate).First().ActualPrice;
+        }
 
         internal static double GetFuelStock(Guid fuelGuid)
         {
             return 333;
         }
 
-
-
-
         #endregion
 
-
-
+        
     }
 }

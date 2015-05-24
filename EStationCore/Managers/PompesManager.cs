@@ -33,7 +33,29 @@ namespace EStationCore.Managers
                 return db.SaveChanges() > 0;
             }
         }
-       
+
+        public bool Post(Prelevement myPrelevement)
+        {
+            using (var db = new StationContext())
+            {
+                if (myPrelevement.PrelevementGuid == Guid.Empty) myPrelevement.PrelevementGuid = Guid.NewGuid();
+
+                var citerneGuid = db.Pompes.Find(myPrelevement.PompeGuid).CiterneGuid;
+                if (citerneGuid != null)
+                    myPrelevement.CiterneGuid = (Guid)citerneGuid;
+                else
+                    throw new ArgumentException("CAN_NOT_FIND_CITERNE");
+               
+                myPrelevement.ActualPrice = FuelManager.GetFuelCurrentPrice(db.Pompes.Find(myPrelevement.PompeGuid).Citerne.FuelGuid);
+
+                myPrelevement.DateAdded = DateTime.Now;
+                myPrelevement.LastEditDate = DateTime.Now;
+
+                db.Set<Prelevement>().Add(myPrelevement);
+                return db.SaveChanges() > 0;
+            }
+        }
+
         public bool Put(Pompe myPompe)
         {
             using (var db = new StationContext())
@@ -45,7 +67,19 @@ namespace EStationCore.Managers
                 return db.SaveChanges() > 0;
             }
         }
-       
+
+        public bool Put(Prelevement myPrelevement)
+        {
+            using (var db = new StationContext())
+            {
+                myPrelevement.LastEditDate = DateTime.Now;
+
+                db.Set<Prelevement>().Attach(myPrelevement);
+                db.Entry(myPrelevement).State = EntityState.Modified;
+                return db.SaveChanges() > 0;
+            }
+        }
+
         public bool Delete(Guid pompeGuid)
         {
             using (var db = new StationContext())
@@ -68,7 +102,6 @@ namespace EStationCore.Managers
                 if (!db.Fuels.Any(f => f.FuelGuid == newPrice.ProductGuid))
                     throw new InvalidOperationException("FUEL_REFERENCE_NOT_FOUND");
 
-
                 if (newPrice.PriceGuid == Guid.Empty) newPrice.PriceGuid = Guid.NewGuid();
 
                 newPrice.DateAdded = DateTime.Now;
@@ -80,14 +113,25 @@ namespace EStationCore.Managers
         }
 
 
+
         #endregion
 
 
 
 
 
-        #region HELPERS
+        #region Views
 
+
+        public Prelevement GetPrelevement(Guid prelevGuid)
+        {
+            using (var db = new StationContext())
+                return db.Set<Prelevement>().Find(prelevGuid);
+        }
+
+
+        public Prelevement GetLastPrelevement(Guid pompeGuid)
+            => StaticGetLastPrelevement(pompeGuid);
 
         public IEnumerable<ColonneCard> GetColonnesCard()
         {
@@ -100,7 +144,7 @@ namespace EStationCore.Managers
 
                 var cols = (db.Pompes.Where(s => !s.IsDeleted).ToList()
                     .Where(s => !string.IsNullOrEmpty(s.Colonne))
-                    .Select(s => s.Colonne)).Distinct().ToList();
+                    .Select(s => s.Colonne.ToLower())).Distinct().ToList();
 
                 Parallel.ForEach(cols, dep => cardList.Add(new ColonneCard(dep)));
 
@@ -109,18 +153,24 @@ namespace EStationCore.Managers
         }
 
 
-
         #endregion
 
 
 
 
 
+        #region Internal Static
+
+        internal static Prelevement StaticGetLastPrelevement(Guid pompeGuid)
+        {
+            using (var db = new StationContext())
+                return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? new Prelevement();
+        }
 
 
 
 
-
+        #endregion
 
 
 

@@ -41,7 +41,7 @@
             <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                 <Image Source="{StaticResource PompIcon}" Height="70" Width="70" VerticalAlignment="Center" DockPanel.Dock="Left"/>
 
-                <Grid Height="40" VerticalAlignment="Top" Margin="15,0,0,0">
+                <Grid Height="40" VerticalAlignment="Top" Margin="50,0,0,0">
                     <TextBlock Name="_TITLE_TEXT" Text="CARBURANT" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
                     <Border Background="Blue" Width="350" Height="7"  VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 </Grid>
@@ -62,7 +62,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Prix /Litre" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_UNIT_PRICE" FormatString="C2" Increment=".5" Minimum="0" Value="1" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown Name="_UNIT_PRICE" FormatString="C2" Increment=".5" Minimum="0" Value="{Binding ActualPrice}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">

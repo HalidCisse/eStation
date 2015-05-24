@@ -19,8 +19,11 @@ namespace EStation.Views.Fuel
         public void Refresh(Guid currentCiterne)
         {
             _currentCiterne = currentCiterne;
-            new Task(() => Dispatcher.BeginInvoke(new Action(()
-                => _STOCKS.ItemsSource = App.EStation.Citernes.GetCiterneStocks(currentCiterne)))).Start();
+            new Task(() => Dispatcher.BeginInvoke(new Action(()=>
+            {
+                _STOCKS.ItemsSource = App.EStation.Citernes.GetCiterneStocks(currentCiterne);
+                _TITLE_TEXT.Text = "LIVRAISONS " + App.EStation.Citernes.Get(currentCiterne)?.Libel.ToUpper();
+            }))).Start();          
         }
 
 
