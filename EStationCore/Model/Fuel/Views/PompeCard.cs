@@ -13,6 +13,7 @@ namespace EStationCore.Model.Fuel.Views
         {
             PompeGuid = pompe.PompeGuid;
             Libel = pompe.Libel;
+            Fuel = pompe.Citerne.Fuel.Libel;
 
             var prelev = pompe.Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault();
 
@@ -26,6 +27,8 @@ namespace EStationCore.Model.Fuel.Views
         public Guid PompeGuid { get; }
         
         public string Libel { get; }
+
+        public string Fuel { get; }
 
         public string LastPrelevement { get; }
 

@@ -27,7 +27,7 @@ namespace EStation
 
         private void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)
         {
-            FormsAuthentication.SignOut();
+            //FormsAuthentication.SignOut();
             Thread.CurrentPrincipal = null;
 
             new Task(() =>

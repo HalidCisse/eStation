@@ -54,7 +54,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Quantité (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="" Increment="100" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="" Increment="100" Minimum="0" Value="{Binding QuantityDelivered}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -64,7 +64,7 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Date Délivrer" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <DatePicker SelectedDate="{Binding DateIssued, UpdateSourceTrigger=PropertyChanged}" Width="250" Height="30" FontSize="20" HorizontalAlignment="Left"/>
+                <DatePicker SelectedDate="{Binding DeliveryDate, UpdateSourceTrigger=PropertyChanged}" Width="250" Height="30" FontSize="20" HorizontalAlignment="Left"/>
             </StackPanel>
 
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">

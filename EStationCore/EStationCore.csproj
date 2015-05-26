@@ -115,11 +115,12 @@
     <Compile Include="Model\Fuel\Entity\Pompe.cs" />
     <Compile Include="Model\Fuel\Entity\Prelevement.cs" />
     <Compile Include="Model\Fuel\Entity\Price.cs" />
-    <Compile Include="Model\Fuel\Entity\FuelStock.cs" />
+    <Compile Include="Model\Fuel\Entity\FuelDelivery.cs" />
     <Compile Include="Model\Fuel\Views\CiterneCard.cs" />
     <Compile Include="Model\Fuel\Views\ColonneCard.cs" />
     <Compile Include="Model\Fuel\Views\FuelCard.cs" />
     <Compile Include="Model\Fuel\Views\PompeCard.cs" />
+    <Compile Include="Model\Fuel\Views\PrelevCard.cs" />
     <Compile Include="Model\Fuel\Views\StockCard.cs" />
     <Compile Include="Model\Hr\Entity\BillPayOff.cs" />
     <Compile Include="Model\Hr\Entity\Employement.cs" />

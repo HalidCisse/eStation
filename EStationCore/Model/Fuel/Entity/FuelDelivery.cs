@@ -5,10 +5,10 @@ using CLib.Database;
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    public class FuelStock : Tracable
+    public class FuelDelivery : Tracable
     {
         [Key]
-        public Guid FuelStockGuid { get; set; }       
+        public Guid FuelDeliveryGuid { get; set; }       
 
         public Guid CiterneGuid { get; set; }
 
@@ -16,11 +16,11 @@ namespace EStationCore.Model.Fuel.Entity
 
         public string Supplier { get; set; }
 
-        public double Quantity { get; set; }
+        public double QuantityDelivered { get; set; }
 
         public double Cost { get; set; }
 
-        public DateTime? DateIssued { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         public string Description { get; set; }
 

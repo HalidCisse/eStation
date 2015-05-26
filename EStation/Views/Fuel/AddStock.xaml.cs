@@ -42,12 +42,12 @@ namespace EStation.Views.Fuel
                     {
                         _isAdd = true;
                       
-                        _GRID.DataContext = new FuelStock
+                        _GRID.DataContext = new FuelDelivery
                         {
                             CiterneGuid = currentCiterne,
                             Supplier = ((string)_SUPPLIER.Items.GetItemAt(0)),
-                            Quantity = 0,
-                            DateIssued = DateTime.Now,
+                            QuantityDelivered = 0,
+                            DeliveryDate = DateTime.Now,
                             Cost = 0
                         };                        
                     }
@@ -64,8 +64,8 @@ namespace EStation.Views.Fuel
         {
             try
             {
-                if (_isAdd) App.EStation.Citernes.Post((FuelStock)_GRID.DataContext);
-                else App.EStation.Citernes.Put((FuelStock)_GRID.DataContext);
+                if (_isAdd) App.EStation.Citernes.Post((FuelDelivery)_GRID.DataContext);
+                else App.EStation.Citernes.Put((FuelDelivery)_GRID.DataContext);
             }
             catch (Exception ex)
             {

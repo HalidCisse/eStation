@@ -30,8 +30,8 @@ namespace EStationCore.Model.Fuel.Entity
 
         public virtual ICollection<Pompe> Pompes { get; set; } = new HashSet<Pompe>();
 
-        public virtual ICollection<FuelStock> Stocks { get; set; } = new HashSet<FuelStock>();
-
+        public virtual ICollection<FuelDelivery> Deliveries { get; set; } = new HashSet<FuelDelivery>();
+        
         public virtual ICollection<Prelevement> Prelevements { get; set; } = new HashSet<Prelevement>();
 
 

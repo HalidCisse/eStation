@@ -15,13 +15,14 @@ namespace EStation.Views.Journals
 
 
 
-        private void BACK_BUTTON_OnClick(object sender, System.Windows.RoutedEventArgs e) => new Task(() => Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); }))).Start();
+        private void BACK_BUTTON_OnClick(object sender, System.Windows.RoutedEventArgs e) => new Task(() 
+            => Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); }))).Start();
 
 
-        private void FuelPeriodCard_OnDateSelectionChanged(object sender, EventArgs e)
-        {
-            
-        }
+        private void FuelPeriodCard_OnSelectionChanged(object sender, EventArgs e) 
+            => _PRELEVS.Refresh(_FUEL_PERIOD.SelectedFuels, _FUEL_PERIOD.FromDate, _FUEL_PERIOD.ToDate);
+
+
 
 
     }

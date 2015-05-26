@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using EStationCore.Model;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Fuel.Views;
+using Humanizer;
 
 
 namespace EStationCore.Managers
@@ -123,6 +125,24 @@ namespace EStationCore.Managers
         #region Views
 
 
+
+        public List<string> GetColonnes()
+        {
+            using (var db = new StationContext())
+                return db.Pompes.Where(p=> !string.IsNullOrEmpty(p.Colonne)).Select(p=> p.Colonne.ToLower()).Distinct().ToList().Select(s=> s.Titleize()).ToList();
+        }
+
+        public IEnumerable<PrelevCard> GetPrelevCards(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
+        {           
+            using (var db = new StationContext()){
+                var prelevements = new List<Prelevement>();
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citerne in citernes)
+                        prelevements.AddRange(citerne.Prelevements.Where(p=> p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date<= toDate));
+                return prelevements.OrderByDescending(p => p.DatePrelevement).Select(p => new PrelevCard(p)).ToList();
+            }
+        }
+
         public Prelevement GetPrelevement(Guid prelevGuid)
         {
             using (var db = new StationContext())
@@ -164,7 +184,8 @@ namespace EStationCore.Managers
         internal static Prelevement StaticGetLastPrelevement(Guid pompeGuid)
         {
             using (var db = new StationContext())
-                return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? new Prelevement();
+                return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
+                    new Prelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
         }
 
 
@@ -172,8 +193,6 @@ namespace EStationCore.Managers
 
         #endregion
 
-
-
-
+        
     }
 }

@@ -58,34 +58,34 @@ namespace EStationCore.Managers
                 return db.Citernes.Find(citerneGuid);
         }
 
-        public FuelStock GetStock(Guid stockGuid)
+        public FuelDelivery GetStock(Guid stockGuid)
         {
             using (var db = new StationContext())
-                return db.FuelStocks.Find(stockGuid);
+                return db.FuelDeliverys.Find(stockGuid);
         }
 
-        public bool Post(FuelStock fuelStock)
+        public bool Post(FuelDelivery fuelDelivery)
         {
             using (var db = new StationContext())
             {
-                if (fuelStock.FuelStockGuid == Guid.Empty) fuelStock.FuelStockGuid = Guid.NewGuid();
+                if (fuelDelivery.FuelDeliveryGuid == Guid.Empty) fuelDelivery.FuelDeliveryGuid = Guid.NewGuid();
 
-                fuelStock.DateAdded = DateTime.Now;
-                fuelStock.LastEditDate = DateTime.Now;
+                fuelDelivery.DateAdded = DateTime.Now;
+                fuelDelivery.LastEditDate = DateTime.Now;
 
-                db.FuelStocks.Add(fuelStock);
+                db.FuelDeliverys.Add(fuelDelivery);
                 return db.SaveChanges() > 0;
             }
         }
 
-        public bool Put(FuelStock myStock)
+        public bool Put(FuelDelivery myDelivery)
         {
             using (var db = new StationContext())
             {
-                myStock.LastEditDate = DateTime.Now;
+                myDelivery.LastEditDate = DateTime.Now;
 
-                db.FuelStocks.Attach(myStock);
-                db.Entry(myStock).State = EntityState.Modified;
+                db.FuelDeliverys.Attach(myDelivery);
+                db.Entry(myDelivery).State = EntityState.Modified;
                 return db.SaveChanges() > 0;
             }
         }
@@ -99,6 +99,15 @@ namespace EStationCore.Managers
 
         #region Views
 
+
+
+        public IEnumerable<FuelCard> GetFuelCards()
+        {
+            using (var db = new StationContext())
+                return db.Fuels.ToList().OrderByDescending(c => c.DateAdded).Select(c => new FuelCard(c)).ToList();
+        }
+
+
         public double GetCiterneFuelBalance(Guid citerneGuid) => StaticGetCiterneFuelBalance(citerneGuid);
 
 
@@ -106,7 +115,7 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
             {
-                var deps = (from s in db.FuelStocks.OrderByDescending(f=> f.DateAdded).ToList() where !string.IsNullOrEmpty(s.Supplier) select s.Supplier).Distinct().ToList();
+                var deps = (from s in db.FuelDeliverys.OrderByDescending(f=> f.DateAdded).ToList() where !string.IsNullOrEmpty(s.Supplier) select s.Supplier).Distinct().ToList();
 
                 return !deps.Any()
                     ? new List<string>
@@ -125,7 +134,7 @@ namespace EStationCore.Managers
         }
 
 
-        public IEnumerable GetCiternes()
+        public IEnumerable<Citerne> GetCiternes()
         {
             using (var db = new StationContext())
                 return db.Citernes.OrderByDescending(c=> c.DateAdded).ToList();
@@ -135,7 +144,7 @@ namespace EStationCore.Managers
         public IEnumerable<StockCard> GetCiterneStocks(Guid citerneGuid)
         {
             using (var db = new StationContext())
-                return db.Citernes.Find(citerneGuid)?.Stocks.OrderByDescending(s=> s.DateAdded).ToList().Select(s => new StockCard(s)).ToList();
+                return db.Citernes.Find(citerneGuid)?.Deliveries.OrderByDescending(s=> s.DateAdded).ToList().Select(s => new StockCard(s)).ToList();
         }
 
 
@@ -147,39 +156,37 @@ namespace EStationCore.Managers
         #region Internal Static
 
 
-        internal static double GetCiterneStock(Guid citerneGuid)
-        {
-            using (var db = new StationContext())
-            {
-                var stocks = db.Citernes.Find(citerneGuid)?.Stocks.Sum(s => s.Quantity);
-                if (stocks == null)
-                    return 0;
-                return (double) stocks;                
-            }
-        }
+        
 
 
         internal static double StaticGetCiterneFuelBalance(Guid citerneGuid)
         {
-            using (var db = new StationContext())
-            {
-                double diff;
+            using (var db = new StationContext()){
                 try
                 {
-                    var stocks = db.Citernes.Find(citerneGuid)?.Stocks.Sum(s => s.Quantity);
-                    if (stocks == null)
-                        return 0;
+                    var stocks = db.Citernes.Find(citerneGuid)?.Deliveries.Sum(s => s.QuantityDelivered) ?? 0;
 
-                    var prelevs = db.Citernes.Find(citerneGuid).Prelevements.Sum(p => p.MeterE);
+                    var prelevs = db.Citernes.Find(citerneGuid)?.Prelevements.Sum(p => p.MeterE) ?? 0;
 
-                    diff = (double) (stocks - prelevs);
+                    return stocks - prelevs;
                 }
                 catch (Exception exception)
                 {
                     DebugHelper.WriteException(exception);
                     return 0;
                 }
-                return diff < 0 ? 0 : diff;               
+            }
+        }
+
+
+        internal static double GetCiterneStock(Guid citerneGuid)
+        {
+            using (var db = new StationContext())
+            {
+                var stocks = db.Citernes.Find(citerneGuid)?.Deliveries.Sum(s => s.QuantityDelivered);
+                if (stocks == null)
+                    return 0;
+                return (double)stocks;
             }
         }
 
@@ -187,17 +194,15 @@ namespace EStationCore.Managers
         internal static double GetCiternePrelevement(Guid citerneGuid)
         {
             using (var db = new StationContext())
-            {
-                var sum = db.Citernes.Find(citerneGuid)?.Pompes.Select(p=> p.Prelevements.Select(v=> v.Meter)).Select(s=> s.Sum());
-                if (sum != null)
-                    return sum.Sum();
-            }
-            return 0;
+                return db.Citernes.Find(citerneGuid)?
+                         .Pompes.Select(p => p.Prelevements.Select(v => v.MeterE))
+                         .Select(s => s.Sum())
+                         .Sum() ?? 0;
         }
 
 
         #endregion
 
-
+        
     }
 }

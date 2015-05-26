@@ -32,7 +32,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <journals:FuelPeriodCard x:Name="_FUEL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" DateSelectionChanged="FuelPeriodCard_OnDateSelectionChanged" />
+                        <journals:FuelPeriodCard x:Name="_FUEL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="FuelPeriodCard_OnSelectionChanged"/>
 
                         <journals:Prelev x:Name="_PRELEVS" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 

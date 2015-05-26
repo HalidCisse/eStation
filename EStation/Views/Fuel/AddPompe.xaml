@@ -80,10 +80,15 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Compteur (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialCounter}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialMeter}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Pompe" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <ComboBox Name="_POMPE" Text="{Binding Colonne, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" Width="250" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+            <!--<StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
                 <TextBlock Text="Pompe" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <TextBox  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error">
                     <TextBox.Text>
@@ -94,14 +99,14 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-            </StackPanel>
+            </StackPanel>-->
 
             <!--<StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Nombre Pistolets" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:IntegerUpDown FormatString="" Increment="1" Minimum="1" Value="{Binding PistolNumber}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>-->
                                  
-            <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
+            <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
                 <Button Name="_ENREGISTRER" Content="Enregistrer" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Command="Save" />
                 <Button Name="_ANNULER" Content="Annuler" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Click="Annuler_Click"/>
             </Grid>

@@ -27,6 +27,8 @@
 
     <BitmapImage x:Key="BariqIcon" UriSource="../Ressources/Icon/Bariq.png" />
 
+    <BitmapImage x:Key="PrelevIcon" UriSource="../Ressources/Icon/Prelevement.png" />
+
 
 
     <BitmapImage x:Key="EconomatIcon"          UriSource="../Ressources/Icon/finance.png" />

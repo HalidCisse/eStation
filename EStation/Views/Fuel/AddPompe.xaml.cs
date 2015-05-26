@@ -21,11 +21,10 @@ namespace EStation.Views.Fuel
 
             new Task(() =>
             {
-
-
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     _CITERNES.ItemsSource = App.EStation.Citernes.GetCiternes();
+                    _POMPE.ItemsSource = App.EStation.Pompes.GetColonnes();
 
                     if (_CITERNES.Items.Count == 0)
                     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using CLib;
 using EStationCore.Model;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Fuel.Views;
@@ -73,28 +74,54 @@ namespace EStationCore.Managers
 
 
 
-        public double GetTotalSold(List<Guid> citernesGuid, DateTime fromDate, DateTime toDate)
+
+        public double GetTotalDeliveryLiter(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
-            return 333;
+            using (var db = new StationContext()){
+                var stocks = new List<FuelDelivery>();
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citerne in citernes)
+                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                return stocks.Sum(p => p.QuantityDelivered);
+            }
         }
 
 
-        public double GetTotalLiterSold(List<Guid> citernesGuid, DateTime fromDate, DateTime toDate)
+        public double GetTotalDeliveryCost(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
-            return 333;
+            using (var db = new StationContext()){
+                var stocks = new List<FuelDelivery>();
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citerne in citernes)
+                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                return stocks.Sum(p => p.Cost);
+            }
         }
 
 
-        public double GetFuelBalance(Guid fuelGuid)
-        {           
+        public double GetSold(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
+        {
             using (var db = new StationContext())
             {
-                var prelevs = db.Fuels.Find(fuelGuid).Citernes.Select(c => c.Prelevements).ToList().Select(p=> p.Sum(s=> s.MeterE)).Sum();
-                var stocks = db.Fuels.Find(fuelGuid).Citernes.Select(c => c.Stocks).ToList().Select(s=> s.Sum(d=> d.Quantity)).Sum();
+                var prelevements = new List<Prelevement>();
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citerne in citernes)
+                        prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                return prelevements.Sum(p => p.MeterE * p.ActualPrice);
+            }
+        }
 
-                var diff = stocks - prelevs;
-                return diff < 0 ? 0 : diff;
-            }               
+
+        public double GetLiterSold(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+            {
+                var prelevements = new List<Prelevement>();
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citerne in citernes)
+                        prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                return prelevements.Sum(p => p.MeterE);
+            }
         }
 
 
@@ -119,16 +146,45 @@ namespace EStationCore.Managers
         #region Static Internal
 
 
+        internal static double StaticGetFuelBalance(Guid fuelGuid)
+        {
+            using (var db = new StationContext())
+            {
+                double diff;
+                try
+                {
+                    var stocks = db.Fuels.Find(fuelGuid)?.Citernes.Select(c=> c.Deliveries).Sum(s => s.Sum(l=> l.QuantityDelivered));
+                    if (stocks == null)
+                        return 0;
+
+                    var prelevs = db.Fuels.Find(fuelGuid)?.Citernes.Select(p=> p.Prelevements).Sum(p => p.Sum(v=> v.MeterE));
+                    if (prelevs == null)
+                        return 0;
+
+                    diff = (double)(stocks - prelevs);
+                }
+                catch (Exception exception)
+                {
+                    DebugHelper.WriteException(exception);
+                    return 0;
+                }
+                return diff < 0 ? 0 : diff;
+            }
+        }
+
+
         internal static double GetFuelCurrentPrice(Guid fuelGuid)
         {
             using (var db = new StationContext())
                 return db.Fuels.Find(fuelGuid).Prices.Where(p => p.FromDate <= DateTime.Now).OrderByDescending(p => p.FromDate).First().ActualPrice;
         }
 
+
         internal static double GetFuelStock(Guid fuelGuid)
         {
             return 333;
         }
+
 
         #endregion
 

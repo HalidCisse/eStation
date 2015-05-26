@@ -10,9 +10,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="20"/>
             <RowDefinition MaxHeight="30"/>
-            <RowDefinition MaxHeight="50"/>
-            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition MaxHeight="20"/>
             <RowDefinition Height="*"/>                        
         </Grid.RowDefinitions>
 
@@ -29,16 +32,26 @@
         </StackPanel>
 
         <Grid  Grid.Row="3" Margin="10,0">
-            <Label Content="Total Litres Vendue" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Content="Litres Vendu" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_TOTAL_LITER" Foreground="#D0D0C6" HorizontalAlignment="Right" Margin="10,0" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
         </Grid>
 
         <Grid  Grid.Row="4" Margin="10,0">
-            <Label Content="Montant Total" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Content="Montant Vente" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_TOTAL_SOLD" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
         </Grid>
 
-        <ListBox Name="_CITERNES" Grid.Row="5" Margin="0,0,0,0" Background="Transparent" SelectionMode="Multiple" SelectedValuePath="CiterneGuid" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="False" SelectionChanged="Selector_OnSelectionChanged">
+        <Grid  Grid.Row="5" Margin="10,0">
+            <Label Content="Litres Livrer" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Name="_TOTAL_STOCK" Foreground="#D0D0C6" HorizontalAlignment="Right" Margin="10,0" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+        </Grid>
+
+        <Grid  Grid.Row="6" Margin="10,0">
+            <Label Content="Depense Livraison" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
+            <Label Name="_TOTAL_COST" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
+        </Grid>
+
+        <ListBox Name="_CITERNES" Grid.Row="8" Margin="0,0,0,0" Background="Transparent" SelectionMode="Multiple" SelectedValuePath="FuelGuid" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="False" SelectionChanged="Selector_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="5,5" Background="Transparent" BorderThickness=".0,.5,.0,.5" BorderBrush="Beige" Effect="{StaticResource Z-Depth1}" HorizontalAlignment="Stretch">
@@ -55,7 +68,7 @@
                             </Grid>
                             <Grid Width="220">
                                 <TextBlock Text="{Binding Libel, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Fuel, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding CurrentPrice, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Pourcentage, Mode=OneTime}" Margin="5" Foreground="#E9E9DE" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             </Grid>                            
                         </StackPanel>

@@ -27,6 +27,30 @@ namespace EStation.Views.Fuel
                         return;
                     }
 
+                    var curPomp = App.EStation.Pompes.Get(currentPompe);
+                    if (curPomp.CiterneGuid != null)
+                    {
+                        var citerneBalance = App.EStation.Citernes.GetCiterneFuelBalance((Guid) curPomp.CiterneGuid);
+
+                        if (citerneBalance<=0)
+                        {
+                            ModernDialog.ShowMessage("Il n'ya pas de carburant dans le Citerne", "EStation", MessageBoxButton.OK);
+                            Close();
+                            return;
+                        }
+
+                        _TITLE_TEXT.Text = "Prélèvement ".ToUpper() + curPomp.Libel.ToUpper();
+                        _derPrelev = App.EStation.Pompes.GetLastPrelevement(currentPompe);
+                        _COMPTEUR_M.Minimum = _derPrelev.Meter;
+                        _COMPTEUR_M.Maximum = _derPrelev.Meter + citerneBalance;
+                        _COMPTEUR_E.Maximum = citerneBalance;
+                    }
+                    else
+                    {
+                        Close();
+                        return;
+                    }
+
                     if (prelevToMod == Guid.Empty)
                     {
                         _isAdd = true;
@@ -35,17 +59,14 @@ namespace EStation.Views.Fuel
                         {
                             PompeGuid = currentPompe,
                             DatePrelevement = DateTime.Now,
-                            Meter = 0,
+                            Meter = _derPrelev.Meter,
                             MeterE = 0
                         };
                     }
                     else
                         _GRID.DataContext = App.EStation.Pompes.GetPrelevement(prelevToMod);
 
-                    _TITLE_TEXT.Text = "Prélèvement " + App.EStation.Pompes.Get(currentPompe).Libel;
-
-                    _derPrelev = App.EStation.Pompes.GetLastPrelevement(currentPompe);
-                    _COMPTEUR_M.Minimum = _derPrelev.Meter;
+                                   
                 }));
             }).Start();
         }

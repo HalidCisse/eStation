@@ -48,7 +48,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="Prix" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                <xctk:DoubleUpDown Name="_PRICE" FormatString="C2" Increment="100" Minimum="0" Value="{Binding Value}" HorizontalAlignment="Left" Width="500" Height="30" />
+                <xctk:DoubleUpDown Name="_PRICE" FormatString="C2" Increment="100" Minimum="0" Value="{Binding ActualPrice}" HorizontalAlignment="Left" Width="500" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">

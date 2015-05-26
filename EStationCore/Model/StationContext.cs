@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
 using EStationCore.Model.Comm.Entity;
+using EStationCore.Model.Customers.Entity;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Oil.Entity;
 using EStationCore.Model.Sale.Entity;
 
 namespace EStationCore.Model
@@ -24,7 +24,7 @@ namespace EStationCore.Model
         /// <summary>
         /// Les Clients
         /// </summary>
-        public virtual DbSet<Customers.Entity.Customer> Customers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         /// <summary>
         /// Les Personnels
@@ -49,7 +49,7 @@ namespace EStationCore.Model
         /// <summary>
         /// Les Stocks
         /// </summary>
-        public virtual DbSet<FuelStock> FuelStocks { get; set; }
+        public virtual DbSet<FuelDelivery> FuelDeliverys { get; set; }
 
         /// <summary>
         /// Les Carburant

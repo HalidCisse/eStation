@@ -15,27 +15,29 @@ namespace EStationCore.Model.Fuel.Views
             FuelGuid = fuel.FuelGuid;
             Libel = fuel.Libel;
             Threshold = fuel.Threshold.ToString("0.##");
-
-            CurrentPrice = FuelManager.GetFuelCurrentPrice(fuel.FuelGuid).ToString("0.##\\ dhs/L");  //fuel.Prices.OrderByDescending(p => p.FromDate.GetValueOrDefault().Ticks).First().ActualPrice.ToString("0.##\\ dhs/L") ;
-
+            CurrentPrice = FuelManager.GetFuelCurrentPrice(fuel.FuelGuid).ToString("0.##\\ dhs/L");  
             CiternesNumber = " Citerne".ToQuantity(fuel.Citernes.Count);
 
-            CurrentStock = FuelManager.GetFuelStock(fuel.FuelGuid).ToString("0.##\\ L en stock");
+            var curBalance = FuelManager.StaticGetFuelBalance(fuel.FuelGuid);
+            CurrentStock = curBalance.ToString("0.##\\L") + " en stock /" + fuel.Citernes.Sum(c => c.MaxCapacity).ToString("0.##\\L");
+            Pourcentage = ((curBalance * 100) / fuel.Citernes.Sum(c=> c.MaxCapacity)).ToString("0.##\\%");           
         }
 
 
 
-        public Guid FuelGuid { get; set; }
+        public Guid FuelGuid { get; }
 
 
-        public string Libel { get; set; }
+        public string Libel { get; }
 
-        public string Threshold { get; set; }
+        public string Threshold { get;}
 
-        public string CurrentPrice { get; set; }
+        public string CurrentPrice { get; }
 
-        public string CiternesNumber { get; set; }
+        public string CiternesNumber { get; }
 
-        public string CurrentStock { get; set; }
+        public string CurrentStock { get;}
+
+        public string Pourcentage { get;}
     }
 }

@@ -9,14 +9,14 @@ namespace EStationCore.Model.Fuel.Views
     public class StockCard
     {
 
-        public StockCard(FuelStock fuelStock)
+        public StockCard(FuelDelivery fuelDelivery)
         {
-            FuelStockGuid = fuelStock.FuelStockGuid;
-            Supplier = fuelStock.Supplier;
-            Quantity = fuelStock.Quantity.ToString("0.##\\L");
-            Cost = fuelStock.Cost.ToString("0.##\\ dhs");
-            Date = "Le " + fuelStock.DateAdded.GetValueOrDefault().ToShortDateString();
-            Description = fuelStock.Description;
+            FuelStockGuid = fuelDelivery.FuelDeliveryGuid;
+            Supplier = fuelDelivery.Supplier;
+            Quantity = fuelDelivery.QuantityDelivered.ToString("0.##\\L");
+            Cost = fuelDelivery.Cost.ToString("0.##\\ dhs");
+            Date = "Le " + fuelDelivery.DateAdded.GetValueOrDefault().ToShortDateString();
+            Description = fuelDelivery.Description;
         }
 
 
