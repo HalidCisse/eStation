@@ -78,6 +78,7 @@
     <Compile Include="Managers\FuelManager.cs" />
     <Compile Include="Managers\HrManager.cs" />
     <Compile Include="Managers\MetaManager.cs" />
+    <Compile Include="Managers\OilManager.cs" />
     <Compile Include="Managers\PayrollManager.cs" />
     <Compile Include="Managers\PompesManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
@@ -139,7 +140,9 @@
     <Compile Include="Model\Hr\Views\SalaryCard.cs" />
     <Compile Include="Model\Hr\Views\TransactionCard.cs" />
     <Compile Include="Model\Oil\Entity\Oil.cs" />
-    <Compile Include="Model\Oil\Views\HuileCard.cs" />
+    <Compile Include="Model\Oil\Entity\OilDelivery.cs" />
+    <Compile Include="Model\Oil\Views\OilCard.cs" />
+    <Compile Include="Model\Oil\Views\OilDeliveryCard.cs" />
     <Compile Include="Model\Sale\Entity\Journal.cs" />
     <Compile Include="Model\Sale\Entity\Product.cs" />
     <Compile Include="Model\Sale\Entity\Purchase.cs" />

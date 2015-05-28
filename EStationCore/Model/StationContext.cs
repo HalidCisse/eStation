@@ -3,6 +3,7 @@ using EStationCore.Model.Comm.Entity;
 using EStationCore.Model.Customers.Entity;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Hr.Entity;
+using EStationCore.Model.Oil.Entity;
 using EStationCore.Model.Sale.Entity;
 
 namespace EStationCore.Model
@@ -60,6 +61,12 @@ namespace EStationCore.Model
         /// Les Huile
         /// </summary>
         public virtual DbSet<Oil.Entity.Oil> Oils { get; set; }
+
+
+        /// <summary>
+        /// Les Stock Huiles
+        /// </summary>
+        public virtual DbSet<OilDelivery> OilDeliveries { get; set; }
 
 
 

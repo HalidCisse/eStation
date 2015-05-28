@@ -7,6 +7,12 @@ namespace EStationCore
     {
 
         /// <summary>
+        /// System de Gestion Des Huiles
+        /// </summary>
+        public OilManager Oils = new OilManager();
+
+
+        /// <summary>
         /// System de Gestion Des Citernes
         /// </summary>
         public CiternesManager Citernes = new CiternesManager();

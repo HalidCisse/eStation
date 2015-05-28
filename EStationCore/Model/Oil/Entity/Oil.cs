@@ -1,23 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EStationCore.Model.Common.Enums;
+using CLib.Database;
+
 
 namespace EStationCore.Model.Oil.Entity
 {
-    public class Oil
+    public class Oil : Tracable
     {
 
         [Key]
         public Guid OilGuid { get; set; }
 
+        public string Libel { get; set; }
 
-        public TypeHuile TypeOil { get; set; }
+        public double LiterPerGallon { get; set; }
+
+        public double CurrentUnitPrice { get; set; }
+
+        public int StockCapacity { get; set; }
+
+        public double Threshold { get; set; }
+
+        public string TypeOil { get; set; }
+   
+        public string Description { get; set; }
 
 
 
-        public double Seuil { get; set; }
 
-
+        public virtual ICollection<OilDelivery> Deliveries { get; set; } = new HashSet<OilDelivery>();
 
     }
 }

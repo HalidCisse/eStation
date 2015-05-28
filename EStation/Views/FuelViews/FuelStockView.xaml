@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ext="clr-namespace:EStation.Ext"
       xmlns:fuel="clr-namespace:EStation.Views.Fuel"
+      xmlns:oilViews="clr-namespace:EStation.Views.OilViews"
       mc:Ignorable="d" 
      d:DesignHeight="550" d:DesignWidth="1080" Background="Beige" x:ClassModifier="internal">
 
@@ -44,7 +45,10 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        
+                        <oilViews:OilsView x:Name="_OILS_VIEW" Effect="{StaticResource Z-Depth2}" Margin="10" HuileSelectionChanged="OilsView_OnHuileSelectionChanged"/>
+
+                        <oilViews:OilDeliveries x:Name="OilDeliveries" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -55,7 +59,7 @@
 
                         <fuel:CarburantView x:Name="_CARBURANTS" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
-                        <fuel:CiterneView x:Name="_CITERNES" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                        <!--<fuel:CiterneView x:Name="_CITERNES" Effect="{StaticResource Z-Depth2}" Margin="10"/>-->
 
                     </StackPanel>
                 </ScrollViewer>

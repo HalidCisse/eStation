@@ -200,40 +200,40 @@
     <Compile Include="Views\Common\StaffPicker.xaml.cs">
       <DependentUpon>StaffPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddCiterne.xaml.cs">
+    <Compile Include="Views\FuelViews\AddCiterne.xaml.cs">
       <DependentUpon>AddCiterne.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddPompe.xaml.cs">
+    <Compile Include="Views\FuelViews\AddPompe.xaml.cs">
       <DependentUpon>AddPompe.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddFuel.xaml.cs">
+    <Compile Include="Views\FuelViews\AddFuel.xaml.cs">
       <DependentUpon>AddFuel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddPrelevement.xaml.cs">
+    <Compile Include="Views\FuelViews\AddPrelevement.xaml.cs">
       <DependentUpon>AddPrelevement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddPrice.xaml.cs">
+    <Compile Include="Views\FuelViews\AddPrice.xaml.cs">
       <DependentUpon>AddPrice.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\AddStock.xaml.cs">
+    <Compile Include="Views\FuelViews\AddStock.xaml.cs">
       <DependentUpon>AddStock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\CarburantView.xaml.cs">
+    <Compile Include="Views\FuelViews\CarburantView.xaml.cs">
       <DependentUpon>CarburantView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\Citernes.xaml.cs">
+    <Compile Include="Views\FuelViews\Citernes.xaml.cs">
       <DependentUpon>Citernes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\CiterneStock.xaml.cs">
+    <Compile Include="Views\FuelViews\CiterneStock.xaml.cs">
       <DependentUpon>CiterneStock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\CiterneView.xaml.cs">
+    <Compile Include="Views\FuelViews\CiterneView.xaml.cs">
       <DependentUpon>CiterneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\ColonneView.xaml.cs">
+    <Compile Include="Views\FuelViews\ColonneView.xaml.cs">
       <DependentUpon>ColonneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\FuelStockView.xaml.cs">
+    <Compile Include="Views\FuelViews\FuelStockView.xaml.cs">
       <DependentUpon>FuelStockView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\AddTransaction.xaml.cs">
@@ -251,7 +251,7 @@
     <Compile Include="Views\Journals\JournalView.xaml.cs">
       <DependentUpon>JournalView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Fuel\OilView.xaml.cs">
+    <Compile Include="Views\FuelViews\OilView.xaml.cs">
       <DependentUpon>OilView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Hr\AddEmploy.xaml.cs">
@@ -283,6 +283,18 @@
     </Compile>
     <Compile Include="Views\Journals\Prelev.xaml.cs">
       <DependentUpon>Prelev.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OilViews\AddOil.xaml.cs">
+      <DependentUpon>AddOil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OilViews\AddOilDelivery.xaml.cs">
+      <DependentUpon>AddOilDelivery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OilViews\OilDelivery.xaml.cs">
+      <DependentUpon>OilDelivery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OilViews\OilsView.xaml.cs">
+      <DependentUpon>OilsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Security\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
@@ -382,51 +394,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Fuel\AddCiterne.xaml">
+    <Page Include="Views\FuelViews\AddCiterne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\AddPompe.xaml">
+    <Page Include="Views\FuelViews\AddPompe.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\AddFuel.xaml">
+    <Page Include="Views\FuelViews\AddFuel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\AddPrelevement.xaml">
+    <Page Include="Views\FuelViews\AddPrelevement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\AddPrice.xaml">
+    <Page Include="Views\FuelViews\AddPrice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\AddStock.xaml">
+    <Page Include="Views\FuelViews\AddStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\CarburantView.xaml">
+    <Page Include="Views\FuelViews\CarburantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\Citernes.xaml">
+    <Page Include="Views\FuelViews\Citernes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\CiterneStock.xaml">
+    <Page Include="Views\FuelViews\CiterneStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\CiterneView.xaml">
+    <Page Include="Views\FuelViews\CiterneView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\ColonneView.xaml">
+    <Page Include="Views\FuelViews\ColonneView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\FuelStockView.xaml">
+    <Page Include="Views\FuelViews\FuelStockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,7 +462,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Fuel\OilView.xaml">
+    <Page Include="Views\FuelViews\OilView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -491,6 +503,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Journals\Prelev.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OilViews\AddOil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OilViews\AddOilDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OilViews\OilDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OilViews\OilsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -559,9 +587,7 @@
       <Name>EStationCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Stock\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Ressources\Icon\clienticon2.png" />
     <Resource Include="Ressources\Icon\ComingSoon.png" />

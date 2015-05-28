@@ -23,5 +23,14 @@ namespace EStation.Views.Fuel
           
             _CITERNE_STOCK.Refresh((Guid) sender);
         }
+
+        private void OilsView_OnHuileSelectionChanged(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+
+            OilDeliveries.Refresh((Guid)sender);
+        }
+
+
     }
 }

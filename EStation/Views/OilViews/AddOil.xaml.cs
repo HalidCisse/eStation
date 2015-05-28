@@ -3,22 +3,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EStationCore.Model.Fuel.Entity;
+using EStationCore.Model.Oil.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Fuel
+namespace EStation.Views.OilViews
 {
-    /// <summary>
-    /// Interaction logic for AddFuel.xaml
-    /// </summary>
-    internal partial class AddFuel 
-    {
-        
+    
+    internal partial class AddOil 
+    {      
         private bool _isAdd;
         private int _errors;
 
 
-        public AddFuel(Guid fuelToModGuid)
+        public AddOil(Guid oilToModGuid)
         {
             InitializeComponent();
 
@@ -26,20 +23,24 @@ namespace EStation.Views.Fuel
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (fuelToModGuid == Guid.Empty)
+                    _OIL_TYPE.ItemsSource = App.EStation.Oils.GetTypes();
+
+                    if (oilToModGuid == Guid.Empty)
                     {
                         _isAdd = true;
 
-                        _GRID.DataContext = new EStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
+                        _GRID.DataContext = new Oil
+                        {
+                            LiterPerGallon = 4,
+                            Threshold = 10,
+                            CurrentUnitPrice = 1,
+                        };
                     }
                     else
-                        _GRID.DataContext = App.EStation.Fuels.Get(fuelToModGuid);
+                        _GRID.DataContext = App.EStation.Oils.Get(oilToModGuid);
                 }));
             }).Start();
         }
-
-
-        
 
 
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
@@ -59,18 +60,9 @@ namespace EStation.Views.Fuel
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
-            {
-                var newFuel =
-                    ((EStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
-
-                if (_UNIT_PRICE.Value != null)
-                    newFuel.Prices.Add(new Price
-                    {
-                        ActualPrice = (double)_UNIT_PRICE.Value
-                    });
-
-                if (_isAdd) App.EStation.Fuels.Post(newFuel);
-                else App.EStation.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);
+            {                
+                if (_isAdd) App.EStation.Oils.Post((Oil)_GRID.DataContext);
+                else App.EStation.Oils.Put((Oil)_GRID.DataContext);
             }
             catch (Exception ex)
             {
@@ -83,7 +75,6 @@ namespace EStation.Views.Fuel
         }
 
         private void Annuler_Click(object sender, RoutedEventArgs e) => Close();
-
 
     }
 }

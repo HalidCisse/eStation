@@ -1,0 +1,95 @@
+﻿<Window x:Class="EStation.Views.OilViews.AddOil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ext="clr-namespace:EStation.Ext"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+       Height="500" Width="600" Style="{StaticResource MyForm}" FontFamily="Helvetica" x:ClassModifier="internal">
+
+
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+
+    </Window.Resources>
+
+    <AdornerDecorator>
+        <Grid x:Name="_GRID" Margin="10,-30,10,20">
+            <Grid.CommandBindings>
+                <CommandBinding Command="Save" CanExecute="Save_CanExecute" Executed="Save_Executed" />
+            </Grid.CommandBindings>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Image Source="{StaticResource OilIcon}" Height="70" Width="70" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+
+                <Grid Height="40" VerticalAlignment="Top" Margin="50,0,0,0">
+                    <TextBlock Name="_TITLE_TEXT" Text="HUILE" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
+                    <Border Background="Blue" Width="350" Height="7"  VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                <TextBlock Text="Libel" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBox x:Name="_LIBEL"  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error">
+                    <TextBox.Text>
+                        <Binding Path="Libel" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <ext:NameValidator Min="3" IsNullable="False" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Litres/Bidon" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_LITER_BIDON" FormatString="" Increment=".5" Minimum="0" Value="{Binding LiterPerGallon}" HorizontalAlignment="Left" Width="250" Height="30" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Tarif/ Bidon" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_UNIT_PRICE" FormatString="C2" Increment=".5" Minimum="0" Value="{Binding CurrentUnitPrice}" HorizontalAlignment="Left" Width="250" Height="30" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Type Huile" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <ComboBox Name="_OIL_TYPE" Text="{Binding TypeOil, UpdateSourceTrigger=PropertyChanged}" IsEditable="True" Width="250" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Capaciter de Stock" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding StockCapacity}" HorizontalAlignment="Left" Width="250" Height="30" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Seuil Minimale" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding Threshold}" HorizontalAlignment="Left" Width="250" Height="30" />
+            </StackPanel>
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
+                <Button Name="_ENREGISTRER" Content="Enregistrer" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Command="Save" />
+                <Button Name="_ANNULER" Content="Annuler" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Click="Annuler_Click"/>
+            </Grid>
+        </Grid>
+    </AdornerDecorator>
+</Window>
