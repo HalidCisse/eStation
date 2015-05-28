@@ -284,18 +284,16 @@ namespace EStationCore.Managers {
                 if(startDate==null||endDate==null)
                     return db.Payrolls.Where(t => !t.IsDeleted&&t.IsPaid).Sum(t => t.FinalPaycheck);
 
-                if(!db.Payrolls.Any(t =>
-                                            !t.IsDeleted&&t.IsPaid&&
-                                            t.DatePaid>=startDate&&
-                                            t.DatePaid<=endDate
-                                        ))
-                    return 0;
-
-                return db.Payrolls.Where(t =>
-                                            !t.IsDeleted&&t.IsPaid&&
-                                            t.DatePaid>=startDate&&
-                                            t.DatePaid<=endDate
-                                        ).Sum(t => t.FinalPaycheck);
+                return db.Payrolls.Any(t =>
+                    !t.IsDeleted && t.IsPaid &&
+                    t.DatePaid >= startDate &&
+                    t.DatePaid <= endDate)
+                    ? db.Payrolls.Where(t =>
+                        !t.IsDeleted && t.IsPaid &&
+                        t.DatePaid >= startDate &&
+                        t.DatePaid <= endDate
+                        ).Sum(t => t.FinalPaycheck)
+                    : 0;
             }
         }
 
@@ -313,18 +311,16 @@ namespace EStationCore.Managers {
                 if(startDate==null||endDate==null)
                     return db.Transactions.Where(t => !t.IsDeleted).Sum(t => t.Amount);
 
-                if(!db.Transactions.Any(t =>
-                                                !t.IsDeleted&&
-                                                t.TransactionDate>=startDate&&
-                                                t.TransactionDate<=endDate
-                                            ))
-                    return 0;
-
-                return db.Transactions.Where(t =>
-                                                !t.IsDeleted&&
-                                                t.TransactionDate>=startDate&&
-                                                t.TransactionDate<=endDate
-                                            ).Sum(t => t.Amount);
+                return db.Transactions.Any(t =>
+                    !t.IsDeleted &&
+                    t.TransactionDate >= startDate &&
+                    t.TransactionDate <= endDate)
+                    ? db.Transactions.Where(t =>
+                        !t.IsDeleted &&
+                        t.TransactionDate >= startDate &&
+                        t.TransactionDate <= endDate
+                        ).Sum(t => t.Amount)
+                    : 0;
             }
         }
 
@@ -383,16 +379,17 @@ namespace EStationCore.Managers {
         /// <param name="newTransaction"></param>
         /// <returns>True pour oui</returns>
         internal static bool TransactionExist (Transaction newTransaction) {
-            using (var db = new StationContext()) {
+            using (var db = new StationContext())
+            {
                 if(db.Transactions.Find(newTransaction.TransactionGuid)!=null)
                     return true;
-                if(db.Transactions.Any(t => t.TransactionReference.Equals(newTransaction.TransactionReference, StringComparison.CurrentCultureIgnoreCase)))
-                    return true;
-
-                return db.Transactions.Any(t => t.PaymentMethode==newTransaction.PaymentMethode&&
-                                              t.Designation.Equals(newTransaction.Designation)&&
-                                              t.TransactionDate==newTransaction.TransactionDate&&
-                                              Math.Abs(t.Amount-newTransaction.Amount)<.0000001);
+                return db.Transactions.Any(t =>
+                        t.TransactionReference.Equals(newTransaction.TransactionReference,
+                            StringComparison.CurrentCultureIgnoreCase)) ||
+                       db.Transactions.Any(t => t.PaymentMethode == newTransaction.PaymentMethode &&
+                                                t.Designation.Equals(newTransaction.Designation) &&
+                                                t.TransactionDate == newTransaction.TransactionDate &&
+                                                Math.Abs(t.Amount - newTransaction.Amount) < .0000001);
             }
         }
 

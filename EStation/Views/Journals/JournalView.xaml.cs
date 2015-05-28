@@ -23,7 +23,13 @@ namespace EStation.Views.Journals
             => _PRELEVS.Refresh(_FUEL_PERIOD.SelectedFuels, _FUEL_PERIOD.FromDate, _FUEL_PERIOD.ToDate);
 
 
+        private void CaisseDetails_OnDateSelectionChanged(object sender, EventArgs e) 
+            => _TRANS_CARD.Refresh(_CAISSE_CARD.FromDate, _CAISSE_CARD.ToDate);
 
 
+        private void CaisseTransactions_OnRefreshed(object sender, EventArgs e)
+            => _CAISSE_CARD.Refresh();
+
+        
     }
 }

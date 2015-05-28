@@ -11,9 +11,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
+            <!--<RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition/>-->
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -40,25 +40,25 @@
             <Label Name="_TOTAL_DEPENSES" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
         </Grid>
         
-        <Grid  Grid.Row="4" Margin="10,0">
+        <!--<Grid  Grid.Row="4" Margin="10,0">
             <Label Content="Total Frais Scolarité Payés" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_TOTAL_SCHOOL_FEE" Foreground="#D0D0C6" HorizontalAlignment="Right" Margin="10,0" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
-        </Grid>
+        </Grid>-->
 
-        <Grid  Grid.Row="5" Margin="10,0">
+        <!--<Grid  Grid.Row="5" Margin="10,0" Visibility="Collapsed">
             <Label Content="Total Salaire Payées" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_TOTAL_SALARIES" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
         </Grid>
         
-        <Grid  Grid.Row="6" Margin="10,0">
+        <Grid  Grid.Row="6" Margin="10,0" Visibility="Collapsed">
             <Label Content="Solde Caisse" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_CAISSE_SOLDE" Foreground="#D0D0C6" HorizontalAlignment="Right" Margin="10,0" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
         </Grid>
 
-        <Grid  Grid.Row="7" Margin="10,0">
+        <Grid  Grid.Row="7" Margin="10,0" Visibility="Collapsed">
             <Label Content="Solde Total" Foreground="#D0D0C6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
             <Label Name="_TOTAL_SOLDE" Foreground="#D0D0C6" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0"  FontSize="15" FontFamily="League Gothic"/>
-        </Grid>
+        </Grid>-->
         
     </Grid>
 </UserControl>

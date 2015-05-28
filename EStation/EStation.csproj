@@ -15,24 +15,28 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Halid\Documents\GitHub\Publish\Estation\</PublishUrl>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://ftp.eschool.bugs3.com/home/u901448786/public_html/es/</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://localhost/EStation/</InstallUrl>
     <TargetCulture>fr</TargetCulture>
     <ProductName>EStation</ProductName>
     <PublisherName>Halid Cisse</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -56,6 +60,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D77BE4986CE106868BB10A3FA6E29D6C848D7489</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>EStation_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elysium">
@@ -142,6 +158,7 @@
     <Compile Include="Ext\StaffValidator.cs" />
     <Compile Include="Ext\TabItemWidthAdjustmentConverter.cs" />
     <Compile Include="Ext\TabSizeConverter.cs" />
+    <Compile Include="Ext\TransactionRefValidator.cs" />
     <Compile Include="Ressources\MyForm.cs" />
     <Compile Include="Ressources\MyWindowStyle.cs" />
     <Compile Include="Views\Clients\CustomerDetails.xaml.cs">
@@ -219,8 +236,14 @@
     <Compile Include="Views\Fuel\FuelStockView.xaml.cs">
       <DependentUpon>FuelStockView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Journals\AddTransaction.xaml.cs">
+      <DependentUpon>AddTransaction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Journals\CaisseDetails.xaml.cs">
       <DependentUpon>CaisseDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journals\CaisseTransactions.xaml.cs">
+      <DependentUpon>CaisseTransactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\FuelPeriodCard.xaml.cs">
       <DependentUpon>FuelPeriodCard.xaml</DependentUpon>
@@ -407,7 +430,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Journals\AddTransaction.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Journals\CaisseDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Journals\CaisseTransactions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -506,6 +537,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="EStation_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
