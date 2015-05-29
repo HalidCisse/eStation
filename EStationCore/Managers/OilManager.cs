@@ -180,6 +180,9 @@ namespace EStationCore.Managers
 
         #endregion
 
-        
+        public IEnumerable GetPrelevCards(Guid currentOil)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
