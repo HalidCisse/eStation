@@ -141,8 +141,10 @@
     <Compile Include="Model\Hr\Views\TransactionCard.cs" />
     <Compile Include="Model\Oil\Entity\Oil.cs" />
     <Compile Include="Model\Oil\Entity\OilDelivery.cs" />
+    <Compile Include="Model\Oil\Entity\OilPrelevement.cs" />
     <Compile Include="Model\Oil\Views\OilCard.cs" />
     <Compile Include="Model\Oil\Views\OilDeliveryCard.cs" />
+    <Compile Include="Model\Oil\Views\OilPrelevCard.cs" />
     <Compile Include="Model\Sale\Entity\Journal.cs" />
     <Compile Include="Model\Sale\Entity\Product.cs" />
     <Compile Include="Model\Sale\Entity\Purchase.cs" />

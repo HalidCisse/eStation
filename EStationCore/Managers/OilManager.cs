@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using CLib;
 using EStationCore.Model;
+using EStationCore.Model.Fuel.Entity;
+using EStationCore.Model.Fuel.Views;
 using EStationCore.Model.Oil.Entity;
 using EStationCore.Model.Oil.Views;
 using Humanizer;
@@ -114,10 +116,20 @@ namespace EStationCore.Managers
 
 
 
-
+        public IEnumerable<OilPrelevCard> GetPrelevCards(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+            {
+                var prelevements = new List<OilPrelevement>();
+                foreach (var oil in db.Oils.Where(f => oilsGuids.Contains(f.OilGuid)))
+                        prelevements.AddRange(oil.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                return prelevements.OrderByDescending(p => p.DatePrelevement).Select(p => new OilPrelevCard(p)).ToList();               
+            }
+        }
 
 
         public int GetOilBalance(Guid oilGuid) => StaticGetOilBalance(oilGuid);
+
 
         public IEnumerable<OilCard> GetOilsCards()
         {
@@ -140,8 +152,6 @@ namespace EStationCore.Managers
 
 
         #endregion
-
-
 
 
 
@@ -180,9 +190,16 @@ namespace EStationCore.Managers
 
         #endregion
 
-        public IEnumerable GetPrelevCards(Guid currentOil)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+        
+
+
+
+
+
+
+
     }
 }

@@ -31,5 +31,7 @@ namespace EStationCore.Model.Oil.Entity
 
         public virtual ICollection<OilDelivery> Deliveries { get; set; } = new HashSet<OilDelivery>();
 
+        public virtual ICollection<OilPrelevement> Prelevements { get; set; } = new HashSet<OilPrelevement>();
+
     }
 }

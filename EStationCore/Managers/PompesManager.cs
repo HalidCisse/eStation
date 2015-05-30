@@ -181,14 +181,16 @@ namespace EStationCore.Managers
 
         #region Internal Static
 
+
+
+
+
         internal static Prelevement StaticGetLastPrelevement(Guid pompeGuid)
         {
             using (var db = new StationContext())
                 return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
                     new Prelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
         }
-
-
 
 
         #endregion
