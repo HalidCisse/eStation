@@ -47,6 +47,8 @@
 
                         <oilViews:OilsView x:Name="_OILS_VIEW" Effect="{StaticResource Z-Depth2}" Margin="10" HuileSelectionChanged="OilsView_OnHuileSelectionChanged"/>
 
+                        <oilViews:OilPrelev x:Name="_OIL_PRELEVS" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+
                         <oilViews:OilDeliveries x:Name="OilDeliveries" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
                     </StackPanel>

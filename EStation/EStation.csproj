@@ -290,6 +290,9 @@
     <Compile Include="Views\OilViews\AddOilDelivery.xaml.cs">
       <DependentUpon>AddOilDelivery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OilViews\AddOilPrelev.xaml.cs">
+      <DependentUpon>AddOilPrelev.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OilViews\OilDelivery.xaml.cs">
       <DependentUpon>OilDelivery.xaml</DependentUpon>
     </Compile>
@@ -514,6 +517,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OilViews\AddOilDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OilViews\AddOilPrelev.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

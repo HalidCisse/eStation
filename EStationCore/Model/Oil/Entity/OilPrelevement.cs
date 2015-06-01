@@ -16,7 +16,7 @@ namespace EStationCore.Model.Oil.Entity
 
         public double TotalMeter { get; set; }
 
-        public double DiffMeter { get; set; }
+        public int DiffMeter { get; set; }
 
         public double ActualUnitPrice { get; set; }
 

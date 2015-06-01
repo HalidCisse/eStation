@@ -6,7 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" Width="360" x:ClassModifier="internal" Background="Beige">
 
-
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="40" Background="#25A0DA">
             <Grid.ColumnDefinitions>
@@ -19,7 +18,7 @@
             <Button Grid.Column="1" Name="_ADD_BUTTON" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Carburant"  Click="AddButton_OnClick"/>
         </Grid>
 
-        <ListBox x:Name="_PRELEVS" Background="Beige" SelectedValuePath="PrelevementGuid" BorderThickness="0" HorizontalAlignment="Center" ScrollViewer.CanContentScroll ="false" >
+        <ListBox x:Name="_PRELEVS" Background="Beige" SelectedValuePath="OilPrelevementGuid" BorderThickness="0" HorizontalAlignment="Center" ScrollViewer.CanContentScroll ="false" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5,5" Width="330" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
@@ -35,8 +34,8 @@
                         </Ellipse>
 
                         <Grid Grid.Column="1">
-                            <TextBlock Text="{Binding Pompe}" VerticalAlignment="Top" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="18" Margin="05,05"/>
-                            <TextBlock Text="{Binding Fuel}" VerticalAlignment="Bottom" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="14" Margin="05,05"/>
+                            <TextBlock Text="{Binding OilLibel}" VerticalAlignment="Top" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="18" Margin="05,05"/>
+                            <TextBlock Text="{Binding DatePrelev}" VerticalAlignment="Bottom" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="14" Margin="05,05"/>
                         </Grid>
 
                         <Grid Grid.Column="2" VerticalAlignment="Stretch">

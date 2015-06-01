@@ -5,7 +5,7 @@ using System.Windows.Input;
 using EStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Fuel
+namespace EStation.Views.FuelViews
 {
     internal partial class AddFuelStock 
     {

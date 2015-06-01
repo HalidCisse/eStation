@@ -69,6 +69,12 @@ namespace EStationCore.Model
         public virtual DbSet<OilDelivery> OilDeliveries { get; set; }
 
 
+        /// <summary>
+        /// Les Prelevements Huiles
+        /// </summary>
+        public virtual DbSet<OilPrelevement> OilPrelevements { get; set; }
+
+
 
 
         #endregion

@@ -29,6 +29,7 @@ namespace EStation.Views.Fuel
             if (sender == null) return;
 
             OilDeliveries.Refresh((Guid)sender);
+            _OIL_PRELEVS.Refresh((Guid)sender);
         }
 
 

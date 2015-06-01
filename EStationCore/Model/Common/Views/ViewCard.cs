@@ -66,5 +66,8 @@ namespace EStationCore.Model.Common.Views
         public bool Bool1 { get; set; }
 
 
+        public int Int1 { get; set; }
+
+
     }
 }

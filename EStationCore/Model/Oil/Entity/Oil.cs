@@ -20,7 +20,9 @@ namespace EStationCore.Model.Oil.Entity
 
         public int StockCapacity { get; set; }
 
-        public double Threshold { get; set; }
+        public int InitialStock { get; set; }
+
+        public int Threshold { get; set; }
 
         public string TypeOil { get; set; }
    

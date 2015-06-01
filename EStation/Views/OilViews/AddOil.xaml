@@ -82,8 +82,8 @@
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Seuil Minimale" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding Threshold}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <TextBlock Text="Stock Actuel" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialStock}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">

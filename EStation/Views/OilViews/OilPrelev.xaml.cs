@@ -24,14 +24,14 @@ namespace EStation.Views.OilViews
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
                 _PRELEVS.ItemsSource = App.EStation.Oils.GetPrelevCards(new List<Guid> {_currentOil}, DateTime.Today.AddDays(-7), DateTime.Today);
-                _TITLE_TEXT.Text = "LIVRAISONS " + App.EStation.Oils.Get(_currentOil)?.Libel.ToUpper();
+                _TITLE_TEXT.Text = "PRELEVEMENTS " + App.EStation.Oils.Get(_currentOil)?.Libel.ToUpper();
             }))).Start();
         }
-
+         
   
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var wind = new AddOilDelivery(_currentOil, Guid.Empty) { Owner = Window.GetWindow(this) };
+            var wind = new AddOilPrelev { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
             Refresh(_currentOil);
         }

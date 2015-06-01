@@ -115,14 +115,18 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
             {
-                var deps = (from s in db.FuelDeliverys.OrderByDescending(f=> f.DateAdded).ToList() where !string.IsNullOrEmpty(s.Supplier) select s.Supplier).Distinct().ToList();
+                var deps = db.FuelDeliverys.OrderByDescending(f => f.DateAdded)
+                        .Where(s => !string.IsNullOrEmpty(s.Supplier))
+                        .Select(s => s.Supplier)
+                        .ToList();
+                    deps.AddRange(db.OilDeliveries.OrderByDescending(f => f.DateAdded)
+                        .Where(s => !string.IsNullOrEmpty(s.Supplier))
+                        .Select(s => s.Supplier)
+                        .ToList());
 
                 return !deps.Any()
-                    ? new List<string>
-                    {
-                        "Winxo",                        
-                    }
-                    : deps;
+                    ? new List<string>{ "Winxo" }
+                    : deps.Distinct().ToList();
             }
         }
 
