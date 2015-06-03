@@ -34,13 +34,13 @@
                         </Ellipse>
 
                         <Grid Grid.Column="1">
-                            <TextBlock Text="{Binding OilLibel}" VerticalAlignment="Top" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="18" Margin="05,05"/>
+                            <TextBlock Text="{Binding Libel}" VerticalAlignment="Top" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="18" Margin="05,05"/>
                             <TextBlock Text="{Binding DatePrelev}" VerticalAlignment="Bottom" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="14" Margin="05,05"/>
                         </Grid>
 
                         <Grid Grid.Column="2" VerticalAlignment="Stretch">
-                            <TextBlock Text="{Binding MeterM}" VerticalAlignment="Top" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
-                            <TextBlock Text="{Binding MeterE}" VerticalAlignment="Bottom" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
+                            <TextBlock Text="{Binding TotalSold}" VerticalAlignment="Top" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
+                            <TextBlock Text="{Binding TotalStock}" VerticalAlignment="Bottom" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>
                         </Grid>
 
                         <Grid.ToolTip>

@@ -6,8 +6,6 @@ using System.Linq;
 using CLib;
 using CLib.Exceptions;
 using EStationCore.Model;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Fuel.Views;
 using EStationCore.Model.Oil.Entity;
 using EStationCore.Model.Oil.Views;
 using Humanizer;

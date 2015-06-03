@@ -11,12 +11,12 @@ namespace EStationCore.Model.Oil.Views
         public OilPrelevCard(OilPrelevement prelevement)
         {
             OilPrelevementGuid = prelevement.OilPrelevementGuid;
-            Libel = $"{prelevement.Oil.Libel.ToLower().Titleize()} ({prelevement.Oil.TypeOil.ToLower().Titleize()})";
+            Libel = $"{prelevement.Oil.Libel.ToLower().Titleize()} ({prelevement.Oil.TypeOil.ToUpper()})";
             DatePrelev = prelevement.DatePrelevement.GetValueOrDefault().ToString("dd MMM yy - HH:mm");
-            TotalStock = "bidon".ToQuantity(prelevement.TotalStock);
-            TotalSold = "bidon".ToQuantity(prelevement.TotalSold);
-
+            TotalStock = $"Stock: {"bidon".ToQuantity(prelevement.TotalStock)}";
+            TotalSold = $"Vendu: {"bidon".ToQuantity(prelevement.TotalSold)}";
         }
+
 
         public Guid OilPrelevementGuid { get; }
 
