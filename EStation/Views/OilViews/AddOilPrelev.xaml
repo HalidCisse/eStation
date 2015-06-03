@@ -59,13 +59,13 @@
             <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <TextBlock Text="Huiles" Width="330" VerticalAlignment="Bottom" FontSize="13"/>
-                    <TextBlock Text="Nombre Bidons Vendus" Width="200" VerticalAlignment="Bottom" FontSize="13"/>
+                    <TextBlock Text="Nombre de Bidons En Stock" Width="200" VerticalAlignment="Bottom" FontSize="13"/>
                 </StackPanel>
 
                 <ListBox Name="_PRELEVS" Background="Transparent" BorderThickness="0" Height="200" VerticalAlignment="Bottom" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="0,2"  BorderThickness="0" BorderBrush="Blue" Background="LightSlateGray" Effect="{StaticResource Z-Depth1}">
+                            <Border Margin="0,2" Height="30"  BorderThickness="0" BorderBrush="Blue" Background="LightSlateGray" Effect="{StaticResource Z-Depth1}">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{Binding Info1, Mode=TwoWay}" Foreground="Blue" Background="Beige" Width="330" FontSize="15" FontWeight="ExtraLight" VerticalContentAlignment="Center"/>
                                     <xctk:IntegerUpDown Background="WhiteSmoke" Value="{Binding Int1, Mode=TwoWay}" Width="200" Minimum="0" Increment="5"/>

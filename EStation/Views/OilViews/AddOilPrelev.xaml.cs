@@ -30,7 +30,7 @@ namespace EStation.Views.OilViews
             try
             {
                 App.EStation.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
-                    .Select(s=> new OilPrelevement {OilGuid = s.Guid, DiffMeter = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
+                    .Select(s=> new OilPrelevement {OilGuid = s.Guid, TotalStock = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
             }
             catch (Exception ex)
             {

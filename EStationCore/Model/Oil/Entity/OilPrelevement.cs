@@ -14,9 +14,9 @@ namespace EStationCore.Model.Oil.Entity
       
 
 
-        public double TotalMeter { get; set; }
+        public int TotalStock { get; set; }
 
-        public int DiffMeter { get; set; }
+        public int TotalSold { get; set; }
 
         public double ActualUnitPrice { get; set; }
 

@@ -117,15 +117,19 @@ namespace EStationCore.Managers
                 {
                     if (prelevement.OilPrelevementGuid == Guid.Empty) prelevement.OilPrelevementGuid = Guid.NewGuid();
                     prelevement.ActualUnitPrice = db.Oils.Find(prelevement.OilGuid).CurrentUnitPrice;
-                             
-                    if (prelevement.DiffMeter<0)
+
+                    var lastOne = StaticGetLastPrelevement(prelevement.OilGuid);
+
+                    prelevement.TotalSold = lastOne.TotalStock - prelevement.TotalSold + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate);
+
+                    if (prelevement.TotalSold < 0)
                         throw new CoolException(
                             $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Négatif");
 
-                    if (prelevement.DiffMeter > StaticGetOilBalance(prelevement.OilGuid))
+                    if (prelevement.TotalSold > StaticGetOilBalance(prelevement.OilGuid))
                         throw new CoolException(
-                            $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Supérieur au Stock".Pascalize());
-                    
+                            $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Supérieur au Stock");
+
                     prelevement.DatePrelevement = fromDate;
                     prelevement.DateAdded = DateTime.Now;
                     prelevement.LastEditDate = DateTime.Now;
@@ -146,6 +150,21 @@ namespace EStationCore.Managers
 
 
 
+        public int GetDeliveries(Guid oilGuid, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+                try
+                {
+                    return db.Oils.Find(oilGuid)?.Deliveries
+                                  .Where(d => d.DeliveryDate >= fromDate && d.DeliveryDate <= toDate)
+                                  .Sum(s => s.QuantityDelivered) ?? 0;
+                }
+                catch (Exception exception)
+                {
+                    DebugHelper.WriteException(exception);
+                    return 0;
+                }
+        }
 
 
         public IEnumerable<OilPrelevCard> GetPrelevCards(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
@@ -186,9 +205,6 @@ namespace EStationCore.Managers
         #endregion
 
 
-
-
-
         #region Internal Static
 
 
@@ -200,7 +216,7 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
                 return db.Oils.Find(oilGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ??
-                    new OilPrelevement { TotalMeter = db.Oils.Find(oilGuid).InitialStock};
+                    new OilPrelevement { TotalStock = db.Oils.Find(oilGuid).InitialStock};
         }
 
         public IEnumerable GetOilDeliveries(Guid oilGuid)
@@ -216,9 +232,9 @@ namespace EStationCore.Managers
                 {
                     var stocks = db.Oils.Find(oilGuid).InitialStock + db.Oils.Find(oilGuid)?.Deliveries.Sum(s => s.QuantityDelivered) ?? 0;
 
-                    var prelevs = db.Oils.Find(oilGuid)?.Prelevements.Sum(p => p.DiffMeter) ?? 0;
+                    var solds = db.Oils.Find(oilGuid)?.Prelevements.Sum(p => p.TotalSold) ?? 0;
 
-                    return (stocks - prelevs);
+                    return (stocks - solds);
                 }
                 catch (Exception exception)
                 {
