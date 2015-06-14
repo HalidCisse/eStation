@@ -13,6 +13,6 @@ namespace EStation.Views.Journals
 
 
         public void Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate) => new Task(() => Dispatcher.BeginInvoke(new Action(() 
-            => _PRELEVS.ItemsSource = App.EStation.Pompes.GetPrelevCards(fuelsGuids, fromDate, toDate)))).Start();
+            => _PRELEVS.ItemsSource = App.Store.Pompes.GetPrelevCards(fuelsGuids, fromDate, toDate)))).Start();
     }
 }

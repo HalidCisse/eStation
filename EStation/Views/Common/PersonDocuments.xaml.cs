@@ -29,7 +29,7 @@ namespace EStation.Views.Common {
             set {
                 new Task(() => Dispatcher.BeginInvoke(new Action(() => {
                     _personGuid=value;
-                    _DOC_LIST.ItemsSource=App.EStation.Documents.GetPersonDocuments(value);                    
+                    _DOC_LIST.ItemsSource=App.Store.Documents.GetPersonDocuments(value);                    
                 }))).Start();
             }
         }
@@ -60,7 +60,7 @@ namespace EStation.Views.Common {
                 if(_DOC_LIST.SelectedValue==null)
                     return ;
                 try {
-                    var download = App.EStation.Documents.DownloadDocument((Guid)_DOC_LIST.SelectedValue);
+                    var download = App.Store.Documents.DownloadDocument((Guid)_DOC_LIST.SelectedValue);
 
                     var saveFileDialog1 = new SaveFileDialog
                     {
@@ -92,7 +92,7 @@ namespace EStation.Views.Common {
 
             try
             {
-                App.EStation.Documents.DeleteDocument((Guid) _DOC_LIST.SelectedValue);
+                App.Store.Documents.DeleteDocument((Guid) _DOC_LIST.SelectedValue);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 return;

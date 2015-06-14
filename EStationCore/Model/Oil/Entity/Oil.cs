@@ -18,6 +18,8 @@ namespace EStationCore.Model.Oil.Entity
 
         public double CurrentUnitPrice { get; set; }
 
+        public DateTime? LastPriceUpdate { get; set; }
+
         public int StockCapacity { get; set; }
 
         public int InitialStock { get; set; }

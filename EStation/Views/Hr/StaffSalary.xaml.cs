@@ -68,7 +68,7 @@ namespace EStation.Views.Hr
 
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
-                _SALARY_LIST.ItemsSource = App.EStation.Economat.PayRoll.GetSalaries(employGuid);
+                _SALARY_LIST.ItemsSource = App.Store.Economat.PayRoll.GetSalaries(employGuid);
                 SourceChanged?.Invoke(_SALARY_LIST?.SelectedValue, new EventArgs());
             }))).Start();
         }

@@ -79,7 +79,7 @@ namespace EStation.Views.Hr
 
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
-                _EMPLOY_LIST.ItemsSource = App.EStation.Economat.PayRoll.GetEmployments(_staffGuid, _fromDate, _toDate);
+                _EMPLOY_LIST.ItemsSource = App.Store.Economat.PayRoll.GetEmployments(_staffGuid, _fromDate, _toDate);
                 _EMPLOY_LIST.SelectedIndex = 0;
             }))).Start();
         }

@@ -37,7 +37,7 @@ namespace EStation.Views.Hr
                         return;
                     }
 
-                    var employ = App.EStation.Economat.PayRoll.GetEmployment(employGuid);
+                    var employ = App.Store.Economat.PayRoll.GetEmployment(employGuid);
 
                     _START_SALARY.DisplayDateStart = DateTime.Today;
                     _END_SALARY.DisplayDateStart   = DateTime.Today;
@@ -61,7 +61,7 @@ namespace EStation.Views.Hr
                     }
                     else
                     {
-                        var data = App.EStation.Economat.PayRoll.GetSalary(salaryToModGuid);                        
+                        var data = App.Store.Economat.PayRoll.GetSalary(salaryToModGuid);                        
                         _TITLE_TEXT.Text = "MODIFICATION";
                         _GRID.DataContext = data;
 
@@ -77,8 +77,8 @@ namespace EStation.Views.Hr
         {
             try
             {             
-                if (_isAdd) App.EStation.Economat.PayRoll.AddSalary((Salary)_GRID.DataContext);
-                else App.EStation.Economat.PayRoll.CancelSalary((Salary)_GRID.DataContext);
+                if (_isAdd) App.Store.Economat.PayRoll.AddSalary((Salary)_GRID.DataContext);
+                else App.Store.Economat.PayRoll.CancelSalary((Salary)_GRID.DataContext);
             }
             catch (SecurityException)
             {

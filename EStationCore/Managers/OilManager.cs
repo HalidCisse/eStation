@@ -44,7 +44,7 @@ namespace EStationCore.Managers
                 return db.SaveChanges() > 0;
             }
         }
-
+      
         public bool Delete(Guid oilGuid)
         {
             using (var db = new StationContext())
@@ -118,15 +118,23 @@ namespace EStationCore.Managers
 
                     var lastOne = StaticGetLastPrelevement(prelevement.OilGuid);
 
-                    prelevement.TotalSold = lastOne.TotalStock - prelevement.TotalSold + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate);
+                    prelevement.TotalSold = - prelevement.TotalStock + lastOne.TotalStock + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate);
 
                     if (prelevement.TotalSold < 0)
                         throw new CoolException(
-                            $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Négatif");
+                            $"{db.Oils.Find(prelevement.OilGuid).Libel} : Le stock restant ne doit pas etre Supérieur a " + lastOne.TotalStock + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate));
 
                     if (prelevement.TotalSold > StaticGetOilBalance(prelevement.OilGuid))
                         throw new CoolException(
-                            $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Supérieur au Stock");
+                            $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le stock restant ne doit pas etre Supérieur a " + StaticGetOilBalance(prelevement.OilGuid));
+
+                    //if (prelevement.TotalSold < 0)
+                    //    throw new CoolException(
+                    //        $"{db.Oils.Find(prelevement.OilGuid).Libel} : Le Total Vendu ne Doit Pas être Négatif");
+
+                    //if (prelevement.TotalSold > StaticGetOilBalance(prelevement.OilGuid))
+                    //    throw new CoolException(
+                    //        $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le Total Vendu ne Doit Pas être Supérieur au Stock");
 
                     prelevement.DatePrelevement = fromDate;
                     prelevement.DateAdded = DateTime.Now;
@@ -138,8 +146,25 @@ namespace EStationCore.Managers
             }
         }
 
+        public bool ChangePrice(Guid oilGuid, double newPrice)
+        {
+            using (var db = new StationContext())
+            {
+                var myOil = db.Oils.Find(oilGuid);
+
+                myOil.CurrentUnitPrice = newPrice;
+                myOil.LastPriceUpdate = DateTime.Now;
+
+                myOil.LastEditDate = DateTime.Now;
+
+                db.Oils.Attach(myOil);
+                db.Entry(myOil).State = EntityState.Modified;
+                return db.SaveChanges() > 0;
+            }
+        }
 
         #endregion
+
 
 
 
@@ -147,6 +172,20 @@ namespace EStationCore.Managers
         #region Views
 
 
+
+
+
+        public double GetTotalDeliveryCost(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => GetDeliveries(oilsGuids, fromDate, toDate).Sum(p => p.Cost);
+
+        public int GetTotalDelivery(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => GetDeliveries(oilsGuids, fromDate, toDate).Sum(p => p.QuantityDelivered);
+
+        public double GetSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => GetPrelevemnts(oilsGuids, fromDate, toDate).Sum(p => p.TotalSold*p.ActualUnitPrice);
+
+        public int GetGallonsSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => GetPrelevemnts(oilsGuids, fromDate, toDate).Sum(p => p.TotalSold);
 
         public int GetDeliveries(Guid oilGuid, DateTime fromDate, DateTime toDate)
         {
@@ -164,7 +203,6 @@ namespace EStationCore.Managers
                 }
         }
 
-
         public IEnumerable<OilPrelevCard> GetPrelevCards(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
         {
             using (var db = new StationContext())
@@ -176,16 +214,13 @@ namespace EStationCore.Managers
             }
         }
 
-
         public int GetOilBalance(Guid oilGuid) => StaticGetOilBalance(oilGuid);
-
 
         public IEnumerable<OilCard> GetOilsCards()
         {
             using (var db = new StationContext())
                 return db.Oils.ToList().OrderByDescending(c => c.DateAdded).Select(c => new OilCard(c)).ToList();
         }
-
 
         public List<string> GetTypes()
         {
@@ -203,12 +238,45 @@ namespace EStationCore.Managers
         #endregion
 
 
+
+
+
         #region Internal Static
 
 
 
 
+        internal static IEnumerable<OilPrelevement> GetPrelevemnts(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+            {
+                var prelevements = new List<OilPrelevement>();
 
+                foreach (var oilGuid in oilsGuids)
+                    prelevements.AddRange(
+                        db.Oils.Find(oilGuid)
+                            .Prelevements.Where(
+                                p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate &&
+                                     p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                return prelevements;
+            }
+        }
+
+        internal static IEnumerable<OilDelivery> GetDeliveries(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+            {
+                var deliveries = new List<OilDelivery>();
+
+                foreach (var oilGuid in oilsGuids)
+                    deliveries.AddRange(
+                        db.Oils.Find(oilGuid)
+                            .Deliveries.Where(
+                                p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate &&
+                                     p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                return deliveries;
+            }
+        }
 
         internal static OilPrelevement StaticGetLastPrelevement(Guid oilGuid)
         {
@@ -221,6 +289,17 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
                 return db.Oils.Find(oilGuid)?.Deliveries.OrderByDescending(s => s.DateAdded).ToList().Select(s => new OilDeliveryCard(s)).ToList();
+        }
+
+        public IEnumerable<OilDeliveryCard> GetOilDeliveries(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+            {
+                var deliveries = new List<OilDelivery>();
+                foreach (var oil in db.Oils.Where(f => oilsGuids.Contains(f.OilGuid)))
+                    deliveries.AddRange(oil.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                return deliveries.OrderByDescending(p => p.DeliveryDate).Select(p => new OilDeliveryCard(p)).ToList();
+            }
         }
 
         internal static int StaticGetOilBalance(Guid oilGuid)

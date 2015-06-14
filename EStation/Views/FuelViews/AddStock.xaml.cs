@@ -19,10 +19,10 @@ namespace EStation.Views.FuelViews
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _SUPPLIER.ItemsSource = App.EStation.Citernes.GetSuppliers();
+                    _SUPPLIER.ItemsSource = App.Store.Citernes.GetSuppliers();
 
-                    var vide = App.EStation.Citernes.Get(currentCiterne).MaxCapacity -
-                               App.EStation.Citernes.GetCiterneFuelBalance(currentCiterne);
+                    var vide = App.Store.Citernes.Get(currentCiterne).MaxCapacity -
+                               App.Store.Citernes.GetCiterneFuelBalance(currentCiterne);
 
                     if (currentCiterne == Guid.Empty)
                     {
@@ -52,10 +52,10 @@ namespace EStation.Views.FuelViews
                         };                        
                     }
                     else
-                        _GRID.DataContext = App.EStation.Citernes.GetStock(stockToMod);
+                        _GRID.DataContext = App.Store.Citernes.GetStock(stockToMod);
                    
                     _QUANTITY.Maximum = vide;
-                    _TITLE_TEXT.Text = "LIVRAISON " + App.EStation.Citernes.Get(currentCiterne).Libel.ToUpper();
+                    _TITLE_TEXT.Text = "LIVRAISON " + App.Store.Citernes.Get(currentCiterne).Libel.ToUpper();
                 }));
             }).Start();
         }
@@ -64,8 +64,8 @@ namespace EStation.Views.FuelViews
         {
             try
             {
-                if (_isAdd) App.EStation.Citernes.Post((FuelDelivery)_GRID.DataContext);
-                else App.EStation.Citernes.Put((FuelDelivery)_GRID.DataContext);
+                if (_isAdd) App.Store.Citernes.Post((FuelDelivery)_GRID.DataContext);
+                else App.Store.Citernes.Put((FuelDelivery)_GRID.DataContext);
             }
             catch (Exception ex)
             {

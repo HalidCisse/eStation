@@ -19,7 +19,7 @@
             <Button Grid.Column="1" Name="_ADD_BUTTON" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Huiles"  Click="AddButton_OnClick"/>
         </Grid>
 
-        <ListBox x:Name="_HUILES" Background="Beige" SelectedValuePath="OilGuid" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="Selector_OnSelectionChanged" >
+        <ListBox x:Name="_HUILES" Background="Beige" SelectionMode="Extended" SelectedValuePath="OilGuid" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="Selector_OnSelectionChanged" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="5,5" Width="320" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
@@ -29,8 +29,13 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <Grid DockPanel.Dock="top">
-                            <TextBlock Text="{Binding Libel}" HorizontalAlignment="Left" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="20" Margin="05,05"/>
-                            <TextBlock Text="{Binding TypeOil}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>
+                            <TextBlock Text="{Binding FullLibel}" HorizontalAlignment="Left" Foreground="#25A0DA" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="20" Margin="05,05"/>
+                            <!--<TextBlock Text="{Binding TypeOil}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>-->
+
+                            <StackPanel Orientation="Horizontal" ToolTip="{Binding LastPriceUpdate}" HorizontalAlignment="Right" Margin="05,05">
+                                <TextBox Text="{Binding CurrentdoubleUnitPrice, Mode=TwoWay}" BorderBrush="Black" Background="WhiteSmoke" VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05" LostFocus="PriceBox_OnLostFocus"/>
+                                <Label VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17">dhs/L</Label>
+                            </StackPanel>
                         </Grid>
                         <Grid DockPanel.Dock="top">
                             <TextBlock Text="{Binding CurrentStock}" HorizontalAlignment="Left" Foreground="DarkGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="15" Margin="05,0"/>

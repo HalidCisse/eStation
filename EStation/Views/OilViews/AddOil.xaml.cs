@@ -23,7 +23,7 @@ namespace EStation.Views.OilViews
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _OIL_TYPE.ItemsSource = App.EStation.Oils.GetTypes();
+                    _OIL_TYPE.ItemsSource = App.Store.Oils.GetTypes();
 
                     if (oilToModGuid == Guid.Empty)
                     {
@@ -37,7 +37,7 @@ namespace EStation.Views.OilViews
                         };
                     }
                     else
-                        _GRID.DataContext = App.EStation.Oils.Get(oilToModGuid);
+                        _GRID.DataContext = App.Store.Oils.Get(oilToModGuid);
                 }));
             }).Start();
         }
@@ -61,8 +61,8 @@ namespace EStation.Views.OilViews
         {
             try
             {                
-                if (_isAdd) App.EStation.Oils.Post((Oil)_GRID.DataContext);
-                else App.EStation.Oils.Put((Oil)_GRID.DataContext);
+                if (_isAdd) App.Store.Oils.Post((Oil)_GRID.DataContext);
+                else App.Store.Oils.Put((Oil)_GRID.DataContext);
             }
             catch (Exception ex)
             {

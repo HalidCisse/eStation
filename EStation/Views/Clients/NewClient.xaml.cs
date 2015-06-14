@@ -31,7 +31,7 @@ namespace EStation.Views.Clients
                     _CIVILITE_.ItemsSource = EnumsHelper.GetAllValuesAndDescriptions<PersonTitles>();
                     _STATUT.ItemsSource = EnumsHelper.GetAllValuesAndDescriptions<CustomerStatus>();
 
-                    _NATIONALITY.ItemsSource = App.EStation.Customers.AllNationalities();
+                    _NATIONALITY.ItemsSource = App.Store.Customers.AllNationalities();
 
                     if (clientToModGuid == Guid.Empty)
                     {
@@ -39,7 +39,7 @@ namespace EStation.Views.Clients
 
                         var obj = new Customer
                         {
-                            Matricule = App.EStation.Customers.NewMatricule(),
+                            Matricule = App.Store.Customers.NewMatricule(),
 
                             CustomerStatus = CustomerStatus.Default,
 
@@ -54,7 +54,7 @@ namespace EStation.Views.Clients
                     }
                     else
                     {
-                        var data = App.EStation.Customers.GetCustomer(clientToModGuid);
+                        var data = App.Store.Customers.GetCustomer(clientToModGuid);
                         _PHOTO_IDENTITY.Source = ImagesHelper.DecodePhoto(data.Person.PhotoIdentity);
                         _MATRICULE_VALIDATOR.IsAdd = false;
                         _GRID.DataContext = data;
@@ -75,9 +75,9 @@ namespace EStation.Views.Clients
                     ImagesHelper.GetPngFromImageControl(_PHOTO_IDENTITY.Source as BitmapImage);
 
                 if (_isAdd)
-                    App.EStation.Customers.AddCustomer(newData);
+                    App.Store.Customers.AddCustomer(newData);
                 else
-                    App.EStation.Customers.UpdateCustomer(newData);
+                    App.Store.Customers.UpdateCustomer(newData);
             }
             catch (SecurityException)
             {

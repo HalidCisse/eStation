@@ -31,7 +31,7 @@ namespace EStation.Views.Fuel
                         _GRID.DataContext = new EStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
                     }
                     else
-                        _GRID.DataContext = App.EStation.Fuels.Get(fuelToModGuid);
+                        _GRID.DataContext = App.Store.Fuels.Get(fuelToModGuid);
                 }));
             }).Start();
         }
@@ -64,8 +64,8 @@ namespace EStation.Views.Fuel
                         ActualPrice = (double)_UNIT_PRICE.Value
                     });
 
-                if (_isAdd) App.EStation.Fuels.Post(newFuel);
-                else App.EStation.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);
+                if (_isAdd) App.Store.Fuels.Post(newFuel);
+                else App.Store.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);
             }
             catch (Exception ex)
             {

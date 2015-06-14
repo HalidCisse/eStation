@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
 
-namespace EStation.Views.Fuel
+namespace EStation.Views.FuelViews
 {
-    internal partial class FuelStockView 
+    internal partial class StockView 
     {
-        public FuelStockView()
+        public StockView()
         {
             InitializeComponent();
         }
@@ -28,8 +29,8 @@ namespace EStation.Views.Fuel
         {
             if (sender == null) return;
 
-            OilDeliveries.Refresh((Guid)sender);
-            _OIL_PRELEVS.Refresh((Guid)sender);
+            OilDeliveries.Refresh((List<Guid>)sender);
+            _OIL_PRELEVS.Refresh((List<Guid>) sender);
         }
 
 

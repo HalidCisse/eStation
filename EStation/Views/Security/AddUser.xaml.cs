@@ -32,8 +32,8 @@ namespace EStation.Views.Security
                     }
 
                     _USER_SPACE.ItemsSource =EnumsHelper.GetAllValuesAndDescriptions<UserSpace>();
-                    var membUser            = App.EStation.Authentication.GetUser(profileGuid);
-                    var theStaff            = App.EStation.HumanResource.GetStaff(profileGuid);
+                    var membUser            = App.Store.Authentication.GetUser(profileGuid);
+                    var theStaff            = App.Store.HumanResource.GetStaff(profileGuid);
 
                     if(membUser==null) {
                         _isAdd=true;
@@ -48,7 +48,7 @@ namespace EStation.Views.Security
                         _GRID.DataContext=newData;
                     }
                     else {
-                        var oldData = App.EStation.Authentication.GetUser(profileGuid);
+                        var oldData = App.Store.Authentication.GetUser(profileGuid);
                         _GRID.DataContext=oldData;
 
                         _USER_NAME.IsEnabled  =false;
@@ -66,9 +66,9 @@ namespace EStation.Views.Security
                 newData.Password = _PASS.Password;
 
                 if (_isAdd)
-                    status = App.EStation.Authentication.AddUser(newData);
+                    status = App.Store.Authentication.AddUser(newData);
                 else
-                    App.EStation.Authentication.UpdateUser(newData);
+                    App.Store.Authentication.UpdateUser(newData);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;

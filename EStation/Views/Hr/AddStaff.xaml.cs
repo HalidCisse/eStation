@@ -33,17 +33,17 @@ namespace EStation.Views.Hr
                     _STATUT.ItemsSource        =EnumsHelper.GetAllValuesAndDescriptions<StaffStatus>();
                     _HEALTH_STATUT.ItemsSource =EnumsHelper.GetAllValuesAndDescriptions<HealthStates>();
 
-                    _NATIONALITY.ItemsSource   =App.EStation.HumanResource.AllNationalities();
-                    _BIRTH_PLACE.ItemsSource   =App.EStation.HumanResource.AllBirthPlaces();                  
-                    _QUALIFICATION.ItemsSource =App.EStation.HumanResource.AllStaffQualifications();
-                    _DEPARTEMENT.ItemsSource   =App.EStation.HumanResource.AllDepartement();
-                    _GRADE.ItemsSource         =App.EStation.HumanResource.AllGrades();
+                    _NATIONALITY.ItemsSource   =App.Store.HumanResource.AllNationalities();
+                    _BIRTH_PLACE.ItemsSource   =App.Store.HumanResource.AllBirthPlaces();                  
+                    _QUALIFICATION.ItemsSource =App.Store.HumanResource.AllStaffQualifications();
+                    _DEPARTEMENT.ItemsSource   =App.Store.HumanResource.AllDepartement();
+                    _GRADE.ItemsSource         =App.Store.HumanResource.AllGrades();
 
                     if(staffToModGuid==Guid.Empty) {
                         _isAdd=true;
 
                         var data = new Staff {
-                            Matricule=App.EStation.HumanResource.GetNewStaffMatricule() ,
+                            Matricule=App.Store.HumanResource.GetNewStaffMatricule() ,
                             Experiences = 0,
                             Statut = StaffStatus.Actif,
                             Person = new Person
@@ -57,7 +57,7 @@ namespace EStation.Views.Hr
                         _GRID.DataContext=data;
                     }
                     else {
-                        var data = App.EStation.HumanResource.GetStaff(staffToModGuid);
+                        var data = App.Store.HumanResource.GetStaff(staffToModGuid);
                         _PHOTO_IDENTITY.Source=ImagesHelper.DecodePhoto(data.Person.PhotoIdentity);
                         _MATRICULE_VALIDATOR.IsAdd = false;
                         //_TITLE_TEXT.Text="MODIFICATION";
@@ -76,9 +76,9 @@ namespace EStation.Views.Hr
                 newStaff.Person.PhotoIdentity =
                     ImagesHelper.GetPngFromImageControl(_PHOTO_IDENTITY.Source as BitmapImage);              
                 if(_isAdd)
-                    App.EStation.HumanResource.AddStaff(newStaff);
+                    App.Store.HumanResource.AddStaff(newStaff);
                 else
-                    App.EStation.HumanResource.UpdateStaff(newStaff);
+                    App.Store.HumanResource.UpdateStaff(newStaff);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;

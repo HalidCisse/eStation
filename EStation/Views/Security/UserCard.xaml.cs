@@ -24,7 +24,7 @@ namespace EStation.Views.Security
             set {
                 new Task(() => Dispatcher.BeginInvoke(new Action(() => {
                     _profileGuid=value;                  
-                    _GRID.DataContext=App.EStation.Authentication.GetUser(_profileGuid);                   
+                    _GRID.DataContext=App.Store.Authentication.GetUser(_profileGuid);                   
                     SpaceChanged?.Invoke(_profileGuid, new EventArgs());
 
                     _CONF.Visibility = _GRID.DataContext!= null ? Visibility.Hidden : Visibility.Visible;
@@ -60,7 +60,7 @@ namespace EStation.Views.Security
                 //    }                       
                 //}
 
-                status = App.EStation.Authentication.IsApproved(_profileGuid, (bool) isApproved);
+                status = App.Store.Authentication.IsApproved(_profileGuid, (bool) isApproved);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;

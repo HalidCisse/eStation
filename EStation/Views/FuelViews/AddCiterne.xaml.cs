@@ -22,7 +22,7 @@ namespace EStation.Views.Fuel
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _FUELS.ItemsSource = App.EStation.Fuels.GetFuels();
+                    _FUELS.ItemsSource = App.Store.Fuels.GetFuels();
 
                     if (_FUELS.Items.Count == 0)
                     {
@@ -38,7 +38,7 @@ namespace EStation.Views.Fuel
                         _GRID.DataContext = new Citerne { Threshold = 100, FuelGuid = ((EStationCore.Model.Fuel.Entity.Fuel)_FUELS.Items.GetItemAt(0)).FuelGuid, MaxCapacity = 1000};
                     }
                     else
-                        _GRID.DataContext = App.EStation.Citernes.Get(citerneToMod);
+                        _GRID.DataContext = App.Store.Citernes.Get(citerneToMod);
                 }));
             }).Start();
         }
@@ -48,8 +48,8 @@ namespace EStation.Views.Fuel
         {
             try
             {
-                if (_isAdd) App.EStation.Citernes.Post((Citerne)_GRID.DataContext);
-                else App.EStation.Citernes.Put((Citerne)_GRID.DataContext);
+                if (_isAdd) App.Store.Citernes.Post((Citerne)_GRID.DataContext);
+                else App.Store.Citernes.Put((Citerne)_GRID.DataContext);
             }
             catch (Exception ex)
             {

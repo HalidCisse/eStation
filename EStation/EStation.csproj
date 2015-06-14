@@ -281,6 +281,9 @@
     <Compile Include="Views\Hr\StaffsView.xaml.cs">
       <DependentUpon>StaffsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Journals\OilPeriodCard.xaml.cs">
+      <DependentUpon>OilPeriodCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Journals\Prelev.xaml.cs">
       <DependentUpon>Prelev.xaml</DependentUpon>
     </Compile>
@@ -507,6 +510,10 @@
     <Page Include="Views\Hr\StaffsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Journals\OilPeriodCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Journals\Prelev.xaml">
       <SubType>Designer</SubType>

@@ -72,9 +72,9 @@ namespace EStation.Views.Hr
 
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
-                _TOTAL_PAID.Content = App.EStation.Economat.PayRoll.GetStaffTotalPaid(_staffGuid, FromDate, ToDate).ToString("0.##", CultureInfo.CurrentCulture)+ " dh";           
-                _TOTAL_DUE.Content  = App.EStation.Economat.PayRoll.GetStaffTotalDue(_staffGuid);              
-                _GRID.DataContext   = App.EStation.HumanResource.GetStaff(_staffGuid);
+                _TOTAL_PAID.Content = App.Store.Economat.PayRoll.GetStaffTotalPaid(_staffGuid, FromDate, ToDate).ToString("0.##", CultureInfo.CurrentCulture)+ " dh";           
+                _TOTAL_DUE.Content  = App.Store.Economat.PayRoll.GetStaffTotalDue(_staffGuid);              
+                _GRID.DataContext   = App.Store.HumanResource.GetStaff(_staffGuid);
             }))).Start();
         }
 

@@ -172,13 +172,17 @@ namespace EStationCore.Managers
             }
         }
 
-
         internal static double GetFuelCurrentPrice(Guid fuelGuid)
         {
             using (var db = new StationContext())
                 return db.Fuels.Find(fuelGuid).Prices.Where(p => p.FromDate <= DateTime.Now).OrderByDescending(p => p.FromDate).First().ActualPrice;
         }
 
+        internal static Price GetFuelLastPrice(Guid fuelGuid)
+        {
+            using (var db = new StationContext())
+                return db.Fuels.Find(fuelGuid).Prices.Where(p => p.FromDate <= DateTime.Now).OrderByDescending(p => p.FromDate).First();
+        }
 
         internal static double GetFuelStock(Guid fuelGuid)
         {

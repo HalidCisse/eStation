@@ -15,7 +15,10 @@ namespace EStationCore.Model.Fuel.Views
             FuelGuid = fuel.FuelGuid;
             Libel = fuel.Libel;
             Threshold = fuel.Threshold.ToString("0.##");
-            CurrentPrice = FuelManager.GetFuelCurrentPrice(fuel.FuelGuid).ToString("0.##\\ dhs/L");  
+             var lastPrice= FuelManager.GetFuelLastPrice(fuel.FuelGuid);
+            CurrentDoublePrice = lastPrice.ActualPrice;
+            CurrentPrice = lastPrice.ActualPrice.ToString("0.##\\ dhs/L");
+            LastPriceUpdate = "Derniere modification du prix " + lastPrice.FromDate.GetValueOrDefault().ToLongDateString();
             CiternesNumber = " Citerne".ToQuantity(fuel.Citernes.Count);
 
             var curBalance = FuelManager.StaticGetFuelBalance(fuel.FuelGuid);
@@ -33,6 +36,10 @@ namespace EStationCore.Model.Fuel.Views
         public string Threshold { get;}
 
         public string CurrentPrice { get; }
+
+        public double CurrentDoublePrice { get; set; }
+
+        public string LastPriceUpdate { get; }
 
         public string CiternesNumber { get; }
 

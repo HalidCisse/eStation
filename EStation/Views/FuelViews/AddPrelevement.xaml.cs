@@ -27,10 +27,10 @@ namespace EStation.Views.Fuel
                         return;
                     }
 
-                    var curPomp = App.EStation.Pompes.Get(currentPompe);
+                    var curPomp = App.Store.Pompes.Get(currentPompe);
                     if (curPomp.CiterneGuid != null)
                     {
-                        var citerneBalance = App.EStation.Citernes.GetCiterneFuelBalance((Guid) curPomp.CiterneGuid);
+                        var citerneBalance = App.Store.Citernes.GetCiterneFuelBalance((Guid) curPomp.CiterneGuid);
 
                         if (citerneBalance<=0)
                         {
@@ -40,7 +40,7 @@ namespace EStation.Views.Fuel
                         }
 
                         _TITLE_TEXT.Text = "Prélèvement ".ToUpper() + curPomp.Libel.ToUpper();
-                        _derPrelev = App.EStation.Pompes.GetLastPrelevement(currentPompe);
+                        _derPrelev = App.Store.Pompes.GetLastPrelevement(currentPompe);
                         _COMPTEUR_M.Minimum = _derPrelev.Meter;
                         _COMPTEUR_M.Maximum = _derPrelev.Meter + citerneBalance;
                         _COMPTEUR_E.Maximum = citerneBalance;
@@ -64,7 +64,7 @@ namespace EStation.Views.Fuel
                         };
                     }
                     else
-                        _GRID.DataContext = App.EStation.Pompes.GetPrelevement(prelevToMod);
+                        _GRID.DataContext = App.Store.Pompes.GetPrelevement(prelevToMod);
 
                                    
                 }));
@@ -75,8 +75,8 @@ namespace EStation.Views.Fuel
         {
             try
             {
-                if (_isAdd) App.EStation.Pompes.Post((Prelevement)_GRID.DataContext);
-                else App.EStation.Pompes.Put((Prelevement)_GRID.DataContext);
+                if (_isAdd) App.Store.Pompes.Post((Prelevement)_GRID.DataContext);
+                else App.Store.Pompes.Put((Prelevement)_GRID.DataContext);
             }
             catch (Exception ex)
             {

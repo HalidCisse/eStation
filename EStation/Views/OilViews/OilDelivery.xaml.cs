@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -10,7 +12,7 @@ namespace EStation.Views.OilViews
     internal partial class OilDeliveries 
     {
 
-        private Guid _currentOil;
+        private List<Guid> _currentOils;
 
 
         public OilDeliveries()
@@ -19,22 +21,28 @@ namespace EStation.Views.OilViews
         }
 
 
-        public void Refresh(Guid currentOil)
+        public void Refresh(List<Guid> currentOil)
         {
-            _currentOil = currentOil;
+            _currentOils = currentOil;
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
-                _STOCKS.ItemsSource = App.EStation.Oils.GetOilDeliveries(_currentOil);
-                _TITLE_TEXT.Text = "LIVRAISONS " + App.EStation.Oils.Get(_currentOil)?.Libel.ToUpper();
+                _STOCKS.ItemsSource = App.Store.Oils.GetOilDeliveries(_currentOils, DateTime.Today.AddMonths(-3), DateTime.Today);
+                _TITLE_TEXT.Text = "LIVRAISONS (";
+
+                foreach (var oilGuid in currentOil)
+                    _TITLE_TEXT.Text += $" {App.Store.Oils.Get(oilGuid)?.Libel.ToUpper()}";
+                _TITLE_TEXT.Text += ")";
             }))).Start();
         }
 
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var wind = new AddOilDelivery(_currentOil, Guid.Empty) { Owner = Window.GetWindow(this) };
+            if (!_currentOils.Any())return;            
+
+            var wind = new AddOilDelivery(_currentOils.First(), Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh(_currentOil);
+            Refresh(_currentOils);
         }
 
     }

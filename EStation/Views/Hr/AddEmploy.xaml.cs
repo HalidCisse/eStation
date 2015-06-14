@@ -39,12 +39,12 @@ namespace EStation.Views.Hr
                         return;
                     }
 
-                    _CATEGORIE.ItemsSource     = App.EStation.HumanResource.AllCategories();
-                    _GRADE.ItemsSource         = App.EStation.HumanResource.AllGrades();
-                    _DEPARTEMENT.ItemsSource   = App.EStation.HumanResource.AllDepartements();
+                    _CATEGORIE.ItemsSource     = App.Store.HumanResource.AllCategories();
+                    _GRADE.ItemsSource         = App.Store.HumanResource.AllGrades();
+                    _DEPARTEMENT.ItemsSource   = App.Store.HumanResource.AllDepartements();
                     //_DIVISION.ItemsSource      = App.DataS.HumanResource.AllDivisions();
                     //_PROJET.ItemsSource        = App.DataS.HumanResource.AllProjets();
-                    _REPORT_TO.ItemsSource     = App.EStation.HumanResource.AllStaffsNames();
+                    _REPORT_TO.ItemsSource     = App.Store.HumanResource.AllStaffsNames();
                     _PAY_TYPE.ItemsSource      = EnumsHelper.GetAllValuesAndDescriptions<PayType>();
                     _SALARY_REC.ItemsSource    = EnumsHelper.GetAllValuesAndDescriptions<InstallmentRecurrence>();
 
@@ -75,7 +75,7 @@ namespace EStation.Views.Hr
                     }
                     else
                     {
-                        var data = App.EStation.Economat.PayRoll.GetEmployment(employToModGuid);
+                        var data = App.Store.Economat.PayRoll.GetEmployment(employToModGuid);
                         //_MATIERE_NAME_VALIDATOR.ClasseGuid = data.ClasseGuid;
                         //_MATIERE_NAME_VALIDATOR.IsAdd = false;
                         _TITLE_TEXT.Text = "MODIFICATION";
@@ -100,8 +100,8 @@ namespace EStation.Views.Hr
 
                 if (_NUM_REC.Value != null) emp.EndDate = emp.StartDate.GetValueOrDefault().AddMonths((int)_NUM_REC.Value) ;
 
-                if (_isAdd) App.EStation.Economat.PayRoll.AddEmployment(emp);
-                else App.EStation.Economat.PayRoll.UpdateEmployment(emp);
+                if (_isAdd) App.Store.Economat.PayRoll.AddEmployment(emp);
+                else App.Store.Economat.PayRoll.UpdateEmployment(emp);
             }
             catch (SecurityException)
             {

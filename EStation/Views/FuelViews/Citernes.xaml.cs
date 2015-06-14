@@ -21,7 +21,7 @@ namespace EStation.Views.Fuel
 
         internal void Refresh()
             => new Task(() => Dispatcher.BeginInvoke(new Action(()
-                => _CITERNES.ItemsSource = App.EStation.Citernes.GetCiternesCards()))).Start();
+                => _CITERNES.ItemsSource = App.Store.Citernes.GetCiternesCards()))).Start();
 
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)

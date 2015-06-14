@@ -8,7 +8,7 @@ namespace EStation.Ext {
             if(string.IsNullOrEmpty(theString)||theString.Length<3)
                 return new ValidationResult(false, "Entrez au moins 3 caractères");
 
-            return App.EStation.Economat.Treasury.RefTransactionExist(theString) ? new ValidationResult(false, "Cette reference exist deja") : new ValidationResult(true, null);
+            return App.Store.Economat.Treasury.RefTransactionExist(theString) ? new ValidationResult(false, "Cette reference exist deja") : new ValidationResult(true, null);
         }
     }
 }

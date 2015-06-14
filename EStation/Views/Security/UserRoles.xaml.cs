@@ -26,7 +26,7 @@ namespace EStation.Views.Security
             new Task(() => Dispatcher.BeginInvoke(new Action(() => {
                 _profileGuid =profileGuid;
                 _userSpace   =userSpace;
-                _ROLES_LIST.ItemsSource=App.EStation.Authentication.GetUserClearances(_profileGuid, userSpace);
+                _ROLES_LIST.ItemsSource=App.Store.Authentication.GetUserClearances(_profileGuid, userSpace);
             }))).Start();
         }
 
@@ -37,7 +37,7 @@ namespace EStation.Views.Security
                           
             try {
                 if(checkBox.IsChecked != null)
-                    App.EStation.Authentication.Clearance(((ViewCard)checkBox.DataContext).Info2, (bool)checkBox.IsChecked, _profileGuid);
+                    App.Store.Authentication.Clearance(((ViewCard)checkBox.DataContext).Info2, (bool)checkBox.IsChecked, _profileGuid);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
             } catch (Exception ex) {

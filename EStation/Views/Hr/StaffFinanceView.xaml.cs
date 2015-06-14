@@ -42,7 +42,7 @@ namespace EStation.Views.Hr
             _toDate    = toDate;
 
             new Task(() => Dispatcher.BeginInvoke(new Action(() => {
-                _PAYCHECKS_LIST.ItemsSource = App.EStation.Economat.PayRoll.GetPayrolls(_staffGuid, _fromDate, _toDate);
+                _PAYCHECKS_LIST.ItemsSource = App.Store.Economat.PayRoll.GetPayrolls(_staffGuid, _fromDate, _toDate);
             }))).Start();
         }
 
@@ -74,9 +74,9 @@ namespace EStation.Views.Hr
         
             try {                
                 if(!payroll.IsPaid)
-                    App.EStation.Economat.PayRoll.Paycheck(payroll.PayrollGuid);
+                    App.Store.Economat.PayRoll.Paycheck(payroll.PayrollGuid);
                 else
-                    App.EStation.Economat.PayRoll.CancelPaycheck(payroll.PayrollGuid);
+                    App.Store.Economat.PayRoll.CancelPaycheck(payroll.PayrollGuid);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 return;

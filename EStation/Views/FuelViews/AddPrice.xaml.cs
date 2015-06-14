@@ -25,7 +25,7 @@ namespace EStation.Views.Fuel
                         return;
                     }
 
-                    var productName = App.EStation.Fuels.Get(productGuid).Libel;
+                    var productName = App.Store.Fuels.Get(productGuid).Libel;
 
                     _TITLE_TEXT.Text = "NOUVEAU PRIX DE " + productName.ToUpper();
 
@@ -44,7 +44,7 @@ namespace EStation.Views.Fuel
                 newPrice.FromDate = new DateTime(_START_DATE.SelectedDate.GetValueOrDefault().Year, _START_DATE.SelectedDate.GetValueOrDefault().Month,
                     _START_DATE.SelectedDate.GetValueOrDefault().Day, _START_TIME.Value.GetValueOrDefault().Hour, _START_TIME.Value.GetValueOrDefault().Minute, _START_TIME.Value.GetValueOrDefault().Second);
 
-                App.EStation.Pompes.PostPrice(newPrice);
+                App.Store.Pompes.Post(newPrice);
             }
             catch (Exception ex)
             {

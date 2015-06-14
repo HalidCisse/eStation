@@ -21,7 +21,7 @@ namespace EStation
 
             try
             {               
-                EStation = new CoreService();
+                Store = new CoreService();
 
             }
             catch (Exception e)
@@ -38,7 +38,7 @@ namespace EStation
         /// <summary>
         /// Serveur de Donnees
         /// </summary>
-        internal static CoreService EStation { get; private set; }
+        internal static CoreService Store { get; private set; }
 
 
         /// <summary>

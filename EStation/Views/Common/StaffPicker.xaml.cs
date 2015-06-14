@@ -13,7 +13,7 @@ namespace EStation.Views.Common {
 
             _TITLE_TEXT.Text = title;          
             new Task(() => Dispatcher.BeginInvoke(new Action(() => {
-                _STAFF.ItemsSource=App.EStation.HumanResource.GetAllStaffs();
+                _STAFF.ItemsSource=App.Store.HumanResource.GetAllStaffs();
                 _STAFF.SelectedIndex = 0;                
             }))).Start();            
         }

@@ -47,8 +47,8 @@ namespace EStation.Views.Journals {
             if (toDate != null) ToDate=(DateTime) toDate;
 
             new Task(() => Dispatcher.BeginInvoke(new Action(() => {
-                _TOTAL_RECETTES.Content   =App.EStation.Economat.Treasury.GetTotalRecette(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                _TOTAL_DEPENSES.Content   =(-App.EStation.Economat.Treasury.GetTotalDepense(FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                _TOTAL_RECETTES.Content   =App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                _TOTAL_DEPENSES.Content   =(-App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
                 //_TOTAL_SCHOOL_FEE.Content =App.EStation.Economat.Treasury.GetTotalPaidSchoolFee(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
                 //_TOTAL_SALARIES.Content   =App.EStation.Economat.Treasury.GetTotalPaidSalaries(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
                 //_CAISSE_SOLDE.Content     =App.EStation.Economat.Treasury.GetSoldeCaisse(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);

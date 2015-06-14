@@ -22,6 +22,10 @@ namespace EStation.Views.Journals
         private void FuelPeriodCard_OnSelectionChanged(object sender, EventArgs e) 
             => _PRELEVS.Refresh(_FUEL_PERIOD.SelectedFuels, _FUEL_PERIOD.FromDate, _FUEL_PERIOD.ToDate);
 
+        private void OilPeriodCard_OnSelectionChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void CaisseDetails_OnDateSelectionChanged(object sender, EventArgs e) 
             => _TRANS_CARD.Refresh(_CAISSE_CARD.FromDate, _CAISSE_CARD.ToDate);

@@ -37,7 +37,7 @@ namespace EStation.Views.Hr
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {                  
-                    _STAFF_LIST.ItemsSource = App.EStation.HumanResource.GetDepStaffsCard();
+                    _STAFF_LIST.ItemsSource = App.Store.HumanResource.GetDepStaffsCard();
                     _BUSY_INDICATOR.IsBusy = false;
                 }));
             }).Start();
@@ -148,7 +148,7 @@ namespace EStation.Views.Hr
 
             try
             {
-                App.EStation.HumanResource.DeleteStaff((Guid) list.SelectedValue);
+                App.Store.HumanResource.DeleteStaff((Guid) list.SelectedValue);
             }
             catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);

@@ -45,7 +45,7 @@ namespace EStation.Views.Common {
                    FileType     =(Path.GetExtension(_documentPath)?.Substring(1, 1).ToUpper() + Path.GetExtension(_documentPath)?.Substring(2).ToLower()).ToEnum<DocumentType>()
                 };
 
-                App.EStation.Documents.SaveDocument(newDoc);
+                App.Store.Documents.SaveDocument(newDoc);
 
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);

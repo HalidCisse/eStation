@@ -27,7 +27,7 @@ namespace EStation.Views.Clients
         {
             try
             {
-                var work = Task<IEnumerable<CustomerCard>>.Factory.StartNew(App.EStation.Customers.GetCustomersCards);
+                var work = Task<IEnumerable<CustomerCard>>.Factory.StartNew(App.Store.Customers.GetCustomersCards);
 
                 _BUSY_INDICATOR.IsBusy = true;
 
@@ -111,7 +111,7 @@ namespace EStation.Views.Clients
 
             try
             {
-                App.EStation.Customers.Delete((Guid)_CLIENT_LIST.SelectedValue);
+                App.Store.Customers.Delete((Guid)_CLIENT_LIST.SelectedValue);
             }
             catch (SecurityException)
             {
@@ -140,7 +140,7 @@ namespace EStation.Views.Clients
                 {
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        _CLIENT_LIST.ItemsSource = App.EStation.Customers.Search(_SEARCH_BOX.Text);
+                        _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
                         _BUSY_INDICATOR.IsBusy = false;
                     }));
                 }).Start();
@@ -164,7 +164,7 @@ namespace EStation.Views.Clients
                 {
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        _CLIENT_LIST.ItemsSource = App.EStation.Customers.Search(_SEARCH_BOX.Text);
+                        _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
                         _BUSY_INDICATOR.IsBusy = false;
                     }));
                 }).Start();

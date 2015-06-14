@@ -27,6 +27,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                        
                         <Ellipse Grid.Column="0" Width="50" Height="50" VerticalAlignment="Center" Margin="5,0">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{StaticResource PrelevIcon}"/>

@@ -23,7 +23,7 @@ namespace EStation.Views.Fuel
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _COLONNES_LIST.ItemsSource = App.EStation.Pompes.GetColonnesCard();
+                    _COLONNES_LIST.ItemsSource = App.Store.Pompes.GetColonnesCard();
                     _BUSY_INDICATOR.IsBusy = false;
                 }));
             }).Start();

@@ -37,7 +37,7 @@ namespace EStation.Views.OilViews
                     //    return;
                     //}
 
-                    _SUPPLIER.ItemsSource = App.EStation.Citernes.GetSuppliers();
+                    _SUPPLIER.ItemsSource = App.Store.Citernes.GetSuppliers();
 
                     if (deliveryToMod == Guid.Empty)
                     {
@@ -53,10 +53,10 @@ namespace EStation.Views.OilViews
                         };
                     }
                     else
-                        _GRID.DataContext = App.EStation.Oils.GetDelivery(deliveryToMod);
+                        _GRID.DataContext = App.Store.Oils.GetDelivery(deliveryToMod);
 
                     //_QUANTITY.Maximum = vide;
-                    _TITLE_TEXT.Text = "LIVRAISON " + App.EStation.Oils.Get(currentOil).Libel.ToUpper();
+                    _TITLE_TEXT.Text = "LIVRAISON " + App.Store.Oils.Get(currentOil).Libel.ToUpper();
                 }));
             }).Start();
         }
@@ -65,8 +65,8 @@ namespace EStation.Views.OilViews
         {
             try
             {
-                if (_isAdd) App.EStation.Oils.Post((OilDelivery)_GRID.DataContext);
-                else App.EStation.Oils.Put((OilDelivery)_GRID.DataContext);
+                if (_isAdd) App.Store.Oils.Post((OilDelivery)_GRID.DataContext);
+                else App.Store.Oils.Put((OilDelivery)_GRID.DataContext);
             }
             catch (Exception ex)
             {

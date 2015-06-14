@@ -23,8 +23,8 @@ namespace EStation.Views.Fuel
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    _CITERNES.ItemsSource = App.EStation.Citernes.GetCiternes();
-                    _POMPE.ItemsSource = App.EStation.Pompes.GetColonnes();
+                    _CITERNES.ItemsSource = App.Store.Citernes.GetCiternes();
+                    _POMPE.ItemsSource = App.Store.Pompes.GetColonnes();
 
                     if (_CITERNES.Items.Count == 0)
                     {
@@ -45,7 +45,7 @@ namespace EStation.Views.Fuel
                         };
                     }
                     else
-                        _GRID.DataContext = App.EStation.Pompes.Get(pompeToModGuid);
+                        _GRID.DataContext = App.Store.Pompes.Get(pompeToModGuid);
                 }));
             }).Start();
         }
@@ -55,8 +55,8 @@ namespace EStation.Views.Fuel
         {
             try
             {
-                if (_isAdd) App.EStation.Pompes.Post((Pompe)_GRID.DataContext);
-                else App.EStation.Pompes.Put((Pompe)_GRID.DataContext);
+                if (_isAdd) App.Store.Pompes.Post((Pompe)_GRID.DataContext);
+                else App.Store.Pompes.Put((Pompe)_GRID.DataContext);
             }
             catch (Exception ex)
             {

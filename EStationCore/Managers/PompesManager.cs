@@ -97,7 +97,7 @@ namespace EStationCore.Managers
                 return db.Pompes.Find(pompeGuid);
         }
 
-        public bool PostPrice(Price newPrice)
+        public bool Post(Price newPrice)
         {
             using (var db = new StationContext())
             {

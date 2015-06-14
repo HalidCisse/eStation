@@ -56,10 +56,10 @@ namespace EStation
         private void Authenticate(string userName, string pass) {
             try {
                 _BUSY_INDICATOR.IsBusy  =true;
-                if(App.EStation.Authentication.Authenticate(userName, pass)) {
+                if(App.Store.Authentication.Authenticate(userName, pass)) {
                     var userKey         = Membership.GetUser()?.ProviderUserKey;
                     if(userKey!=null)
-                        App.CurrentUser =App.EStation.Authentication.GetUser((Guid)userKey);
+                        App.CurrentUser =App.Store.Authentication.GetUser((Guid)userKey);
 
                     var userSpace = (UserSpace)App.CurrentUser.UserSpaces.First().Value;    
 
@@ -108,7 +108,7 @@ namespace EStation
         private async void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
         {
             _BUSY_INDICATOR.IsBusy = true;
-            var img = await Task.FromResult(App.EStation.Authentication.GetUserPic(_PSEUDO.Text));
+            var img = await Task.FromResult(App.Store.Authentication.GetUserPic(_PSEUDO.Text));
             _USER_IMAGE.DataContext = img ?? ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
             _BUSY_INDICATOR.IsBusy = false;
             //FormsAuthentication.SignOut();

@@ -20,7 +20,7 @@ namespace EStation.Views.Security {
         private void save_Executed (object sender, ExecutedRoutedEventArgs e) {
             bool status;
             try {                
-                status = App.EStation.Authentication.ChangePassWord(_LOGIN.Text.Trim(), _PASS.Password, _NEW_PASS.Password);                
+                status = App.Store.Authentication.ChangePassWord(_LOGIN.Text.Trim(), _PASS.Password, _NEW_PASS.Password);                
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;

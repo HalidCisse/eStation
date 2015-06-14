@@ -25,7 +25,7 @@ namespace EStation.Views.Security
         private void save_Executed (object sender, ExecutedRoutedEventArgs e) {
             string status;
             try {
-                status=App.EStation.Authentication.ResetPassword(_LOGIN.Text.Trim(), _REPONSE.Text);
+                status=App.Store.Authentication.ResetPassword(_LOGIN.Text.Trim(), _REPONSE.Text);
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;
@@ -50,7 +50,7 @@ namespace EStation.Views.Security
         private void Annuler_Click (object sender, RoutedEventArgs e) => Close();
 
 
-        private void _LOGIN_OnLostFocus(object sender, RoutedEventArgs e) => _QUESTION.Content = App.EStation.Authentication.GetUserQuestion(_LOGIN.Text.Trim());
+        private void _LOGIN_OnLostFocus(object sender, RoutedEventArgs e) => _QUESTION.Content = App.Store.Authentication.GetUserQuestion(_LOGIN.Text.Trim());
 
 
     }

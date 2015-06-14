@@ -22,7 +22,7 @@ namespace EStation.Ext
             if (string.IsNullOrEmpty(theString) || theString.Length < 3)
                 return new ValidationResult(false, "Min 3 caractères");
 
-            var theMan = App.EStation.Customers.GetCustomer(theString);
+            var theMan = App.Store.Customers.GetCustomer(theString);
             return theMan!=null ? new ValidationResult(false, theMan.Person.FullName+" dispose ce matricule") :
                   new ValidationResult(true, null);
         }

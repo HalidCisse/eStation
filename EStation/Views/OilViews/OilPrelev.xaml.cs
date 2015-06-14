@@ -9,7 +9,7 @@ namespace EStation.Views.OilViews
     
     internal partial class OilPrelev 
     {
-        private Guid _currentOil;
+        private List<Guid> _currentOils;
 
 
         public OilPrelev()
@@ -18,13 +18,17 @@ namespace EStation.Views.OilViews
         }
 
 
-        public void Refresh(Guid currentOil)
+        public void Refresh(List<Guid> oilsGuids)
         {
-            _currentOil = currentOil;
+            _currentOils = oilsGuids ;
             new Task(() => Dispatcher.BeginInvoke(new Action(() =>
             {
-                _PRELEVS.ItemsSource = App.EStation.Oils.GetPrelevCards(new List<Guid> {_currentOil}, DateTime.Today.AddDays(-7), DateTime.Today);
-                _TITLE_TEXT.Text = "PRELEVEMENTS " + App.EStation.Oils.Get(_currentOil)?.Libel.ToUpper();
+                _PRELEVS.ItemsSource = App.Store.Oils.GetPrelevCards(_currentOils, DateTime.Today.AddDays(-7), DateTime.Today);
+                _TITLE_TEXT.Text = "PRELEVEMENTS (" ;
+
+                foreach (var oilGuid in oilsGuids)
+                    _TITLE_TEXT.Text += $" {App.Store.Oils.Get(oilGuid)?.Libel.ToUpper()}";
+                _TITLE_TEXT.Text += ")";
             }))).Start();
         }
          
@@ -33,9 +37,8 @@ namespace EStation.Views.OilViews
         {
             var wind = new AddOilPrelev { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh(_currentOil);
+            Refresh(_currentOils);
         }
-
 
     }
 }

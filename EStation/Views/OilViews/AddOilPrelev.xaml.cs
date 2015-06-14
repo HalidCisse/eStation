@@ -21,7 +21,7 @@ namespace EStation.Views.OilViews
             {
                 _TITLE_TEXT.Text = "Prélèvement Huiles";
                 _START_DATE.SelectedDate = DateTime.Now;
-                _PRELEVS.ItemsSource = App.EStation.Oils.GetOils().Select(oil => new ViewCard{Guid = oil.OilGuid, Info1 = oil.Libel}).ToList();
+                _PRELEVS.ItemsSource = App.Store.Oils.GetOils().Select(oil => new ViewCard{Guid = oil.OilGuid, Info1 = oil.Libel}).ToList();
             }))).Start();
         }
 
@@ -29,7 +29,7 @@ namespace EStation.Views.OilViews
         {
             try
             {
-                App.EStation.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
+                App.Store.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
                     .Select(s=> new OilPrelevement {OilGuid = s.Guid, TotalStock = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
             }
             catch (Exception ex)
