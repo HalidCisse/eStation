@@ -21,11 +21,11 @@ namespace EStation
 
             try
             {               
-                Store = new CoreService();
-
+                Store = new Estation();
             }
             catch (Exception e)
             {
+                DebugHelper.WriteException(e);
                 MessageBox.Show(e.Message);
                 Current.Shutdown();
             }
@@ -33,12 +33,12 @@ namespace EStation
 
 
 
-        #region DATA SERVICES
+        #region STORE SERVICES
 
         /// <summary>
         /// Serveur de Donnees
         /// </summary>
-        internal static CoreService Store { get; private set; }
+        internal static Estation Store { get; private set; }
 
 
         /// <summary>

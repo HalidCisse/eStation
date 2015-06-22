@@ -18,7 +18,7 @@ namespace EStation.Views.OilViews
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(async () =>
                 {
                     if (currentOil == Guid.Empty)
                     {
@@ -37,7 +37,7 @@ namespace EStation.Views.OilViews
                     //    return;
                     //}
 
-                    _SUPPLIER.ItemsSource = App.Store.Citernes.GetSuppliers();
+                    _SUPPLIER.ItemsSource = await App.Store.Citernes.GetSuppliers();
 
                     if (deliveryToMod == Guid.Empty)
                     {

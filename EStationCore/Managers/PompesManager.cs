@@ -36,7 +36,7 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool Post(Prelevement myPrelevement)
+        public async Task<bool> Post(Prelevement myPrelevement)
         {
             using (var db = new StationContext())
             {
@@ -48,13 +48,13 @@ namespace EStationCore.Managers
                 else
                     throw new ArgumentException("CAN_NOT_FIND_CITERNE");
                
-                myPrelevement.ActualPrice = FuelManager.GetFuelCurrentPrice(db.Pompes.Find(myPrelevement.PompeGuid).Citerne.FuelGuid);
+                myPrelevement.ActualPrice = (await FuelManager.GetFuelCurrentPrice(db.Pompes.Find(myPrelevement.PompeGuid).Citerne.FuelGuid));
 
                 myPrelevement.DateAdded = DateTime.Now;
                 myPrelevement.LastEditDate = DateTime.Now;
 
                 db.Set<Prelevement>().Add(myPrelevement);
-                return db.SaveChanges() > 0;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -149,9 +149,8 @@ namespace EStationCore.Managers
                 return db.Set<Prelevement>().Find(prelevGuid);
         }
 
-
-        public Prelevement GetLastPrelevement(Guid pompeGuid)
-            => StaticGetLastPrelevement(pompeGuid);
+        public async Task<Prelevement> GetLastPrelevement(Guid pompeGuid)
+            => await StaticGetLastPrelevement(pompeGuid);
 
         public IEnumerable<ColonneCard> GetColonnesCard()
         {
@@ -185,11 +184,13 @@ namespace EStationCore.Managers
 
 
 
-        internal static Prelevement StaticGetLastPrelevement(Guid pompeGuid)
+        internal async static Task<Prelevement> StaticGetLastPrelevement(Guid pompeGuid)
         {
-            using (var db = new StationContext())
+            return await Task.Run(() => {
+                using (var db = new StationContext())
                 return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
                     new Prelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
+            });
         }
 
 

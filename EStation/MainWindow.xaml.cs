@@ -25,23 +25,17 @@ namespace EStation
 
 
 
-        private void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)
+        private async void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)
         {
-            //FormsAuthentication.SignOut();
             Thread.CurrentPrincipal = null;
+            await Dispatcher.BeginInvoke(new Action(() =>
+                  {
+                      _MAIN_FRAME.Navigate(new Login());
 
-            new Task(() =>
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _MAIN_FRAME.Navigate(new Login());
-
-                    var cm = FindResource("UserPopup") as Popup;
-                    if (cm == null) return;
-                    cm.IsOpen = false;
-                }));
-            }).Start();
-
+                      var cm = FindResource("UserPopup") as Popup;
+                      if (cm == null) return;
+                      cm.IsOpen = false;
+                  }));            
         }
 
 
@@ -62,15 +56,15 @@ namespace EStation
         }
 
 
-        private void _ESPACES_LIST_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void _ESPACES_LIST_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (((ListBox)(sender)).SelectedValue == null) return;
 
             switch (((ListBox)(sender)).SelectedValue.ToString().ToEnum<UserSpace>())
             {
                 case UserSpace.AdminSpace:
-                    new Task(() => Dispatcher.BeginInvoke(new Action(()
-                        => _MAIN_FRAME.NavigationService?.Navigate(new HomePage(), UriKind.Relative)))).Start();
+                    await Dispatcher.BeginInvoke(new Action(()
+                         => _MAIN_FRAME.NavigationService?.Navigate(new HomePage(), UriKind.Relative)));
                     break;
                 //case UserSpace.SecretaireSpace:
                 //    new Task(() => Dispatcher.BeginInvoke(new Action(()

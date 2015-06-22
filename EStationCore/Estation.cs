@@ -3,8 +3,14 @@
 
 namespace EStationCore
 {
-    public class CoreService
+    public class Estation
     {
+
+        /// <summary>
+        /// System de Gestion Des Achats
+        /// </summary>
+        public SalesManager Sales = new SalesManager();
+
 
         /// <summary>
         /// System de Gestion Des Huiles

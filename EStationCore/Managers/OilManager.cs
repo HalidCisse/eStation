@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using CLib;
 using CLib.Exceptions;
 using EStationCore.Model;
@@ -99,6 +100,12 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
                 return db.OilDeliveries.Find(deliveryGuid);
+        }
+
+        public List<Oil> GetOils(List<Guid> oilsGuids)
+        {
+            using (var db = new StationContext())
+                return db.Oils.Where(o => oilsGuids.Contains(o.OilGuid)).ToList();
         }
 
         public List<Oil> GetOils()
@@ -237,6 +244,30 @@ namespace EStationCore.Managers
 
         #endregion
 
+
+
+
+        #region Analytic
+
+        public async Task<List<KeyValuePair<DateTime, double>>> GetPrices(Guid oilGuid, DateTime fromDate, DateTime toDate)
+        {
+            using (var db = new StationContext())
+                return (await db.Oils.FindAsync(oilGuid)).Prelevements.Select(p=> new KeyValuePair<DateTime, double>(p.DatePrelevement.GetValueOrDefault(), p.ActualUnitPrice)).ToList();                        
+        }
+
+
+        public IEnumerable<KeyValuePair<string, double>> GetMonthlySales(Guid oilGuid, int numberOfMonths = 11)
+                    => DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1))
+                    .Select(month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
+                     GetGallonsSold(new List<Guid> {oilGuid},month.Date, month.Date.AddMonths(1).AddDays(-1))));
+
+        public IEnumerable<KeyValuePair<string, double>> GetMonthlySales(Guid oilGuid, DateTime fromDate, DateTime toDate)
+                    => DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1))
+                    .Select(month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
+                     GetGallonsSold(new List<Guid> { oilGuid }, month.Date, month.Date.AddMonths(1).AddDays(-1))));
+
+
+        #endregion
 
 
 

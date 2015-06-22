@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database;
+using CLib.Database.Interfaces;
 
 
 namespace EStationCore.Model.Oil.Entity

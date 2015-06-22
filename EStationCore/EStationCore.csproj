@@ -66,7 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoreService.cs" />
+    <Compile Include="Estation.cs" />
     <Compile Include="Helpers\MembershipUserCreateStatus.cs" />
     <Compile Include="Helpers\PayRollHelper.cs" />
     <Compile Include="Managers\AnalyticsManager.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Managers\OilManager.cs" />
     <Compile Include="Managers\PayrollManager.cs" />
     <Compile Include="Managers\PompesManager.cs" />
+    <Compile Include="Managers\SalesManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
     <Compile Include="Managers\TreasuryManager.cs" />
     <Compile Include="Migrations\201505121758349_m-.cs" />
@@ -145,10 +146,15 @@
     <Compile Include="Model\Oil\Views\OilCard.cs" />
     <Compile Include="Model\Oil\Views\OilDeliveryCard.cs" />
     <Compile Include="Model\Oil\Views\OilPrelevCard.cs" />
+    <Compile Include="Model\Sale\Entity\Company.cs" />
     <Compile Include="Model\Sale\Entity\Journal.cs" />
     <Compile Include="Model\Sale\Entity\Product.cs" />
     <Compile Include="Model\Sale\Entity\Purchase.cs" />
     <Compile Include="Model\Sale\Entity\Transaction.cs" />
+    <Compile Include="Model\Sale\Enums\ProductType.cs" />
+    <Compile Include="Model\Sale\Enums\PurchaseState.cs" />
+    <Compile Include="Model\Sale\Views\CompanyCard.cs" />
+    <Compile Include="Model\Sale\Views\PurchaseCard.cs" />
     <Compile Include="Model\Security\Entity\SecurityClearances.cs" />
     <Compile Include="Model\Security\Entity\User.cs" />
     <Compile Include="Model\Security\Enums\AdminClearances.cs" />
@@ -165,8 +171,6 @@
     <Folder Include="Model\Customers\Enums\" />
     <Folder Include="Model\Fuel\Enums\" />
     <Folder Include="Model\Oil\Enums\" />
-    <Folder Include="Model\Sale\Enums\" />
-    <Folder Include="Model\Sale\Views\" />
     <Folder Include="Model\Security\Views\" />
   </ItemGroup>
   <ItemGroup>

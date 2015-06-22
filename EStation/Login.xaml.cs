@@ -53,7 +53,7 @@ namespace EStation
         }
 
 
-        private void Authenticate(string userName, string pass) {
+        private async void Authenticate(string userName, string pass) {
             try {
                 _BUSY_INDICATOR.IsBusy  =true;
                 if(App.Store.Authentication.Authenticate(userName, pass)) {
@@ -65,8 +65,8 @@ namespace EStation
 
                     switch(userSpace) {
                         case UserSpace.AdminSpace:
-                            new Task(() => Dispatcher.BeginInvoke(new Action(()
-                                => NavigationService?.Navigate(new HomePage(), UriKind.Relative)))).Start();
+                            await Dispatcher.BeginInvoke(new Action(()
+                                 => NavigationService?.Navigate(new HomePage(), UriKind.Relative)));
                             break;
                         //case UserSpace.SecretaireSpace:
                         //    new Task(() => Dispatcher.BeginInvoke(new Action(()
@@ -92,9 +92,10 @@ namespace EStation
                 _ERROR_LABEL.Visibility=Visibility.Visible;
                 _ERROR_LABEL.Text="Permission Refusée";
                 _BUSY_INDICATOR.IsBusy=false;
-            } catch (SqlException) {
+            } catch (SqlException sqlException) {
                 _ERROR_LABEL.Visibility=Visibility.Visible;
                 _ERROR_LABEL.Text="Serveur Introuvable !";
+                _ERROR_LABEL.ToolTip = sqlException.Message;
                 _BUSY_INDICATOR.IsBusy=false;
             } catch (Exception exx) {
                 DebugHelper.WriteException(exx);

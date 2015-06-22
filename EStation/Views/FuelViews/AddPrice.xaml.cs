@@ -16,7 +16,7 @@ namespace EStation.Views.Fuel
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(async () =>
                 {
                     if (productGuid == Guid.Empty)
                     {
@@ -25,7 +25,7 @@ namespace EStation.Views.Fuel
                         return;
                     }
 
-                    var productName = App.Store.Fuels.Get(productGuid).Libel;
+                    var productName =(await App.Store.Fuels.Get(productGuid)).Libel;
 
                     _TITLE_TEXT.Text = "NOUVEAU PRIX DE " + productName.ToUpper();
 

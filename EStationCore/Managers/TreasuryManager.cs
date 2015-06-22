@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using CLib;
 using EStationCore.Model;
 using EStationCore.Model.Hr.Views;
@@ -120,8 +122,8 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public double GetTotalRecette (DateTime? startDate, DateTime? endDate) 
-            => StaticGetTotalRecette(startDate, endDate);
+        public async Task<double> GetTotalRecette (DateTime? startDate, DateTime? endDate) 
+            => await StaticGetTotalRecette(startDate, endDate);
 
 
         /// <summary>
@@ -130,17 +132,9 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public double GetTotalDepense (DateTime? startDate, DateTime? endDate) 
-            => StaticGetTotalDepense(startDate, endDate);
+        public async Task<double> GetTotalDepense (DateTime? startDate, DateTime? endDate) 
+            => await StaticGetTotalDepense(startDate, endDate);
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        public double GetTotalPaidSchoolFee (DateTime? startDate, DateTime? endDate) 
-            => StaticGetTotalPaidSchoolFee(startDate, endDate);
 
 
         /// <summary>
@@ -148,8 +142,8 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        public double GetTotalPaidSalaries (DateTime? startDate, DateTime? endDate) 
-            => StaticGetTotalPaidSalaries(startDate, endDate);
+        public async Task<double> GetTotalPaidSalaries (DateTime? startDate, DateTime? endDate) 
+            => await StaticGetTotalPaidSalaries(startDate, endDate);
 
 
         /// <summary>
@@ -157,8 +151,8 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        public double GetSoldeCaisse (DateTime? startDate, DateTime? endDate) 
-            => StaticGetSoldeCaisse(startDate, endDate);
+        public async Task<double> GetSoldeCaisse (DateTime? startDate, DateTime? endDate) 
+            => await StaticGetSoldeCaisse(startDate, endDate);
 
 
         /// <summary>
@@ -167,13 +161,19 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public double GetSolde (DateTime? startDate, DateTime? endDate)
+        public async Task<double> GetSolde (DateTime? startDate, DateTime? endDate)
         {
-            var solde  = StaticGetSoldeCaisse(startDate, endDate);
-            solde     -= StaticGetTotalPaidSalaries(startDate, endDate);
-            solde     += StaticGetTotalPaidSchoolFee(startDate, endDate);
+            var solde  = await StaticGetSoldeCaisse(startDate, endDate);
+            solde     -= await StaticGetTotalPaidSalaries(startDate, endDate);
+            //solde     += await StaticGetTotalPaidSchoolFee(startDate, endDate);
             return solde;
         }
+
+
+        //public IEnumerable<KeyValuePair<string, double>> TresoryPerMonth(int numberOfMonths = 12)
+        //    => DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1))
+        //    .Select(async date => new KeyValuePair<string, double>(date.Month.ToString("MMM"),
+        //    await StaticGetSolde(date.Date, date.Date.AddMonths(1).AddDays(-1))));
 
 
 
@@ -186,8 +186,9 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        internal static double StaticGetTotalRecette (DateTime? startDate, DateTime? endDate) {
-            using (var db = new StationContext()) {
+        internal async static Task<double> StaticGetTotalRecette (DateTime? startDate, DateTime? endDate) {
+            return await Task.Run(() => {
+                using (var db = new StationContext()) {
                 if(!db.Transactions.Any(t => !t.IsDeleted&&t.Amount>0))
                     return 0;
 
@@ -206,7 +207,8 @@ namespace EStationCore.Managers {
                                                 t.TransactionDate>=startDate&&
                                                 t.TransactionDate<=endDate
                                             ).Sum(t => t.Amount);
-            }
+                }
+            });
         }
 
 
@@ -216,8 +218,9 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        internal static double StaticGetTotalDepense (DateTime? startDate, DateTime? endDate) {
-            using (var db = new StationContext()) {
+        internal async static Task<double> StaticGetTotalDepense (DateTime? startDate, DateTime? endDate) {
+            return await Task.Run(() => {
+                using (var db = new StationContext()) {
 
                 if(!db.Transactions.Any(t => !t.IsDeleted&&t.Amount<0))
                     return 0;
@@ -238,46 +241,18 @@ namespace EStationCore.Managers {
                                                 t.TransactionDate<=endDate
                                             ).Sum(t => t.Amount);
             }
+            });
         }
-
+      
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        internal static double StaticGetTotalPaidSchoolFee (DateTime? startDate, DateTime? endDate) {
-            using (var db = new StationContext()) {
-                //if(!db.SchoolFees.Any(t => !t.IsDeleted&&t.IsPaid))
-                //    return 0;
-
-                //if(startDate==null||endDate==null)
-                //    return db.SchoolFees.Where(t => !t.IsDeleted&&t.IsPaid).Sum(t => t.NetAmount);
-
-                //if(!db.SchoolFees.Any(t =>
-                //                                !t.IsDeleted&&t.IsPaid&&
-                //                                t.DatePaid>=startDate&&
-                //                                t.DatePaid<=endDate
-                //                            ))
-                //    return 0;
-
-                //return db.SchoolFees.Where(t =>
-                //                                !t.IsDeleted&&t.IsPaid&&
-                //                                t.DatePaid>=startDate&&
-                //                                t.DatePaid<=endDate
-                //                            ).Sum(t => t.NetAmount);
-                return 0;
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        internal static double StaticGetTotalPaidSalaries (DateTime? startDate, DateTime? endDate) {
-            using (var db = new StationContext()) {
+        internal async static Task<double> StaticGetTotalPaidSalaries (DateTime? startDate, DateTime? endDate) {
+            return await Task.Run(() => {
+                using (var db = new StationContext()) {
                 if(!db.Payrolls.Any(t => !t.IsDeleted&&t.IsPaid))
                     return 0;
 
@@ -294,7 +269,7 @@ namespace EStationCore.Managers {
                         t.DatePaid <= endDate
                         ).Sum(t => t.FinalPaycheck)
                     : 0;
-            }
+            }});
         }
 
 
@@ -303,8 +278,9 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        internal static double StaticGetSoldeCaisse (DateTime? startDate, DateTime? endDate) {
-            using (var db = new StationContext()) {
+        internal async static Task<double> StaticGetSoldeCaisse (DateTime? startDate, DateTime? endDate) {
+            return await Task.Run(() => {
+                using (var db = new StationContext()) {
                 if(!db.Transactions.Any(t => !t.IsDeleted))
                     return 0;
 
@@ -322,6 +298,7 @@ namespace EStationCore.Managers {
                         ).Sum(t => t.Amount)
                     : 0;
             }
+            });
         }
 
 
@@ -331,10 +308,10 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        internal static double StaticGetSolde (DateTime? startDate, DateTime? endDate) {
-            var solde = StaticGetSoldeCaisse(startDate, endDate);
-            solde-=StaticGetTotalPaidSalaries(startDate, endDate);
-            solde+=StaticGetTotalPaidSchoolFee(startDate, endDate);
+        internal async static Task<double> StaticGetSolde (DateTime? startDate, DateTime? endDate) {
+            var solde = await StaticGetSoldeCaisse(startDate, endDate);           
+            solde -= await StaticGetTotalPaidSalaries(startDate, endDate);
+            //solde+= await StaticGetTotalPaidSchoolFee(startDate, endDate);
             return solde;
         }
 

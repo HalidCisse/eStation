@@ -92,6 +92,15 @@
     <Reference Include="Humanizer">
       <HintPath>..\packages\Humanizer.1.35.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2015.1.893-alpha\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2015.1.893-alpha\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2015.1.893-alpha\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -148,6 +157,7 @@
     <Compile Include="Ext\ClientMatriculeValidator.cs" />
     <Compile Include="Ext\EmailValidator.cs" />
     <Compile Include="Ext\FileValidator.cs" />
+    <Compile Include="Ext\Helpers.cs" />
     <Compile Include="Ext\LocalExtensions.cs" />
     <Compile Include="Ext\ModernDialogExtention.cs" />
     <Compile Include="Ext\NameValidation.cs" />
@@ -161,8 +171,23 @@
     <Compile Include="Ext\TransactionRefValidator.cs" />
     <Compile Include="Ressources\MyForm.cs" />
     <Compile Include="Ressources\MyWindowStyle.cs" />
+    <Compile Include="Views\Clients\AddCompany.xaml.cs">
+      <DependentUpon>AddCompany.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\AddPurchase.xaml.cs">
+      <DependentUpon>AddPurchase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Clients\CustomerDetails.xaml.cs">
       <DependentUpon>CustomerDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\Companies.xaml.cs">
+      <DependentUpon>Companies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\CompaniesView.xaml.cs">
+      <DependentUpon>CompaniesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\Purchases.xaml.cs">
+      <DependentUpon>Purchases.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -233,11 +258,17 @@
     <Compile Include="Views\FuelViews\ColonneView.xaml.cs">
       <DependentUpon>ColonneView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FuelViews\FuelPrelevements.xaml.cs">
+      <DependentUpon>FuelPrelevements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FuelViews\FuelStockView.xaml.cs">
       <DependentUpon>FuelStockView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\AddTransaction.xaml.cs">
       <DependentUpon>AddTransaction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journals\AnalyticView.xaml.cs">
+      <DependentUpon>AnalyticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\CaisseDetails.xaml.cs">
       <DependentUpon>CaisseDetails.xaml</DependentUpon>
@@ -245,8 +276,17 @@
     <Compile Include="Views\Journals\CaisseTransactions.xaml.cs">
       <DependentUpon>CaisseTransactions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Journals\FinanceChart.xaml.cs">
+      <DependentUpon>FinanceChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journals\FuelMonthlySale.xaml.cs">
+      <DependentUpon>FuelMonthlySale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Journals\FuelPeriodCard.xaml.cs">
       <DependentUpon>FuelPeriodCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journals\FuelVariations.xaml.cs">
+      <DependentUpon>FuelVariations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\JournalView.xaml.cs">
       <DependentUpon>JournalView.xaml</DependentUpon>
@@ -281,8 +321,14 @@
     <Compile Include="Views\Hr\StaffsView.xaml.cs">
       <DependentUpon>StaffsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Journals\OilMonthlySale.xaml.cs">
+      <DependentUpon>OilMonthlySale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Journals\OilPeriodCard.xaml.cs">
       <DependentUpon>OilPeriodCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journals\OilVariations.xaml.cs">
+      <DependentUpon>OilVariations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\Prelev.xaml.cs">
       <DependentUpon>Prelev.xaml</DependentUpon>
@@ -351,7 +397,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Clients\AddCompany.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\AddPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Clients\CustomerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\Companies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\CompaniesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\Purchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -447,6 +513,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FuelViews\FuelPrelevements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FuelViews\FuelStockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -454,6 +524,10 @@
     <Page Include="Views\Journals\AddTransaction.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Journals\AnalyticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Journals\CaisseDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -463,7 +537,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Journals\FinanceChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Journals\FuelMonthlySale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Journals\FuelPeriodCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Journals\FuelVariations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -511,7 +597,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Journals\OilMonthlySale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Journals\OilPeriodCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Journals\OilVariations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

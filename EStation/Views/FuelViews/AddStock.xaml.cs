@@ -17,12 +17,12 @@ namespace EStation.Views.FuelViews
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(async () =>
                 {
-                    _SUPPLIER.ItemsSource = App.Store.Citernes.GetSuppliers();
+                    _SUPPLIER.ItemsSource = await App.Store.Citernes.GetSuppliers();
 
-                    var vide = App.Store.Citernes.Get(currentCiterne).MaxCapacity -
-                               App.Store.Citernes.GetCiterneFuelBalance(currentCiterne);
+                    var vide = (await  App.Store.Citernes.Get(currentCiterne)).MaxCapacity -
+                               (await App.Store.Citernes.GetCiterneFuelBalance(currentCiterne));
 
                     if (currentCiterne == Guid.Empty)
                     {
@@ -55,7 +55,7 @@ namespace EStation.Views.FuelViews
                         _GRID.DataContext = App.Store.Citernes.GetStock(stockToMod);
                    
                     _QUANTITY.Maximum = vide;
-                    _TITLE_TEXT.Text = "LIVRAISON " + App.Store.Citernes.Get(currentCiterne).Libel.ToUpper();
+                    _TITLE_TEXT.Text = "LIVRAISON " + (await App.Store.Citernes.Get(currentCiterne)).Libel.ToUpper();
                 }));
             }).Start();
         }

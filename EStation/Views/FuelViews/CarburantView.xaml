@@ -32,7 +32,7 @@
             <Button Grid.Column="1" Name="_ADD_BUTTON" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Carburant"  Click="AddButton_OnClick"/>
         </Grid>
 
-        <ListBox x:Name="_CARBURANTS" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
+        <ListBox x:Name="_CARBURANTS" SelectionMode="Extended" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="480" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">

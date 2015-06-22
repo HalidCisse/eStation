@@ -33,6 +33,13 @@ namespace EStation.Views.FuelViews
             _OIL_PRELEVS.Refresh((List<Guid>) sender);
         }
 
+        private void CarburantView_OnSelectionChanged(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+
+            _CARB_PRELEVS.Refresh((List<Guid>) sender, DateTime.Today.AddDays(-7), DateTime.Today);
+        }
+
 
     }
 }

@@ -21,9 +21,9 @@ namespace EStation.Views.Fuel
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(async () =>
                 {
-                    _CITERNES.ItemsSource = App.Store.Citernes.GetCiternes();
+                    _CITERNES.ItemsSource = await App.Store.Citernes.GetCiternes();
                     _POMPE.ItemsSource = App.Store.Pompes.GetColonnes();
 
                     if (_CITERNES.Items.Count == 0)

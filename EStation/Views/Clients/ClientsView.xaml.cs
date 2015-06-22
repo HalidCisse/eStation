@@ -20,10 +20,10 @@ namespace EStation.Views.Clients
         {
             InitializeComponent();
 
-            Refresh();
+            Dispatcher.BeginInvoke(new Action(async ()=> await Refresh()));           
         }
 
-        private async void Refresh()
+        private async Task Refresh()
         {
             try
             {
@@ -48,43 +48,32 @@ namespace EStation.Views.Clients
             }
         }
 
-        private void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e)
-        {
-            new Task(() => {
-                Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); }));
-            }).Start();
-        }
+        private async void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e)
+            => await Dispatcher.BeginInvoke(new Action(()
+                => NavigationService?.GoBack()));
 
-        private void ClientList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void ClientList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (_CLIENT_LIST?.SelectedItem == null) return;
-
-            new Task(() =>
-            {
-                Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));
-            }).Start();
-
+            await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));           
         }
 
-        private void AddButon_Click(object sender, RoutedEventArgs e)
+        private async void AddButon_Click(object sender, RoutedEventArgs e)
         {
             var wind = new NewClient(Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
         }
 
-        private void Details_Click(object sender, RoutedEventArgs e)
+        private async void Details_Click(object sender, RoutedEventArgs e)
         {
             if (_CLIENT_LIST?.SelectedItem == null)
                 return;
-
-            new Task(() =>
-            {
-                Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));
-            }).Start();
+            await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));
+           
         }
 
-        private void Modifier_OnClick(object sender, RoutedEventArgs e)
+        private async void Modifier_OnClick(object sender, RoutedEventArgs e)
         {
             if (_CLIENT_LIST?.SelectedItem == null)
                 return;
@@ -92,10 +81,10 @@ namespace EStation.Views.Clients
             _BUSY_INDICATOR.IsBusy = false;
             var wind = new NewClient((Guid)_CLIENT_LIST.SelectedValue) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
         }
 
-        private void Archiver_OnClick(object sender, RoutedEventArgs e)
+        private  void Archiver_OnClick(object sender, RoutedEventArgs e)
         {
             if (_CLIENT_LIST?.SelectedItem == null)
                 return;
@@ -127,7 +116,7 @@ namespace EStation.Views.Clients
                 MessageBoxButton.OK);
         }
 
-        private void _SEARCH_BUTTON_OnClick(object sender, RoutedEventArgs e)
+        private async void _SEARCH_BUTTON_OnClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_SEARCH_BOX.Text))
                 return;
@@ -135,15 +124,12 @@ namespace EStation.Views.Clients
             try
             {
                 _BUSY_INDICATOR.IsBusy = true;
-
-                new Task(() =>
-                {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
-                        _BUSY_INDICATOR.IsBusy = false;
-                    }));
-                }).Start();
+                await Dispatcher.BeginInvoke(new Action(() =>
+                      {
+                          _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
+                          _BUSY_INDICATOR.IsBusy = false;
+                      }));
+               
             }
             catch (Exception ex)
             {
@@ -151,7 +137,7 @@ namespace EStation.Views.Clients
             }
         }
 
-        private void _SEARCH_BOX_TextChanged(object sender, TextChangedEventArgs e)
+        private async void _SEARCH_BOX_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(_SEARCH_BOX.Text))
                 return;
@@ -159,21 +145,17 @@ namespace EStation.Views.Clients
             try
             {
                 _BUSY_INDICATOR.IsBusy = true;
-
-                new Task(() =>
+                await Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
-                        _BUSY_INDICATOR.IsBusy = false;
-                    }));
-                }).Start();
+                    _CLIENT_LIST.ItemsSource = App.Store.Customers.Search(_SEARCH_BOX.Text);
+                    _BUSY_INDICATOR.IsBusy = false;
+                }));                
             }
             catch (Exception ex)
             {
                 DebugHelper.WriteException(ex);
             }
         }
-       
+        
     }
 }

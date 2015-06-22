@@ -18,59 +18,52 @@ namespace EStation.Views.Journals
 
         public DateTime ToDate => _TO_PICKER.SelectedDate.GetValueOrDefault();
 
-        public List<Guid> SelectedFuels => new List<Guid>(_OILS.SelectedItems.Cast<OilCard>().Select(c => c.OilGuid));
+        public List<Guid> SelectedOils => new List<Guid>(_OILS.SelectedItems.Cast<OilCard>().Select(c => c.OilGuid));
 
 
         public OilPeriodCard()
         {
             InitializeComponent();
 
-            new Task(() => Dispatcher.BeginInvoke(new Action(async () =>
+            Dispatcher.BeginInvoke(new Action(async () =>
             {
                 await Task.Run(() => Refresh(DateTime.Today.AddDays(-7), DateTime.Today));
-                SelectionChanged?.Invoke(null, EventArgs.Empty);
-            }))).Start();
+                SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
+            }));
         }
 
 
-        public void Refresh(DateTime fromDate, DateTime toDate)
+        public async Task Refresh(DateTime fromDate, DateTime toDate) => await Dispatcher.BeginInvoke(new Action(() =>
         {
-            new Task(() =>
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                _FROM_PICKER.SelectedDate = fromDate;
-                _TO_PICKER.SelectedDate = toDate;
+            _FROM_PICKER.SelectedDate = fromDate;
+            _TO_PICKER.SelectedDate = toDate;
 
-                _OILS.ItemsSource = App.Store.Oils.GetOilsCards();
-                _OILS.SelectAll();
-            }))
-            ).Start();
-        }
+            _OILS.ItemsSource = App.Store.Oils.GetOilsCards();
+            _OILS.SelectAll();
+        }));
 
 
         private async void DatePicker_OnSelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectionChanged?.Invoke(null, EventArgs.Empty);
-            await Task.Run(() => UpdateDashboard());
+            SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
+            await UpdateDashboard();
         }
 
 
         private async void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectionChanged?.Invoke(null, EventArgs.Empty);
-            await Task.Run(() => UpdateDashboard());
+            SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
+            await UpdateDashboard();
         }
 
 
-        private void UpdateDashboard()
-        {           
-            Dispatcher.BeginInvoke(new Action(() => {
-                _TOTAL_GALLONS.Content = "Bidon".ToQuantity(App.Store.Oils.GetGallonsSold(SelectedFuels, FromDate, ToDate)); 
-                _TOTAL_SOLD.Content = App.Store.Oils.GetSold(SelectedFuels, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+        private async Task UpdateDashboard() => await Dispatcher.BeginInvoke(new Action(() =>
+        {
+            _TOTAL_GALLONS.Content = "Bidon".ToQuantity(App.Store.Oils.GetGallonsSold(SelectedOils, FromDate, ToDate));
+            _TOTAL_SOLD.Content = App.Store.Oils.GetSold(SelectedOils, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
 
-                _TOTAL_STOCK.Content = "Bidon".ToQuantity(App.Store.Oils.GetTotalDelivery(SelectedFuels, FromDate, ToDate));
-                _TOTAL_COST.Content = App.Store.Oils.GetTotalDeliveryCost(SelectedFuels, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-            }));
-        }
+            _TOTAL_STOCK.Content = "Bidon".ToQuantity(App.Store.Oils.GetTotalDelivery(SelectedOils, FromDate, ToDate));
+            _TOTAL_COST.Content = App.Store.Oils.GetTotalDeliveryCost(SelectedOils, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+        }));
     }
 }

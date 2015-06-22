@@ -20,9 +20,9 @@ namespace EStation.Views.Fuel
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(async () =>
                 {
-                    _FUELS.ItemsSource = App.Store.Fuels.GetFuels();
+                    _FUELS.ItemsSource = (await App.Store.Fuels.GetFuels());
 
                     if (_FUELS.Items.Count == 0)
                     {

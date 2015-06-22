@@ -16,14 +16,13 @@ namespace EStation.Views.Fuel
         }
 
 
-        public void Refresh(Guid currentCiterne)
+        public async Task Refresh(Guid currentCiterne)
         {
             _currentCiterne = currentCiterne;
-            new Task(() => Dispatcher.BeginInvoke(new Action(()=>
-            {
-                _STOCKS.ItemsSource = App.Store.Citernes.GetCiterneStocks(currentCiterne);
-                _TITLE_TEXT.Text = "LIVRAISONS " + App.Store.Citernes.Get(currentCiterne)?.Libel.ToUpper();
-            }))).Start();          
+            
+                _STOCKS.ItemsSource = await App.Store.Citernes.GetCiterneStocks(currentCiterne);
+                _TITLE_TEXT.Text = "LIVRAISONS " +(await App.Store.Citernes.Get(currentCiterne))?.Libel.ToUpper();
+                   
         }
 
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,30 +14,38 @@ namespace EStation.Views.FuelViews
 {
     internal partial class CarburantView 
     {
+
+        public event EventHandler SelectionChanged;
+
+
+        private List<Guid> SelectedFuels => new List<Guid>(_CARBURANTS.SelectedItems.Cast<FuelCard>().Select(c => c.FuelGuid));
+
+
         public CarburantView()
         {
             InitializeComponent();
 
-            Refresh();
+            Dispatcher.BeginInvoke(new Action(async () => await Refresh()));
         }
 
        
-        internal void Refresh() 
-            => new Task(() => Dispatcher.BeginInvoke(new Action(() 
-            => _CARBURANTS.ItemsSource = App.Store.Fuels.GetFuelCards()))).Start();
+        internal async Task Refresh() 
+            => await Dispatcher.BeginInvoke(new Action(async ()=>
+            {
+                _CARBURANTS.ItemsSource = await App.Store.Fuels.GetFuelCards();
+                _CARBURANTS.SelectAll();
+            }));
 
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             var wind = new AddFuel(Guid.Empty){ Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
         }
 
-        private void CARBURANTS_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        private void CARBURANTS_OnSelectionChanged(object sender, SelectionChangedEventArgs e) 
+            => SelectionChanged?.Invoke(SelectedFuels, EventArgs.Empty);
 
         private void CARBURANTS_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

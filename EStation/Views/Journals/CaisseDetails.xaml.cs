@@ -32,37 +32,43 @@ namespace EStation.Views.Journals {
         public CaisseDetails () {
             InitializeComponent();
 
-            new Task(() => Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.BeginInvoke(new Action(async () =>
             {
                 _FROM_PICKER.SelectedDate=FromDate=DateTime.Today.AddMonths(-1);
                 _TO_PICKER.SelectedDate=ToDate=DateTime.Today.AddMonths(1);
-                Refresh(FromDate, ToDate);
+                await Refresh(FromDate, ToDate);
                 DateSelectionChanged?.Invoke(null, new EventArgs());
-            }))).Start();
+            }));
         }
 
        
-        public void Refresh (DateTime? fromDate = null, DateTime? toDate=null) {
+        public async Task Refresh (DateTime? fromDate = null, DateTime? toDate=null) {
             if (fromDate != null) FromDate=(DateTime) fromDate;
             if (toDate != null) ToDate=(DateTime) toDate;
+            await
+                         //new Task(() => Dispatcher.BeginInvoke(new Action(() =>
+                         //{
+                         //    _TOTAL_RECETTES.Content = App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //    _TOTAL_DEPENSES.Content = (-App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //    //_TOTAL_SCHOOL_FEE.Content =App.EStation.Economat.Treasury.GetTotalPaidSchoolFee(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //    //_TOTAL_SALARIES.Content   =App.EStation.Economat.Treasury.GetTotalPaidSalaries(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //    //_CAISSE_SOLDE.Content     =App.EStation.Economat.Treasury.GetSoldeCaisse(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //    //_TOTAL_SOLDE.Content      =App.EStation.Economat.Treasury.GetSolde(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+                         //}))).Start();
 
-            new Task(() => Dispatcher.BeginInvoke(new Action(() => {
-                _TOTAL_RECETTES.Content   =App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                _TOTAL_DEPENSES.Content   =(-App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                //_TOTAL_SCHOOL_FEE.Content =App.EStation.Economat.Treasury.GetTotalPaidSchoolFee(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                //_TOTAL_SALARIES.Content   =App.EStation.Economat.Treasury.GetTotalPaidSalaries(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                //_CAISSE_SOLDE.Content     =App.EStation.Economat.Treasury.GetSoldeCaisse(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                //_TOTAL_SOLDE.Content      =App.EStation.Economat.Treasury.GetSolde(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-            }))).Start();
+            Dispatcher.BeginInvoke(new Action(async () =>
+            {               
+                _TOTAL_RECETTES.Content = (await App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+                _TOTAL_DEPENSES.Content = (-(await App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate))).ToString("C0", CultureInfo.CurrentCulture);
+            }));
         }
 
 
-        private void DatePicker_OnSelectedDateChanged (object sender, SelectionChangedEventArgs e) {
+        private async void DatePicker_OnSelectedDateChanged (object sender, SelectionChangedEventArgs e) {
            
             if((FromDate==_FROM_PICKER.SelectedDate.GetValueOrDefault()&&ToDate==_TO_PICKER.SelectedDate.GetValueOrDefault())||_TO_PICKER.SelectedDate==null)
                 return;
-
-            Refresh(_FROM_PICKER.SelectedDate.GetValueOrDefault(), _TO_PICKER.SelectedDate.GetValueOrDefault());
+            await Refresh(_FROM_PICKER.SelectedDate.GetValueOrDefault(), _TO_PICKER.SelectedDate.GetValueOrDefault());
             DateSelectionChanged?.Invoke(null, e);
         }
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using EStationCore.Model.Fuel.Views;
@@ -26,56 +25,41 @@ namespace EStation.Views.Journals
         {
             InitializeComponent();
 
-            new Task(() => Dispatcher.BeginInvoke(new Action(async () =>
+            Dispatcher.BeginInvoke(new Action(async () =>
             {
-                await Task.Run(() => Refresh(DateTime.Today.AddDays(-7), DateTime.Today));
+                await Refresh(DateTime.Today.AddDays(-7), DateTime.Today);
                 SelectionChanged?.Invoke(null, EventArgs.Empty);
-            }))).Start();
+            }));
         }
+   
+        public async Task Refresh(DateTime fromDate, DateTime toDate) 
+        {
+            _FROM_PICKER.SelectedDate = fromDate;
+            _TO_PICKER.SelectedDate = toDate;
 
-    
-        public void Refresh(DateTime fromDate, DateTime toDate)
-        {            
-            new Task(() => 
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                _FROM_PICKER.SelectedDate = fromDate;
-                _TO_PICKER.SelectedDate = toDate;
-
-                _CITERNES.ItemsSource = App.Store.Citernes.GetFuelCards();
-                _CITERNES.SelectAll();
-            }))
-            ).Start();
+            _CITERNES.ItemsSource = await App.Store.Citernes.GetFuelCards();
+            _CITERNES.SelectAll();
         }
-
 
         private async void DatePicker_OnSelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {           
-            SelectionChanged?.Invoke(null, EventArgs.Empty);
-            await Task.Run(() => UpdateDashboard());
+            SelectionChanged?.Invoke(SelectedFuels, EventArgs.Empty);
+            await UpdateDashboard();
         }
-
 
         private async void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectionChanged?.Invoke(null, EventArgs.Empty);
-            await Task.Run(() => UpdateDashboard());
+            SelectionChanged?.Invoke(SelectedFuels, EventArgs.Empty);
+            await UpdateDashboard();
         }
 
-
-        private void UpdateDashboard()
+        private async Task UpdateDashboard() 
         {
-            //Thread.Sleep(1000);
+            _TOTAL_LITER.Content =(await App.Store.Fuels.GetLiterSoldAsync(SelectedFuels, FromDate, ToDate)).ToString("0.##\\ L", CultureInfo.CurrentCulture);
+            _TOTAL_SOLD.Content = (await App.Store.Fuels.GetSold(SelectedFuels, FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
 
-            Dispatcher.BeginInvoke(new Action(() =>{
-                _TOTAL_LITER.Content =App.Store.Fuels.GetLiterSold(SelectedFuels, FromDate, ToDate).ToString("0.##\\ L", CultureInfo.CurrentCulture);
-                _TOTAL_SOLD.Content = App.Store.Fuels.GetSold(SelectedFuels, FromDate, ToDate) .ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-
-                _TOTAL_STOCK.Content =App.Store.Fuels.GetTotalDeliveryLiter(SelectedFuels, FromDate, ToDate).ToString("0.##\\ L", CultureInfo.CurrentCulture);
-                _TOTAL_COST.Content =App.Store.Fuels.GetTotalDeliveryCost(SelectedFuels, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-            }));
+            _TOTAL_STOCK.Content = (await App.Store.Fuels.GetTotalDeliveryLiter(SelectedFuels, FromDate, ToDate)).ToString("0.##\\ L", CultureInfo.CurrentCulture);
+            _TOTAL_COST.Content = (await App.Store.Fuels.GetTotalDeliveryCost(SelectedFuels, FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
         }
-
-      
     }
 }

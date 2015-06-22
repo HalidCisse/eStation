@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database;
+using CLib.Database.Interfaces;
 using CLib.Enums;
 
 namespace EStationCore.Model.Common.Entity

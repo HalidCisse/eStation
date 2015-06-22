@@ -15,13 +15,13 @@ namespace EStationCore.Model.Fuel.Views
             FuelGuid = fuel.FuelGuid;
             Libel = fuel.Libel;
             Threshold = fuel.Threshold.ToString("0.##");
-             var lastPrice= FuelManager.GetFuelLastPrice(fuel.FuelGuid);
+             var lastPrice= FuelManager.GetFuelLastPrice(fuel.FuelGuid).Result;
             CurrentDoublePrice = lastPrice.ActualPrice;
             CurrentPrice = lastPrice.ActualPrice.ToString("0.##\\ dhs/L");
             LastPriceUpdate = "Derniere modification du prix " + lastPrice.FromDate.GetValueOrDefault().ToLongDateString();
             CiternesNumber = " Citerne".ToQuantity(fuel.Citernes.Count);
 
-            var curBalance = FuelManager.StaticGetFuelBalance(fuel.FuelGuid);
+            var curBalance = FuelManager.StaticGetFuelBalance(fuel.FuelGuid).Result;
             CurrentStock = curBalance.ToString("0.##\\L") + " en stock /" + fuel.Citernes.Sum(c => c.MaxCapacity).ToString("0.##\\L");
             Pourcentage = ((curBalance * 100) / fuel.Citernes.Sum(c=> c.MaxCapacity)).ToString("0.##\\%");           
         }

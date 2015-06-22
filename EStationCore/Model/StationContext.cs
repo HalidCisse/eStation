@@ -23,6 +23,18 @@ namespace EStationCore.Model
         #region SHARED
 
         /// <summary>
+        /// Les Bons
+        /// </summary>
+        public virtual DbSet<Purchase> Purchases { get; set; }
+
+
+        /// <summary>
+        /// Les Entreprises
+        /// </summary>
+        public virtual DbSet<Company> Companies { get; set; }
+
+
+        /// <summary>
         /// Les Clients
         /// </summary>
         public virtual DbSet<Customer> Customers { get; set; }

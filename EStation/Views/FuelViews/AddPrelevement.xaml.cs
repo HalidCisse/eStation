@@ -18,8 +18,8 @@ namespace EStation.Views.Fuel
 
             new Task(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {                  
+                Dispatcher.BeginInvoke(new Action(async () =>
+                {
                     if (currentPompe == Guid.Empty)
                     {
                         ModernDialog.ShowMessage("Selectionner un Pistolet", "EStation", MessageBoxButton.OK);
@@ -30,9 +30,9 @@ namespace EStation.Views.Fuel
                     var curPomp = App.Store.Pompes.Get(currentPompe);
                     if (curPomp.CiterneGuid != null)
                     {
-                        var citerneBalance = App.Store.Citernes.GetCiterneFuelBalance((Guid) curPomp.CiterneGuid);
+                        var citerneBalance = await App.Store.Citernes.GetCiterneFuelBalance((Guid)curPomp.CiterneGuid);
 
-                        if (citerneBalance<=0)
+                        if (citerneBalance <= 0)
                         {
                             ModernDialog.ShowMessage("Il n'ya pas de carburant dans le Citerne", "EStation", MessageBoxButton.OK);
                             Close();
@@ -40,7 +40,7 @@ namespace EStation.Views.Fuel
                         }
 
                         _TITLE_TEXT.Text = "Prélèvement ".ToUpper() + curPomp.Libel.ToUpper();
-                        _derPrelev = App.Store.Pompes.GetLastPrelevement(currentPompe);
+                        _derPrelev = await App.Store.Pompes.GetLastPrelevement(currentPompe);
                         _COMPTEUR_M.Minimum = _derPrelev.Meter;
                         _COMPTEUR_M.Maximum = _derPrelev.Meter + citerneBalance;
                         _COMPTEUR_E.Maximum = citerneBalance;
@@ -66,7 +66,7 @@ namespace EStation.Views.Fuel
                     else
                         _GRID.DataContext = App.Store.Pompes.GetPrelevement(prelevToMod);
 
-                                   
+
                 }));
             }).Start();
         }

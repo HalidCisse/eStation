@@ -1,26 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CLib.Database.Interfaces;
+using EStationCore.Model.Sale.Enums;
 
 namespace EStationCore.Model.Sale.Entity
 {
-    public class Purchase
+    public class Purchase : Tracable
     {
         [Key]
-        public Guid AchatGuid { get; set; }
+        public Guid PurchaseGuid { get; set; }
+
+        public Guid CompanyGuid { get; set; }
+
+        public ProductType ProductType { get; set; }
+
+        public Guid ProductGuid { get; set; }
+
+        public double Quantity { get; set; }
+
+        public DateTime? PurchaseDate { get; set; }
+
+        public PurchaseState PurchaseState { get; set; }
+
+        public double Sum { get; set; }
+
+        public string Description { get; set; }
+
+        public string Comment { get; set; }
 
 
-        public Guid CustomerGuid { get; set; }
 
-
-
-
-        [ForeignKey("CustomerGuid")]
-        public virtual Customers.Entity.Customer Customer { get; set; }
-
-
-        public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
+        [ForeignKey("CompanyGuid")]
+        public virtual Company Company { get; set; }
 
     }
 }

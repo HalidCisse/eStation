@@ -21,27 +21,25 @@ namespace EStation.Views.Journals {
 
 
         
-        public void Refresh ( DateTime fromDate, DateTime toDate) {
-
+        public async Task Refresh ( DateTime fromDate, DateTime toDate) {
             _fromDate=fromDate;
             _toDate=toDate;
-           
-            new Task(() => Dispatcher.BeginInvoke(new Action(() => {
-                _TRANS_LIST.ItemsSource=App.Store.Economat.Treasury.GetTransactions(_fromDate, _toDate);
+            await Dispatcher.BeginInvoke(new Action(() =>{
+                _TRANS_LIST.ItemsSource = App.Store.Economat.Treasury.GetTransactions(_fromDate, _toDate);
                 Refreshed?.Invoke(null, EventArgs.Empty);
-            }))).Start();
+            }));
         }
 
 
-        private void _ADD_TRANSACTION_OnClick(object sender, RoutedEventArgs e)
+        private async void _ADD_TRANSACTION_OnClick(object sender, RoutedEventArgs e)
         {
             var wind = new AddTransaction { Owner=Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh(_fromDate, _toDate);
+            await Refresh(_fromDate, _toDate);
         }
 
 
-        private void Annuler_Click (object sender, RoutedEventArgs e) {
+        private async void Annuler_Click (object sender, RoutedEventArgs e) {
 
             if(_TRANS_LIST.SelectedValue==null)
                 return;
@@ -56,7 +54,7 @@ namespace EStation.Views.Journals {
                 return;
             }
 
-            Refresh(_fromDate, _toDate);
+            await Refresh(_fromDate, _toDate);
             ModernDialog.ShowMessage("Annuler avec Succès !", "EStation", MessageBoxButton.OK);            
         }
 
