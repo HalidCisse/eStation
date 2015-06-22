@@ -69,7 +69,6 @@
     <Compile Include="Estation.cs" />
     <Compile Include="Helpers\MembershipUserCreateStatus.cs" />
     <Compile Include="Helpers\PayRollHelper.cs" />
-    <Compile Include="Managers\AnalyticsManager.cs" />
     <Compile Include="Managers\CiternesManager.cs" />
     <Compile Include="Managers\CommManager.cs" />
     <Compile Include="Managers\CustomersManager.cs" />

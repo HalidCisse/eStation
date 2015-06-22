@@ -16,12 +16,14 @@ namespace EStationCore.Managers {
     /// </summary>
     public sealed class TreasuryManager {
 
+        #region CRUD
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="newTransaction"></param>
         /// <returns></returns>
-        public bool NewTransaction (Transaction newTransaction)
+        public bool NewTransaction(Transaction newTransaction)
         {
             //todo security
             return StaticNewTransaction(newTransaction);
@@ -33,22 +35,23 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="transactionGuid"></param>
         /// <returns></returns>
-        public bool CancelTransaction (Guid transactionGuid) {            
+        public bool CancelTransaction(Guid transactionGuid)
+        {
             using (var db = new StationContext())
             {
                 var theTransaction = db.Transactions.Find(transactionGuid);
                 if (theTransaction == null) throw new InvalidOperationException("CAN_NOT_FIND_REFERENCE_TRANSACTION");
-              
-                theTransaction.IsDeleted        = true;
-                theTransaction.DeleteDate       = DateTime.Now;
-                theTransaction.DeleteUserGuid   = Guid.Empty;
 
-                theTransaction.LastEditDate     = DateTime.Now;
-                theTransaction.LastEditUserGuid =Guid.Empty;
+                theTransaction.IsDeleted = true;
+                theTransaction.DeleteDate = DateTime.Now;
+                theTransaction.DeleteUserGuid = Guid.Empty;
+
+                theTransaction.LastEditDate = DateTime.Now;
+                theTransaction.LastEditUserGuid = Guid.Empty;
 
                 db.Transactions.Attach(theTransaction);
-                db.Entry(theTransaction).State=EntityState.Modified;
-                return db.SaveChanges()>0;
+                db.Entry(theTransaction).State = EntityState.Modified;
+                return db.SaveChanges() > 0;
             }
         }
 
@@ -56,23 +59,25 @@ namespace EStationCore.Managers {
         /// <summary>
         /// Nouvelle Numero de Reference
         /// </summary>
-        public string GetNewTransactionReference () {
+        public string GetNewTransactionReference()
+        {
             string newId;
             do
-                newId="T"+RandomHelper.GetRandLetters(1)+"-"+DateTime.Today.Month+DateTime.Today.Year.ToString().Substring(2)+"-"+RandomHelper.GetRandNum(4);
-            while(
-                     RefTransactionExist(newId)
-                  );
+                newId = "T" + RandomHelper.GetRandLetters(1) + "-" + DateTime.Today.Month +
+                        DateTime.Today.Year.ToString().Substring(2) + "-" + RandomHelper.GetRandNum(4); while (
+                RefTransactionExist(newId)
+                );
             return newId;
         }
 
-        
+
         /// <summary>
         /// Verifie si cette reference exist
         /// </summary>
         /// <param name="theReference"></param>
         /// <returns></returns>
-        public bool RefTransactionExist (string theReference) {
+        public bool RefTransactionExist(string theReference)
+        {
             using (var mc = new StationContext())
                 return
                     mc.Transactions.Any(
@@ -87,7 +92,7 @@ namespace EStationCore.Managers {
         /// <param name="endDate"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public IEnumerable GetTransactions (DateTime? startDate, DateTime? endDate, bool includeDeleted = false)
+        public IEnumerable GetTransactions(DateTime? startDate, DateTime? endDate, bool includeDeleted = false)
         {
             if (includeDeleted)
                 using (var db = new StationContext())
@@ -104,17 +109,28 @@ namespace EStationCore.Managers {
                         ).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
                 }
 
-            using (var db = new StationContext()) {
-                if(startDate==null||endDate==null)
-                    return db.Transactions.Where(t=> !t.IsDeleted).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
+            using (var db = new StationContext())
+            {
+                if (startDate == null || endDate == null)
+                    return
+                        db.Transactions.Where(t => !t.IsDeleted)
+                            .OrderByDescending(t => t.TransactionDate)
+                            .ToList()
+                            .Select(t => new TransactionCard(t));
 
                 return db.Transactions.Where(t => !t.IsDeleted &&
-                                                  t.TransactionDate>=startDate&&
-                                                  t.TransactionDate<=endDate
+                                                  t.TransactionDate >= startDate &&
+                                                  t.TransactionDate <= endDate
                     ).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
             }
         }
 
+        #endregion
+
+
+
+
+        #region Views
 
         /// <summary>
         /// 
@@ -122,7 +138,7 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public async Task<double> GetTotalRecette (DateTime? startDate, DateTime? endDate) 
+        public async Task<double> GetTotalRecette(DateTime? startDate, DateTime? endDate)
             => await StaticGetTotalRecette(startDate, endDate);
 
 
@@ -132,7 +148,7 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public async Task<double> GetTotalDepense (DateTime? startDate, DateTime? endDate) 
+        public async Task<double> GetTotalDepense(DateTime? startDate, DateTime? endDate)
             => await StaticGetTotalDepense(startDate, endDate);
 
 
@@ -142,7 +158,7 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        public async Task<double> GetTotalPaidSalaries (DateTime? startDate, DateTime? endDate) 
+        public async Task<double> GetTotalPaidSalaries(DateTime? startDate, DateTime? endDate)
             => await StaticGetTotalPaidSalaries(startDate, endDate);
 
 
@@ -151,7 +167,7 @@ namespace EStationCore.Managers {
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        public async Task<double> GetSoldeCaisse (DateTime? startDate, DateTime? endDate) 
+        public async Task<double> GetSoldeCaisse(DateTime? startDate, DateTime? endDate)
             => await StaticGetSoldeCaisse(startDate, endDate);
 
 
@@ -161,19 +177,66 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public async Task<double> GetSolde (DateTime? startDate, DateTime? endDate)
+        public async Task<double> GetSolde(DateTime? startDate, DateTime? endDate)
         {
-            var solde  = await StaticGetSoldeCaisse(startDate, endDate);
-            solde     -= await StaticGetTotalPaidSalaries(startDate, endDate);
+            var solde = await StaticGetSoldeCaisse(startDate, endDate);
+            solde -= await StaticGetTotalPaidSalaries(startDate, endDate);
             //solde     += await StaticGetTotalPaidSchoolFee(startDate, endDate);
             return solde;
         }
 
+        #endregion
 
-        //public IEnumerable<KeyValuePair<string, double>> TresoryPerMonth(int numberOfMonths = 12)
-        //    => DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1))
-        //    .Select(async date => new KeyValuePair<string, double>(date.Month.ToString("MMM"),
-        //    await StaticGetSolde(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+
+
+
+        #region Analytic
+
+      
+        public async Task<List<KeyValuePair<string, double>>> SalaryPerMonth(int numberOfMonths = 11)
+        {
+            //return DateTimeHelper.EachMonth(
+            //    new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths),
+            //    new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1))
+            //    .Select(async month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
+            //        await StaticGetTotalPaidSalaries(month.Date, month.Date.AddMonths(1).AddDays(-1))));
+
+            var points = new List<KeyValuePair<string, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)))
+                points.Add(new KeyValuePair<string, double>(date.ToString("MMM-yy"),
+                    await StaticGetTotalPaidSalaries(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;
+        }
+
+        public async Task<List<KeyValuePair<string, double>>> ExpensePerMonth(int numberOfMonths = 11)
+        {          
+            var points = new List<KeyValuePair<string, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)))
+                points.Add(new KeyValuePair<string, double>(date.ToString("MMM-yy"),
+                    -await StaticGetTotalDepense(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;
+        }
+
+        public async Task<List<KeyValuePair<string, double>>> IncomePerMonth(int numberOfMonths = 11)
+        {            
+            var points = new List<KeyValuePair<string, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)))
+                points.Add(new KeyValuePair<string, double>(date.ToString("MMM-yy"),
+                    await StaticGetTotalRecette(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;
+        }
+
+        public async Task<List<KeyValuePair<string, double>>> TresoryPerMonth(int numberOfMonths = 11)
+        {            
+            var points = new List<KeyValuePair<string, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1)))
+                points.Add(new KeyValuePair<string, double>(date.ToString("MMM-yy"),
+                    await StaticGetSolde(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;
+        }
+
+        #endregion
+
 
 
 

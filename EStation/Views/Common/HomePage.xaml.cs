@@ -52,7 +52,7 @@ namespace EStation.Views.Common
         
         private async void _OIL_BUTTON_OnClick(object sender, RoutedEventArgs e) 
             => await Dispatcher.BeginInvoke(new Action(()
-               => { NavigationService?.Navigate(new AnalyticView(), UriKind.Relative); }));
+               => { NavigationService?.Navigate(new ChartView(), UriKind.Relative); }));
       
         private async void _STAFF_BUTTON_OnClick(object sender, RoutedEventArgs e) 
             => await Dispatcher.BeginInvoke(new Action(()

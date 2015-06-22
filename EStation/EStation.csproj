@@ -15,24 +15,22 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://ftp.eschool.bugs3.com/home/u901448786/public_html/es/</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\HALID\Documents\GitHub\Publish\EStation\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://localhost/EStation/</InstallUrl>
     <TargetCulture>fr</TargetCulture>
     <ProductName>EStation</ProductName>
     <PublisherName>Halid Cisse</PublisherName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -267,26 +265,26 @@
     <Compile Include="Views\Journals\AddTransaction.xaml.cs">
       <DependentUpon>AddTransaction.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\AnalyticView.xaml.cs">
-      <DependentUpon>AnalyticView.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\CaisseDetails.xaml.cs">
-      <DependentUpon>CaisseDetails.xaml</DependentUpon>
+    <Compile Include="Views\Journals\FinanaceDetails.xaml.cs">
+      <DependentUpon>FinanaceDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\CaisseTransactions.xaml.cs">
-      <DependentUpon>CaisseTransactions.xaml</DependentUpon>
+    <Compile Include="Views\Journals\FinanceTransactions.xaml.cs">
+      <DependentUpon>FinanceTransactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\FinanceChart.xaml.cs">
-      <DependentUpon>FinanceChart.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartFinance.xaml.cs">
+      <DependentUpon>ChartFinance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\FuelMonthlySale.xaml.cs">
-      <DependentUpon>FuelMonthlySale.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartFuelSale.xaml.cs">
+      <DependentUpon>ChartFuelSale.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\FuelPeriodCard.xaml.cs">
       <DependentUpon>FuelPeriodCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\FuelVariations.xaml.cs">
-      <DependentUpon>FuelVariations.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartFuelPrices.xaml.cs">
+      <DependentUpon>ChartFuelPrices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\JournalView.xaml.cs">
       <DependentUpon>JournalView.xaml</DependentUpon>
@@ -321,14 +319,14 @@
     <Compile Include="Views\Hr\StaffsView.xaml.cs">
       <DependentUpon>StaffsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\OilMonthlySale.xaml.cs">
-      <DependentUpon>OilMonthlySale.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartOilSale.xaml.cs">
+      <DependentUpon>ChartOilSale.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\OilPeriodCard.xaml.cs">
       <DependentUpon>OilPeriodCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\OilVariations.xaml.cs">
-      <DependentUpon>OilVariations.xaml</DependentUpon>
+    <Compile Include="Views\Journals\ChartOilPrices.xaml.cs">
+      <DependentUpon>ChartOilPrices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\Prelev.xaml.cs">
       <DependentUpon>Prelev.xaml</DependentUpon>
@@ -525,23 +523,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Journals\AnalyticView.xaml">
+    <Page Include="Views\Journals\ChartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Journals\CaisseDetails.xaml">
+    <Page Include="Views\Journals\FinanaceDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Journals\CaisseTransactions.xaml">
+    <Page Include="Views\Journals\FinanceTransactions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Journals\FinanceChart.xaml">
+    <Page Include="Views\Journals\ChartFinance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Journals\FuelMonthlySale.xaml">
+    <Page Include="Views\Journals\ChartFuelSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -549,7 +547,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Journals\FuelVariations.xaml">
+    <Page Include="Views\Journals\ChartFuelPrices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -597,7 +595,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Journals\OilMonthlySale.xaml">
+    <Page Include="Views\Journals\ChartOilSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -605,7 +603,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Journals\OilVariations.xaml">
+    <Page Include="Views\Journals\ChartOilPrices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,6 +20,10 @@ namespace EStationCore.Managers
     {
 
 
+        #region CRUD
+
+
+
         /// <summary>
         /// Represente un enseignant, proff, staff, qui a la possibilite de se connecter a l'Eschool
         /// </summary>
@@ -36,7 +40,7 @@ namespace EStationCore.Managers
                 if (myStaff.StaffGuid == Guid.Empty)
                     myStaff.StaffGuid = Guid.NewGuid();
                 if (myStaff.Person.PersonGuid == Guid.Empty)
-                    myStaff.Person.PersonGuid = Guid.NewGuid();                
+                    myStaff.Person.PersonGuid = Guid.NewGuid();
 
                 db.Set<Person>().Add(myStaff.Person);
                 db.Staffs.Add(myStaff);
@@ -64,6 +68,11 @@ namespace EStationCore.Managers
                 return db.SaveChanges() > 0;
             }
         }
+
+        #endregion
+
+
+
 
 
         #region HELPERS
@@ -556,6 +565,31 @@ namespace EStationCore.Managers
 
 
         #endregion
+
+
+
+
+
+        #region Analytic
+
+
+
+
+
+        public IEnumerable<KeyValuePair<string, int>> StaffPerYear(int numberOfYear = 10)
+        {
+            using (var db = new StationContext())
+            {
+                foreach (var year in DateTimeHelper.EachYear(DateTime.Today.AddYears(-numberOfYear), DateTime.Today))
+                    yield return
+                        new KeyValuePair<string, int>(year.Year.ToString(),
+                            db.Staffs.Count(s => s.Person.DateAdded.Value.Year == year.Year));
+            }
+        }
+
+        #endregion
+
+
 
 
 

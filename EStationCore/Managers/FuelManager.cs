@@ -117,8 +117,7 @@ namespace EStationCore.Managers
 
         public async Task<double> GetLiterSoldAsync(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
-            return await Task.Run(() =>
-            {
+            return await Task.Run(() => {
                 using (var db = new StationContext())
                 {
                     var prelevements = new List<Prelevement>();

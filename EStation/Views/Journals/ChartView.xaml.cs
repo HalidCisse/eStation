@@ -7,9 +7,9 @@ using System.Windows;
 namespace EStation.Views.Journals
 {
     
-    internal partial class AnalyticView 
+    internal partial class ChartView
     {
-        public AnalyticView()
+        public ChartView()
         {
             InitializeComponent();
 
@@ -23,7 +23,7 @@ namespace EStation.Views.Journals
 
         private async Task Refresh() => await _FUEL_CHART.Refresh(new List<Guid>(), DateTime.Today.AddYears(-1), DateTime.Today)
             .ContinueWith(task =>  _OIL_CHART.Refresh(new List<Guid>(), DateTime.Today.AddYears(-1), DateTime.Today))
-            .ContinueWith(task =>  _FINANCE_CHART.Refresh(new List<Guid>(), DateTime.Today.AddYears(-1), DateTime.Today));
+            .ContinueWith(task =>  ChartFinance.Refresh(DateTime.Today.AddYears(-1), DateTime.Today));
 
 
     }

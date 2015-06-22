@@ -1,4 +1,4 @@
-﻿<Page x:Class="EStation.Views.Journals.AnalyticView"
+﻿<Page x:Class="EStation.Views.Journals.ChartView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -37,7 +37,7 @@
             </TabItem>            
 
             <TabItem Header="      Dépenses/Recettes" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
-                <journals:FinanceChart x:Name="_FINANCE_CHART" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+                <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
             </TabItem>
 
             <TabControl.Resources>

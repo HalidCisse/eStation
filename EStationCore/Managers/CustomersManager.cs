@@ -296,7 +296,27 @@ namespace EStationCore.Managers
             return birthPlace;
         }
 
-    
+
+
+        #endregion
+
+
+
+        #region Analytic
+
+
+
+
+        public IEnumerable<KeyValuePair<string, int>> YearlyCustomers(int numberOfYear = 10)
+        {
+            using (var db = new StationContext())
+            {
+                foreach (var year in DateTimeHelper.EachYear(DateTime.Today.AddYears(-numberOfYear), DateTime.Today))
+                    yield return
+                        new KeyValuePair<string, int>(year.Year.ToString(),
+                            db.Customers.Count(s => s.Person.DateAdded.Value.Year == year.Year));
+            }
+        }
 
         #endregion
 
