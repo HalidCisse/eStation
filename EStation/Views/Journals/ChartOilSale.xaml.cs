@@ -54,7 +54,7 @@ namespace EStation.Views.Journals
             foreach (var oil in oils) {
                 var col = RandomHelper.RandomColor();
                 plotModel.Series.Add(new ColumnSeries {
-                    ItemsSource = App.Store.Oils.GetMonthlySales(oil.OilGuid, fromDate, toDate).ToList(),
+                    ItemsSource = (await App.Store.Oils.GetMonthlySales(new List<Guid> {oil.OilGuid}, fromDate, toDate)),
                     ValueField = "Value",
                     Title = oil.Libel.ToUpper(),
                     FillColor = OxyColor.FromArgb(col.A, col.R, col.G, col.B),

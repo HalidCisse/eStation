@@ -153,7 +153,7 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool ChangePrice(Guid oilGuid, double newPrice)
+        public async Task<bool> ChangePrice(Guid oilGuid, double newPrice)
         {
             using (var db = new StationContext())
             {
@@ -166,7 +166,7 @@ namespace EStationCore.Managers
 
                 db.Oils.Attach(myOil);
                 db.Entry(myOil).State = EntityState.Modified;
-                return db.SaveChanges() > 0;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -182,17 +182,17 @@ namespace EStationCore.Managers
 
 
 
-        public double GetTotalDeliveryCost(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => GetDeliveries(oilsGuids, fromDate, toDate).Sum(p => p.Cost);
+        public async Task<double> GetTotalDeliveryCost(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => (await GetDeliveries(oilsGuids, fromDate, toDate)).Sum(p => p.Cost);
 
-        public int GetTotalDelivery(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => GetDeliveries(oilsGuids, fromDate, toDate).Sum(p => p.QuantityDelivered);
+        public async Task<int> GetTotalDelivery(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => (await GetDeliveries(oilsGuids, fromDate, toDate)).Sum(p => p.QuantityDelivered);
 
-        public double GetSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => GetPrelevemnts(oilsGuids, fromDate, toDate).Sum(p => p.TotalSold*p.ActualUnitPrice);
+        public async Task<double> GetSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.TotalSold*p.ActualUnitPrice);
 
-        public int GetGallonsSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => GetPrelevemnts(oilsGuids, fromDate, toDate).Sum(p => p.TotalSold);
+        public async Task<int> GetGallonsSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
+            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.TotalSold);
 
         public int GetDeliveries(Guid oilGuid, DateTime fromDate, DateTime toDate)
         {
@@ -223,10 +223,12 @@ namespace EStationCore.Managers
 
         public int GetOilBalance(Guid oilGuid) => StaticGetOilBalance(oilGuid);
 
-        public IEnumerable<OilCard> GetOilsCards()
+        public async Task<List<OilCard>> GetOilsCards()
         {
-            using (var db = new StationContext())
-                return db.Oils.ToList().OrderByDescending(c => c.DateAdded).Select(c => new OilCard(c)).ToList();
+            return await Task.Run(() => {
+                using (var db = new StationContext())
+                    return db.Oils.ToList().OrderByDescending(c => c.DateAdded).Select(c => new OilCard(c)).ToList();
+            });
         }
 
         public List<string> GetTypes()
@@ -256,16 +258,29 @@ namespace EStationCore.Managers
         }
 
 
-        public IEnumerable<KeyValuePair<string, double>> GetMonthlySales(Guid oilGuid, int numberOfMonths = 11)
-                    => DateTimeHelper.EachMonth(new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-numberOfMonths), new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1))
-                    .Select(month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
-                     GetGallonsSold(new List<Guid> {oilGuid},month.Date, month.Date.AddMonths(1).AddDays(-1))));
+        public async Task<List<KeyValuePair<DateTime, double>>> GetMonthlySales(List<Guid> oilGuids, DateTime fromDate, DateTime toDate)
+        {
+            if (!oilGuids.Any())
+                oilGuids = GetOils().Select(o => o.OilGuid).ToList();
+            var points = new List<KeyValuePair<DateTime, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))
+                points.Add(new KeyValuePair<DateTime, double>(date,
+                    await GetGallonsSold(oilGuids, date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;           
+        }
 
-        public IEnumerable<KeyValuePair<string, double>> GetMonthlySales(Guid oilGuid, DateTime fromDate, DateTime toDate)
-                    => DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1))
-                    .Select(month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
-                     GetGallonsSold(new List<Guid> { oilGuid }, month.Date, month.Date.AddMonths(1).AddDays(-1))));
 
+        public async Task<List<KeyValuePair<DateTime, double>>> GetMonthlyIncome(List<Guid> oilGuids, DateTime fromDate, DateTime toDate)
+        {
+            if (!oilGuids.Any())
+                oilGuids = GetOils().Select(o => o.OilGuid).ToList();
+           
+            var points = new List<KeyValuePair<DateTime, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))
+                points.Add(new KeyValuePair<DateTime, double>(date,
+                    await GetSold(oilGuids, date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;           
+        }
 
         #endregion
 
@@ -275,38 +290,49 @@ namespace EStationCore.Managers
         #region Internal Static
 
 
-
-
-        internal static IEnumerable<OilPrelevement> GetPrelevemnts(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        internal async static Task<double> GetSold(DateTime fromDate, DateTime toDate)
         {
-            using (var db = new StationContext())
-            {
-                var prelevements = new List<OilPrelevement>();
-
-                foreach (var oilGuid in oilsGuids)
-                    prelevements.AddRange(
-                        db.Oils.Find(oilGuid)
-                            .Prelevements.Where(
-                                p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate &&
-                                     p.DatePrelevement.GetValueOrDefault().Date <= toDate));
-                return prelevements;
-            }
+            return await Task.Run(() =>{
+                    using (var db = new StationContext())
+                        return db.OilPrelevements.Any(
+                                p => p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate)
+                                ? db.OilPrelevements.Where(
+                                      p => p.DatePrelevement >= fromDate &&
+                                      p.DatePrelevement <= toDate)
+                                    .Sum(p => p.TotalSold*p.ActualUnitPrice)
+                                : 0;
+            });
         }
 
-        internal static IEnumerable<OilDelivery> GetDeliveries(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        internal async static Task<List<OilPrelevement>> GetPrelevemnts(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
         {
-            using (var db = new StationContext())
-            {
-                var deliveries = new List<OilDelivery>();
-
+           return await Task.Run(() => {
+                using (var db = new StationContext()) {
+                var prelevements = new List<OilPrelevement>();
                 foreach (var oilGuid in oilsGuids)
-                    deliveries.AddRange(
-                        db.Oils.Find(oilGuid)
-                            .Deliveries.Where(
-                                p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate &&
-                                     p.DeliveryDate.GetValueOrDefault().Date <= toDate));
-                return deliveries;
-            }
+                    prelevements.AddRange(db.Oils.Find(oilGuid)
+                            .Prelevements.Where(
+                                p => p.DatePrelevement >= fromDate &&
+                                     p.DatePrelevement <= toDate));
+                return prelevements;
+                }});
+        }
+
+        internal async static Task<List<OilDelivery>> GetDeliveries(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
+        {
+            return await Task.Run(() => {
+                using (var db = new StationContext())
+                {
+                    var deliveries = new List<OilDelivery>();
+
+                    foreach (var oilGuid in oilsGuids)
+                        deliveries.AddRange(
+                            db.Oils.Find(oilGuid)
+                                .Deliveries.Where(
+                                    p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate &&
+                                         p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                    return deliveries;
+                }});
         }
 
         internal static OilPrelevement StaticGetLastPrelevement(Guid oilGuid)

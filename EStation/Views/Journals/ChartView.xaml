@@ -27,19 +27,19 @@
 
         <TabControl Name="_MY_TAB_CONTROL" Background="Transparent" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
                     Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
-
+            
+            <TabItem Header="      Finance" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">                
+                <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+            </TabItem>
+            
             <TabItem Header="        Variations Prix Carburant" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
                 <journals:FuelVariations x:Name="_FUEL_CHART" Effect="{StaticResource Z-Depth1}" Margin="10"/>
             </TabItem>
             
             <TabItem Header="                 Variations Prix Huiles" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
                 <journals:OilVariations x:Name="_OIL_CHART" Effect="{StaticResource Z-Depth1}" Margin="10"/>
-            </TabItem>            
-
-            <TabItem Header="      Dépenses/Recettes" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
-                <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
             </TabItem>
-
+            
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

@@ -58,8 +58,8 @@ namespace EStation.Views.Journals {
 
             Dispatcher.BeginInvoke(new Action(async () =>
             {               
-                _TOTAL_RECETTES.Content = (await App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
-                _TOTAL_DEPENSES.Content = (-(await App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate))).ToString("C0", CultureInfo.CurrentCulture);
+                _TOTAL_RECETTES.Content = (await App.Store.Economat.Finance.GetTotalRecette(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+                _TOTAL_DEPENSES.Content = (-(await App.Store.Economat.Finance.GetTotalDepense(FromDate, ToDate))).ToString("C0", CultureInfo.CurrentCulture);
             }));
         }
 

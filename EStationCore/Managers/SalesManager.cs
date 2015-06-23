@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using CLib;
 using CLib.Database.Entity;
 using EStationCore.Model;
 using EStationCore.Model.Sale.Entity;
@@ -69,9 +70,7 @@ namespace EStationCore.Managers
         public async Task<bool> Post(Purchase myPurchase)
         {
             using (var db = new StationContext())
-            {
-                if (myPurchase.PurchaseGuid == Guid.Empty) myPurchase.PurchaseGuid = Guid.NewGuid();
-
+            {                
                 switch (myPurchase.ProductType)
                 {
                     case ProductType.Fuel:
@@ -85,7 +84,9 @@ namespace EStationCore.Managers
 
                         break;
                 }
-                                  
+
+                if (myPurchase.PurchaseGuid == Guid.Empty) myPurchase.PurchaseGuid = Guid.NewGuid();
+                if (myPurchase.PurchaseState == PurchaseState.Paid) myPurchase.PurchaseDate = DateTime.Now;
                 myPurchase.DateAdded = DateTime.Now;
                 myPurchase.LastEditDate = DateTime.Now;
 
@@ -152,11 +153,83 @@ namespace EStationCore.Managers
 
         #endregion
 
-        
+
+
+
+        #region Analytics
 
 
 
 
+
+        public async Task<List<KeyValuePair<DateTime, double>>> MonthlyPurchasedSum(ProductType? product, PurchaseState purchaseState, DateTime fromDate, DateTime toDate)
+        {
+            var points = new List<KeyValuePair<DateTime, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))
+                points.Add(new KeyValuePair<DateTime, double>(date,
+                    await StaticGetPurchasedSum(product, purchaseState, date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;
+        }
+
+        #endregion
+
+
+
+
+        #region Protected Internal Static
+
+
+
+
+
+        internal static async Task<double> StaticGetPurchasedSum(ProductType? product, PurchaseState purchaseState, DateTime? startDate, DateTime? endDate)
+        {
+            return await Task.Run(() => {
+                using (var db = new StationContext()) {
+                    switch (product)
+                    {
+                        case null:
+                            if (!db.Purchases.Any(t => t.PurchaseState == purchaseState && !t.IsDeleted))
+                                return 0;
+
+                            if (startDate == null || endDate == null)
+                                return db.Purchases.Where(t => t.PurchaseState == purchaseState && !t.IsDeleted).Sum(t => t.Sum);
+
+                            return db.Purchases.Any(t =>
+                                t.PurchaseState == purchaseState && !t.IsDeleted &&
+                                t.PurchaseDate >= startDate &&
+                                t.PurchaseDate <= endDate)
+                                ? db.Purchases.Where(t =>
+                                    t.PurchaseState == purchaseState && !t.IsDeleted &&
+                                    t.PurchaseDate >= startDate &&
+                                    t.PurchaseDate <= endDate
+                                    ).Sum(t => t.Sum)
+                                : 0;
+                    }
+
+                    if (!db.Purchases.Any(t => t.ProductType == product && t.PurchaseState == purchaseState && !t.IsDeleted))
+                        return 0;
+
+                    if (startDate == null || endDate == null)
+                        return db.Purchases.Where(t => t.ProductType == product && t.PurchaseState == purchaseState && !t.IsDeleted).Sum(t => t.Sum);
+
+                    return db.Purchases.Any(t =>
+                        t.ProductType == product && t.PurchaseState == purchaseState && !t.IsDeleted &&
+                        t.PurchaseDate >= startDate &&
+                        t.PurchaseDate <= endDate)
+                        ? db.Purchases.Where(t =>
+                            t.ProductType == product && t.PurchaseState == purchaseState && !t.IsDeleted  &&
+                            t.PurchaseDate >= startDate &&
+                            t.PurchaseDate <= endDate
+                            ).Sum(t => t.Sum)
+                        : 0;
+                }
+            });
+        }
+
+
+
+        #endregion
 
     }
 }

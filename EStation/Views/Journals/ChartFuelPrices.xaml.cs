@@ -68,7 +68,7 @@ namespace EStation.Views.Journals
 
             plotModel.Axes.Add(new DateTimeAxis
             {                
-                IntervalType = DateTimeIntervalType.Auto,
+                IntervalType = DateTimeIntervalType.Auto,                
                 MajorGridlineStyle = LineStyle.None,
                 MinorGridlineStyle = LineStyle.None,
                 StringFormat = "d/MMM/yy",

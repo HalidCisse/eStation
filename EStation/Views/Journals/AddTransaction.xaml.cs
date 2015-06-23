@@ -34,7 +34,7 @@ namespace EStation.Views.Journals
                         Amount               = 0,
                         PaymentMethode       = PaymentMethode.Espece,
                         TransactionDate      = DateTime.Today,
-                        TransactionReference = App.Store.Economat.Treasury.GetNewTransactionReference()
+                        TransactionReference = App.Store.Economat.Finance.GetNewTransactionReference()
                     };
                     _GRID.DataContext=newData;
                 }));
@@ -58,7 +58,7 @@ namespace EStation.Views.Journals
                 if ((TransactionType) (_TRANS_TYPE.SelectedValue) == TransactionType.Expense)
                     newTransaction.Amount = - newTransaction.Amount;
                 
-                App.Store.Economat.Treasury.NewTransaction(newTransaction);
+                App.Store.Economat.Finance.NewTransaction(newTransaction);
             } catch (Exception ex) {
                 ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
             }

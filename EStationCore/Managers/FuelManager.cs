@@ -151,10 +151,15 @@ namespace EStationCore.Managers
         }
 
 
-        public async Task<List<Fuel>> GetFuels() => await Task.Run(() =>{
-            using (var db = new StationContext())
-                return db.Fuels.ToList();
-        });
+        public async Task<List<Fuel>> GetFuels()
+        {
+            return await Task.Run(() =>
+            {
+                using (var db = new StationContext())
+                    return db.Fuels.ToList();
+            });
+        }
+
 
         public async Task<List<Fuel>> GetFuels(List<Guid> fuelsGuids)
         {
@@ -163,6 +168,7 @@ namespace EStationCore.Managers
                 return db.Fuels.Where(o => fuelsGuids.Contains(o.FuelGuid)).ToList();
             });
         }
+
 
         public async Task<double> GetFuelActualPrice(Guid fuelGuid)
         {
@@ -185,18 +191,48 @@ namespace EStationCore.Managers
                 return (await db.Fuels.FindAsync(fuelGuid)).Prices.Select(p => new KeyValuePair<DateTime, double>(p.FromDate.GetValueOrDefault(), p.ActualPrice)).ToList();
         }
 
-        public IEnumerable<KeyValuePair<string, double>> GetMonthlySales(List<Guid> fuelGuids, DateTime fromDate, DateTime toDate)
-                    => (DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1))
-                        .Select( month => new KeyValuePair<string, double>(month.ToString("MMM-yy"),
-                           GetLiterSoldAsync(fuelGuids, month.Date, month.Date.AddMonths(1).AddDays(-1)).Result)));
+        public async Task<List<KeyValuePair<DateTime, double>>> GetMonthlySales(List<Guid> fuelGuids, DateTime fromDate, DateTime toDate)
+        {
+            var points = new List<KeyValuePair<DateTime, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))
+                points.Add(new KeyValuePair<DateTime, double>(date,
+                    await GetLiterSoldAsync(fuelGuids, date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;            
+        }
 
-        
+        public async Task<List<KeyValuePair<DateTime, double>>> GetMonthlyIncome(DateTime fromDate, DateTime toDate)
+        {
+            var points = new List<KeyValuePair<DateTime, double>>();
+            foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))
+                points.Add(new KeyValuePair<DateTime, double>(date,
+                    await GetSold(date.Date, date.Date.AddMonths(1).AddDays(-1))));
+            return points;            
+        }
+
         #endregion
 
 
 
         #region Static Internal
 
+
+
+
+        internal async static Task<double> GetSold(DateTime fromDate, DateTime toDate)
+        {
+            return await Task.Run(() => {
+                    using (var db = new StationContext())
+                        return db.FuelPrelevements.Any(
+                                    p =>
+                                    p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate)
+                                ? db.FuelPrelevements.Where(
+                                    p =>
+                                    p.DatePrelevement >= fromDate &&
+                                    p.DatePrelevement <= toDate)
+                                    .Sum(p => p.MeterE*p.ActualPrice)
+                                : 0;
+            });
+        }
 
         internal async static Task<double> StaticGetFuelBalance(Guid fuelGuid)
         {
@@ -226,8 +262,7 @@ namespace EStationCore.Managers
             });
         }
 
-        internal static async Task<double> GetFuelCurrentPrice(Guid fuelGuid) 
-            => (await GetFuelLastPrice(fuelGuid)).ActualPrice;
+        internal static async Task<double> GetFuelCurrentPrice(Guid fuelGuid) => (await GetFuelLastPrice(fuelGuid)).ActualPrice;
 
         internal async static Task<Price> GetFuelLastPrice(Guid fuelGuid)
         {

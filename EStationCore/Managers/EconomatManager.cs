@@ -11,7 +11,7 @@ namespace EStationCore.Managers {
         /// <summary>
         /// Gestion Des Recettes et depenses
         /// </summary>
-        public TreasuryManager Treasury = new TreasuryManager();
+        public FinanceManager Finance = new FinanceManager();
 
 
         /// <summary>

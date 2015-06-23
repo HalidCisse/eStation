@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStation.Ext;
+using EStationCore.Model.Sale.Enums;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -22,13 +22,7 @@ namespace EStation.Views.Journals
 
 
         public async Task Refresh(DateTime fromDate, DateTime toDate)
-        {
-            if (fromDate == default(DateTime))
-            {
-                fromDate = DateTime.Today.AddMonths(-11);
-                toDate = DateTime.Today;
-            }
-            
+        {           
             var plotModel = new PlotModel
             {
                 TitleColor = OxyColors.Gray,
@@ -45,21 +39,21 @@ namespace EStation.Views.Journals
 
             plotModel.Series.Add(new ColumnSeries
             {
-                ItemsSource = (await App.Store.Economat.Treasury.ExpensePerMonth()),
+                ItemsSource = (await App.Store.Economat.Finance.MonthlyExpense(fromDate, toDate)),
                 ValueField = "Value",
                 Title = "Depenses",
                 FillColor = OxyColors.Brown,
                 LabelPlacement = LabelPlacement.Outside,
                 LabelFormatString = "{0:C0}",
                 TextColor = OxyColors.DimGray,
-                StrokeColor = OxyColors.White,
+                StrokeColor = OxyColors.Red,
                 StrokeThickness = 1,
                 ColumnWidth = 10
             });
 
             plotModel.Series.Add(new ColumnSeries
             {
-                ItemsSource = (await App.Store.Economat.Treasury.IncomePerMonth()),
+                ItemsSource = (await App.Store.Economat.Finance.MonthlyRecette(fromDate, toDate)),
                 ValueField = "Value",
                 Title = "Recettes",
                 FillColor = OxyColors.CadetBlue,
@@ -73,10 +67,10 @@ namespace EStation.Views.Journals
 
             plotModel.Series.Add(new ColumnSeries
             {
-                ItemsSource = (await App.Store.Economat.Treasury.SalaryPerMonth()),
+                ItemsSource = (await App.Store.Economat.Finance.MonthlySalary(fromDate, toDate)),
                 ValueField = "Value",
                 Title = "Salaires",
-                FillColor = OxyColors.LightSteelBlue,
+                FillColor = OxyColors.Orange,
                 LabelPlacement = LabelPlacement.Outside,
                 LabelFormatString = "{0:C0}",
                 TextColor = OxyColors.DimGray,
@@ -84,23 +78,69 @@ namespace EStation.Views.Journals
                 StrokeThickness = 1,
                 ColumnWidth = 10
             });
-           
+
+            plotModel.Series.Add(new ColumnSeries
+            {
+                ItemsSource = (await App.Store.Fuels.GetMonthlyIncome(fromDate, toDate)),
+                ValueField = "Value",
+                Title = "Vente Carburant",
+                FillColor = OxyColors.Green,
+                LabelPlacement = LabelPlacement.Outside,
+                LabelFormatString = "{0:C0}",
+                TextColor = OxyColors.DimGray,
+                StrokeColor = OxyColors.White,
+                StrokeThickness = 1,
+                ColumnWidth = 10
+            });
+
+            plotModel.Series.Add(new ColumnSeries
+            {
+                ItemsSource = (await App.Store.Oils.GetMonthlyIncome( new List<Guid>(), fromDate, toDate)),
+                ValueField = "Value",
+                Title = "Vente Huile",
+                FillColor = OxyColors.DarkMagenta,
+                LabelPlacement = LabelPlacement.Outside,
+                LabelFormatString = "{0:C0}",
+                TextColor = OxyColors.DimGray,
+                StrokeColor = OxyColors.White,
+                StrokeThickness = 1,
+                ColumnWidth = 10
+            });
+
+            plotModel.Series.Add(new ColumnSeries
+            {
+                ItemsSource = (await App.Store.Sales.MonthlyPurchasedSum(null, PurchaseState.Paid, fromDate, toDate)),
+                ValueField = "Value",
+                Title = "Bons Payer",
+                FillColor = OxyColors.DarkCyan,
+                LabelPlacement = LabelPlacement.Outside,
+                LabelFormatString = "{0:C0}",
+                TextColor = OxyColors.DimGray,
+                StrokeColor = OxyColors.White,
+                StrokeThickness = 1,
+                ColumnWidth = 10
+            });
+
             var netLine = new LineSeries
             {
                 Title = "Net Revenue",
+                Color = OxyColors.Gold,
                 LabelFormatString = "{1:C0}",
                 TrackerFormatString = "Le {2:d/MMM/yy} Valeur {4:C0}",
                 TextColor = OxyColors.DimGray,
                 StrokeThickness = 2,
-                Smooth = true,
+                Smooth = false,
                 MarkerType = MarkerType.Circle,
                 MarkerFill = OxyColors.SteelBlue,
                 MarkerStroke = OxyColor.Parse("#FFFDFDFD"),
-                LineStyle = LineStyle.Automatic
+                LineStyle = LineStyle.Automatic,
+                //DataFieldX = "Key",
+                //DataFieldY = "Value",
+                //ItemsSource = (await App.Store.Economat.Finance.MonthlyIncome(fromDate, toDate))
             };
 
             var i = 0;
-            foreach (var net in (await App.Store.Economat.Treasury.TresoryPerMonth()))
+            foreach (var net in (await App.Store.Economat.Finance.MonthlyIncome(fromDate, toDate)))
             {
                 netLine.Points.Add(new DataPoint(i, net.Value));
                 i++;
@@ -108,12 +148,10 @@ namespace EStation.Views.Journals
 
             plotModel.Series.Add(netLine);
 
-
-
             var axis = DateTimeHelper.EachMonth(
                        new DateTime(fromDate.Year, fromDate.Month, 1),
                        new DateTime(toDate.Year, toDate.Month, 1))
-                       .Select(month => new KeyValuePair<string, double>(month.ToString("MMM-yy"), 0)).ToList();
+                       .Select(month => new KeyValuePair<DateTime, double>(month, 0)).ToList(); 
 
             plotModel.Axes.Add(new CategoryAxis
             {
@@ -125,9 +163,10 @@ namespace EStation.Views.Journals
                 Position = AxisPosition.Bottom,
                 TickStyle = TickStyle.Outside,
                 AxislineColor = OxyColors.Transparent,
-                IsZoomEnabled = false
+                IsZoomEnabled = false,
+                StringFormat = "MMM/yy"
             });
-            
+          
             plotModel.Axes.Add(new LinearAxis
             {
                 MinimumPadding = 0,

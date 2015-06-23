@@ -20,38 +20,36 @@ namespace EStation.Views.OilViews
         {
             InitializeComponent();
 
-            Refresh();
+            Dispatcher.BeginInvoke(new Action(async () => await Refresh()));
         }
 
 
-        internal void Refresh()
-            => new Task(() => Dispatcher.BeginInvoke(new Action(()
-                => _HUILES.ItemsSource = App.Store.Oils.GetOilsCards()))).Start();
+        internal async Task Refresh() => _HUILES.ItemsSource = await App.Store.Oils.GetOilsCards();
 
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             var wind = new AddOil(Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+           await Refresh();
         }
 
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) 
             => HuileSelectionChanged?.Invoke(new List<Guid>(_HUILES.SelectedItems.Cast<OilCard>().Select(c => c.OilGuid)), EventArgs.Empty);
 
-        private void PriceBox_OnLostFocus(object sender, RoutedEventArgs e)
+        private async void PriceBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
             try
             {
                 var card = ((OilCard)((TextBox)sender).DataContext);
-                App.Store.Oils.ChangePrice(card.OilGuid, Convert.ToDouble(((TextBox)sender).Text));
+                await App.Store.Oils.ChangePrice(card.OilGuid, Convert.ToDouble(((TextBox)sender).Text));
             }
             catch (Exception exception)
             {
                 DebugHelper.WriteException(exception);
             }
-            Refresh();
+            await Refresh();
         }
 
 

@@ -62,7 +62,7 @@ namespace EStation.Views.Journals
                 var col = RandomHelper.RandomColor();               
                 plotModel.Series.Add(new ColumnSeries
                 {
-                    ItemsSource = App.Store.Fuels.GetMonthlySales(new List<Guid> { fuel.FuelGuid }, fromDate, toDate).ToList(),
+                    ItemsSource = (await App.Store.Fuels.GetMonthlySales(new List<Guid> { fuel.FuelGuid }, fromDate, toDate)),
                     ValueField = "Value",
                     Title = fuel.Libel.ToUpper(),
                     FillColor = OxyColor.FromArgb(col.A, col.R, col.G, col.B) ,            //OxyColors.LightGreen,

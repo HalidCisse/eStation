@@ -65,6 +65,11 @@ namespace EStationCore.Model
         public virtual DbSet<FuelDelivery> FuelDeliverys { get; set; }
 
         /// <summary>
+        /// Les prelevements
+        /// </summary>
+        public virtual DbSet<Prelevement> FuelPrelevements { get; set; }
+
+        /// <summary>
         /// Les Carburant
         /// </summary>
         public virtual DbSet<Fuel.Entity.Fuel> Fuels { get; set; }

@@ -25,7 +25,7 @@ namespace EStation.Views.Journals {
             _fromDate=fromDate;
             _toDate=toDate;
             await Dispatcher.BeginInvoke(new Action(() =>{
-                _TRANS_LIST.ItemsSource = App.Store.Economat.Treasury.GetTransactions(_fromDate, _toDate);
+                _TRANS_LIST.ItemsSource = App.Store.Economat.Finance.GetTransactions(_fromDate, _toDate);
                 Refreshed?.Invoke(null, EventArgs.Empty);
             }));
         }
@@ -45,7 +45,7 @@ namespace EStation.Views.Journals {
                 return;
 
             try {
-                   App.Store.Economat.Treasury.CancelTransaction((Guid) _TRANS_LIST.SelectedValue);              
+                   App.Store.Economat.Finance.CancelTransaction((Guid) _TRANS_LIST.SelectedValue);              
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 return;

@@ -33,14 +33,14 @@ namespace EStation.Views.Journals
         }
 
 
-        public async Task Refresh(DateTime fromDate, DateTime toDate) => await Dispatcher.BeginInvoke(new Action(() =>
-        {
+        public async Task Refresh(DateTime fromDate, DateTime toDate)
+        {          
             _FROM_PICKER.SelectedDate = fromDate;
             _TO_PICKER.SelectedDate = toDate;
 
-            _OILS.ItemsSource = App.Store.Oils.GetOilsCards();
-            _OILS.SelectAll();
-        }));
+            _OILS.ItemsSource = await App.Store.Oils.GetOilsCards();
+            _OILS.SelectAll();           
+        }
 
 
         private async void DatePicker_OnSelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -57,13 +57,15 @@ namespace EStation.Views.Journals
         }
 
 
-        private async Task UpdateDashboard() => await Dispatcher.BeginInvoke(new Action(() =>
+        private async Task UpdateDashboard() 
         {
-            _TOTAL_GALLONS.Content = "Bidon".ToQuantity(App.Store.Oils.GetGallonsSold(SelectedOils, FromDate, ToDate));
-            _TOTAL_SOLD.Content = App.Store.Oils.GetSold(SelectedOils, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
+            _TOTAL_GALLONS.Content = "Bidon".ToQuantity(await App.Store.Oils.GetGallonsSold(SelectedOils, FromDate, ToDate));
+            _TOTAL_SOLD.Content    = (await App.Store.Oils.GetSold(SelectedOils, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
 
-            _TOTAL_STOCK.Content = "Bidon".ToQuantity(App.Store.Oils.GetTotalDelivery(SelectedOils, FromDate, ToDate));
-            _TOTAL_COST.Content = App.Store.Oils.GetTotalDeliveryCost(SelectedOils, FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-        }));
+            _TOTAL_STOCK.Content   = "Bidon".ToQuantity(await App.Store.Oils.GetTotalDelivery(SelectedOils, FromDate, ToDate));
+            _TOTAL_COST.Content    = (await App.Store.Oils.GetTotalDeliveryCost(SelectedOils, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+        }
+
+       
     }
 }

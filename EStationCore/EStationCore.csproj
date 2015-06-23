@@ -82,7 +82,7 @@
     <Compile Include="Managers\PompesManager.cs" />
     <Compile Include="Managers\SalesManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
-    <Compile Include="Managers\TreasuryManager.cs" />
+    <Compile Include="Managers\FinanceManager.cs" />
     <Compile Include="Migrations\201505121758349_m-.cs" />
     <Compile Include="Migrations\201505121758349_m-.Designer.cs">
       <DependentUpon>201505121758349_m-.cs</DependentUpon>
