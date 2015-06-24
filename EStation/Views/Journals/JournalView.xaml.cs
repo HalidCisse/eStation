@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace EStation.Views.Journals
@@ -20,7 +19,7 @@ namespace EStation.Views.Journals
                 => await _FUELS_SALES.Refresh(_FUEL_PERIOD.SelectedFuels, _FUEL_PERIOD.FromDate,_FUEL_PERIOD.ToDate);
 
         private async void OilPeriodCard_OnSelectionChanged(object sender, EventArgs e)            
-                => await _OIL_SALE.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate);
+                => await ChartOilSale.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate);
 
         private async void CaisseDetails_OnDateSelectionChanged(object sender, EventArgs e) 
                 => await _TRANS_CARD.Refresh(_CAISSE_CARD.FromDate, _CAISSE_CARD.ToDate);

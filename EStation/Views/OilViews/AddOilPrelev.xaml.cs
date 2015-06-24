@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using EStationCore.Model.Common.Views;
@@ -17,19 +16,19 @@ namespace EStation.Views.OilViews
         {
             InitializeComponent();
 
-            new Task(() => Dispatcher.BeginInvoke(new Action(() =>
+            Dispatcher.BeginInvoke(new Action(async () =>
             {
                 _TITLE_TEXT.Text = "Prélèvement Huiles";
                 _START_DATE.SelectedDate = DateTime.Now;
-                _PRELEVS.ItemsSource = App.Store.Oils.GetOils().Select(oil => new ViewCard{Guid = oil.OilGuid, Info1 = oil.Libel}).ToList();
-            }))).Start();
+                _PRELEVS.ItemsSource = (await App.Store.Oils.GetOils()).Select(oil => new ViewCard {Guid = oil.OilGuid, Info1 = oil.Libel});
+            }));
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                App.Store.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
+               await App.Store.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
                     .Select(s=> new OilPrelevement {OilGuid = s.Guid, TotalStock = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
             }
             catch (Exception ex)

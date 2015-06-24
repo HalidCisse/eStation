@@ -11,12 +11,12 @@ using OxyPlot.Series;
 
 namespace EStation.Views.Journals
 {
-    internal partial class OilMonthlySale 
+    internal partial class ChartOilSale 
     {
         private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
         private bool _isFistHit = true;
 
-        public OilMonthlySale()
+        public ChartOilSale()
         {
             InitializeComponent();           
         }
@@ -30,7 +30,7 @@ namespace EStation.Views.Journals
             {
                 fromDate = DateTime.Today.AddMonths(-11);
                 toDate = DateTime.Today;
-                oils = App.Store.Oils.GetOils().Take(4).ToList();
+                oils =(await App.Store.Oils.GetOils()).Take(4).ToList();
                 _isFistHit = false;
             }
             else

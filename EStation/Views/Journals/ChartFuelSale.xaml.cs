@@ -10,13 +10,13 @@ using OxyPlot.Series;
 
 namespace EStation.Views.Journals
 {
-    internal partial class FuelMonthlySale 
+    internal partial class ChartFuelSale 
     {
         private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
         private bool _isFistHit = true;
 
 
-        public FuelMonthlySale()
+        public ChartFuelSale()
         {
             InitializeComponent();
         }

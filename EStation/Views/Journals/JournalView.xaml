@@ -35,7 +35,7 @@
                         <journals:FuelPeriodCard x:Name="_FUEL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="FuelPeriodCard_OnSelectionChanged"/>
 
                         <!--<journals:Prelev x:Name="_PRELEVS" Effect="{StaticResource Z-Depth2}" Margin="10"/>-->
-                        <journals:FuelMonthlySale x:Name="_FUELS_SALES" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                        <journals:ChartFuelSale x:Name="_FUELS_SALES" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -47,7 +47,7 @@
 
                         <journals:OilPeriodCard x:Name="_OIL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="OilPeriodCard_OnSelectionChanged"/>
 
-                        <journals:OilMonthlySale x:Name="_OIL_SALE" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                        <journals:ChartOilSale x:Name="ChartOilSale" Effect="{StaticResource Z-Depth2}" Margin="10"/>
                         
                     </StackPanel>
                 </ScrollViewer>

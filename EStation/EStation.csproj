@@ -328,9 +328,6 @@
     <Compile Include="Views\Journals\ChartOilPrices.xaml.cs">
       <DependentUpon>ChartOilPrices.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\Prelev.xaml.cs">
-      <DependentUpon>Prelev.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\OilViews\AddOil.xaml.cs">
       <DependentUpon>AddOil.xaml</DependentUpon>
     </Compile>
@@ -604,10 +601,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Journals\ChartOilPrices.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Journals\Prelev.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

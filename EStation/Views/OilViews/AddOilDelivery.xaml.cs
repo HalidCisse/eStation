@@ -56,7 +56,7 @@ namespace EStation.Views.OilViews
                         _GRID.DataContext = App.Store.Oils.GetDelivery(deliveryToMod);
 
                     //_QUANTITY.Maximum = vide;
-                    _TITLE_TEXT.Text = "LIVRAISON " + App.Store.Oils.Get(currentOil).Libel.ToUpper();
+                    _TITLE_TEXT.Text = "LIVRAISON " + (await App.Store.Oils.Get(currentOil)).Libel.ToUpper();
                 }));
             }).Start();
         }

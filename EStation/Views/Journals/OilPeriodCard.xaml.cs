@@ -25,11 +25,8 @@ namespace EStation.Views.Journals
         {
             InitializeComponent();
 
-            Dispatcher.BeginInvoke(new Action(async () =>
-            {
-                await Task.Run(() => Refresh(DateTime.Today.AddDays(-7), DateTime.Today));
-                SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
-            }));
+            Dispatcher.BeginInvoke(new Action(async () 
+                => await Refresh(DateTime.Today.AddDays(-7), DateTime.Today)));
         }
 
 
@@ -44,17 +41,11 @@ namespace EStation.Views.Journals
 
 
         private async void DatePicker_OnSelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
-            await UpdateDashboard();
-        }
+            => await UpdateDashboard();
 
 
         private async void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
-            await UpdateDashboard();
-        }
+            => await UpdateDashboard();
 
 
         private async Task UpdateDashboard() 
@@ -64,6 +55,8 @@ namespace EStation.Views.Journals
 
             _TOTAL_STOCK.Content   = "Bidon".ToQuantity(await App.Store.Oils.GetTotalDelivery(SelectedOils, FromDate, ToDate));
             _TOTAL_COST.Content    = (await App.Store.Oils.GetTotalDeliveryCost(SelectedOils, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+
+            SelectionChanged?.Invoke(SelectedOils, EventArgs.Empty);
         }
 
        

@@ -21,28 +21,26 @@ namespace EStation.Views.OilViews
         }
 
 
-        public void Refresh(List<Guid> currentOil)
+        public async Task Refresh(List<Guid> currentOil)
         {
             _currentOils = currentOil;
-            new Task(() => Dispatcher.BeginInvoke(new Action(() =>
-            {
-                _STOCKS.ItemsSource = App.Store.Oils.GetOilDeliveries(_currentOils, DateTime.Today.AddMonths(-3), DateTime.Today);
-                _TITLE_TEXT.Text = "LIVRAISONS (";
+            
+            _STOCKS.ItemsSource = await App.Store.Oils.GetOilDeliveries(_currentOils, DateTime.Today.AddMonths(-3), DateTime.Today);
+            _TITLE_TEXT.Text = "LIVRAISONS (";
 
-                foreach (var oilGuid in currentOil)
-                    _TITLE_TEXT.Text += $" {App.Store.Oils.Get(oilGuid)?.Libel.ToUpper()}";
-                _TITLE_TEXT.Text += ")";
-            }))).Start();
+            foreach (var oilGuid in currentOil)
+                _TITLE_TEXT.Text += $" { (await App.Store.Oils.Get(oilGuid))?.Libel.ToUpper()}";
+            _TITLE_TEXT.Text += ")";           
         }
 
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (!_currentOils.Any())return;            
 
             var wind = new AddOilDelivery(_currentOils.First(), Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh(_currentOils);
+            await Refresh(_currentOils);
         }
 
     }

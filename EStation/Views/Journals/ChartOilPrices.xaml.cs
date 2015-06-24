@@ -30,7 +30,7 @@ namespace EStation.Views.Journals
             {
                 fromDate = DateTime.Today.AddMonths(-11);
                 toDate = DateTime.Today;
-                oils = App.Store.Oils.GetOils().ToList();
+                oils = await App.Store.Oils.GetOils();
             }
             else
                 oils = App.Store.Oils.GetOils(oilsGuids);

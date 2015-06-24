@@ -16,16 +16,18 @@ namespace EStation.Views.Clients
 
     internal partial class AddPurchase 
     {
-        private double _curFuelPrice;
+        private double _curPrice;
+        private readonly bool _isFuel;
 
 
-        public AddPurchase(Guid companyGuid = default(Guid))
+        public AddPurchase(Guid companyGuid = default(Guid), bool isFuel = true)
         {
+            _isFuel = isFuel;
             InitializeComponent();
 
             Dispatcher.BeginInvoke(new Action(async () =>
             {
-                if (companyGuid == Guid.Empty)
+                if (companyGuid == default(Guid))
                 {
                     ModernDialog.ShowMessage("Choisir un client", "eStation", MessageBoxButton.OK);
                     Close();
@@ -33,19 +35,27 @@ namespace EStation.Views.Clients
                 }
 
                 _STATUS.ItemsSource = EnumsHelper.GetAllValuesAndDescriptions<PurchaseState>();
-                _CARBURANT.ItemsSource = (await App.Store.Fuels.GetFuels()).ToDictionary(c => c.Libel, f=> f.FuelGuid);
 
-                if (_CARBURANT.Items.Count == 0)
+                if (isFuel)
+                    _PRODUCT.ItemsSource = (await App.Store.Fuels.GetFuels()).ToDictionary(c => c.Libel, f => f.FuelGuid);
+                else
                 {
-                    ModernDialog.ShowMessage("Ajouter au moins un carburant dans stock", "eStation", MessageBoxButton.OK);
+                    _PRODUCT_NAME.Text = "Huile";
+                    _QUANTITY_LABEL.Text = "Quantité (bidons)";
+                    _PRODUCT.ItemsSource = (await App.Store.Oils.GetOils()).ToDictionary(c => c.Libel, f => f.OilGuid);
+                }
+
+                if (_PRODUCT.Items.Count == 0)
+                {
+                    ModernDialog.ShowMessage(isFuel ? "Ajouter au moins un carburant dans stock" : "Ajouter au moins un huile dans stock", "eStation", MessageBoxButton.OK);
                     Close();
                     return;
                 }
 
                 _GRID.DataContext = new Purchase
                 {
-                    ProductType = ProductType.Fuel,
-                    ProductGuid = ((KeyValuePair<string, Guid>)_CARBURANT.Items.GetItemAt(0)).Value,
+                    ProductType = isFuel ? ProductType.Fuel : ProductType.Oil,
+                    ProductGuid = ((KeyValuePair<string, Guid>)_PRODUCT.Items.GetItemAt(0)).Value,
                     PurchaseDate = DateTime.Now,
                     CompanyGuid = companyGuid
                 };
@@ -90,15 +100,15 @@ namespace EStation.Views.Clients
 
         private void UpDownBase_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (_CARBURANT.SelectedValue ==null) return;          
-            _MONTANT.Text = (_QUANTITY.Value.GetValueOrDefault()*_curFuelPrice).ToString("0.##") + " DH";
+            if (_PRODUCT.SelectedValue ==null) return;          
+            _MONTANT.Text = (_QUANTITY.Value.GetValueOrDefault()*_curPrice).ToString("0.##") + " DH";
         }
 
         private async void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_CARBURANT.SelectedValue == null) return;
-            _curFuelPrice = await App.Store.Fuels.GetFuelActualPrice((Guid) _CARBURANT.SelectedValue);
-            _MONTANT.Text = (_QUANTITY.Value.GetValueOrDefault()*_curFuelPrice).ToString("0.##") + " DH";
+            if (_PRODUCT.SelectedValue == null) return;
+            _curPrice = _isFuel?  await App.Store.Fuels.GetFuelActualPrice((Guid) _PRODUCT.SelectedValue) : (await App.Store.Oils.Get((Guid)_PRODUCT.SelectedValue)).CurrentUnitPrice;
+            _MONTANT.Text = (_QUANTITY.Value.GetValueOrDefault()*_curPrice).ToString("0.##") + " DH";
         }
 
     }

@@ -41,12 +41,12 @@
             </Grid>
 
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <TextBlock Text="Carburant" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <ComboBox Name="_CARBURANT" SelectedValue="{Binding ProductGuid, UpdateSourceTrigger=PropertyChanged}" Width="170" VerticalAlignment="Bottom" HorizontalAlignment="Right" SelectedValuePath="Value" DisplayMemberPath="Key" SelectionChanged="Selector_OnSelectionChanged" />
+                <TextBlock Name="_PRODUCT_NAME" Text="Carburant" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <ComboBox Name="_PRODUCT" SelectedValue="{Binding ProductGuid, UpdateSourceTrigger=PropertyChanged}" Width="170" VerticalAlignment="Bottom" HorizontalAlignment="Right" SelectedValuePath="Value" DisplayMemberPath="Key" SelectionChanged="Selector_OnSelectionChanged" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Quantité (L)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBlock Name="_QUANTITY_LABEL" Text="Quantité (litre)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:DoubleUpDown Name="_QUANTITY" FormatString="" Increment="10" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" ValueChanged="UpDownBase_OnValueChanged" />
             </StackPanel>
 

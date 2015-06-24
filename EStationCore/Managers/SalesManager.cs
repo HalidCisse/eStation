@@ -9,6 +9,7 @@ using EStationCore.Model;
 using EStationCore.Model.Sale.Entity;
 using EStationCore.Model.Sale.Enums;
 using EStationCore.Model.Sale.Views;
+using Humanizer;
 
 
 namespace EStationCore.Managers
@@ -75,19 +76,21 @@ namespace EStationCore.Managers
                 {
                     case ProductType.Fuel:
                         myPurchase.Sum = myPurchase.Quantity * (await FuelManager.GetFuelCurrentPrice(myPurchase.ProductGuid));
-                        myPurchase.Description = $"{myPurchase.Quantity.ToString("0.##\\ L ")}{(await db.Fuels.FindAsync(myPurchase.ProductGuid)).Libel}";
+                        myPurchase.Description = $"{myPurchase.Quantity.ToString("0.##\\ L")} {(await db.Fuels.FindAsync(myPurchase.ProductGuid)).Libel}";
                         break;
                     case ProductType.Oil:
-
+                        myPurchase.Sum = myPurchase.Quantity * (await OilManager.StaticGet(myPurchase.ProductGuid)).CurrentUnitPrice;
+                        myPurchase.Description = $"{"Bidon".ToQuantity((int) myPurchase.Quantity)} {(await db.Oils.FindAsync(myPurchase.ProductGuid)).Libel}";
                         break;
                     case ProductType.Service:
+                        
 
                         break;
                 }
-
+                              
                 if (myPurchase.PurchaseGuid == Guid.Empty) myPurchase.PurchaseGuid = Guid.NewGuid();
                 if (myPurchase.PurchaseState == PurchaseState.Paid) myPurchase.PurchaseDate = DateTime.Now;
-                myPurchase.DateAdded = DateTime.Now;
+                myPurchase.DateAdded = myPurchase.PurchaseDate;
                 myPurchase.LastEditDate = DateTime.Now;
 
                 db.Purchases.Add(myPurchase);

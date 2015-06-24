@@ -18,26 +18,26 @@ namespace EStation.Views.FuelViews
         { Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); })); }).Start();
 
 
-        private void Citernes_OnCiterneSelectionChanged(object sender, EventArgs e)
+        private async void Citernes_OnCiterneSelectionChanged(object sender, EventArgs e)
         {
             if (sender == null) return;
           
-            _CITERNE_STOCK.Refresh((Guid) sender);
+           await _CITERNE_STOCK.Refresh((Guid) sender);
         }
 
-        private void OilsView_OnHuileSelectionChanged(object sender, EventArgs e)
+        private async void OilsView_OnHuileSelectionChanged(object sender, EventArgs e)
         {
             if (sender == null) return;
 
-            OilDeliveries.Refresh((List<Guid>)sender);
-            _OIL_PRELEVS.Refresh((List<Guid>) sender);
+            await OilDeliveries.Refresh((List<Guid>)sender);
+            await _OIL_PRELEVS.Refresh((List<Guid>) sender);
         }
 
-        private void CarburantView_OnSelectionChanged(object sender, EventArgs e)
+        private async void CarburantView_OnSelectionChanged(object sender, EventArgs e)
         {
             if (sender == null) return;
 
-            _CARB_PRELEVS.Refresh((List<Guid>) sender, DateTime.Today.AddDays(-7), DateTime.Today);
+           await _CARB_PRELEVS.Refresh((List<Guid>) sender, DateTime.Today.AddDays(-7), DateTime.Today);
         }
 
 
