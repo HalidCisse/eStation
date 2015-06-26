@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using EStationCore.Model.Hr.Views;
+using EStationCore.Model.Sale.Enums;
+using EStationCore.Model.Sale.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EStation.Views.Clients
 {
@@ -74,12 +79,69 @@ namespace EStation.Views.Clients
             await Refresh(_companiesGuids, _fromDate, _toDate);
         }
 
-        private void AddPurchaseService_Click(object sender, RoutedEventArgs e)
+        private async void AddPurchaseService_Click(object sender, RoutedEventArgs e)
         {
+            if (_companiesGuids.Count == 0) return;
 
+            Guid theCompany;
+
+            if (_PURCHASES.SelectedValue != null)
+                theCompany = (Guid)_PURCHASES.SelectedValue;
+            else
+                theCompany = (_companiesGuids).First();
+
+            var wind = new AddPurchaseService(theCompany) { Owner = Window.GetWindow(this) };
+            wind.ShowDialog();
+            await Refresh(_companiesGuids, _fromDate, _toDate);
         }
 
+        private void PayContext_OnOpened(object sender, RoutedEventArgs e)
+        {
+            if (_PURCHASES.SelectedValue == null) return;
+            switch (((PurchaseCard)_PURCHASES.SelectedItem).PurchaseState)
+            {
+                case PurchaseState.NotPaying:
+                    return;
+                case PurchaseState.UnPaid:
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(0)).Visibility = Visibility.Visible;
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(1)).Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(0)).Visibility = Visibility.Collapsed;
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(1)).Visibility = Visibility.Visible;
+                    break;
+            }
+        }
 
+        private async void Paycheck_Click(object sender, RoutedEventArgs e)
+        {
 
+            if (_PURCHASES.SelectedValue == null) return;
+
+            var payCard = ((PurchaseCard)_PURCHASES.SelectedItem);
+
+            try
+            {
+                if (payCard.PurchaseState == PurchaseState.UnPaid)
+                    await App.Store.Sales.CheckOut(payCard.PurchaseGuid);
+                else
+                    await App.Store.Sales.CheckOut(payCard.PurchaseGuid, PurchaseState.UnPaid);
+            }
+            catch (SecurityException)
+            {
+                ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
+                return;
+            }
+            catch (Exception ex)
+            {
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+                return;
+            }
+            
+            if (payCard.PurchaseState == PurchaseState.Paid)
+                ModernDialog.ShowMessage("Annuler avec Succès !", "eStation", MessageBoxButton.OK);
+
+           await Refresh( _companiesGuids, _fromDate, _toDate);
+        }
     }
 }

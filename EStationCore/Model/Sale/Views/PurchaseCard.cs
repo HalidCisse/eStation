@@ -20,11 +20,13 @@ namespace EStationCore.Model.Sale.Views
             Sum = purchase.Sum.ToString("C0");
             Comment = purchase.Comment;            
             Description = purchase.Description;
+            PurchaseState = purchase.PurchaseState;
 
             switch (purchase.PurchaseState)
             {
                 case PurchaseState.Paid:
                     YesNoImage = ImagesHelper.ImageToByteArray(Resources.yes);
+                    
                     break;
                 case PurchaseState.UnPaid:
                     YesNoImage = ImagesHelper.ImageToByteArray(Resources.No);
@@ -42,6 +44,8 @@ namespace EStationCore.Model.Sale.Views
         public string Company { get;  }
 
         public ProductType ProductType { get;  }
+
+        public PurchaseState PurchaseState { get; }
 
         public string PurchaseDate { get;  }
 

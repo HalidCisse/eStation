@@ -54,7 +54,7 @@
                     <TextBox.Text>
                         <Binding Path="Libel" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <ext:NameValidator Min="3" IsNullable="False" ValidatesOnTargetUpdated="True"/>
+                                <ext:NameValidator Min="2" IsNullable="False" ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -63,12 +63,12 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Litres/Bidon" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_LITER_BIDON" FormatString="" Increment=".5" Minimum="0" Value="{Binding LiterPerGallon}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown Name="_LITER_BIDON" FormatString="0.##\ L" Increment=".5" Minimum="0" Value="{Binding LiterPerGallon}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <TextBlock Text="Tarif/ Bidon" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_UNIT_PRICE" FormatString="C2" Increment=".5" Minimum="0" Value="{Binding CurrentUnitPrice}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown Name="_UNIT_PRICE" FormatString="C0" Increment=".5" Minimum="0" Value="{Binding CurrentUnitPrice}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -78,12 +78,12 @@
 
             <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <TextBlock Text="Capaciter de Stock" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding StockCapacity}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:IntegerUpDown FormatString="0.##\ L" Increment="100" Minimum="0" Value="{Binding StockCapacity}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Text="Stock Actuel" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:IntegerUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialStock}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:IntegerUpDown FormatString="0.##\ L" Increment="100" Minimum="0" Value="{Binding InitialStock}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">

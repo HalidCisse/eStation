@@ -46,8 +46,8 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Name="_QUANTITY_LABEL" Text="Quantité (litre)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="" Increment="10" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" ValueChanged="UpDownBase_OnValueChanged" />
+                <TextBlock Name="_QUANTITY_LABEL" Text="Quantité" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="0.##\ L" Increment="10" Minimum="0" Value="{Binding Quantity}" HorizontalAlignment="Left" Width="250" Height="30" ValueChanged="UpDownBase_OnValueChanged" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
@@ -61,8 +61,8 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Montant : "/>
-                <TextBlock Name="_MONTANT" Text=" DH" />                
+                <TextBlock Name="_MONTANT" Text="Montant : "/>
+                <TextBlock Text=" DH" />                
             </StackPanel> 
 
             <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">

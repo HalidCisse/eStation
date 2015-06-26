@@ -81,11 +81,7 @@ namespace EStationCore.Managers
                     case ProductType.Oil:
                         myPurchase.Sum = myPurchase.Quantity * (await OilManager.StaticGet(myPurchase.ProductGuid)).CurrentUnitPrice;
                         myPurchase.Description = $"{"Bidon".ToQuantity((int) myPurchase.Quantity)} {(await db.Oils.FindAsync(myPurchase.ProductGuid)).Libel}";
-                        break;
-                    case ProductType.Service:
-                        
-
-                        break;
+                        break;                    
                 }
                               
                 if (myPurchase.PurchaseGuid == Guid.Empty) myPurchase.PurchaseGuid = Guid.NewGuid();
@@ -123,6 +119,23 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
                 return await db.Purchases.FindAsync(purchaseGuid);
+        }
+
+        public async Task<bool> CheckOut(Guid purchaseGuid, PurchaseState purchaseState = PurchaseState.Paid)
+        {
+            using (var db = new StationContext())
+            {
+                var myPurchase = await db.Purchases.FindAsync(purchaseGuid);
+                if (myPurchase == null)
+                    throw new InvalidOperationException("ITEM_NOT_FOUND");
+                if (myPurchase.PurchaseState == purchaseState)
+                    throw new InvalidOperationException("ITEM_ALREADY_PAID");
+
+                myPurchase.PurchaseState = purchaseState;
+                db.Purchases.Attach(myPurchase);
+                db.Entry(myPurchase).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
+            }
         }
 
         #endregion
@@ -234,5 +247,6 @@ namespace EStationCore.Managers
 
         #endregion
 
+        
     }
 }
