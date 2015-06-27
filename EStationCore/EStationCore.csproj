@@ -88,6 +88,7 @@
       <DependentUpon>201505121758349_m-.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Common\Entity\AboutCard.cs" />
     <Compile Include="Model\Common\Entity\Document.cs" />
     <Compile Include="Model\Common\Entity\Person.cs" />
     <Compile Include="Model\Common\Enums\Carburants.cs" />
@@ -280,6 +281,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dbo.Staffs.data.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

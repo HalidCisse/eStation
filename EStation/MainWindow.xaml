@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"        
-        mc:Ignorable="d" Height="660" Width="1100" MinHeight="550" MinWidth="850" WindowStartupLocation="CenterScreen" 
+        mc:Ignorable="d" Height="660" Width="1100" MinHeight="550" MinWidth="850" WindowStartupLocation="CenterScreen" Loaded="MainWindow_OnLoaded"
         Background="Beige" Icon="{StaticResource MainIcon}" Style="{DynamicResource WindowStyle}" Effect="{StaticResource Z-Depth3}">
 
     <Window.Resources>
@@ -44,14 +44,33 @@
                 </Grid>
             </Border>
         </Popup>
+
+
+
+        <Popup x:Key="AboutPopup" Placement="Center" PopupAnimation="Scroll" StaysOpen="False" Opened="AboutPopup_OnOpened">
+            <Border Width="500" Height="400" BorderThickness="1" BorderBrush="Gainsboro" Background="Beige">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Image Source="{Binding ProductIcon}" Margin="10" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="{Binding ProductName}" Margin="10" Foreground="Gray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="40" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding CurrentVersion}" Margin="5" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ProductDescription}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding CopyrightLicence}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Justify" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Copyright}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock TextAlignment="Center">
+                       <Hyperlink NavigateUri="{Binding DevelopperEmail}" RequestNavigate="Hyperlink_OnRequestNavigate" Foreground="Gray" FontFamily="Verdana" FontWeight="Light">HalidCisse@gmail.com</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                
+            </Border>
+        </Popup>
     </Window.Resources>
 
 
     <Grid Margin="2,-25,2,2">
 
-        <StackPanel Orientation="Horizontal" Background="Transparent" Height="50" Margin="10,-25,100,0" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" ZIndex="2">
+        <StackPanel Orientation="Horizontal" Background="Transparent" Height="50" Margin="10,-25,100,0" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" ZIndex="2">
             <Image Source="{StaticResource MainIcon}" Stretch="Fill" Height="45" Opacity=".4"/>
-            <Label Content="Winxo-beta1" Foreground="#464343" FontSize="40" Margin="10,0"/>
+            <Label Name="_APP_NAME" Content="eStation-beta" Foreground="#464343" FontSize="40" Margin="10,0"/>
         </StackPanel>
 
         <DockPanel >
@@ -61,12 +80,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <!--<ColumnDefinition Width="Auto"/>-->
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="1" Name="_USER_NAME_LABEL" Content="Halid Cisse" Target="_POPUP_BUTTON" Foreground="Gray" FontSize="20" Margin="10,0" />
                 <Button Grid.Column="2" Name="_POPUP_BUTTON" Content="&#xf107;" Margin="-05,0,10,0" Style="{DynamicResource ToolButtonStyle}" ToolTip="More" Click="_POPUP_BUTTON_OnClick"/>
-                <!--<Button Grid.Column="3" Name="_SETTING_BUTTON" Content="&#xf0c9;" Margin="10,0" Style="{DynamicResource ToolButtonStyle}" ToolTip="Parametres" Click="SeetingButton_OnClick"/>-->
+                <Button Grid.Column="3" Name="_SETTING_BUTTON" Content="&#xf0eb;" Margin="10,0" Style="{DynamicResource ToolButtonStyle}" ToolTip="Parametres" Click="SettingButton_OnClick"/>
             </Grid>
             
             <Frame x:Name="_MAIN_FRAME" Source="Login.xaml" NavigationUIVisibility="Hidden" >

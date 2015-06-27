@@ -1,21 +1,23 @@
 ﻿using System.Deployment.Application;
 using System.Reflection;
+using CLib;
+using EStationCore.Model.Common.Entity;
 
 namespace EStationCore.Managers {
+    public class MetaManager
+    {
 
-    internal sealed class MetaManager {
+        public static string ProductName => "eStation";
 
+        public static string ProductDescription => "Logiciel de Gestion de Station Service";
 
-        /// <summary>
-        /// Gets the company name.
-        /// </summary>
-        public string ProductName => "EStation";
+        public static byte[] ProductIcon => ImagesHelper.ImageToByteArray(Properties.Resources.mainicon).Result;
 
+        public static string DevelopperEmail => "HalidCisse@gmail.com";
 
-        /// <summary>
-        /// AssemblyProductVersion
-        /// </summary>
-        public string AssemblyProductVersion {
+        public AboutCard About => new AboutCard();
+
+        public static string AssemblyProductVersion {
             get {
                 var attributes = Assembly.GetExecutingAssembly()
                     .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false);
@@ -25,37 +27,31 @@ namespace EStationCore.Managers {
             }
         }
 
+        public static bool IsBeta => true;
 
-        /// <summary>
-        /// La version Actuelle
-        /// </summary>
-        public string CurrentVersion => ApplicationDeployment.IsNetworkDeployed
+        public static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
             : Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-
-        /// <summary>
-        /// VersionNumber
-        /// </summary>
-        public string VersionNumber => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+     
+        public static string VersionNumber => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
         /// <summary>
         /// Gets the company name.
         /// </summary>
-        public string CompanyName => "Matrix Technology";
+        public static string CompanyName => "Matrix Technology";
 
 
         /// <summary>
         /// Gets the developper name.
         /// </summary>
-        public string DevelopperName => "Halidou Cisse";
+        public static string DevelopperName => "Halidou Cisse";
 
 
         /// <summary>
         /// Gets the copyright banner.
         /// </summary>
-        public string[] CopyrightBanner => new[]
+        public static string[] CopyrightLicence => new[]
         {
             "Licensed under the Apache License, Version 2.0 (the \"License\");",
             "you may not use this file except in compliance with the License.",
@@ -70,6 +66,6 @@ namespace EStationCore.Managers {
             "limitations under the License."
         };
 
-        public int CopyrightStartYear => 2014;
+        public static int CopyrightStartYear => 2015;
     }
 }

@@ -7,6 +7,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Security;
 using CLib;
 using EStationCore.Model.Common.Views;
@@ -28,35 +29,30 @@ namespace EStationCore.Managers
         /// <returns>True si l'operation success</returns>
         /// <exception cref="SecurityException">CAN_NOT_FIND_USER</exception>
         public bool Authenticate(string userName, string userPassword)
-        {
-            #if (DEBUG)
-            if (Membership.GetAllUsers().Count == 0)
-            {
-                MembershipCreateStatus status;
-                Membership.CreateUser(
-                    "halid",
-                    "pass00.",
-                    "halid@gmail.com",
-                    "halid",
-                    "halid",
-                    true,
-                    new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
-                    out status);
-                if (status == MembershipCreateStatus.Success)
-                {
-                    Roles.CreateRole(AdminClearances.SuperUser.ToString());
-                    Roles.CreateRole(UserSpace.AdminSpace.ToString());
-
-                    Roles.AddUserToRole("halid", AdminClearances.SuperUser.ToString());
-                    Roles.AddUserToRole("halid", UserSpace.AdminSpace.ToString());
-                }
-            }
-            #endif
-
+        {           
             try
             {
                 if (!Membership.ValidateUser(userName, userPassword))
+                {
+                    if (Membership.GetAllUsers().Count != 0) return false;
+                    MembershipCreateStatus status;
+                    Membership.CreateUser(
+                        "admin",
+                        "admin00.",
+                        "admin@gmail.com",
+                        "admin",
+                        "admin",
+                        true,
+                        new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
+                        out status);
+                    if (status != MembershipCreateStatus.Success) return false;
+                    Roles.CreateRole(AdminClearances.SuperUser.ToString());
+                    Roles.CreateRole(UserSpace.AdminSpace.ToString());
+
+                    Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
+                    Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
                     return false;
+                }
 
                 var user = Membership.GetUser(userName);
                 if (user == null)
@@ -409,7 +405,7 @@ namespace EStationCore.Managers
         /// <param name="profileGuid"></param>
         /// <returns></returns>
 
-        public User GetUser(Guid profileGuid)
+        public async Task<User> GetUser(Guid profileGuid)
         {
             try
             {
@@ -418,7 +414,7 @@ namespace EStationCore.Managers
                 if (membUser == null)
                     return null;
 
-                var theStaff = HrManager.StaticGetStaffByGuid(profileGuid);
+                var theStaff = await HrManager.StaticGetStaffByGuid(profileGuid);
                 return new User
                 {
                     // ReSharper disable once PossibleNullReferenceException
@@ -447,15 +443,15 @@ namespace EStationCore.Managers
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public byte[] GetUserPic(string userName)
+        public async Task<byte[]> GetUserPic(string userName)
         {
             try
             {
                 var membUser = Membership.GetUser(userName);
 
                 // ReSharper disable once PossibleNullReferenceException
-                return membUser == null ? null :
-                    HrManager.StaticGetStaffByGuid((Guid)membUser.ProviderUserKey).Person.PhotoIdentity;
+                return membUser == null ? null : (await 
+                    HrManager.StaticGetStaffByGuid((Guid)membUser.ProviderUserKey))?.Person?.PhotoIdentity;
             }
             catch (Exception ex)
             {

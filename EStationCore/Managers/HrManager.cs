@@ -596,14 +596,12 @@ namespace EStationCore.Managers
         #region internal Static
 
 
-        internal static Staff StaticGetStaffByGuid(Guid staffGuid)
+        internal async static Task<Staff> StaticGetStaffByGuid(Guid staffGuid)
         {
             try
             {
                 using (var db = new StationContext())
-                {
-                    return db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
-                }
+                    return await db.Staffs.Include(s => s.Person).FirstOrDefaultAsync(s => s.StaffGuid == staffGuid);
             }
             catch (Exception exception)
             {

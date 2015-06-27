@@ -65,10 +65,10 @@ namespace EStationCore
         public DocumentsManager Documents = new DocumentsManager();
 
 
-        ///// <summary>
-        ///// Messagerie
-        ///// </summary>
-        //public CommManager Comm = new CommManager();
+        /// <summary>
+        /// About
+        /// </summary>
+        public MetaManager Meta = new MetaManager();
 
 
         ///// <summary>

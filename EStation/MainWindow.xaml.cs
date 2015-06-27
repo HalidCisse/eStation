@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using CLib;
 using EStation.Views.Common;
 using EStation.Views.Security;
@@ -18,9 +20,14 @@ namespace EStation
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
-
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var card = App.Store.Meta.About;
+            _APP_NAME.Content = card.ProductName + (card.IsBeta ? " - Beta" : "");
+        }
 
         private async void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)
         {
@@ -50,6 +57,17 @@ namespace EStation
             ((Popup)sender).DataContext = App.CurrentUser;
 
             _USER_NAME_LABEL.Content = App.CurrentUser.FullName;
+        }
+
+        private void AboutPopup_OnOpened(object sender, EventArgs e) 
+            => ((Popup)sender).DataContext = App.Store.Meta.About;
+
+        private void SettingButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var cm = FindResource("AboutPopup") as Popup;
+            if (cm == null) return;
+            cm.PlacementTarget = this;
+            cm.IsOpen = true;           
         }
 
 
@@ -89,12 +107,16 @@ namespace EStation
             wind.ShowDialog();
         }
 
+        private void Hyperlink_OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            var hyperlink = sender as Hyperlink;
+            if (hyperlink == null) return;
+            if (!Regex.IsMatch(hyperlink.NavigateUri.ToString(), @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")) return;
+            var address = string.Concat("mailto:", hyperlink.NavigateUri.ToString(), "?subject=eStation&body=Bonjour,");
+            try { System.Diagnostics.Process.Start(address); }
+            catch { MessageBox.Show("Addresse e-mail invalide.", "E-mail error"); }
+        }
 
-
-
-
-
-
-
+        
     }
 }

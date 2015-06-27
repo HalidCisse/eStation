@@ -34,8 +34,8 @@ namespace EStation
                     Keyboard.Focus(_PSEUDO);
                     #if (DEBUG)
                     {
-                        _PSEUDO.Text = "Halid";   //"halid";
-                        _PASSWORD.Password = "pass00."; //"halid5.";
+                        _PSEUDO.Text = "admin";   //"halid";
+                        _PASSWORD.Password = "admin00."; //"halid5.";
                     }
                     #endif                   
                 }));
@@ -59,7 +59,7 @@ namespace EStation
                 if(App.Store.Authentication.Authenticate(userName, pass)) {
                     var userKey         = Membership.GetUser()?.ProviderUserKey;
                     if(userKey!=null)
-                        App.CurrentUser =App.Store.Authentication.GetUser((Guid)userKey);
+                        App.CurrentUser =await App.Store.Authentication.GetUser((Guid)userKey);
 
                     var userSpace = (UserSpace)App.CurrentUser.UserSpaces.First().Value;    
 
@@ -109,14 +109,13 @@ namespace EStation
         private async void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
         {
             _BUSY_INDICATOR.IsBusy = true;
-            var img = await Task.FromResult(App.Store.Authentication.GetUserPic(_PSEUDO.Text));
-            _USER_IMAGE.DataContext = img ?? ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
+            var img = await App.Store.Authentication.GetUserPic(_PSEUDO.Text);
+            _USER_IMAGE.DataContext = img ?? await ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
             _BUSY_INDICATOR.IsBusy = false;
-            //FormsAuthentication.SignOut();
         }
 
 
-        private async void _PSEUDO_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void _PSEUDO_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             
 

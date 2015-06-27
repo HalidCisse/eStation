@@ -87,7 +87,7 @@ namespace EStationCore.Migrations
 
             var img = (Image)Resources.ResourceManager.GetObject(imgName, CultureInfo.InvariantCulture);
 
-            return img == null ? null : ImagesHelper.ImageToByteArray(img);
+            return img == null ? null : ImagesHelper.ImageToByteArray(img).Result;
         }
 
 

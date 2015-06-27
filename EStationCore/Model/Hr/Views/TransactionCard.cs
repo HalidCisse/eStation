@@ -28,12 +28,12 @@ namespace EStationCore.Model.Hr.Views {
             if (transaction.Amount > 0)
             {
                 AmountString=transaction.Amount.ToString("0.##", CultureInfo.CurrentCulture)+" dhs";
-                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Down);
+                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Down).Result;
             }
             else
             {
                 AmountString= (-transaction.Amount).ToString("0.##", CultureInfo.CurrentCulture)+" dhs";
-                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Up);
+                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Up).Result;
             }           
         }
 
