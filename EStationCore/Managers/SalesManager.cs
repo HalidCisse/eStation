@@ -11,7 +11,6 @@ using EStationCore.Model.Sale.Enums;
 using EStationCore.Model.Sale.Views;
 using Humanizer;
 
-
 namespace EStationCore.Managers
 {
     public class SalesManager 
@@ -144,6 +143,9 @@ namespace EStationCore.Managers
 
         #region Views
 
+        public async Task<double> GetPurchasedSum(ProductType? product, PurchaseState purchaseState, DateTime? startDate, DateTime? endDate) 
+            => await StaticGetPurchasedSum(product, purchaseState, startDate, endDate);
+
 
         public async Task<List<PurchaseCard>> GetPurchasesCards(List<Guid> companiesGuids, DateTime fromDate, DateTime toDate)
         {
@@ -174,10 +176,7 @@ namespace EStationCore.Managers
 
         #region Analytics
 
-
-
-
-
+        
         public async Task<List<KeyValuePair<DateTime, double>>> MonthlyPurchasedSum(ProductType? product, PurchaseState purchaseState, DateTime fromDate, DateTime toDate)
         {
             var points = new List<KeyValuePair<DateTime, double>>();
@@ -193,8 +192,6 @@ namespace EStationCore.Managers
 
 
         #region Protected Internal Static
-
-
 
 
 
@@ -242,9 +239,7 @@ namespace EStationCore.Managers
                 }
             });
         }
-
-
-
+        
         #endregion
 
         

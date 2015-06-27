@@ -10,7 +10,7 @@ namespace EStation.Views.Fuel
     internal partial class AddPrelevement 
     {
         private bool _isAdd;
-        private Prelevement _derPrelev;
+        private FuelPrelevement _derPrelev;
 
         public AddPrelevement(Guid currentPompe, Guid prelevToMod)
         {
@@ -43,7 +43,7 @@ namespace EStation.Views.Fuel
                         _derPrelev = await App.Store.Pompes.GetLastPrelevement(currentPompe);
                         _COMPTEUR_M.Minimum = _derPrelev.Meter;
                         _COMPTEUR_M.Maximum = _derPrelev.Meter + citerneBalance;
-                        _COMPTEUR_E.Maximum = citerneBalance;
+                        _RESULT.Maximum = citerneBalance;
                     }
                     else
                     {
@@ -55,28 +55,26 @@ namespace EStation.Views.Fuel
                     {
                         _isAdd = true;
 
-                        _GRID.DataContext = new Prelevement
+                        _GRID.DataContext = new FuelPrelevement
                         {
                             PompeGuid = currentPompe,
                             DatePrelevement = DateTime.Now,
                             Meter = _derPrelev.Meter,
-                            MeterE = 0
+                            Result = 0
                         };
                     }
                     else
                         _GRID.DataContext = App.Store.Pompes.GetPrelevement(prelevToMod);
-
-
                 }));
             }).Start();
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                if (_isAdd) App.Store.Pompes.Post((Prelevement)_GRID.DataContext);
-                else App.Store.Pompes.Put((Prelevement)_GRID.DataContext);
+                if (_isAdd) {await App.Store.Pompes.Post((FuelPrelevement)_GRID.DataContext);}
+                else { App.Store.Pompes.Put((FuelPrelevement)_GRID.DataContext);}
             }
             catch (Exception ex)
             {
@@ -97,7 +95,7 @@ namespace EStation.Views.Fuel
         private void Annuler_Click(object sender, RoutedEventArgs e) => Close();
 
         private void UpDownBase_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e) 
-            => _COMPTEUR_E.Value = _COMPTEUR_M.Value-_derPrelev.Meter ;
+            => _RESULT.Value = _COMPTEUR_M.Value-_derPrelev.Meter ;
 
     }
 }

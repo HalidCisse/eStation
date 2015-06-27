@@ -79,7 +79,7 @@
             </StackPanel>-->
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Compteur (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBlock Text="Compteur" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:DoubleUpDown FormatString="" Increment="100" Minimum="0" Value="{Binding InitialMeter}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 

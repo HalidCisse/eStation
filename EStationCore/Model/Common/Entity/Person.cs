@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CLib.Database;
 using CLib.Database.Interfaces;
 using EStationCore.Model.Comm.Entity;
 using EStationCore.Model.Common.Enums;

@@ -124,17 +124,17 @@ namespace EStationCore.Managers
                 foreach (var prelevement in oilPrelevements)
                 {
                     if (prelevement.OilPrelevementGuid == Guid.Empty) prelevement.OilPrelevementGuid = Guid.NewGuid();
-                    prelevement.ActualUnitPrice = db.Oils.Find(prelevement.OilGuid).CurrentUnitPrice;
+                    prelevement.CurrentPrice = db.Oils.Find(prelevement.OilGuid).CurrentUnitPrice;
 
                     var lastOne = StaticGetLastPrelevement(prelevement.OilGuid);
 
-                    prelevement.TotalSold = - prelevement.TotalStock + lastOne.TotalStock + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate);
+                    prelevement.Result = - prelevement.Meter + lastOne.Meter + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate);
 
-                    if (prelevement.TotalSold < 0)
+                    if (prelevement.Result < 0)
                         throw new CoolException(
-                            $"{db.Oils.Find(prelevement.OilGuid).Libel} : Le stock restant ne doit pas etre Supérieur a " + lastOne.TotalStock + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate));
+                            $"{db.Oils.Find(prelevement.OilGuid).Libel} : Le stock restant ne doit pas etre Supérieur a " + lastOne.Meter + GetDeliveries(prelevement.OilGuid, lastOne.DatePrelevement.GetValueOrDefault(), fromDate));
 
-                    if (prelevement.TotalSold > StaticGetOilBalance(prelevement.OilGuid))
+                    if (prelevement.Result > StaticGetOilBalance(prelevement.OilGuid))
                         throw new CoolException(
                             $"{db.Oils.Find(prelevement.OilGuid).Libel}: Le stock restant ne doit pas etre Supérieur a " + StaticGetOilBalance(prelevement.OilGuid));
                     
@@ -175,8 +175,6 @@ namespace EStationCore.Managers
 
 
 
-
-
         public async Task<double> GetTotalDeliveryCost(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
             => (await GetDeliveries(oilsGuids, fromDate, toDate)).Sum(p => p.Cost);
 
@@ -184,10 +182,10 @@ namespace EStationCore.Managers
             => (await GetDeliveries(oilsGuids, fromDate, toDate)).Sum(p => p.QuantityDelivered);
 
         public async Task<double> GetSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.TotalSold*p.ActualUnitPrice);
+            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.Result*p.CurrentPrice);
 
         public async Task<int> GetGallonsSold(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate) 
-            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.TotalSold);
+            => (await GetPrelevemnts(oilsGuids, fromDate, toDate)).Sum(p => p.Result);
 
         public int GetDeliveries(Guid oilGuid, DateTime fromDate, DateTime toDate)
         {
@@ -254,7 +252,7 @@ namespace EStationCore.Managers
         public async Task<List<KeyValuePair<DateTime, double>>> GetPrices(Guid oilGuid, DateTime fromDate, DateTime toDate)
         {
             using (var db = new StationContext())
-                return (await db.Oils.FindAsync(oilGuid)).Prelevements.Select(p=> new KeyValuePair<DateTime, double>(p.DatePrelevement.GetValueOrDefault(), p.ActualUnitPrice)).ToList();                        
+                return (await db.Oils.FindAsync(oilGuid)).Prelevements.Select(p=> new KeyValuePair<DateTime, double>(p.DatePrelevement.GetValueOrDefault(), p.CurrentPrice)).ToList();                        
         }
 
 
@@ -304,7 +302,7 @@ namespace EStationCore.Managers
                                 ? db.OilPrelevements.Where(
                                       p => p.DatePrelevement >= fromDate &&
                                       p.DatePrelevement <= toDate)
-                                    .Sum(p => p.TotalSold*p.ActualUnitPrice)
+                                    .Sum(p => p.Result*p.CurrentPrice)
                                 : 0;
             });
         }
@@ -344,7 +342,7 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
                 return db.Oils.Find(oilGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ??
-                    new OilPrelevement { TotalStock = db.Oils.Find(oilGuid).InitialStock};
+                    new OilPrelevement { Meter = db.Oils.Find(oilGuid).InitialStock};
         }
 
         public IEnumerable GetOilDeliveries(Guid oilGuid)
@@ -372,7 +370,7 @@ namespace EStationCore.Managers
                 {
                     var stocks = db.Oils.Find(oilGuid).InitialStock + db.Oils.Find(oilGuid)?.Deliveries.Sum(s => s.QuantityDelivered) ?? 0;
 
-                    var solds = db.Oils.Find(oilGuid)?.Prelevements.Sum(p => p.TotalSold) ?? 0;
+                    var solds = db.Oils.Find(oilGuid)?.Prelevements.Sum(p => p.Result) ?? 0;
 
                     return (stocks - solds);
                 }

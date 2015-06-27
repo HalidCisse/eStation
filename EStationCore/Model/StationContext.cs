@@ -67,7 +67,7 @@ namespace EStationCore.Model
         /// <summary>
         /// Les prelevements
         /// </summary>
-        public virtual DbSet<Prelevement> FuelPrelevements { get; set; }
+        public virtual DbSet<FuelPrelevement> FuelPrelevements { get; set; }
 
         /// <summary>
         /// Les Carburant

@@ -2,8 +2,6 @@
 using EStationCore.Managers;
 using EStationCore.Model.Fuel.Entity;
 
-
-
 namespace EStationCore.Model.Fuel.Views
 {
     public class CiterneCard

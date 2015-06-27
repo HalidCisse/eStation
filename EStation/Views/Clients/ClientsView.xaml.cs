@@ -10,7 +10,6 @@ using EStation.Ext;
 using EStationCore.Model.Customers.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-
 namespace EStation.Views.Clients
 {
     

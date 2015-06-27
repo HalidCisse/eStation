@@ -247,17 +247,17 @@
     <Compile Include="Views\FuelViews\AddPrice.xaml.cs">
       <DependentUpon>AddPrice.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FuelViews\AddStock.xaml.cs">
-      <DependentUpon>AddStock.xaml</DependentUpon>
+    <Compile Include="Views\FuelViews\AddDelivery.xaml.cs">
+      <DependentUpon>AddDelivery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FuelViews\CarburantView.xaml.cs">
-      <DependentUpon>CarburantView.xaml</DependentUpon>
+    <Compile Include="Views\FuelViews\FuelsView.xaml.cs">
+      <DependentUpon>FuelsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FuelViews\Citernes.xaml.cs">
       <DependentUpon>Citernes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FuelViews\CiterneStock.xaml.cs">
-      <DependentUpon>CiterneStock.xaml</DependentUpon>
+    <Compile Include="Views\FuelViews\CiterneDelivery.xaml.cs">
+      <DependentUpon>CiterneDelivery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FuelViews\CiterneView.xaml.cs">
       <DependentUpon>CiterneView.xaml</DependentUpon>
@@ -268,8 +268,8 @@
     <Compile Include="Views\FuelViews\FuelPrelevements.xaml.cs">
       <DependentUpon>FuelPrelevements.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FuelViews\FuelStockView.xaml.cs">
-      <DependentUpon>FuelStockView.xaml</DependentUpon>
+    <Compile Include="Views\FuelViews\StockView.xaml.cs">
+      <DependentUpon>StockView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\AddTransaction.xaml.cs">
       <DependentUpon>AddTransaction.xaml</DependentUpon>
@@ -280,8 +280,8 @@
     <Compile Include="Views\Journals\FinanaceDetails.xaml.cs">
       <DependentUpon>FinanaceDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Journals\FinanceTransactions.xaml.cs">
-      <DependentUpon>FinanceTransactions.xaml</DependentUpon>
+    <Compile Include="Views\Journals\Caisse.xaml.cs">
+      <DependentUpon>Caisse.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Journals\ChartFinance.xaml.cs">
       <DependentUpon>ChartFinance.xaml</DependentUpon>
@@ -297,9 +297,6 @@
     </Compile>
     <Compile Include="Views\Journals\JournalView.xaml.cs">
       <DependentUpon>JournalView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FuelViews\OilView.xaml.cs">
-      <DependentUpon>OilView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Hr\AddEmploy.xaml.cs">
       <DependentUpon>AddEmploy.xaml</DependentUpon>
@@ -497,11 +494,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FuelViews\AddStock.xaml">
+    <Page Include="Views\FuelViews\AddDelivery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FuelViews\CarburantView.xaml">
+    <Page Include="Views\FuelViews\FuelsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -509,7 +506,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FuelViews\CiterneStock.xaml">
+    <Page Include="Views\FuelViews\CiterneDelivery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -525,7 +522,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FuelViews\FuelStockView.xaml">
+    <Page Include="Views\FuelViews\StockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -541,7 +538,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Journals\FinanceTransactions.xaml">
+    <Page Include="Views\Journals\Caisse.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -562,10 +559,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Journals\JournalView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FuelViews\OilView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

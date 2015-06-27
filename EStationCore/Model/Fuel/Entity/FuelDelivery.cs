@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database;
 using CLib.Database.Interfaces;
 
 namespace EStationCore.Model.Fuel.Entity

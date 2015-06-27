@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using CLib;
 using EStationCore.Model.Oil.Views;
 
-
 namespace EStation.Views.OilViews
 {
     
@@ -43,7 +42,7 @@ namespace EStation.Views.OilViews
             try
             {
                 var card = ((OilCard)((TextBox)sender).DataContext);
-                await App.Store.Oils.ChangePrice(card.OilGuid, Convert.ToDouble(((TextBox)sender).Text));
+                await App.Store.Oils.ChangePrice(card.OilGuid, card.CurrentdoubleUnitPrice);
             }
             catch (Exception exception)
             {

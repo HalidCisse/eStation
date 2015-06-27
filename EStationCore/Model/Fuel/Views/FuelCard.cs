@@ -4,7 +4,6 @@ using System.Linq;
 using EStationCore.Managers;
 using Humanizer;
 
-
 namespace EStationCore.Model.Fuel.Views
 {
     public class FuelCard

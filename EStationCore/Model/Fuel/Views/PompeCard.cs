@@ -4,7 +4,6 @@ using System.Linq;
 using EStationCore.Model.Fuel.Entity;
 using Humanizer;
 
-
 namespace EStationCore.Model.Fuel.Views
 {
     public class PompeCard
@@ -19,8 +18,8 @@ namespace EStationCore.Model.Fuel.Views
 
             LastPrelevement = prelev?.DatePrelevement.GetValueOrDefault().Humanize(false);
 
-            MeterM = prelev?.Meter.ToString(CultureInfo.InvariantCulture);
-            MeterE = prelev?.MeterE.ToString(CultureInfo.InvariantCulture);
+            Meter= prelev?.Meter.ToString("0.##");
+            Result = prelev?.Result.ToString("0.## 'Litres'");
         }
 
         
@@ -32,9 +31,9 @@ namespace EStationCore.Model.Fuel.Views
 
         public string LastPrelevement { get; }
 
-        public string MeterE { get; }
+        public string Result { get; }
 
-        public string MeterM { get; }
+        public string Meter { get; }
         
     }
 }

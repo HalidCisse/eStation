@@ -57,7 +57,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <journals:CaisseDetails x:Name="_CAISSE_CARD" Effect="{StaticResource Z-Depth2}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
+                        <journals:FinanceDetails x:Name="FinanceCard" Effect="{StaticResource Z-Depth2}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
 
                         <journals:CaisseTransactions x:Name="_TRANS_CARD" Effect="{StaticResource Z-Depth2}" Margin="10" Refreshed="CaisseTransactions_OnRefreshed"/>
 

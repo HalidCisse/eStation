@@ -67,8 +67,8 @@
                         <DataTemplate>
                             <Border Margin="0,2" Height="30"  BorderThickness="0" BorderBrush="Blue" Background="LightSlateGray" Effect="{StaticResource Z-Depth1}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Info1, Mode=TwoWay}" Foreground="Blue" Background="Beige" Width="330" FontSize="15" FontWeight="ExtraLight" VerticalContentAlignment="Center"/>
-                                    <xctk:IntegerUpDown Background="WhiteSmoke" Value="{Binding Int1, Mode=TwoWay}" Width="200" Minimum="0" Increment="5"/>
+                                    <Label Content="{Binding Info1, Mode=TwoWay}" Margin="5,0" Foreground="Blue" Background="Beige" Width="330" FontSize="15" FontWeight="ExtraLight" VerticalContentAlignment="Center"/>
+                                    <xctk:IntegerUpDown Background="WhiteSmoke" Value="{Binding Int1, Mode=TwoWay}" FormatString="0.##\ Bidons" Width="200" Minimum="0" Increment="5"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

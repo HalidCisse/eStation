@@ -1,10 +1,9 @@
 ﻿
 
 using System;
+using CLib;
 using EStationCore.Model.Oil.Entity;
 using Humanizer;
-
-
 
 namespace EStationCore.Model.Oil.Views
 {
@@ -16,8 +15,8 @@ namespace EStationCore.Model.Oil.Views
             OilDeliveryGuid = oilDelivery.OilDeliveryGuid;
             Supplier = oilDelivery.Supplier;
             Quantity = "bidon".ToQuantity(oilDelivery.QuantityDelivered);
-            Cost = oilDelivery.Cost.ToString("0.##\\ dhs");
-            Date = "Le " + oilDelivery.DateAdded.GetValueOrDefault().ToShortDateString();
+            Cost = oilDelivery.Cost.ToString("C0");
+            Date = oilDelivery.DateAdded.FriendlyDateTime();
             Description = oilDelivery.Description;
         }
 

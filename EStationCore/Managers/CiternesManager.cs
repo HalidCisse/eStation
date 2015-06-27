@@ -1,6 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -182,7 +180,7 @@ namespace EStationCore.Managers
                 {
                     var stocks = db.Citernes.Find(citerneGuid)?.Deliveries.Sum(s => s.QuantityDelivered) ?? 0;
 
-                    var prelevs = db.Citernes.Find(citerneGuid)?.Prelevements.Sum(p => p.MeterE) ?? 0;
+                    var prelevs = db.Citernes.Find(citerneGuid)?.Prelevements.Sum(p => p.Result) ?? 0;
 
                     return stocks - prelevs;
                 }
@@ -215,7 +213,7 @@ namespace EStationCore.Managers
             return await Task.Run(() => {
                 using (var db = new StationContext())
                 return db.Citernes.Find(citerneGuid)?
-                         .Pompes.Select(p => p.Prelevements.Select(v => v.MeterE))
+                         .Pompes.Select(p => p.Prelevements.Select(v => v.Result))
                          .Select(s => s.Sum())
                          .Sum() ?? 0;
            });

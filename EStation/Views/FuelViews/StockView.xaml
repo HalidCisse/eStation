@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ext="clr-namespace:EStation.Ext"
-      xmlns:fuel="clr-namespace:EStation.Views.Fuel"
       xmlns:oilViews="clr-namespace:EStation.Views.OilViews"
       xmlns:fuelViews="clr-namespace:EStation.Views.FuelViews"
       mc:Ignorable="d" 
@@ -34,7 +33,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <fuelViews:CarburantView x:Name="_CARBURANTS" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="CarburantView_OnSelectionChanged"/>
+                        <fuelViews:FuelsView x:Name="_CARBURANTS" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="CarburantView_OnSelectionChanged"/>
 
                         <fuelViews:FuelPrelevements x:Name="_CARB_PRELEVS" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
@@ -62,9 +61,9 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <fuel:Citernes x:Name="_CITERNES_LIST" Effect="{StaticResource Z-Depth2}" Margin="10" CiterneSelectionChanged="Citernes_OnCiterneSelectionChanged" />                        
+                        <fuelViews:Citernes x:Name="_CITERNES_LIST" Effect="{StaticResource Z-Depth2}" Margin="10" CiterneSelectionChanged="Citernes_OnCiterneSelectionChanged" />
 
-                        <fuel:CiterneStock x:Name="_CITERNE_STOCK" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                        <fuelViews:CiterneDelivery x:Name="_CITERNE_STOCK" Effect="{StaticResource Z-Depth2}" Margin="10"/>
 
                     </StackPanel>
                 </ScrollViewer>

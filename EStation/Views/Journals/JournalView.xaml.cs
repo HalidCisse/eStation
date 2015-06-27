@@ -22,20 +22,10 @@ namespace EStation.Views.Journals
                 => await ChartOilSale.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate);
 
         private async void CaisseDetails_OnDateSelectionChanged(object sender, EventArgs e) 
-                => await _TRANS_CARD.Refresh(_CAISSE_CARD.FromDate, _CAISSE_CARD.ToDate);
+                => await _TRANS_CARD.Refresh(FinanceCard.FromDate, FinanceCard.ToDate);
 
         private async void CaisseTransactions_OnRefreshed(object sender, EventArgs e) 
-                =>await _CAISSE_CARD.Refresh();
-
-
-
-        //public async void Refresh() => await Task.Run(() => _CAISSE_CARD.Refresh());
-        //private void OilPeriodCard_OnSelectionChanged(object sender, EventArgs e) => new Task(() => Dispatcher.BeginInvoke(new Action(
-        //      async () => await Task.Run(() => _OIL_SALE.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate))))).Start();
-
-
-
-
+                =>await FinanceCard.Refresh();        
 
     }
 }

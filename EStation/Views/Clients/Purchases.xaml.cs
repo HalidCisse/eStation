@@ -5,7 +5,6 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using EStationCore.Model.Hr.Views;
 using EStationCore.Model.Sale.Enums;
 using EStationCore.Model.Sale.Views;
 using FirstFloor.ModernUI.Windows.Controls;
@@ -101,6 +100,8 @@ namespace EStation.Views.Clients
             switch (((PurchaseCard)_PURCHASES.SelectedItem).PurchaseState)
             {
                 case PurchaseState.NotPaying:
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(0)).Visibility = Visibility.Collapsed;
+                    ((MenuItem)((ContextMenu)sender).Items.GetItemAt(1)).Visibility = Visibility.Collapsed;
                     return;
                 case PurchaseState.UnPaid:
                     ((MenuItem)((ContextMenu)sender).Items.GetItemAt(0)).Visibility = Visibility.Visible;

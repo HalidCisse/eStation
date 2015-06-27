@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Security;
 using Bytes2you.Validation;
 using CLib;
@@ -12,7 +11,6 @@ using EStationCore.Model.Common.Entity;
 using EStationCore.Model.Customers.Entity;
 using EStationCore.Model.Customers.Views;
 using EStationCore.Model.Hr.Entity;
-using QueryableExtensions = System.Data.Entity.QueryableExtensions;
 
 namespace EStationCore.Managers
 {

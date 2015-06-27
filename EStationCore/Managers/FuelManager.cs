@@ -105,11 +105,11 @@ namespace EStationCore.Managers
             return await Task.Run(() => {
                 using (var db = new StationContext())
             {
-                var prelevements = new List<Prelevement>();
+                var prelevements = new List<FuelPrelevement>();
                 foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
                     foreach (var citerne in citernes)
                         prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
-                return prelevements.Sum(p => p.MeterE * p.ActualPrice);
+                return prelevements.Sum(p => p.Result * p.CurrentPrice);
             }
             });
         }
@@ -120,11 +120,11 @@ namespace EStationCore.Managers
             return await Task.Run(() => {
                 using (var db = new StationContext())
                 {
-                    var prelevements = new List<Prelevement>();
+                    var prelevements = new List<FuelPrelevement>();
                     foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
                         foreach (var citerne in citernes)
                             prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
-                    return prelevements.Sum(p => p.MeterE);
+                    return prelevements.Sum(p => p.Result);
                 }
             });
         }
@@ -133,11 +133,11 @@ namespace EStationCore.Managers
         {            
                 using (var db = new StationContext())
                 {
-                    var prelevements = new List<Prelevement>();
+                    var prelevements = new List<FuelPrelevement>();
                     foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
                         foreach (var citerne in citernes)
                             prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
-                    return prelevements.Sum(p => p.MeterE);
+                    return prelevements.Sum(p => p.Result);
                 }           
         }
 
@@ -229,7 +229,7 @@ namespace EStationCore.Managers
                                     p =>
                                     p.DatePrelevement >= fromDate &&
                                     p.DatePrelevement <= toDate)
-                                    .Sum(p => p.MeterE*p.ActualPrice)
+                                    .Sum(p => p.Result*p.CurrentPrice)
                                 : 0;
             });
         }
@@ -246,7 +246,7 @@ namespace EStationCore.Managers
                     if (stocks == null)
                         return 0;
 
-                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Select(p=> p.Prelevements).Sum(p => p.Sum(v=> v.MeterE));
+                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Select(p=> p.Prelevements).Sum(p => p.Sum(v=> v.Result));
                     if (prelevs == null)
                         return 0;
 

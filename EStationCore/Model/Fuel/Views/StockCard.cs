@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Globalization;
+using CLib;
 using EStationCore.Model.Fuel.Entity;
-using Humanizer;
-
 
 namespace EStationCore.Model.Fuel.Views
 {
@@ -13,9 +11,9 @@ namespace EStationCore.Model.Fuel.Views
         {
             FuelStockGuid = fuelDelivery.FuelDeliveryGuid;
             Supplier = fuelDelivery.Supplier;
-            Quantity = fuelDelivery.QuantityDelivered.ToString("0.##\\L");
-            Cost = fuelDelivery.Cost.ToString("0.##\\ dhs");
-            Date = "Le " + fuelDelivery.DateAdded.GetValueOrDefault().ToShortDateString();
+            Quantity = fuelDelivery.QuantityDelivered.ToString("0.##\\ Litres");
+            Cost = fuelDelivery.Cost.ToString("C0");
+            Date = fuelDelivery.DateAdded.FriendlyDateTime();
             Description = fuelDelivery.Description;
         }
 

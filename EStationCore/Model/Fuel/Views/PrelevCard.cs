@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EStationCore.Managers;
 using EStationCore.Model.Fuel.Entity;
 using Humanizer;
 
@@ -11,14 +6,14 @@ namespace EStationCore.Model.Fuel.Views
 {
     public class PrelevCard
     {
-        public PrelevCard(Prelevement prelevement)
+        public PrelevCard(FuelPrelevement prelevement)
         {
             PrelevementGuid = prelevement.PrelevementGuid;
             Pompe = $"{prelevement.Pompe.Libel.ToLower().Titleize()} ({prelevement.Pompe.Colonne.ToLower().Titleize()})";
             DatePrelev = prelevement.DatePrelevement.GetValueOrDefault().ToString("dd MMM yy - HH:mm");
             Fuel = prelevement.Pompe.Citerne.Fuel.Libel + " (" + DatePrelev + ")";
-            MeterM = "M: " + prelevement.Meter.ToString("0.##\\ L ");
-            MeterE = "E: " + prelevement.MeterE.ToString("0.##\\ L ");
+            Meter = prelevement.Meter.ToString("0.##");
+            Result = prelevement.Result.ToString("0.## 'Litres'");
 
             //var curBalance = CiternesManager.StaticGetCiterneFuelBalance(citerne.CiterneGuid);
             //CurrentStock = curBalance.ToString("0.##\\L") + " en stock /" + citerne.MaxCapacity.ToString("0.##\\L");
@@ -33,9 +28,9 @@ namespace EStationCore.Model.Fuel.Views
 
         public string Fuel { get; }
 
-        public string MeterM { get; }
+        public string Meter { get; }
 
-        public string MeterE { get; }
+        public string Result { get; }
 
     }
 }

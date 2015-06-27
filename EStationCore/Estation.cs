@@ -1,6 +1,5 @@
 ﻿using EStationCore.Managers;
 
-
 namespace EStationCore
 {
     public class Estation

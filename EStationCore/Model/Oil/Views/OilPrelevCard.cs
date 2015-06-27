@@ -2,7 +2,6 @@
 using EStationCore.Model.Oil.Entity;
 using Humanizer;
 
-
 namespace EStationCore.Model.Oil.Views
 {
     public class OilPrelevCard
@@ -13,8 +12,8 @@ namespace EStationCore.Model.Oil.Views
             OilPrelevementGuid = prelevement.OilPrelevementGuid;
             Libel = $"{prelevement.Oil.Libel.ToLower().Titleize()} ({prelevement.Oil.TypeOil.ToUpper()})";
             DatePrelev = prelevement.DatePrelevement.GetValueOrDefault().ToString("dd MMM yy - HH:mm");
-            TotalStock = $"Stock: {"bidon".ToQuantity(prelevement.TotalStock)}";
-            TotalSold = $"Vendu: {"bidon".ToQuantity(prelevement.TotalSold)}";
+            TotalStock = $"Stock: {"bidon".ToQuantity(prelevement.Meter)}";
+            TotalSold = $"Vendu: {"bidon".ToQuantity(prelevement.Result)}";
         }
 
 

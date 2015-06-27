@@ -53,13 +53,13 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Quantité (Bidons)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:IntegerUpDown Name="_QUANTITY" FormatString="" Increment="100" Minimum="0" Value="{Binding QuantityDelivered}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <TextBlock Text="Quantité" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:IntegerUpDown Name="_QUANTITY" FormatString="0.##\ Bidons" Increment="100" Minimum="0" Value="{Binding QuantityDelivered}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <TextBlock Text="Montant" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown FormatString="C2" Increment="100" Minimum="0" Value="{Binding Cost}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <xctk:DoubleUpDown FormatString="C0" Increment="100" Minimum="0" Value="{Binding Cost}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">

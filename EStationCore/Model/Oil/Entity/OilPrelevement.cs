@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database;
 using CLib.Database.Interfaces;
 
 namespace EStationCore.Model.Oil.Entity
@@ -15,11 +14,11 @@ namespace EStationCore.Model.Oil.Entity
       
 
 
-        public int TotalStock { get; set; }
+        public int Meter { get; set; }
 
-        public int TotalSold { get; set; }
+        public int Result { get; set; }
 
-        public double ActualUnitPrice { get; set; }
+        public double CurrentPrice { get; set; }
 
         public DateTime? DatePrelevement { get; set; }
 

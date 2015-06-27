@@ -48,13 +48,13 @@
             
          
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <TextBlock Text="Compteur M" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBlock Text="Compteur" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 <xctk:DoubleUpDown Name="_COMPTEUR_M" FormatString="" Increment="100" Minimum="0" Value="{Binding Meter}" HorizontalAlignment="Left" Width="250" Height="30" ValueChanged="UpDownBase_OnValueChanged"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Compteur E" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_COMPTEUR_E" FormatString="" Increment="100" Minimum="0" Value="{Binding MeterE}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <TextBlock Text="Resultat" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_RESULT" FormatString="0.##\ Litres" Increment="50" Minimum="0" Value="{Binding Result}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">

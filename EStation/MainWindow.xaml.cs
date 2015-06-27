@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using CLib;
-using EStation.Views;
 using EStation.Views.Common;
 using EStation.Views.Security;
 using EStationCore.Model.Security.Enums;

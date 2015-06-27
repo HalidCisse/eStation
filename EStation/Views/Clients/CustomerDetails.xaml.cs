@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using EStationCore.Model.Customers.Views;
 
-
 namespace EStation.Views.Clients
 {
     /// <summary>

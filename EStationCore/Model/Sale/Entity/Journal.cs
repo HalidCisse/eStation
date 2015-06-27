@@ -14,7 +14,7 @@ namespace EStationCore.Model.Sale.Entity
 
 
 
-        public List<Prelevement> Prelevements { get; set; }
+        public List<FuelPrelevement> Prelevements { get; set; }
 
     }
 }

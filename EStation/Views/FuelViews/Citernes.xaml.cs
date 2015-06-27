@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using EStation.Views.Fuel;
 
-namespace EStation.Views.Fuel
+namespace EStation.Views.FuelViews
 {
     
     internal partial class Citernes 

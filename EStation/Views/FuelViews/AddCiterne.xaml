@@ -79,13 +79,13 @@
             </StackPanel>-->
 
             <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <TextBlock Text="Seuil Minimal (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_THRESHOLD" FormatString="" Increment="100" Minimum="0" Value="{Binding Threshold}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <TextBlock Text="Seuil Minimal" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_THRESHOLD" FormatString="0.##\ Litres" Increment="100" Minimum="0" Value="{Binding Threshold}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Text="Capaciter (Litres)" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:DoubleUpDown Name="_MAX_CAP" FormatString="" Increment="100" Minimum="0" Value="{Binding MaxCapacity}" HorizontalAlignment="Left" Width="250" Height="30" />
+                <TextBlock Text="Capaciter" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_MAX_CAP" FormatString="0.##\ Litres" Increment="100" Minimum="0" Value="{Binding MaxCapacity}" HorizontalAlignment="Left" Width="250" Height="30" />
             </StackPanel>
 
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">

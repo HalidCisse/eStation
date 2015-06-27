@@ -2,8 +2,6 @@
 using EStationCore.Managers;
 using Humanizer;
 
-
-
 namespace EStationCore.Model.Oil.Views
 {
     public class OilCard

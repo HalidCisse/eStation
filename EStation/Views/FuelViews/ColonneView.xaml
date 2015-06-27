@@ -143,8 +143,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Compteur E" FontSize="15" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding MeterE}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
+                                    <TextBlock Text="Resultat" FontSize="15" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Result}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
                                 </Grid>
 
                                 <Grid Margin="0,10">
@@ -152,8 +152,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Compteur M" FontSize="15" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding MeterM}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
+                                    <TextBlock Text="Compteur" FontSize="15" Foreground="Gray" FontWeight="Medium" FontFamily="Verdana"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Meter}" FontSize="15" Foreground="Gray" FontWeight="Light" FontFamily="Verdana"/>
                                 </Grid>
                                 
                             </StackPanel>

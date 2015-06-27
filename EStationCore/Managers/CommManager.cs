@@ -10,8 +10,6 @@ using EStationCore.Model.Comm.Entity;
 using EStationCore.Model.Comm.Enums;
 using EStationCore.Model.Comm.Views;
 using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Views;
-
 
 namespace EStationCore.Managers {
 

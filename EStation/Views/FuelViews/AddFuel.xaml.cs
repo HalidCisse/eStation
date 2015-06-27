@@ -6,7 +6,7 @@ using System.Windows.Input;
 using EStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Fuel
+namespace EStation.Views.FuelViews
 {
     
     internal partial class AddFuel 
@@ -51,7 +51,7 @@ namespace EStation.Views.Fuel
             e.Handled = true;
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
@@ -64,8 +64,8 @@ namespace EStation.Views.Fuel
                         ActualPrice = (double)_UNIT_PRICE.Value
                     });
 
-                if (_isAdd) App.Store.Fuels.Post(newFuel);
-                else App.Store.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);
+                if (_isAdd) {await App.Store.Fuels.Post(newFuel);}
+                else {await App.Store.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);}
             }
             catch (Exception ex)
             {

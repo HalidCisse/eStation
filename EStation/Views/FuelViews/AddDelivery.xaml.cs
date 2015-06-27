@@ -7,11 +7,11 @@ using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EStation.Views.FuelViews
 {
-    internal partial class AddFuelStock 
+    internal partial class AddFuelDelivery
     {
         private bool _isAdd;
        
-        public AddFuelStock(Guid currentCiterne , Guid stockToMod)
+        public AddFuelDelivery(Guid currentCiterne , Guid stockToMod)
         {
             InitializeComponent();
 
@@ -52,7 +52,7 @@ namespace EStation.Views.FuelViews
                         };                        
                     }
                     else
-                        _GRID.DataContext = App.Store.Citernes.GetStock(stockToMod);
+                        _GRID.DataContext = await App.Store.Citernes.GetStock(stockToMod);
                    
                     _QUANTITY.Maximum = vide;
                     _TITLE_TEXT.Text = "LIVRAISON " + (await App.Store.Citernes.Get(currentCiterne)).Libel.ToUpper();
@@ -60,12 +60,12 @@ namespace EStation.Views.FuelViews
             }).Start();
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                if (_isAdd) App.Store.Citernes.Post((FuelDelivery)_GRID.DataContext);
-                else App.Store.Citernes.Put((FuelDelivery)_GRID.DataContext);
+                if (_isAdd) {await App.Store.Citernes.Post((FuelDelivery)_GRID.DataContext);}
+                else {await App.Store.Citernes.Put((FuelDelivery)_GRID.DataContext);}
             }
             catch (Exception ex)
             {

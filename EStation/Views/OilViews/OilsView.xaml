@@ -33,8 +33,8 @@
                             <!--<TextBlock Text="{Binding TypeOil}" HorizontalAlignment="Right" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05"/>-->
 
                             <StackPanel Orientation="Horizontal" ToolTip="{Binding LastPriceUpdate}" HorizontalAlignment="Right" Margin="05,05">
-                                <TextBox Text="{Binding CurrentdoubleUnitPrice, Mode=TwoWay}" BorderBrush="Black" Background="WhiteSmoke" VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05" LostFocus="PriceBox_OnLostFocus"/>
-                                <Label VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17">dhs/L</Label>
+                                <TextBox Text="{Binding CurrentdoubleUnitPrice, Mode=TwoWay, StringFormat=C0}" BorderBrush="Black" Background="WhiteSmoke" VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17" Margin="05,05" LostFocus="PriceBox_OnLostFocus"/>
+                                <Label VerticalAlignment="Center" Foreground="DarkSlateGray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Normal" FontSize="17">/Bidon</Label>
                             </StackPanel>
                         </Grid>
                         <Grid DockPanel.Dock="top">

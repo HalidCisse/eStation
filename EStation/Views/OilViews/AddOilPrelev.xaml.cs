@@ -20,16 +20,16 @@ namespace EStation.Views.OilViews
             {
                 _TITLE_TEXT.Text = "Prélèvement Huiles";
                 _START_DATE.SelectedDate = DateTime.Now;
-                _PRELEVS.ItemsSource = (await App.Store.Oils.GetOils()).Select(oil => new ViewCard {Guid = oil.OilGuid, Info1 = oil.Libel});
+                _PRELEVS.ItemsSource = (await App.Store.Oils.GetOils()).Select(oil => new ViewCard {Guid = oil.OilGuid, Info1 = oil.Libel, Int1 = 0});
             }));
         }
 
         private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
-            {
-               await App.Store.Oils.Post(((List<ViewCard>)_PRELEVS.ItemsSource)
-                    .Select(s=> new OilPrelevement {OilGuid = s.Guid, TotalStock = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
+            {              
+                await App.Store.Oils.Post(_PRELEVS.Items.Cast<ViewCard>().ToList()
+                    .Select(s=> new OilPrelevement{OilGuid = s.Guid, Meter = s.Int1}).ToList(), _START_DATE.SelectedDate.GetValueOrDefault());
             }
             catch (Exception ex)
             {
@@ -49,9 +49,6 @@ namespace EStation.Views.OilViews
         }
 
         private void Annuler_Click(object sender, RoutedEventArgs e) => Close();
-
-        //private void UpDownBase_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        //    => _COMPTEUR_E.Value = _COMPTEUR_M.Value - _derPrelev.Meter;
 
     }
 }

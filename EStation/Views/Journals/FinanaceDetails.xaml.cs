@@ -2,42 +2,30 @@
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using EStationCore.Model.Sale.Enums;
 
 namespace EStation.Views.Journals {
-    /// <summary>
-    /// Interaction logic for CaisseDetails.xaml
-    /// </summary>
-    public partial class CaisseDetails {
+    
 
-        /// <summary>
-        /// Fire When date changed, (Guid)sender as Staff Guid
-        /// </summary>
+    public partial class FinanceDetails {
+
+        
         public event EventHandler DateSelectionChanged;
-
-        /// <summary>
-        /// Date de debut selectionner
-        /// </summary>
+       
         public DateTime FromDate { get; private set; }
-
-
-        /// <summary>
-        /// Date de fin Selectionner
-        /// </summary>
+     
         public DateTime ToDate { get; private set; }
 
-
-        /// <summary>
-        /// Caisse Details
-        /// </summary>
-        public CaisseDetails () {
+     
+        public FinanceDetails () {
             InitializeComponent();
 
             Dispatcher.BeginInvoke(new Action(async () =>
             {
                 _FROM_PICKER.SelectedDate=FromDate=DateTime.Today.AddMonths(-1);
-                _TO_PICKER.SelectedDate=ToDate=DateTime.Today.AddMonths(1);
+                _TO_PICKER.SelectedDate=ToDate=DateTime.Today;
                 await Refresh(FromDate, ToDate);
-                DateSelectionChanged?.Invoke(null, new EventArgs());
+                
             }));
         }
 
@@ -45,22 +33,21 @@ namespace EStation.Views.Journals {
         public async Task Refresh (DateTime? fromDate = null, DateTime? toDate=null) {
             if (fromDate != null) FromDate=(DateTime) fromDate;
             if (toDate != null) ToDate=(DateTime) toDate;
-            await
-                         //new Task(() => Dispatcher.BeginInvoke(new Action(() =>
-                         //{
-                         //    _TOTAL_RECETTES.Content = App.Store.Economat.Treasury.GetTotalRecette(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //    _TOTAL_DEPENSES.Content = (-App.Store.Economat.Treasury.GetTotalDepense(FromDate, ToDate)).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //    //_TOTAL_SCHOOL_FEE.Content =App.EStation.Economat.Treasury.GetTotalPaidSchoolFee(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //    //_TOTAL_SALARIES.Content   =App.EStation.Economat.Treasury.GetTotalPaidSalaries(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //    //_CAISSE_SOLDE.Content     =App.EStation.Economat.Treasury.GetSoldeCaisse(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //    //_TOTAL_SOLDE.Content      =App.EStation.Economat.Treasury.GetSolde(FromDate, ToDate).ToString("0.##\\ dhs", CultureInfo.CurrentCulture);
-                         //}))).Start();
+           
+                      
+            _TOTAL_RECETTES.Content = (await App.Store.Economat.Finance.GetTotalRecette(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+            _TOTAL_DEPENSES.Content = (-(await App.Store.Economat.Finance.GetTotalDepense(FromDate, ToDate))).ToString("C0", CultureInfo.CurrentCulture);
 
-            Dispatcher.BeginInvoke(new Action(async () =>
-            {               
-                _TOTAL_RECETTES.Content = (await App.Store.Economat.Finance.GetTotalRecette(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
-                _TOTAL_DEPENSES.Content = (-(await App.Store.Economat.Finance.GetTotalDepense(FromDate, ToDate))).ToString("C0", CultureInfo.CurrentCulture);
-            }));
+            _CAISSE_SOLDE.Content = (await App.Store.Economat.Finance.GetSoldeCaisse(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+            _TOTAL_SALARIES.Content = (await App.Store.Economat.Finance.GetTotalPaidSalaries(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+
+            _PAID_PURCHASE.Content = (await App.Store.Sales.GetPurchasedSum(null, PurchaseState.Paid, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+            _UNPAID_PURCHASE.Content = (await App.Store.Sales.GetPurchasedSum(null, PurchaseState.UnPaid, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+
+            _NOT_PAYING_PURCHASE.Content = (await App.Store.Sales.GetPurchasedSum(null, PurchaseState.NotPaying, FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+            _TOTAL_SOLDE.Content = (await App.Store.Economat.Finance.GetRevenue(FromDate, ToDate)).ToString("C0", CultureInfo.CurrentCulture);
+
+            DateSelectionChanged?.Invoke(null, new EventArgs());           
         }
 
 

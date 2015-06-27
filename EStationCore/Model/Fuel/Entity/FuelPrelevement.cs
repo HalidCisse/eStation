@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database;
 using CLib.Database.Interfaces;
-
 
 namespace EStationCore.Model.Fuel.Entity
 {
-    public class Prelevement : Tracable
+    public class FuelPrelevement : Tracable
     {
         [Key]
         public Guid PrelevementGuid { get; set; }
@@ -20,9 +18,9 @@ namespace EStationCore.Model.Fuel.Entity
 
         public double Meter { get; set; }
 
-        public double MeterE { get; set; }
+        public double Result { get; set; }
 
-        public double ActualPrice { get; set; }
+        public double CurrentPrice { get; set; }
 
         public DateTime? DatePrelevement { get; set; }
             

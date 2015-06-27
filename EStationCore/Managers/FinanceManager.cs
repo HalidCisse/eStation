@@ -153,7 +153,6 @@ namespace EStationCore.Managers {
             => await StaticGetExpense(startDate, endDate);
 
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -178,13 +177,8 @@ namespace EStationCore.Managers {
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public async Task<double> GetSolde(DateTime? startDate, DateTime? endDate)
-        {
-            var solde = await StaticGetSoldeCaisse(startDate, endDate);
-            solde -= await StaticGetPaidSalary(startDate, endDate);
-            //solde     += await StaticGetTotalPaidSchoolFee(startDate, endDate);
-            return solde;
-        }
+        public async Task<double> GetRevenue(DateTime startDate, DateTime endDate) 
+            => await StaticGetRevenue(startDate, endDate);
 
         #endregion
 

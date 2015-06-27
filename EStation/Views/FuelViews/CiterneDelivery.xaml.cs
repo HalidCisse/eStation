@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using EStation.Views.FuelViews;
 
-
-namespace EStation.Views.Fuel
+namespace EStation.Views.FuelViews
 {
-    internal partial class CiterneStock 
+    internal partial class CiterneDelivery 
     {
         private Guid _currentCiterne;
 
-        public CiterneStock()
+        public CiterneDelivery()
         {
             InitializeComponent();           
         }
@@ -26,11 +24,11 @@ namespace EStation.Views.Fuel
         }
 
 
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {          
-            var wind = new AddFuelStock(_currentCiterne, Guid.Empty) { Owner = Window.GetWindow(this) };
+            var wind = new AddFuelDelivery(_currentCiterne, Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh(_currentCiterne);
+            await Refresh(_currentCiterne);
         }
 
 

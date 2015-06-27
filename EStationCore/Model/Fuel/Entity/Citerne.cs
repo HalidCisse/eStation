@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database;
 using CLib.Database.Interfaces;
-
 
 namespace EStationCore.Model.Fuel.Entity
 {
@@ -33,7 +31,7 @@ namespace EStationCore.Model.Fuel.Entity
 
         public virtual ICollection<FuelDelivery> Deliveries { get; set; } = new HashSet<FuelDelivery>();
         
-        public virtual ICollection<Prelevement> Prelevements { get; set; } = new HashSet<Prelevement>();
+        public virtual ICollection<FuelPrelevement> Prelevements { get; set; } = new HashSet<FuelPrelevement>();
 
 
     }

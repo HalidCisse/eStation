@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +8,6 @@ using EStationCore.Model;
 using EStationCore.Model.Fuel.Entity;
 using EStationCore.Model.Fuel.Views;
 using Humanizer;
-
 
 namespace EStationCore.Managers
 {
@@ -36,7 +34,7 @@ namespace EStationCore.Managers
             }
         }
 
-        public async Task<bool> Post(Prelevement myPrelevement)
+        public async Task<bool> Post(FuelPrelevement myPrelevement)
         {
             using (var db = new StationContext())
             {
@@ -48,12 +46,12 @@ namespace EStationCore.Managers
                 else
                     throw new ArgumentException("CAN_NOT_FIND_CITERNE");
                
-                myPrelevement.ActualPrice = (await FuelManager.GetFuelCurrentPrice(db.Pompes.Find(myPrelevement.PompeGuid).Citerne.FuelGuid));
+                myPrelevement.CurrentPrice = (await FuelManager.GetFuelCurrentPrice(db.Pompes.Find(myPrelevement.PompeGuid).Citerne.FuelGuid));
 
                 myPrelevement.DateAdded = DateTime.Now;
                 myPrelevement.LastEditDate = DateTime.Now;
 
-                db.Set<Prelevement>().Add(myPrelevement);
+                db.Set<FuelPrelevement>().Add(myPrelevement);
                 return await db.SaveChangesAsync() > 0;
             }
         }
@@ -70,13 +68,13 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool Put(Prelevement myPrelevement)
+        public bool Put(FuelPrelevement myPrelevement)
         {
             using (var db = new StationContext())
             {
                 myPrelevement.LastEditDate = DateTime.Now;
 
-                db.Set<Prelevement>().Attach(myPrelevement);
+                db.Set<FuelPrelevement>().Attach(myPrelevement);
                 db.Entry(myPrelevement).State = EntityState.Modified;
                 return db.SaveChanges() > 0;
             }
@@ -97,7 +95,7 @@ namespace EStationCore.Managers
                 return db.Pompes.Find(pompeGuid);
         }
 
-        public bool Post(Price newPrice)
+        public async Task<bool> Post(Price newPrice)
         {
             using (var db = new StationContext())
             {
@@ -110,7 +108,7 @@ namespace EStationCore.Managers
                 newPrice.LastEditDate = DateTime.Now;
 
                 db.Set<Price>().Add(newPrice);
-                return db.SaveChanges() > 0;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -135,7 +133,7 @@ namespace EStationCore.Managers
         public IEnumerable<PrelevCard> GetPrelevCards(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {           
             using (var db = new StationContext()){
-                var prelevements = new List<Prelevement>();
+                var prelevements = new List<FuelPrelevement>();
                 foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
                     foreach (var citerne in citernes)
                         prelevements.AddRange(citerne.Prelevements.Where(p=> p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date<= toDate));
@@ -143,13 +141,13 @@ namespace EStationCore.Managers
             }
         }
 
-        public Prelevement GetPrelevement(Guid prelevGuid)
+        public FuelPrelevement GetPrelevement(Guid prelevGuid)
         {
             using (var db = new StationContext())
-                return db.Set<Prelevement>().Find(prelevGuid);
+                return db.Set<FuelPrelevement>().Find(prelevGuid);
         }
 
-        public async Task<Prelevement> GetLastPrelevement(Guid pompeGuid)
+        public async Task<FuelPrelevement> GetLastPrelevement(Guid pompeGuid)
             => await StaticGetLastPrelevement(pompeGuid);
 
         public IEnumerable<ColonneCard> GetColonnesCard()
@@ -181,15 +179,12 @@ namespace EStationCore.Managers
         #region Internal Static
 
 
-
-
-
-        internal async static Task<Prelevement> StaticGetLastPrelevement(Guid pompeGuid)
+        internal async static Task<FuelPrelevement> StaticGetLastPrelevement(Guid pompeGuid)
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
                 return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
-                    new Prelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
+                    new FuelPrelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
             });
         }
 
