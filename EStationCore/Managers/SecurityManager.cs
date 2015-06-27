@@ -47,9 +47,11 @@ namespace EStationCore.Managers
                         out status);
                     if (status != MembershipCreateStatus.Success) return false;
                     Roles.CreateRole(AdminClearances.SuperUser.ToString());
+                    Roles.CreateRole(AdminClearances.StaffWrite.ToString());
                     Roles.CreateRole(UserSpace.AdminSpace.ToString());
 
                     Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
+                    Roles.AddUserToRole("admin", AdminClearances.StaffWrite.ToString());
                     Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
                     return false;
                 }
@@ -405,7 +407,7 @@ namespace EStationCore.Managers
         /// <param name="profileGuid"></param>
         /// <returns></returns>
 
-        public async Task<User> GetUser(Guid profileGuid)
+        public User GetUser(Guid profileGuid)
         {
             try
             {
@@ -414,7 +416,7 @@ namespace EStationCore.Managers
                 if (membUser == null)
                     return null;
 
-                var theStaff = await HrManager.StaticGetStaffByGuid(profileGuid);
+                var theStaff = HrManager.StaticGetStaffByGuid(profileGuid);
                 return new User
                 {
                     // ReSharper disable once PossibleNullReferenceException
@@ -443,21 +445,10 @@ namespace EStationCore.Managers
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public async Task<byte[]> GetUserPic(string userName)
-        {
-            try
-            {
-                var membUser = Membership.GetUser(userName);
-
-                // ReSharper disable once PossibleNullReferenceException
-                return membUser == null ? null : (await 
-                    HrManager.StaticGetStaffByGuid((Guid)membUser.ProviderUserKey))?.Person?.PhotoIdentity;
-            }
-            catch (Exception ex)
-            {
-                DebugHelper.WriteException(ex);
-                return null;
-            }
+        public byte[] GetUserPic(string userName)
+        {          
+            var membUserGuid = (Guid)Membership.GetUser(userName)?.ProviderUserKey;
+            return HrManager.StaticGetStaffByGuid(membUserGuid)?.Person?.PhotoIdentity;           
         }
 
 

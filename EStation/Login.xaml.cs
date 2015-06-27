@@ -53,35 +53,36 @@ namespace EStation
         }
 
 
-        private async void Authenticate(string userName, string pass) {
+        private void Authenticate(string userName, string pass) {
             try {
                 _BUSY_INDICATOR.IsBusy  =true;
-                if(App.Store.Authentication.Authenticate(userName, pass)) {
-                    var userKey         = Membership.GetUser()?.ProviderUserKey;
-                    if(userKey!=null)
-                        App.CurrentUser =await App.Store.Authentication.GetUser((Guid)userKey);
+                if(App.Store.Authentication.Authenticate(userName, pass)) {                   
+                        var userKey = Membership.GetUser()?.ProviderUserKey;
+                        if (userKey != null)
+                            App.CurrentUser = App.Store.Authentication.GetUser((Guid) userKey);
 
-                    var userSpace = (UserSpace)App.CurrentUser.UserSpaces.First().Value;    
+                        var userSpace = (UserSpace) App.CurrentUser.UserSpaces.First().Value;
 
-                    switch(userSpace) {
-                        case UserSpace.AdminSpace:
-                            await Dispatcher.BeginInvoke(new Action(()
-                                 => NavigationService?.Navigate(new HomePage(), UriKind.Relative)));
-                            break;
-                        //case UserSpace.SecretaireSpace:
-                        //    new Task(() => Dispatcher.BeginInvoke(new Action(()
-                        //        => NavigationService?.Navigate(new TeacherSpace(), UriKind.Relative)))).Start();
-                        //    break;
-                        //case UserSpace.EconomatSpace:
-                        //    new Task(() => Dispatcher.BeginInvoke(new Action(()
-                        //        => NavigationService?.Navigate(new EconomatView(false), UriKind.Relative)))).Start();
-                        //    break;
-                        default:
-                            _ERROR_LABEL.Visibility=Visibility.Visible;
-                            _ERROR_LABEL.Text="Oops! Espace utilisateur non Implementer";
-                            break;
-                    }
-                    _BUSY_INDICATOR.IsBusy=false;
+                        switch (userSpace)
+                        {
+                            case UserSpace.AdminSpace:
+                                Dispatcher.BeginInvoke(new Action(()
+                                    => NavigationService?.Navigate(new HomePage(), UriKind.Relative)));
+                                break;
+                            //case UserSpace.SecretaireSpace:
+                            //    new Task(() => Dispatcher.BeginInvoke(new Action(()
+                            //        => NavigationService?.Navigate(new TeacherSpace(), UriKind.Relative)))).Start();
+                            //    break;
+                            //case UserSpace.EconomatSpace:
+                            //    new Task(() => Dispatcher.BeginInvoke(new Action(()
+                            //        => NavigationService?.Navigate(new EconomatView(false), UriKind.Relative)))).Start();
+                            //    break;
+                            default:
+                                _ERROR_LABEL.Visibility = Visibility.Visible;
+                                _ERROR_LABEL.Text = "Oops! Espace utilisateur non Implementer";
+                                break;
+                        }
+                        _BUSY_INDICATOR.IsBusy = false;                
                 }
                 else {
                     _BUSY_INDICATOR.IsBusy = false;
@@ -106,12 +107,19 @@ namespace EStation
         }
 
 
-        private async void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
+        private void _PSEUDO_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            _BUSY_INDICATOR.IsBusy = true;
-            var img = await App.Store.Authentication.GetUserPic(_PSEUDO.Text);
-            _USER_IMAGE.DataContext = img ?? await ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
-            _BUSY_INDICATOR.IsBusy = false;
+            try
+            {
+                _BUSY_INDICATOR.IsBusy = true;
+                var img =  App.Store.Authentication.GetUserPic(_PSEUDO.Text);
+                _USER_IMAGE.DataContext = img ?? ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
+                _BUSY_INDICATOR.IsBusy = false;
+            }
+            catch (Exception exception)
+            {
+                DebugHelper.WriteException(exception);
+            }
         }
 
 

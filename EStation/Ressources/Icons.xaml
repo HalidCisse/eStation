@@ -7,7 +7,7 @@
 
     <BitmapImage x:Key="ClientIcon" UriSource="../Ressources/Icon/clienticon2.png" />
 
-    <BitmapImage x:Key="PompIcon" UriSource="../Ressources/Icon/pomp3.jpg" />
+    <BitmapImage x:Key="PompIcon" UriSource="../Ressources/Icon/pomp3.png" />
 
     <BitmapImage x:Key="ComingSoonIcon" UriSource="../Ressources/Icon/ComingSoon.png" />
 

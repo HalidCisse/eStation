@@ -25,11 +25,11 @@ namespace EStationCore.Model.Sale.Views
             switch (purchase.PurchaseState)
             {
                 case PurchaseState.Paid:
-                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.yes).Result;
+                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.yes);
                     
                     break;
                 case PurchaseState.UnPaid:
-                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.No).Result;
+                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.No);
                     break;
                 case PurchaseState.NotPaying:
                     YesNoImage = null;

@@ -25,8 +25,8 @@ namespace EStation
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var card = App.Store.Meta.About;
-            _APP_NAME.Content = card.ProductName + (card.IsBeta ? " - Beta" : "");
+            //var card = App.Store.Meta.About;
+            //_APP_NAME.Content = card.ProductName + (card.IsBeta ? " - Beta" : "");
         }
 
         private async void _LOGOUT_BUTTON_OnClick(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@ namespace EStationCore.Managers {
 
         public static string ProductDescription => "Logiciel de Gestion de Station Service";
 
-        public static byte[] ProductIcon => ImagesHelper.ImageToByteArray(Properties.Resources.mainicon).Result;
+        public static byte[] ProductIcon => ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
 
         public static string DevelopperEmail => "HalidCisse@gmail.com";
 

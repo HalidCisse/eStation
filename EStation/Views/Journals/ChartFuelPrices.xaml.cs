@@ -47,11 +47,11 @@ namespace EStation.Views.Journals
             };
 
             foreach (var fuel in fuels)
-            {              
+            {
                 plotModel.Series.Add(new LineSeries
                 {
                     Title = fuel.Libel.ToUpper(),
-                    ItemsSource =      Helpers.GetPoints(40,60), //    (await App.Store.Fuels.GetPrices(fuel.FuelGuid, fromDate, toDate)).ToList(),     
+                    ItemsSource =      (await App.Store.Fuels.GetPrices(fuel.FuelGuid, fromDate, toDate)).ToList(),     //Helpers.GetPoints(40,60), //    
                     DataFieldX = "Key",
                     DataFieldY = "Value",
                     LabelFormatString = "{1:C0}",

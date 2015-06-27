@@ -699,7 +699,9 @@
       <Name>EStationCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Ressources\Icon\pomp3.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Ressources\Icon\clienticon2.png" />
     <Resource Include="Ressources\Icon\ComingSoon.png" />

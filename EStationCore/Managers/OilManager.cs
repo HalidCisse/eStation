@@ -252,7 +252,7 @@ namespace EStationCore.Managers
         public async Task<List<KeyValuePair<DateTime, double>>> GetPrices(Guid oilGuid, DateTime fromDate, DateTime toDate)
         {
             using (var db = new StationContext())
-                return (await db.Oils.FindAsync(oilGuid)).Prelevements.Select(p=> new KeyValuePair<DateTime, double>(p.DatePrelevement.GetValueOrDefault(), p.CurrentPrice)).ToList();                        
+                return (await db.Oils.FindAsync(oilGuid)).Prelevements.OrderBy(p=> p.DatePrelevement).Select(p=> new KeyValuePair<DateTime, double>(p.DatePrelevement.GetValueOrDefault(), p.CurrentPrice)).ToList();                        
         }
 
 

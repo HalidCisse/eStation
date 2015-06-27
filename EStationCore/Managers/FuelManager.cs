@@ -188,7 +188,7 @@ namespace EStationCore.Managers
         public async Task<List<KeyValuePair<DateTime, double>>> GetPrices(Guid fuelGuid, DateTime fromDate, DateTime toDate)
         {
             using (var db = new StationContext())
-                return (await db.Fuels.FindAsync(fuelGuid)).Prices.Select(p => new KeyValuePair<DateTime, double>(p.FromDate.GetValueOrDefault(), p.ActualPrice)).ToList();
+                return (await db.Fuels.FindAsync(fuelGuid)).Prices.OrderBy(p=>p.FromDate).Select(p => new KeyValuePair<DateTime, double>(p.FromDate.GetValueOrDefault(), p.ActualPrice)).ToList();
         }
 
         public async Task<List<KeyValuePair<DateTime, double>>> GetMonthlySales(List<Guid> fuelGuids, DateTime fromDate, DateTime toDate)
