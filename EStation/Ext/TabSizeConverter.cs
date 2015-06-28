@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace EStation.Ext
+namespace eStation.Ext
 {
     /// <summary>
     /// 

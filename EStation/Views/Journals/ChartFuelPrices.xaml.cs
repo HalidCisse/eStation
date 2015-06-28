@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EStation.Ext;
+using eStation.Ext;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
     
     internal partial class FuelVariations 
@@ -21,7 +21,7 @@ namespace EStation.Views.Journals
 
         public async Task Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
-            List<EStationCore.Model.Fuel.Entity.Fuel> fuels;
+            List<eStationCore.Model.Fuel.Entity.Fuel> fuels;
 
             if (!fuelsGuids.Any())
             {

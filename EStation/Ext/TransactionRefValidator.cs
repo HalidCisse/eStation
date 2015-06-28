@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace EStation.Ext {
+namespace eStation.Ext {
     internal class TransactionRefValidator:ValidationRule {
         public override ValidationResult Validate (object value, CultureInfo cultureInfo) {
             var theString = ((string)value)?.Trim();

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Entity;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Common.Enums;
+using eStationCore.Model.Common.Enums;
 
-namespace EStationCore.Model.Sale.Entity
+namespace eStationCore.Model.Sale.Entity
 {
     public class Company : Tracable 
     {

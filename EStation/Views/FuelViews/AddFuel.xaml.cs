@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.FuelViews
+namespace eStation.Views.FuelViews
 {
     
     internal partial class AddFuel 
@@ -28,7 +28,7 @@ namespace EStation.Views.FuelViews
                     {
                         _isAdd = true;
 
-                        _GRID.DataContext = new EStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
+                        _GRID.DataContext = new eStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
                     }
                     else
                         _GRID.DataContext = App.Store.Fuels.Get(fuelToModGuid);
@@ -56,7 +56,7 @@ namespace EStation.Views.FuelViews
             try
             {
                 var newFuel =
-                    ((EStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
+                    ((eStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
 
                 if (_UNIT_PRICE.Value != null)
                     newFuel.Prices.Add(new Price
@@ -65,7 +65,7 @@ namespace EStation.Views.FuelViews
                     });
 
                 if (_isAdd) {await App.Store.Fuels.Post(newFuel);}
-                else {await App.Store.Fuels.Put((EStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);}
+                else {await App.Store.Fuels.Put((eStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);}
             }
             catch (Exception ex)
             {

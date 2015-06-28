@@ -1,8 +1,8 @@
 ﻿using System;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 using Humanizer;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class PrelevCard
     {

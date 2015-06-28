@@ -1,8 +1,8 @@
 ﻿using System;
-using EStationCore.Managers;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Managers;
+using eStationCore.Model.Fuel.Entity;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class CiterneCard
     {

@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using CLib;
-using EStation.Ext;
-using EStationCore.Model.Fuel.Views;
-using EStationCore.Model.Sale.Views;
+using eStation.Ext;
+using eStationCore.Model.Fuel.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.FuelViews
+namespace eStation.Views.FuelViews
 {
     internal partial class CiterneDelivery 
     {

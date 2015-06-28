@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using EStationCore.Managers;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Managers;
+using eStationCore.Model.Common.Views;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Enums;
 
-namespace EStationCore.Model.Hr.Views {
+namespace eStationCore.Model.Hr.Views {
 
     /// <summary>
     /// les donnee concernant une salaire

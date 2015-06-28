@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EStationCore.Model.Security.Enums
+namespace eStationCore.Model.Security.Enums
 {
 
     /// <summary>

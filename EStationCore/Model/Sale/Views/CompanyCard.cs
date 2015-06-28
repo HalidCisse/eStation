@@ -1,8 +1,8 @@
 ﻿using System;
-using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Sale.Entity;
+using eStationCore.Model.Common.Enums;
+using eStationCore.Model.Sale.Entity;
 
-namespace EStationCore.Model.Sale.Views
+namespace eStationCore.Model.Sale.Views
 {
     public class CompanyCard 
     {

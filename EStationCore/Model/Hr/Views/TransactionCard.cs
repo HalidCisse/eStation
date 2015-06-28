@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using CLib;
-using EStationCore.Model.Sale.Entity;
-using EStationCore.Properties;
+using eStationCore.Model.Sale.Entity;
+using eStationCore.Properties;
 
-namespace EStationCore.Model.Hr.Views {
+namespace eStationCore.Model.Hr.Views {
 
 
     /// <summary>

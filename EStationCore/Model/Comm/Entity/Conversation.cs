@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Comm.Enums;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model.Comm.Enums;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Model.Comm.Entity {
+namespace eStationCore.Model.Comm.Entity {
 
 
     /// <summary>

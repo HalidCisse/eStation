@@ -7,14 +7,14 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Hr.Views;
-using EStationCore.Model.Security.Entity;
+using eStationCore.Model;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Views;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Views;
+using eStationCore.Model.Security.Entity;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class HrManager
     {

@@ -4,10 +4,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib.Database.Entity;
-using EStationCore.Model.Sale.Entity;
+using eStationCore.Model.Sale.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
     internal partial class AddCompany
     {

@@ -2,7 +2,7 @@
 using System.Windows;
 using Microsoft.Win32;
 
-namespace EStation.Views.Common {
+namespace eStation.Views.Common {
     /// <summary>
     /// A simple file selector which supports save-as and
     /// open-file dialogs.

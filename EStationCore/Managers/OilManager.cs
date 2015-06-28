@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CLib;
 using CLib.Exceptions;
-using EStationCore.Model;
-using EStationCore.Model.Oil.Entity;
-using EStationCore.Model.Oil.Views;
+using eStationCore.Model;
+using eStationCore.Model.Oil.Entity;
+using eStationCore.Model.Oil.Views;
 using Humanizer;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class OilManager
     {
@@ -46,12 +46,21 @@ namespace EStationCore.Managers
             }
         }
       
-        public bool Delete(Guid oilGuid)
+        public async Task<bool> Delete(Guid oilGuid)
         {
             using (var db = new StationContext())
             {
-                db.Oils.Remove(db.Oils.Find(oilGuid));
-                return db.SaveChanges() > 0;
+                var myObject = await db.Oils.FindAsync(oilGuid);
+
+                if (myObject == null) throw new InvalidOperationException("OIL_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.Oils.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -87,12 +96,21 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool DeleteDelivery(Guid deliveryGuid)
+        public async Task<bool> DeleteDelivery(Guid deliveryGuid)
         {
             using (var db = new StationContext())
             {
-                db.OilDeliveries.Remove(db.OilDeliveries.Find(deliveryGuid));
-                return db.SaveChanges() > 0;
+                var myObject = await db.OilDeliveries.FindAsync(deliveryGuid);
+
+                if (myObject == null) throw new InvalidOperationException("DELIVERY_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.OilDeliveries.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -148,6 +166,24 @@ namespace EStationCore.Managers
             }
         }
 
+        public async Task<bool> DeletePrelevement(Guid oilPrelevementGuid)
+        {
+            using (var db = new StationContext())
+            {
+                var myObject = await db.OilPrelevements.FindAsync(oilPrelevementGuid);
+
+                if (myObject == null) throw new InvalidOperationException("PRELEVEMENT_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.OilPrelevements.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
+            }
+        }
+
         public async Task<bool> ChangePrice(Guid oilGuid, double newPrice)
         {
             using (var db = new StationContext())
@@ -164,6 +200,7 @@ namespace EStationCore.Managers
                 return await db.SaveChangesAsync() > 0;
             }
         }
+
 
         #endregion
 
@@ -193,7 +230,7 @@ namespace EStationCore.Managers
                 try
                 {
                     return db.Oils.Find(oilGuid)?.Deliveries
-                                  .Where(d => d.DeliveryDate >= fromDate && d.DeliveryDate <= toDate)
+                                  .Where(d => d.DeliveryDate >= fromDate && d.DeliveryDate <= toDate && !d.IsDeleted)
                                   .Sum(s => s.QuantityDelivered) ?? 0;
                 }
                 catch (Exception exception)
@@ -211,9 +248,8 @@ namespace EStationCore.Managers
                     foreach (var oil in db.Oils.Where(f => oilsGuids.Contains(f.OilGuid)))
                         prelevements.AddRange( oil.Prelevements.Where(
                                p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate &&
-                                    p.DatePrelevement.GetValueOrDefault().Date <= toDate));
-                    return
-                        prelevements.OrderByDescending(p => p.DatePrelevement)
+                                    p.DatePrelevement.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
+                    return prelevements.OrderByDescending(p => p.DatePrelevement)
                             .Select(p => new OilPrelevCard(p))
                             .ToList();
                 }});
@@ -225,7 +261,7 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                    return db.Oils.ToList().OrderByDescending(c => c.DateAdded).Select(c => new OilCard(c)).ToList();
+                    return db.Oils.Where(o=>!o.IsDeleted).ToList().OrderByDescending(c => c.DateAdded).Select(c => new OilCard(c)).ToList();
             });
         }
 
@@ -298,10 +334,10 @@ namespace EStationCore.Managers
             return await Task.Run(() =>{
                     using (var db = new StationContext())
                         return db.OilPrelevements.Any(
-                                p => p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate)
+                                p => p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate && !p.IsDeleted)
                                 ? db.OilPrelevements.Where(
                                       p => p.DatePrelevement >= fromDate &&
-                                      p.DatePrelevement <= toDate)
+                                      p.DatePrelevement <= toDate && !p.IsDeleted)
                                     .Sum(p => p.Result*p.CurrentPrice)
                                 : 0;
             });
@@ -316,7 +352,7 @@ namespace EStationCore.Managers
                     prelevements.AddRange(db.Oils.Find(oilGuid)
                             .Prelevements.Where(
                                 p => p.DatePrelevement >= fromDate &&
-                                     p.DatePrelevement <= toDate));
+                                     p.DatePrelevement <= toDate && !p.IsDeleted));
                 return prelevements;
                 }});
         }
@@ -333,7 +369,7 @@ namespace EStationCore.Managers
                             db.Oils.Find(oilGuid)
                                 .Deliveries.Where(
                                     p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate &&
-                                         p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                                         p.DeliveryDate.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                     return deliveries;
                 }});
         }
@@ -341,14 +377,14 @@ namespace EStationCore.Managers
         internal static OilPrelevement StaticGetLastPrelevement(Guid oilGuid)
         {
             using (var db = new StationContext())
-                return db.Oils.Find(oilGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ??
+                return db.Oils.Find(oilGuid).Prelevements.Where(p =>!p.IsDeleted).OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ??
                     new OilPrelevement { Meter = db.Oils.Find(oilGuid).InitialStock};
         }
 
         public IEnumerable GetOilDeliveries(Guid oilGuid)
         {
             using (var db = new StationContext())
-                return db.Oils.Find(oilGuid)?.Deliveries.OrderByDescending(s => s.DateAdded).ToList().Select(s => new OilDeliveryCard(s)).ToList();
+                return db.Oils.Find(oilGuid)?.Deliveries.Where(d =>!d.IsDeleted).OrderByDescending(s => s.DateAdded).ToList().Select(s => new OilDeliveryCard(s)).ToList();
         }
 
         public async Task<List<OilDeliveryCard>> GetOilDeliveries(List<Guid> oilsGuids, DateTime fromDate, DateTime toDate)
@@ -358,7 +394,7 @@ namespace EStationCore.Managers
                 {
                     var deliveries = new List<OilDelivery>();
                     foreach (var oil in db.Oils.Where(f => oilsGuids.Contains(f.OilGuid)))
-                        deliveries.AddRange(oil.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                        deliveries.AddRange(oil.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                     return deliveries.OrderByDescending(p => p.DeliveryDate).Select(p => new OilDeliveryCard(p)).ToList();
                 }});
         }
@@ -368,9 +404,9 @@ namespace EStationCore.Managers
             using (var db = new StationContext())
                 try
                 {
-                    var stocks = db.Oils.Find(oilGuid).InitialStock + db.Oils.Find(oilGuid)?.Deliveries.Sum(s => s.QuantityDelivered) ?? 0;
+                    var stocks = db.Oils.Find(oilGuid).InitialStock + db.Oils.Find(oilGuid)?.Deliveries.Where(d =>!d.IsDeleted).Sum(s => s.QuantityDelivered) ?? 0;
 
-                    var solds = db.Oils.Find(oilGuid)?.Prelevements.Sum(p => p.Result) ?? 0;
+                    var solds = db.Oils.Find(oilGuid)?.Prelevements.Where(p =>!p.IsDeleted).Sum(p => p.Result) ?? 0;
 
                     return (stocks - solds);
                 }

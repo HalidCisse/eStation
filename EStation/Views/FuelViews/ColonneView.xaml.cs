@@ -3,8 +3,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CLib;
+using eStation.Ext;
+using eStation.Views.Fuel;
+using eStationCore.Model.Fuel.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Fuel
+namespace eStation.Views.FuelViews
 {
     
     public partial class ColonneView 
@@ -14,26 +19,15 @@ namespace EStation.Views.Fuel
             InitializeComponent();
         }
 
-        private void Refresh()
+        private async Task Refresh()
         {
-            _BUSY_INDICATOR.IsBusy = true;
-
-            new Task(() =>
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    _COLONNES_LIST.ItemsSource = App.Store.Pompes.GetColonnesCard();
-                    _BUSY_INDICATOR.IsBusy = false;
-                }));
-            }).Start();
+            _BUSY_INDICATOR.IsBusy = true;            
+            _COLONNES_LIST.ItemsSource = await App.Store.Pompes.GetColonnesCard();
+            _BUSY_INDICATOR.IsBusy = false;                
         }
 
-        private void ContextDel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ContextMod_OnClick(object sender, RoutedEventArgs e)
+       
+        private async void ContextMod_OnClick(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)e.Source;
             var menu = (ContextMenu)menuItem.Parent;
@@ -42,22 +36,19 @@ namespace EStation.Views.Fuel
 
             var wind = new AddPompe((Guid)list.SelectedValue) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
         }
       
-        private void AddButon_Click(object sender, RoutedEventArgs e)
+        private async void AddButon_Click(object sender, RoutedEventArgs e)
         {            
             var wind = new AddPompe(Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
         }
 
         private void Pomps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var list = sender as ListBox;
-            if (list?.SelectedValue == null) return;
-
-            //NavigationService?.Navigate(new ClassDetails(new Guid(list.SelectedValue.ToString())));
+            
         }
 
         private void Pomps_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,17 +56,13 @@ namespace EStation.Views.Fuel
 
         }
 
-        private void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e)
-        {
-            new Task(() => {
-                Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); }));
-            }).Start();
-        }
+        private async void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e) 
+            => await  Dispatcher.BeginInvoke(new Action(() => { NavigationService?.GoBack(); }));
 
-        private void ColonneView_OnLoaded(object sender, RoutedEventArgs e) => Refresh();
+        private async void ColonneView_OnLoaded(object sender, RoutedEventArgs e) => await Refresh();
 
 
-        private void ContextPrelev_OnClick(object sender, RoutedEventArgs e)
+        private async void ContextPrelev_OnClick(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)e.Source;
             var menu = (ContextMenu)menuItem.Parent;
@@ -84,7 +71,40 @@ namespace EStation.Views.Fuel
 
             var wind = new AddPrelevement((Guid)list.SelectedValue, Guid.Empty) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
-            Refresh();
+            await Refresh();
+        }
+
+        private async void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuItem = (MenuItem)e.Source;
+            var menu = (ContextMenu)menuItem.Parent;
+            var list = (ListBox)menu.PlacementTarget;
+            if (list?.SelectedItem == null) return;
+
+            try
+            {
+                var card = ((PompeCard)list.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de supprimer " + card.Libel + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Pompes.Delete(card.PompeGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh();
+            e.Handled = true;
         }
     }
 }

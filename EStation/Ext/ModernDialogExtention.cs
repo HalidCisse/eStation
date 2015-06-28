@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Ext
+namespace eStation.Ext
 {    
     static class ModernDialogExtension
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Model.Hr.Enums;
 
-namespace EStationCore.Model.Hr.Entity
+namespace eStationCore.Model.Hr.Entity
 {
     /// <summary>
     /// Employement d'un Staff

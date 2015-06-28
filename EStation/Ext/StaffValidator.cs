@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Controls;
 
-namespace EStation.Ext {
+namespace eStation.Ext {
     internal class StaffValidator:ValidationRule {
 
         public DateTime FromDate { get; set; }

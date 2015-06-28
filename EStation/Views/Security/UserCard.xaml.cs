@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Security
+namespace eStation.Views.Security
 {
    
     internal partial class UserCard {

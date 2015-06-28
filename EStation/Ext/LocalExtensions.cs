@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace EStation.Ext
+namespace eStation.Ext
 {
     internal static class LocalExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EStationCore.Model.Sale.Entity
+namespace eStationCore.Model.Sale.Entity
 {
     public class Product
     {

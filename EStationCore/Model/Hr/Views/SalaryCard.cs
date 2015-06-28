@@ -1,8 +1,8 @@
 ﻿using System;
 using CLib;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Entity;
 
-namespace EStationCore.Model.Hr.Views
+namespace eStationCore.Model.Hr.Views
 {
 
     /// <summary>

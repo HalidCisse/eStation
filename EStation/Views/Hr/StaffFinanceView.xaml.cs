@@ -3,10 +3,10 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using EStationCore.Model.Hr.Views;
+using eStationCore.Model.Hr.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
 
     /// <summary>

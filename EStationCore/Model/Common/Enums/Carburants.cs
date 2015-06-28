@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EStationCore.Model.Common.Enums
+namespace eStationCore.Model.Common.Enums
 {
     public enum Carburants
     {

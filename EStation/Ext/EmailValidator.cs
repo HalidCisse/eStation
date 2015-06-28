@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using CLib.Validation;
 
-namespace EStation.Ext {
+namespace eStation.Ext {
     internal class EmailValidator:ValidationRule {
       
         public override ValidationResult Validate (object value, CultureInfo cultureInfo) {

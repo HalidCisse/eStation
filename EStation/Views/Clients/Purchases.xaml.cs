@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CLib;
-using EStation.Ext;
-using EStationCore.Model.Hr.Enums;
-using EStationCore.Model.Sale.Entity;
-using EStationCore.Model.Sale.Enums;
-using EStationCore.Model.Sale.Views;
+using eStation.Ext;
+using eStationCore.Model.Sale.Enums;
+using eStationCore.Model.Sale.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
     internal partial class Purchases
     {

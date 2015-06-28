@@ -6,10 +6,10 @@ using System.Windows;
 using System.Windows.Threading;
 using CLib;
 using CLib.Program;
-using EStationCore;
-using EStationCore.Model.Security.Entity;
+using eStationCore;
+using eStationCore.Model.Security.Entity;
 
-namespace EStation
+namespace eStation
 {
 
     public partial class App 

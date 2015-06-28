@@ -6,12 +6,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStationCore.Helpers;
-using EStationCore.Model.Security.Entity;
-using EStationCore.Model.Security.Enums;
+using eStationCore.Helpers;
+using eStationCore.Model.Security.Entity;
+using eStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Security
+namespace eStation.Views.Security
 {
     
 

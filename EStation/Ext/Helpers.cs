@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CLib;
 
-namespace EStation.Ext
+namespace eStation.Ext
 {
     internal static class Helpers
     {

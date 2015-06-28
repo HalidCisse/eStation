@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace EStation.Views.Common
+namespace eStation.Views.Common
 {
     /// <summary>
     /// Interaction logic for About.xaml

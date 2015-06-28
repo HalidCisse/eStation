@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     /// <summary>
     /// Presentation du Staff

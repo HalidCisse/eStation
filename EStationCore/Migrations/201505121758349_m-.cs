@@ -1,6 +1,6 @@
 using System.Data.Entity.Migrations;
 
-namespace EStationCore.Migrations
+namespace eStationCore.Migrations
 {
     public partial class m : DbMigration
     {

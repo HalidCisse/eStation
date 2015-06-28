@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Sale.Enums;
+using eStationCore.Model.Sale.Enums;
 
-namespace EStationCore.Model.Sale.Entity
+namespace eStationCore.Model.Sale.Entity
 {
     public class Purchase : Tracable
     {

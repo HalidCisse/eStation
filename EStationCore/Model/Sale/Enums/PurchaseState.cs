@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EStationCore.Model.Sale.Enums
+namespace eStationCore.Model.Sale.Enums
 {
     public enum PurchaseState
     {

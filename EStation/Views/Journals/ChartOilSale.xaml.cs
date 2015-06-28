@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model.Oil.Entity;
+using eStationCore.Model.Oil.Entity;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
     internal partial class ChartOilSale 
     {

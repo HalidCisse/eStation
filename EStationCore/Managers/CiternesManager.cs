@@ -4,11 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Fuel.Views;
+using eStationCore.Model;
+using eStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Views;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class CiternesManager
     {

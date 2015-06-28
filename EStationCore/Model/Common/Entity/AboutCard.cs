@@ -1,6 +1,6 @@
-﻿using EStationCore.Managers;
+﻿using eStationCore.Managers;
 
-namespace EStationCore.Model.Common.Entity
+namespace eStationCore.Model.Common.Entity
 {
     public class AboutCard
     {

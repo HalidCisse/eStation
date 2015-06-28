@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 
-namespace EStationCore.Model.Sale.Entity
+namespace eStationCore.Model.Sale.Entity
 {
     public class Journal
     {

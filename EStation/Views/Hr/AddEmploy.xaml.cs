@@ -5,11 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     /// <summary>
     /// Ajouter Un Employement Pour Un Staff

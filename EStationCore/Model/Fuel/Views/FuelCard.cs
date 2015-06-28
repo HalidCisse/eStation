@@ -1,10 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
-using EStationCore.Managers;
+using eStationCore.Managers;
 using Humanizer;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class FuelCard
     {

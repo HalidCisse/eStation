@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
     
     internal partial class ChartView

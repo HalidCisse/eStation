@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CLib;
-using EStation.Ext;
-using EStation.Views.Fuel;
-using EStationCore.Model.Fuel.Views;
-using EStationCore.Model.Sale.Views;
+using eStation.Ext;
+using eStation.Views.Fuel;
+using eStationCore.Model.Fuel.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.FuelViews
+namespace eStation.Views.FuelViews
 {
     
     internal partial class Citernes 

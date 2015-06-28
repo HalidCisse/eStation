@@ -6,13 +6,13 @@ using System.Linq;
 using System.Web.Security;
 using Bytes2you.Validation;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Customers.Entity;
-using EStationCore.Model.Customers.Views;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Customers.Entity;
+using eStationCore.Model.Customers.Views;
+using eStationCore.Model.Hr.Entity;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public sealed class CustomersManager
     {

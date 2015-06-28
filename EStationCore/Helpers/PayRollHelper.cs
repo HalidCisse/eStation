@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CLib;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Enums;
 
-namespace EStationCore.Helpers
+namespace eStationCore.Helpers
 {
     internal static class PayRollHelper
     {

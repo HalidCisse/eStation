@@ -1,7 +1,7 @@
 ﻿using System;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Model.Hr.Enums;
 
-namespace EStationCore.Model.Hr.Entity
+namespace eStationCore.Model.Hr.Entity
 {
     /// <summary>
     /// Recue de payement des frais d'etudes

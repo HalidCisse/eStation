@@ -1,6 +1,6 @@
-﻿using EStationCore.Managers;
+﻿using eStationCore.Managers;
 
-namespace EStationCore
+namespace eStationCore
 {
     public class Estation
     {

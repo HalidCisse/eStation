@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace EStation.Views.Fuel
+namespace eStation.Views.Fuel
 {
    
     internal partial class CiterneView 

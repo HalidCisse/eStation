@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Hr.Enums;
+using eStationCore.Model.Hr.Enums;
 
-namespace EStationCore.Model.Hr.Entity
+namespace eStationCore.Model.Hr.Entity
 {
 
     /// <summary>

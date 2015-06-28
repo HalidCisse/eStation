@@ -9,7 +9,7 @@ using CLib;
 using CLib.FilesHelper;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Common {
+namespace eStation.Views.Common {
     
     internal partial class PersonDocuments {
         private bool _isReadOnly;

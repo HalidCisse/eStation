@@ -7,12 +7,12 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CLib;
 using CLib.Validation;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Enums;
+using eStationCore.Model.Hr.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     
     internal partial class AddStaff {

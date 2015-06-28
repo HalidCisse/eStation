@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Fuel
+namespace eStation.Views.Fuel
 {
     internal partial class AddCiterne 
     {
@@ -34,7 +34,7 @@ namespace EStation.Views.Fuel
                     {
                         _isAdd = true;
 
-                        _GRID.DataContext = new Citerne { Threshold = 100, FuelGuid = ((EStationCore.Model.Fuel.Entity.Fuel)_FUELS.Items.GetItemAt(0)).FuelGuid, MaxCapacity = 1000};
+                        _GRID.DataContext = new Citerne { Threshold = 100, FuelGuid = ((eStationCore.Model.Fuel.Entity.Fuel)_FUELS.Items.GetItemAt(0)).FuelGuid, MaxCapacity = 1000};
                     }
                     else
                         _GRID.DataContext = App.Store.Citernes.Get(citerneToMod);

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using EStationCore.Model.Customers.Views;
+using eStationCore.Model.Customers.Views;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
     /// <summary>
     /// Interaction logic for CustomerDetails.xaml

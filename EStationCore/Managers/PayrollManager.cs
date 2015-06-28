@@ -5,12 +5,12 @@ using System.Linq;
 using System.Security;
 using System.Web.Security;
 using CLib;
-using EStationCore.Helpers;
-using EStationCore.Model;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Hr.Views;
+using eStationCore.Helpers;
+using eStationCore.Model;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Views;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
 
     /// <summary>

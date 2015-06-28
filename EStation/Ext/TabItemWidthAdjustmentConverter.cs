@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace EStation.Ext
+namespace eStation.Ext
 {
     /// <summary>
     /// 

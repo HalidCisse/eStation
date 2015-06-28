@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CLib;
 using CLib.Database.Entity;
-using EStationCore.Model;
-using EStationCore.Model.Sale.Entity;
-using EStationCore.Model.Sale.Enums;
-using EStationCore.Model.Sale.Views;
+using eStationCore.Model;
+using eStationCore.Model.Sale.Entity;
+using eStationCore.Model.Sale.Enums;
+using eStationCore.Model.Sale.Views;
 using Humanizer;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class SalesManager 
     {
@@ -54,15 +54,16 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
             {
-                var myCompany= await db.Companies.FindAsync(companyGuid);
+                var myObject = await db.Companies.FindAsync(companyGuid);
 
-                if (myCompany == null) throw new InvalidOperationException("COMPANY_NOT_FOUND");
+                if (myObject == null) throw new InvalidOperationException("COMPANY_NOT_FOUND");
 
-                myCompany.LastEditDate = DateTime.Now;
-                myCompany.IsDeleted = true;
+                myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
+                myObject.IsDeleted = true;
 
-                db.Companies.Attach(myCompany);
-                db.Entry(myCompany).State = EntityState.Modified;
+                db.Companies.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
                 return await db.SaveChangesAsync() > 0;
             }         
         }
@@ -157,7 +158,7 @@ namespace EStationCore.Managers
 
 
 
-        #region Views
+        #region Functions
 
         public async Task<double> GetPurchasedSum(ProductType? product, PurchaseState purchaseState, DateTime? startDate, DateTime? endDate) 
             => await StaticGetPurchasedSum(product, purchaseState, startDate, endDate);

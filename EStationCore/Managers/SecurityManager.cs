@@ -7,14 +7,13 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Security;
 using CLib;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Security.Entity;
-using EStationCore.Model.Security.Enums;
+using eStationCore.Model.Common.Views;
+using eStationCore.Model.Security.Entity;
+using eStationCore.Model.Security.Enums;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class SecurityManager
     {

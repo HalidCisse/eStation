@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStation", "EStation\EStation.csproj", "{F73EC04F-D3A8-4AD2-B732-3B8C638385EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eStation", "EStation\eStation.csproj", "{F73EC04F-D3A8-4AD2-B732-3B8C638385EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStation.Core", "EStationCore\EStation.Core.csproj", "{C57F8245-B031-4F98-9B2C-E10EEAEF1B1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eStationCore", "EStationCore\eStationCore.csproj", "{C57F8245-B031-4F98-9B2C-E10EEAEF1B1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLib", "..\ESchool\ESchool\CLib\CLib.csproj", "{E6B9D217-36D7-4656-B702-918FC31DB125}"
 EndProject

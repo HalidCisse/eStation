@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using CLib;
-using EStationCore.Model.Oil.Entity;
+using eStationCore.Model.Oil.Entity;
 using Humanizer;
 
-namespace EStationCore.Model.Oil.Views
+namespace eStationCore.Model.Oil.Views
 {
     public class OilDeliveryCard
     {

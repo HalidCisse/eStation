@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Security.Enums;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Security.Enums;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
 
     /// <summary>

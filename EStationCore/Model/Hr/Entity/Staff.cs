@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Enums;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Enums;
 
-namespace EStationCore.Model.Hr.Entity
+namespace eStationCore.Model.Hr.Entity
 {
     public class Staff
     {

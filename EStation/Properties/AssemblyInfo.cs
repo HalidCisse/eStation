@@ -6,13 +6,13 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EStation")]
+[assembly: AssemblyTitle("eStation")]
 [assembly: AssemblyDescription("Gestion Station Service")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matrix Technology")]
-[assembly: AssemblyProduct("EStation")]
+[assembly: AssemblyProduct("eStation")]
 [assembly: AssemblyCopyright("Copyright ©  2015 Halid Cisse")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("eStation")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

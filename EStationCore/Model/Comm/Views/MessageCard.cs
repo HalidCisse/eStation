@@ -1,8 +1,8 @@
 ﻿using System;
 using CLib;
-using EStationCore.Model.Comm.Entity;
+using eStationCore.Model.Comm.Entity;
 
-namespace EStationCore.Model.Comm.Views {
+namespace eStationCore.Model.Comm.Views {
 
     /// <summary>
     /// Chat, Message

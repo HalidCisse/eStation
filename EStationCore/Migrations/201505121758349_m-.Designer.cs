@@ -4,7 +4,7 @@ using System.CodeDom.Compiler;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Resources;
 
-namespace EStationCore.Migrations
+namespace eStationCore.Migrations
 {
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
     public sealed partial class m : IMigrationMetadata

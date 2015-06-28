@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CLib;
+using eStation.Ext;
+using eStationCore.Model.Oil.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.OilViews
+namespace eStation.Views.OilViews
 {
    
     internal partial class OilDeliveries 
@@ -41,5 +45,34 @@ namespace EStation.Views.OilViews
             await Refresh(_currentOils);
         }
 
+        private async void Delete_OnClick(object sender, RoutedEventArgs e)
+        {           
+            if (_STOCKS.SelectedItem == null) return;
+
+            try
+            {
+                var card = ((OilDeliveryCard)_STOCKS.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de supprimer cette livraison de " + card.Supplier + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Oils.DeleteDelivery(card.OilDeliveryGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh(_currentOils);
+            e.Handled = true;
+        }
     }
 }

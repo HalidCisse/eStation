@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CLib;
-using EStationCore.Model.Oil.Views;
+using eStation.Ext;
+using eStationCore.Model.Oil.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.OilViews
+namespace eStation.Views.OilViews
 {
     
     internal partial class OilsView 
@@ -51,6 +53,34 @@ namespace EStation.Views.OilViews
             await Refresh();
         }
 
+        private async void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (_HUILES.SelectedItem == null) return;
 
+            try
+            {
+                var card = ((OilCard)_HUILES.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de supprimer " + card.Libel + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Oils.Delete(card.OilGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh();
+            e.Handled = true;
+        }
     }
 }

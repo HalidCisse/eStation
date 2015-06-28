@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EStationCore.Model.Security.Entity
+namespace eStationCore.Model.Security.Entity
 {
     /// <summary>
     /// Represente un utilisateur

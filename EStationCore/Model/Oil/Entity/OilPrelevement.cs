@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
 
-namespace EStationCore.Model.Oil.Entity
+namespace eStationCore.Model.Oil.Entity
 {
     public class OilPrelevement :Tracable
     {

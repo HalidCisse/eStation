@@ -6,11 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStation.Ext;
-using EStationCore.Model.Sale.Views;
+using eStation.Ext;
+using eStationCore.Model.Sale.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
     internal partial class Companies
     {

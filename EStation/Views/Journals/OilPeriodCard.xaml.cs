@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using EStationCore.Model.Oil.Views;
+using eStationCore.Model.Oil.Views;
 using Humanizer;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
     
     public partial class OilPeriodCard 
@@ -24,19 +24,29 @@ namespace EStation.Views.Journals
         public OilPeriodCard()
         {
             InitializeComponent();
-
-            Dispatcher.BeginInvoke(new Action(async () 
-                => await Refresh(DateTime.Today.AddDays(-7), DateTime.Today)));
         }
 
 
         public async Task Refresh(DateTime fromDate, DateTime toDate)
-        {          
-            _FROM_PICKER.SelectedDate = fromDate;
-            _TO_PICKER.SelectedDate = toDate;
+        {
+           await Dispatcher.BeginInvoke(new Action(async () =>
+           {
+               _FROM_PICKER.SelectedDateChanged -= DatePicker_OnSelectedDateChanged;
+               _TO_PICKER.SelectedDateChanged -= DatePicker_OnSelectedDateChanged;
+               _OILS.SelectionChanged -= Selector_OnSelectionChanged;
 
-            _OILS.ItemsSource = await App.Store.Oils.GetOilsCards();
-            _OILS.SelectAll();           
+               _FROM_PICKER.SelectedDate = fromDate;
+               _TO_PICKER.SelectedDate = toDate;
+
+                _OILS.ItemsSource = await App.Store.Oils.GetOilsCards();
+                _OILS.SelectAll();
+
+               _FROM_PICKER.SelectedDateChanged += DatePicker_OnSelectedDateChanged;
+               _TO_PICKER.SelectedDateChanged += DatePicker_OnSelectedDateChanged;
+               _OILS.SelectionChanged += Selector_OnSelectionChanged;
+
+               await UpdateDashboard();
+           }));                      
         }
 
 

@@ -1,5 +1,5 @@
 <ResourceDictionary 
-    x:Class="EStation.Ressources.MyForm"
+    x:Class="eStation.Ressources.MyForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using EStation.Views.Clients;
-using EStation.Views.Fuel;
-using EStation.Views.FuelViews;
-using EStation.Views.Hr;
-using EStation.Views.Journals;
-using EStationCore.Model.Security.Enums;
+using eStation.Views.Clients;
+using eStation.Views.Fuel;
+using eStation.Views.FuelViews;
+using eStation.Views.Hr;
+using eStation.Views.Journals;
+using eStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Common
+namespace eStation.Views.Common
 {
     
     public partial class HomePage 

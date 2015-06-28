@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     /// <summary>
     /// Ajouter nouvelle renumeration

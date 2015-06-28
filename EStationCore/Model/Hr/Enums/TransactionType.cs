@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EStationCore.Model.Hr.Enums {
+namespace eStationCore.Model.Hr.Enums {
 
 
     /// <summary>

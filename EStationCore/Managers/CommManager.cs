@@ -5,13 +5,13 @@ using System.Linq;
 using System.Net.Mail;
 using CLib;
 using CLib.Validation;
-using EStationCore.Model;
-using EStationCore.Model.Comm.Entity;
-using EStationCore.Model.Comm.Enums;
-using EStationCore.Model.Comm.Views;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model;
+using eStationCore.Model.Comm.Entity;
+using eStationCore.Model.Comm.Enums;
+using eStationCore.Model.Comm.Views;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Managers {
+namespace eStationCore.Managers {
 
     /// <summary>
     /// Manager des Messages, Annonces, Emails

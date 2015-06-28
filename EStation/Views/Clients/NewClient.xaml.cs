@@ -7,12 +7,12 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CLib;
 using CLib.Validation;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Customers.Entity;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Enums;
+using eStationCore.Model.Customers.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
    
     internal partial class NewClient 

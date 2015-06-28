@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using EStationCore.Model;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Managers {
+namespace eStationCore.Managers {
 
     /// <summary>
     /// Gestion des Documents

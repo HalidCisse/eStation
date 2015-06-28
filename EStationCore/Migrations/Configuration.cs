@@ -5,13 +5,13 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Properties;
+using eStationCore.Model;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Enums;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Properties;
 
-namespace EStationCore.Migrations
+namespace eStationCore.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<StationContext>
     {

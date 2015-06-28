@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EStationCore.Model.Common.Views
+namespace eStationCore.Model.Common.Views
 {
 
     /// <summary>

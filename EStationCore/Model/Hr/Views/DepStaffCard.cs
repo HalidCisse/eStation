@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Entity;
 
-namespace EStationCore.Model.Hr.Views
+namespace eStationCore.Model.Hr.Views
 {
     /// <summary>
     /// 

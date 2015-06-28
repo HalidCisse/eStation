@@ -7,10 +7,10 @@ using System.Windows.Input;
 using CLib;
 using CLib.Enums;
 using CLib.FilesHelper;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Common {
+namespace eStation.Views.Common {
    
 
     public partial class AddDocument

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EStationCore.Model.Common.Enums
+namespace eStationCore.Model.Common.Enums
 {
     public class Rapport
     {

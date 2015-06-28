@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace EStation.Views.Common {
+namespace eStation.Views.Common {
     
     internal partial class StaffPicker {
 

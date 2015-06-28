@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EStation.Views.Common
+namespace eStation.Views.Common
 {
     /// <summary>
     /// Interaction logic for ListSelector.xaml

@@ -1,12 +1,12 @@
-﻿<Page x:Class="EStation.Views.Hr.StaffDetails"
+﻿<Page x:Class="eStation.Views.Hr.StaffDetails"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:ext="clr-namespace:EStation.Ext"
-      xmlns:hr="clr-namespace:EStation.Views.Hr"
-      xmlns:security="clr-namespace:EStation.Views.Security"
-      xmlns:common="clr-namespace:EStation.Views.Common"
+      xmlns:ext="clr-namespace:eStation.Ext"
+      xmlns:hr="clr-namespace:eStation.Views.Hr"
+      xmlns:security="clr-namespace:eStation.Views.Security"
+      xmlns:common="clr-namespace:eStation.Views.Common"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="1100" Background="Beige">
     

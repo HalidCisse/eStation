@@ -1,9 +1,9 @@
 ﻿using System.Deployment.Application;
 using System.Reflection;
 using CLib;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Managers {
+namespace eStationCore.Managers {
     public class MetaManager
     {
 

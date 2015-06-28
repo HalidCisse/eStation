@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EStation.Views.Common
+namespace eStation.Views.Common
 {
     /// <summary>
     /// Control de Recherche Text

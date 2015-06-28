@@ -6,11 +6,11 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using CLib;
-using EStation.Views.Common;
-using EStation.Views.Security;
-using EStationCore.Model.Security.Enums;
+using eStation.Views.Common;
+using eStation.Views.Security;
+using eStationCore.Model.Security.Enums;
 
-namespace EStation
+namespace eStation
 {
     
 

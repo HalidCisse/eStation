@@ -1,6 +1,6 @@
 ﻿
 
-namespace EStationCore.Managers {
+namespace eStationCore.Managers {
 
     /// <summary>
     /// Gestion Du Budget

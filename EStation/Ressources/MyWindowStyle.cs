@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using EStation.Ext;
+using eStation.Ext;
 
-namespace EStation.Ressources
+namespace eStation.Ressources
 {
     /// <summary>
     /// 

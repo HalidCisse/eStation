@@ -1,7 +1,7 @@
 ﻿using System;
-using EStationCore.Model.Customers.Entity;
+using eStationCore.Model.Customers.Entity;
 
-namespace EStationCore.Model.Customers.Views
+namespace eStationCore.Model.Customers.Views
 {
     public class CustomerCard
     {       

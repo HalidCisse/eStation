@@ -8,11 +8,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStation.Views.Common;
-using EStation.Views.Security;
-using EStationCore.Model.Security.Enums;
+using eStation.Views.Common;
+using eStation.Views.Security;
+using eStationCore.Model.Security.Enums;
 
-namespace EStation
+namespace eStation
 {
    
     internal partial class Login

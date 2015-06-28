@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Common.Entity;
-using EStationCore.Model.Common.Enums;
-using EStationCore.Model.Sale.Entity;
+using eStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Enums;
+using eStationCore.Model.Sale.Entity;
 
-namespace EStationCore.Model.Customers.Entity
+namespace eStationCore.Model.Customers.Entity
 {
 
     /// <summary>

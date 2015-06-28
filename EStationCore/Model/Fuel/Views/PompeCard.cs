@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 using Humanizer;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class PompeCard
     {

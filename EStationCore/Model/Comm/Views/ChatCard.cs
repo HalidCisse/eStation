@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using CLib;
-using EStationCore.Model.Comm.Entity;
+using eStationCore.Model.Comm.Entity;
 
-namespace EStationCore.Model.Comm.Views {
+namespace eStationCore.Model.Comm.Views {
 
     /// <summary>
     /// Une Conversation avec une Groupe de Personnes

@@ -6,11 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStation.Ext;
-using EStationCore.Model.Hr.Entity;
+using eStation.Ext;
+using eStationCore.Model.Hr.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     
     /// <summary>

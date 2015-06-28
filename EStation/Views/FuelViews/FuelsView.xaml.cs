@@ -6,14 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStation.Ext;
-using EStation.Views.Fuel;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Fuel.Views;
-using EStationCore.Model.Sale.Views;
+using eStation.Ext;
+using eStation.Views.Fuel;
+using eStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Views;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.FuelViews
+namespace eStation.Views.FuelViews
 {
     internal partial class FuelsView 
     {

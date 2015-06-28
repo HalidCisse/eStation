@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.FuelViews
+namespace eStation.Views.FuelViews
 {
     internal partial class AddFuelDelivery
     {

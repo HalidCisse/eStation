@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class ColonneCard
     {

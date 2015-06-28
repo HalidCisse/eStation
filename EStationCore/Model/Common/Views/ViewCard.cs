@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using EStationCore.Model.Hr.Entity;
+using eStationCore.Model.Hr.Entity;
 
-namespace EStationCore.Model.Common.Views
+namespace eStationCore.Model.Common.Views
 {
     /// <summary>
     /// 

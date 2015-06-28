@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Journals {
+namespace eStation.Views.Journals {
 
     
     internal partial class CaisseTransactions
@@ -19,15 +19,18 @@ namespace EStation.Views.Journals {
             InitializeComponent();
         }
 
-
         
-        public async Task Refresh ( DateTime fromDate, DateTime toDate) {
-            _fromDate=fromDate;
-            _toDate=toDate;
-            await Dispatcher.BeginInvoke(new Action(() =>{
-                _TRANS_LIST.ItemsSource = App.Store.Economat.Finance.GetTransactions(_fromDate, _toDate);
-                Refreshed?.Invoke(null, EventArgs.Empty);
-            }));
+        public async Task Refresh (DateTime fromDate, DateTime toDate, bool shouldInvoke = false) {
+            await Dispatcher.BeginInvoke(new Action(async () =>
+            {
+                _fromDate = fromDate;
+                _toDate = toDate;
+
+                _TRANS_LIST.ItemsSource = await App.Store.Economat.Finance.GetTransactions(_fromDate, _toDate);
+
+                if (shouldInvoke)
+                    Refreshed?.Invoke(null, EventArgs.Empty);              
+            }));                        
         }
 
 
@@ -35,7 +38,7 @@ namespace EStation.Views.Journals {
         {
             var wind = new AddTransaction { Owner=Window.GetWindow(this) };
             wind.ShowDialog();
-            await Refresh(_fromDate, _toDate);
+            await Refresh(_fromDate, _toDate , true);
         }
 
 
@@ -54,7 +57,7 @@ namespace EStation.Views.Journals {
                 return;
             }
 
-            await Refresh(_fromDate, _toDate);
+            await Refresh(_fromDate, _toDate, true);
             ModernDialog.ShowMessage("Annuler avec Succès !", "EStation", MessageBoxButton.OK);            
         }
 

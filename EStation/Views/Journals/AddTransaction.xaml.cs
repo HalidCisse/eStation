@@ -4,12 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CLib;
-using EStation.Ext;
-using EStationCore.Model.Hr.Enums;
-using EStationCore.Model.Sale.Entity;
+using eStation.Ext;
+using eStationCore.Model.Hr.Enums;
+using eStationCore.Model.Sale.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
 
     internal partial class AddTransaction {

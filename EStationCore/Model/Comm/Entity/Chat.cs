@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Model.Comm.Entity {
+namespace eStationCore.Model.Comm.Entity {
 
     /// <summary>
     /// Talk, Chat, Dicussion

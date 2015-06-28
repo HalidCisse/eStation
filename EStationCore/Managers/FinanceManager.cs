@@ -5,12 +5,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Hr.Views;
-using EStationCore.Model.Sale.Entity;
-using EStationCore.Model.Sale.Enums;
+using eStationCore.Model;
+using eStationCore.Model.Hr.Views;
+using eStationCore.Model.Sale.Entity;
+using eStationCore.Model.Sale.Enums;
 
-namespace EStationCore.Managers {
+namespace eStationCore.Managers {
 
     /// <summary>
     /// Tresorerie
@@ -93,37 +93,40 @@ namespace EStationCore.Managers {
         /// <param name="endDate"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public IEnumerable GetTransactions(DateTime? startDate, DateTime? endDate, bool includeDeleted = false)
+        public async Task<IEnumerable<TransactionCard>> GetTransactions(DateTime? startDate, DateTime? endDate, bool includeDeleted = false)
         {
-            if (includeDeleted)
+            return await Task.Run(() =>
+            {
+                if (includeDeleted)
+                    using (var db = new StationContext())
+                    {
+                        if (startDate == null || endDate == null)
+                            return
+                                db.Transactions.OrderByDescending(t => t.TransactionDate)
+                                    .ToList()
+                                    .Select(t => new TransactionCard(t));
+
+                        return db.Transactions.Where(t =>
+                            t.TransactionDate >= startDate &&
+                            t.TransactionDate <= endDate
+                            ).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
+                    }
+
                 using (var db = new StationContext())
                 {
                     if (startDate == null || endDate == null)
                         return
-                            db.Transactions.OrderByDescending(t => t.TransactionDate)
+                            db.Transactions.Where(t => !t.IsDeleted)
+                                .OrderByDescending(t => t.TransactionDate)
                                 .ToList()
                                 .Select(t => new TransactionCard(t));
 
-                    return db.Transactions.Where(t =>
-                        t.TransactionDate >= startDate &&
-                        t.TransactionDate <= endDate
+                    return db.Transactions.Where(t => !t.IsDeleted &&
+                                                      t.TransactionDate >= startDate &&
+                                                      t.TransactionDate <= endDate
                         ).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
                 }
-
-            using (var db = new StationContext())
-            {
-                if (startDate == null || endDate == null)
-                    return
-                        db.Transactions.Where(t => !t.IsDeleted)
-                            .OrderByDescending(t => t.TransactionDate)
-                            .ToList()
-                            .Select(t => new TransactionCard(t));
-
-                return db.Transactions.Where(t => !t.IsDeleted &&
-                                                  t.TransactionDate >= startDate &&
-                                                  t.TransactionDate <= endDate
-                    ).OrderByDescending(t => t.TransactionDate).ToList().Select(t => new TransactionCard(t));
-            }
+            });
         }
 
         #endregion

@@ -4,11 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Fuel.Views;
+using eStationCore.Model;
+using eStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Views;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class FuelManager
     {
@@ -82,6 +82,7 @@ namespace EStationCore.Managers
                 if (myObject == null) throw new InvalidOperationException("DELIVERY_NOT_FOUND");
 
                 myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
                 myObject.IsDeleted = true;
 
                 db.FuelDeliverys.Attach(myObject);
@@ -96,7 +97,7 @@ namespace EStationCore.Managers
 
 
 
-        #region Views
+        #region Functions
 
 
         public async Task<double> GetTotalDeliveryLiter(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
@@ -156,6 +157,7 @@ namespace EStationCore.Managers
             });
         }
 
+
         public double GetLiterSold(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {            
                 using (var db = new StationContext())
@@ -178,12 +180,14 @@ namespace EStationCore.Managers
         }
 
 
-        public async Task<List<Fuel>> GetFuels()
+        public async Task<List<Fuel>> GetFuels(DateTime date = default(DateTime))
         {
             return await Task.Run(() =>
             {
                 using (var db = new StationContext())
-                    return db.Fuels.Where(f => !f.IsDeleted).ToList();
+                    return date == default(DateTime)
+                        ? db.Fuels.Where(f => !f.IsDeleted).ToList()
+                        : db.Fuels.Where(f => !f.IsDeleted || f.DeleteDate < date).ToList();
             });
         }
 
@@ -251,7 +255,7 @@ namespace EStationCore.Managers
                     using (var db = new StationContext())
                         return db.FuelPrelevements.Any(
                                     p =>
-                                    p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate && !p.IsDeleted)
+                                    p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate && !p.IsDeleted )
                                 ? db.FuelPrelevements.Where(
                                     p =>
                                     p.DatePrelevement >= fromDate &&
@@ -273,7 +277,7 @@ namespace EStationCore.Managers
                     if (stocks == null)
                         return 0;
 
-                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Where(c => !c.IsDeleted).Select(p=> p.Prelevements.Where(p=>!p.IsDeleted)).Sum(p => p.Sum(v=> v.Result));
+                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Where(c => !c.IsDeleted).Select(p=> p.Prelevements.Where(l=>!l.IsDeleted)).Sum(p => p.Sum(v=> v.Result));
                     if (prelevs == null)
                         return 0;
 

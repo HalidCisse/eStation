@@ -1,8 +1,8 @@
 ﻿using System;
 using CLib;
-using EStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Entity;
 
-namespace EStationCore.Model.Fuel.Views
+namespace eStationCore.Model.Fuel.Views
 {
     public class FuelDeliveryCard
     {

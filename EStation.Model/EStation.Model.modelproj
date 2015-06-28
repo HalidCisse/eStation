@@ -52,12 +52,12 @@
       <Name>CLib</Name>
       <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\EStationCore\EStation.Core.csproj">
-      <Name>EStation.Core</Name>
+    <ProjectReference Include="..\EStationCore\eStationCore.csproj">
+      <Name>eStationCore</Name>
       <Project>{c57f8245-b031-4f98-9b2c-e10eeaef1b1a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\EStation\EStation.csproj">
-      <Name>EStation</Name>
+      <Name>eStation</Name>
       <Project>{f73ec04f-d3a8-4ad2-b732-3b8c638385ef}</Project>
     </ProjectReference>
   </ItemGroup>

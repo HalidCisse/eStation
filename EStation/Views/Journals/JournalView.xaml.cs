@@ -1,8 +1,10 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
    
     internal partial class JournalView 
@@ -10,6 +12,16 @@ namespace EStation.Views.Journals
         public JournalView()
         {
             InitializeComponent();
+
+            Task.Run(async () => await Refresh(DateTime.Today.AddMonths(-1), DateTime.Today));
+        }
+
+
+        public async Task Refresh(DateTime fromDate, DateTime toDate)
+        {
+            await _FUEL_PERIOD.Refresh(fromDate, toDate)
+            .ContinueWith(task => _OIL_PERIOD.Refresh(fromDate, toDate))
+            .ContinueWith(task => FinanceCard.Refresh(fromDate: fromDate, toDate: toDate));
         }
 
         private async void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e) 
@@ -25,7 +37,7 @@ namespace EStation.Views.Journals
                 => await _TRANS_CARD.Refresh(FinanceCard.FromDate, FinanceCard.ToDate);
 
         private async void CaisseTransactions_OnRefreshed(object sender, EventArgs e) 
-                =>await FinanceCard.Refresh();        
+                =>await FinanceCard.Refresh(false);        
 
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Oil.Entity;
+using eStationCore.Model.Common.Views;
+using eStationCore.Model.Oil.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.OilViews
+namespace eStation.Views.OilViews
 {
     internal partial class AddOilPrelev 
     {

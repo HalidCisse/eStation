@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace EStationCore.Helpers
+namespace eStationCore.Helpers
 {
     /// <summary>
     /// 

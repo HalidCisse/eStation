@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using EStationCore.Model;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Fuel.Views;
+using eStationCore.Model;
+using eStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Fuel.Views;
 using Humanizer;
 
-namespace EStationCore.Managers
+namespace eStationCore.Managers
 {
     public class PompesManager
     {
@@ -80,12 +80,21 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool Delete(Guid pompeGuid)
+        public async Task<bool> Delete(Guid pompeGuid)
         {
             using (var db = new StationContext())
             {
-                db.Pompes.Remove(db.Pompes.Find(pompeGuid));
-                return db.SaveChanges() > 0;
+                var myObject = await db.Pompes.FindAsync(pompeGuid);
+
+                if (myObject == null) throw new InvalidOperationException("POMPE_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.DeleteDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.Pompes.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -134,9 +143,9 @@ namespace EStationCore.Managers
         {           
             using (var db = new StationContext()){
                 var prelevements = new List<FuelPrelevement>();
-                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c=> !c.IsDeleted)))
                     foreach (var citerne in citernes)
-                        prelevements.AddRange(citerne.Prelevements.Where(p=> p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date<= toDate));
+                        prelevements.AddRange(citerne.Prelevements.Where(p=> p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date<= toDate && !p.IsDeleted));
                 return prelevements.OrderByDescending(p => p.DatePrelevement).Select(p => new PrelevCard(p)).ToList();
             }
         }
@@ -150,23 +159,27 @@ namespace EStationCore.Managers
         public async Task<FuelPrelevement> GetLastPrelevement(Guid pompeGuid)
             => await StaticGetLastPrelevement(pompeGuid);
 
-        public IEnumerable<ColonneCard> GetColonnesCard()
+        public async Task<List<ColonneCard>> GetColonnesCard()
         {
-            using (var db = new StationContext())
+            return await Task.Run(() =>
             {
-                var cardList = new ConcurrentBag<ColonneCard>();
+                using (var db = new StationContext())
+                {
+                    var cardList = new ConcurrentBag<ColonneCard>();
 
-                var nd = new ColonneCard("");
-                if (nd.Pompes.Any()) { cardList.Add(nd); }
+                    var nd = new ColonneCard("");
+                    if (nd.Pompes.Any())
+                        cardList.Add(nd);
 
-                var cols = (db.Pompes.Where(s => !s.IsDeleted).ToList()
-                    .Where(s => !string.IsNullOrEmpty(s.Colonne))
-                    .Select(s => s.Colonne.ToLower())).Distinct().ToList();
+                    var cols = (db.Pompes.Where(s => !s.IsDeleted).ToList()
+                        .Where(s => !string.IsNullOrEmpty(s.Colonne))
+                        .Select(s => s.Colonne.ToLower())).Distinct().ToList();
 
-                Parallel.ForEach(cols, dep => cardList.Add(new ColonneCard(dep)));
+                    Parallel.ForEach(cols, dep => cardList.Add(new ColonneCard(dep)));
 
-                return cardList.Any() ? cardList.OrderBy(d => d.Libel).ToList() : null;
-            }
+                    return cardList.Any() ? cardList.OrderBy(d => d.Libel).ToList() : null;
+                }
+            });
         }
 
 
@@ -183,7 +196,7 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Pompes.Find(pompeGuid).Prelevements.OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
+                return db.Pompes.Find(pompeGuid).Prelevements.Where(p=> !p.IsDeleted).OrderByDescending(p => p.DatePrelevement).FirstOrDefault() ?? 
                     new FuelPrelevement {Meter = db.Pompes.Find(pompeGuid).InitialMeter};
             });
         }

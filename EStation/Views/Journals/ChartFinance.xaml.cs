@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
-using EStationCore.Model.Sale.Enums;
+using eStationCore.Model.Sale.Enums;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
    
     internal partial class ChartFinance

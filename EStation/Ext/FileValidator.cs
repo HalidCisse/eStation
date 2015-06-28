@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Controls;
 using CLib.FilesHelper;
 
-namespace EStation.Ext {
+namespace eStation.Ext {
 
     internal class FileValidator:ValidationRule
     {

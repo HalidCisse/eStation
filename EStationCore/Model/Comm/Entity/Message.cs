@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Common.Entity;
+using eStationCore.Model.Common.Entity;
 
-namespace EStationCore.Model.Comm.Entity {
+namespace eStationCore.Model.Comm.Entity {
 
     /// <summary>
     /// Message, Talk

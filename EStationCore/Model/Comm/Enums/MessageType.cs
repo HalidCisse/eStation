@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EStationCore.Model.Comm.Enums {
+namespace eStationCore.Model.Comm.Enums {
 
     /// <summary>
     /// MessageType

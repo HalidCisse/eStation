@@ -1,6 +1,6 @@
 ﻿
 
-namespace EStationCore.Model.Security.Entity
+namespace eStationCore.Model.Security.Entity
 {
     
     public static class SecurityClearances

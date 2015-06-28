@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CLib;
-using EStationCore.Model.Common.Views;
-using EStationCore.Model.Security.Enums;
+using eStationCore.Model.Common.Views;
+using eStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Security
+namespace eStation.Views.Security
 {
     internal partial class USpaces {
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using CLib;
-using EStationCore.Model.Sale.Entity;
-using EStationCore.Model.Sale.Enums;
-using EStationCore.Properties;
+using eStationCore.Model.Sale.Entity;
+using eStationCore.Model.Sale.Enums;
+using eStationCore.Properties;
 
-namespace EStationCore.Model.Sale.Views
+namespace eStationCore.Model.Sale.Views
 {
     public class PurchaseCard
     {

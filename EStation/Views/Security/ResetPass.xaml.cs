@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace EStation.Views.Security
+namespace eStation.Views.Security
 {
     
 

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CLib.Database.Interfaces;
-using EStationCore.Model.Comm.Entity;
-using EStationCore.Model.Common.Enums;
+using eStationCore.Model.Comm.Entity;
+using eStationCore.Model.Common.Enums;
 
-namespace EStationCore.Model.Common.Entity
+namespace eStationCore.Model.Common.Entity
 {
     public class Person : Tracable
     {

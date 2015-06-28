@@ -8,7 +8,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 
-namespace EStation.Views.Journals
+namespace eStation.Views.Journals
 {
     internal partial class ChartFuelSale 
     {
@@ -21,16 +21,9 @@ namespace EStation.Views.Journals
             InitializeComponent();
         }
 
-        public async Task<bool> Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
-        {
-            await Dispatcher.BeginInvoke(new Action(
-                            async () => await Task.Run(() => SetUpModel(fuelsGuids, fromDate, toDate))));
-            return true;
-        }
-
-        private async void SetUpModel(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
+        public async Task Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {           
-            List<EStationCore.Model.Fuel.Entity.Fuel> fuels;
+            List<eStationCore.Model.Fuel.Entity.Fuel> fuels;
 
             if (_isFistHit)
             {

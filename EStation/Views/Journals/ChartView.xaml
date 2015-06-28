@@ -1,10 +1,10 @@
-﻿<Page x:Class="EStation.Views.Journals.ChartView"
+﻿<Page x:Class="eStation.Views.Journals.ChartView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:ext="clr-namespace:EStation.Ext"
-      xmlns:journals="clr-namespace:EStation.Views.Journals"
+      xmlns:ext="clr-namespace:eStation.Ext"
+      xmlns:journals="clr-namespace:eStation.Views.Journals"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="1080" Background="Beige" x:ClassModifier="internal">
 
@@ -27,8 +27,8 @@
 
         <TabControl Name="_MY_TAB_CONTROL" Background="Transparent" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
                     Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
-            
-            <TabItem Header="      Finance" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">                
+
+            <TabItem Header="         Revenues Financières" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">                
                 <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
             </TabItem>
             

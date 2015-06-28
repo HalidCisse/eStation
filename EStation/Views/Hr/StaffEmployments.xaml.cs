@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace EStation.Views.Hr
+namespace eStation.Views.Hr
 {
     /// <summary>
     /// List des Employements

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace EStation.Views.Clients
+namespace eStation.Views.Clients
 {
    
     public partial class CompaniesView 

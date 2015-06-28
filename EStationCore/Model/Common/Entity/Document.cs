@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CLib.Database.Interfaces;
 using CLib.Enums;
 
-namespace EStationCore.Model.Common.Entity
+namespace eStationCore.Model.Common.Entity
 {
     /// <summary>
     /// Document d'une personne

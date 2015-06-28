@@ -1,12 +1,12 @@
 ﻿using System.Data.Entity;
-using EStationCore.Model.Comm.Entity;
-using EStationCore.Model.Customers.Entity;
-using EStationCore.Model.Fuel.Entity;
-using EStationCore.Model.Hr.Entity;
-using EStationCore.Model.Oil.Entity;
-using EStationCore.Model.Sale.Entity;
+using eStationCore.Model.Comm.Entity;
+using eStationCore.Model.Customers.Entity;
+using eStationCore.Model.Fuel.Entity;
+using eStationCore.Model.Hr.Entity;
+using eStationCore.Model.Oil.Entity;
+using eStationCore.Model.Sale.Entity;
 
-namespace EStationCore.Model
+namespace eStationCore.Model
 {
     public class StationContext : DbContext
     {
