@@ -53,11 +53,19 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
             {
-                db.Fuels.Remove(db.Fuels.Find(fuelGuid));
+                var myObject = await db.Fuels.FindAsync(fuelGuid);
+
+                if (myObject == null) throw new InvalidOperationException("FUEL_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.Fuels.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
                 return await db.SaveChangesAsync() > 0;
             }
         }
-
+        
         public async Task<Fuel> Get(Guid fuelGuid)
         {
             using (var db = new StationContext())
@@ -65,21 +73,40 @@ namespace EStationCore.Managers
         }
 
 
+        public async Task<bool> DeleteDelivery(Guid deliveryGuid)
+        {
+            using (var db = new StationContext())
+            {
+                var myObject = await db.FuelDeliverys.FindAsync(deliveryGuid);
+
+                if (myObject == null) throw new InvalidOperationException("DELIVERY_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.FuelDeliverys.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
+            }
+        }
+
+        
+
         #endregion
 
 
 
         #region Views
 
-        
+
         public async Task<double> GetTotalDeliveryLiter(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
             return await Task.Run(() => {
                 using (var db = new StationContext()){
                 var stocks = new List<FuelDelivery>();
-                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c => !c.IsDeleted)))
                     foreach (var citerne in citernes)
-                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                 return stocks.Sum(p => p.QuantityDelivered);
             }
             });
@@ -91,9 +118,9 @@ namespace EStationCore.Managers
             return await Task.Run(() => {
                 using (var db = new StationContext()){
                 var stocks = new List<FuelDelivery>();
-                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c=> !c.IsDeleted)))
                     foreach (var citerne in citernes)
-                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate));
+                        stocks.AddRange(citerne.Deliveries.Where(p => p.DeliveryDate.GetValueOrDefault().Date >= fromDate && p.DeliveryDate.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                 return stocks.Sum(p => p.Cost);
             }
             });
@@ -106,9 +133,9 @@ namespace EStationCore.Managers
                 using (var db = new StationContext())
             {
                 var prelevements = new List<FuelPrelevement>();
-                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c => !c.IsDeleted)))
                     foreach (var citerne in citernes)
-                        prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                        prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                 return prelevements.Sum(p => p.Result * p.CurrentPrice);
             }
             });
@@ -121,9 +148,9 @@ namespace EStationCore.Managers
                 using (var db = new StationContext())
                 {
                     var prelevements = new List<FuelPrelevement>();
-                    foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c => !c.IsDeleted)))
                         foreach (var citerne in citernes)
-                            prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                            prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                     return prelevements.Sum(p => p.Result);
                 }
             });
@@ -134,9 +161,9 @@ namespace EStationCore.Managers
                 using (var db = new StationContext())
                 {
                     var prelevements = new List<FuelPrelevement>();
-                    foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes))
+                    foreach (var citernes in db.Fuels.Where(f => fuelsGuids.Contains(f.FuelGuid)).Select(d => d.Citernes.Where(c => !c.IsDeleted)))
                         foreach (var citerne in citernes)
-                            prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate));
+                            prelevements.AddRange(citerne.Prelevements.Where(p => p.DatePrelevement.GetValueOrDefault().Date >= fromDate && p.DatePrelevement.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                     return prelevements.Sum(p => p.Result);
                 }           
         }
@@ -146,7 +173,7 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Fuels.ToList().Select(f => new FuelCard(f)).ToList();
+                return db.Fuels.Where(f=> !f.IsDeleted).ToList().Select(f => new FuelCard(f)).ToList();
             });
         }
 
@@ -156,7 +183,7 @@ namespace EStationCore.Managers
             return await Task.Run(() =>
             {
                 using (var db = new StationContext())
-                    return db.Fuels.ToList();
+                    return db.Fuels.Where(f => !f.IsDeleted).ToList();
             });
         }
 
@@ -224,11 +251,11 @@ namespace EStationCore.Managers
                     using (var db = new StationContext())
                         return db.FuelPrelevements.Any(
                                     p =>
-                                    p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate)
+                                    p.DatePrelevement >= fromDate && p.DatePrelevement <= toDate && !p.IsDeleted)
                                 ? db.FuelPrelevements.Where(
                                     p =>
                                     p.DatePrelevement >= fromDate &&
-                                    p.DatePrelevement <= toDate)
+                                    p.DatePrelevement <= toDate && !p.IsDeleted)
                                     .Sum(p => p.Result*p.CurrentPrice)
                                 : 0;
             });
@@ -242,11 +269,11 @@ namespace EStationCore.Managers
                 double diff;
                 try
                 {
-                    var stocks = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Select(c=> c.Deliveries).Sum(s => s.Sum(l=> l.QuantityDelivered));
+                    var stocks = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Where(c=>!c.IsDeleted).Select(c=> c.Deliveries.Where(d=>!d.IsDeleted)).Sum(s => s.Sum(l=> l.QuantityDelivered));
                     if (stocks == null)
                         return 0;
 
-                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Select(p=> p.Prelevements).Sum(p => p.Sum(v=> v.Result));
+                    var prelevs = (await db.Fuels.FindAsync(fuelGuid))?.Citernes.Where(c => !c.IsDeleted).Select(p=> p.Prelevements.Where(p=>!p.IsDeleted)).Sum(p => p.Sum(v=> v.Result));
                     if (prelevs == null)
                         return 0;
 
@@ -275,6 +302,6 @@ namespace EStationCore.Managers
 
         #endregion
 
-
+        
     }
 }

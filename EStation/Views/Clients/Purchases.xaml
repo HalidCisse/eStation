@@ -58,6 +58,17 @@
                 </MenuItem.Header>
             </MenuItem>
 
+            <MenuItem Height="50" Margin="10,0" Click="DeletePay_Click">
+                <MenuItem.Icon>
+                    <!--<Image Source="{StaticResource NoIcon}" Height="40" Width="40"/>-->
+                    <TextBlock Text="&#xf00d;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Red" Height="40" Width="40"/>
+                </MenuItem.Icon>
+
+                <MenuItem.Header>
+                    <TextBlock Text="Supprimer Bon" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+
         </ContextMenu>
     </UserControl.Resources>
 

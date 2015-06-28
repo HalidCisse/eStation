@@ -8,14 +8,23 @@
 
     <UserControl.Resources>
         <ContextMenu x:Key="ContextMenu">
-            <MenuItem Height="50" Margin="10,0" Click="ChangeLitrage" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
+
+            <MenuItem Height="50" Margin="10,0" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}" Click="Delete_OnClick">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xf00d;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Red" Height="40" Width="40"/>
+                </MenuItem.Icon>
+                <MenuItem.Header>
+                    <TextBlock Text="Supprimer Entreprise" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <!--<MenuItem Height="50" Margin="10,0" Click="ChangeLitrage" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}">
                 <MenuItem.Icon>
                     <TextBlock Text="&#xf155;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Gray" Height="40" Width="40"/>
                 </MenuItem.Icon>
                 <MenuItem.Header>
                     <TextBlock Text="Charger Prix Litrage" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
                 </MenuItem.Header>
-            </MenuItem>          
+            </MenuItem>-->          
             
         </ContextMenu>
     </UserControl.Resources>

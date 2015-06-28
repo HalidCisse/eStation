@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CLib;
+using EStation.Ext;
 using EStationCore.Model.Sale.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EStation.Views.Clients
 {
@@ -14,7 +17,7 @@ namespace EStation.Views.Clients
 
         public event EventHandler SelectionChanged;
 
-        private List<Guid> SelectedCompanies => new List<Guid>(_CUSTOMERS.SelectedItems.Cast<CompanyCard>().Select(c => c.CompanyGuid));
+        private List<Guid> SelectedCompanies => new List<Guid>(_COMPANIES.SelectedItems.Cast<CompanyCard>().Select(c => c.CompanyGuid));
 
 
         public Companies()
@@ -25,10 +28,11 @@ namespace EStation.Views.Clients
         }
 
 
-        internal async Task Refresh()=> await Dispatcher.BeginInvoke(new Action(async () => {
-            _CUSTOMERS.ItemsSource = await App.Store.Sales.GetCompaniesCards();
-            _CUSTOMERS.SelectAll();
-        }));
+        internal async Task Refresh()
+        {           
+            _COMPANIES.ItemsSource = await App.Store.Sales.GetCompaniesCards();
+            _COMPANIES.SelectAll();           
+        }
 
         private async void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -42,13 +46,41 @@ namespace EStation.Views.Clients
 
         private async void _CUSTOMERS_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (_CUSTOMERS.SelectedValue == null) return;
+            if (_COMPANIES.SelectedValue == null) return;
 
-            var wind = new AddCompany((Guid)_CUSTOMERS.SelectedValue) { Owner = Window.GetWindow(this) };
+            var wind = new AddCompany((Guid)_COMPANIES.SelectedValue) { Owner = Window.GetWindow(this) };
             wind.ShowDialog();
             await Refresh();
         }
 
+        private async void DeleteCompany_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (_COMPANIES.SelectedItem == null) return;
 
+            try
+            {
+                var card = ((CompanyCard)_COMPANIES.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de supprimer " + card.Name + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Sales.Delete(card.CompanyGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh();
+            e.Handled = true;
+        }
     }
 }

@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using CLib;
+using EStation.Ext;
+using EStationCore.Model.Fuel.Views;
+using EStationCore.Model.Sale.Views;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EStation.Views.FuelViews
 {
@@ -18,8 +23,8 @@ namespace EStation.Views.FuelViews
         {
             _currentCiterne = currentCiterne;
             
-                _STOCKS.ItemsSource = await App.Store.Citernes.GetCiterneStocks(currentCiterne);
-                _TITLE_TEXT.Text = "LIVRAISONS " +(await App.Store.Citernes.Get(currentCiterne))?.Libel.ToUpper();
+            _STOCKS.ItemsSource = await App.Store.Citernes.GetCiterneStocks(currentCiterne);
+            _TITLE_TEXT.Text = "LIVRAISONS " +(await App.Store.Citernes.Get(currentCiterne))?.Libel.ToUpper();
                    
         }
 
@@ -31,7 +36,36 @@ namespace EStation.Views.FuelViews
             await Refresh(_currentCiterne);
         }
 
+        private async void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            return;
 
+            if ( _STOCKS.SelectedItem == null) return;
 
+            try
+            {
+                var card = ((FuelDeliveryCard)_STOCKS.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de supprimer cette livraison de " + card.Supplier + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Fuels.DeleteDelivery(card.FuelDeliveryGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh(_currentCiterne);
+            e.Handled = true;
+        }
     }
 }

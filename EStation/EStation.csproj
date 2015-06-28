@@ -30,7 +30,8 @@
     <ProductName>EStation</ProductName>
     <PublisherName>Halid Cisse</PublisherName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -694,9 +695,9 @@
       <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
       <Name>CLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EStationCore\EStationCore.csproj">
+    <ProjectReference Include="..\EStationCore\EStation.Core.csproj">
       <Project>{c57f8245-b031-4f98-9b2c-e10eeaef1b1a}</Project>
-      <Name>EStationCore</Name>
+      <Name>EStation.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

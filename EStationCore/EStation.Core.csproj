@@ -121,7 +121,7 @@
     <Compile Include="Model\Fuel\Views\FuelCard.cs" />
     <Compile Include="Model\Fuel\Views\PompeCard.cs" />
     <Compile Include="Model\Fuel\Views\PrelevCard.cs" />
-    <Compile Include="Model\Fuel\Views\StockCard.cs" />
+    <Compile Include="Model\Fuel\Views\FuelDeliveryCard.cs" />
     <Compile Include="Model\Hr\Entity\BillPayOff.cs" />
     <Compile Include="Model\Hr\Entity\Employement.cs" />
     <Compile Include="Model\Hr\Entity\Paycheck.cs" />

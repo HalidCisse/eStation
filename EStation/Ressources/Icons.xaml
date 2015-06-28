@@ -48,6 +48,10 @@
     <BitmapImage x:Key="DocIcon" UriSource="../Ressources/Icon/Doc.png" />
     <BitmapImage x:Key="RoleIcon" UriSource="../Ressources/Icon/Role.png" />
 
+    <BitmapImage x:Key="NoIcon" UriSource="../Ressources/Icon/No.png" />
+
+    <BitmapImage x:Key="YesIcon" UriSource="../Ressources/Icon/yes.png" />
+
 
 
 </ResourceDictionary>

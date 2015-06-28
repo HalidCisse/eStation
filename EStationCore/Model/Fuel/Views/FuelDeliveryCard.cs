@@ -4,12 +4,12 @@ using EStationCore.Model.Fuel.Entity;
 
 namespace EStationCore.Model.Fuel.Views
 {
-    public class StockCard
+    public class FuelDeliveryCard
     {
 
-        public StockCard(FuelDelivery fuelDelivery)
+        public FuelDeliveryCard(FuelDelivery fuelDelivery)
         {
-            FuelStockGuid = fuelDelivery.FuelDeliveryGuid;
+            FuelDeliveryGuid = fuelDelivery.FuelDeliveryGuid;
             Supplier = fuelDelivery.Supplier;
             Quantity = fuelDelivery.QuantityDelivered.ToString("0.##\\ Litres");
             Cost = fuelDelivery.Cost.ToString("C0");
@@ -18,7 +18,7 @@ namespace EStationCore.Model.Fuel.Views
         }
 
 
-        public Guid FuelStockGuid { get; }
+        public Guid FuelDeliveryGuid { get; }
 
         public string Supplier { get; }
 

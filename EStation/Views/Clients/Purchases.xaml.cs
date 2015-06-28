@@ -5,6 +5,10 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CLib;
+using EStation.Ext;
+using EStationCore.Model.Hr.Enums;
+using EStationCore.Model.Sale.Entity;
 using EStationCore.Model.Sale.Enums;
 using EStationCore.Model.Sale.Views;
 using FirstFloor.ModernUI.Windows.Controls;
@@ -144,5 +148,36 @@ namespace EStation.Views.Clients
 
            await Refresh( _companiesGuids, _fromDate, _toDate);
         }
+
+        private async void DeletePay_Click(object sender, RoutedEventArgs e)
+        {
+            if (_PURCHASES.SelectedValue == null || _PURCHASES.SelectedItem == null) return;
+           
+            try
+            {
+                var payCard = ((PurchaseCard)_PURCHASES.SelectedItem);
+
+                var dialog = new ModernDialog
+                {
+                    Title = "eStation",
+                    Content = "Ete vous sure de Supprimer cet Bon de " + payCard.Company + " ?"
+                };
+
+                if (dialog.ShowDialogOkCancel() != MessageBoxResult.OK)
+                    return;
+                if (await App.Store.Sales.DeletePurchase(payCard.PurchaseGuid))
+                    ModernDialog.ShowMessage("Supprimer avec Success !", "eStation", MessageBoxButton.OK);
+                else
+                    ModernDialog.ShowMessage("Erreur Inconnue !", "eStation", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                ModernDialog.ShowMessage(ex.Message, "ERREUR", MessageBoxButton.OK);
+            }
+            await Refresh(_companiesGuids, _fromDate, _toDate);            
+            e.Handled = true;
+        }
+
     }
 }

@@ -6,6 +6,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" Width="350" x:ClassModifier="internal" Background="Beige">
 
+    <UserControl.Resources>
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem Height="50" Margin="10,0" Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}" Click="ContextDelete_OnClick">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xf00d;" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" FontSize="40" Foreground="Red" Height="40" Width="40"/>
+                </MenuItem.Icon>
+                <MenuItem.Header>
+                    <TextBlock Text="Supprimer Entreprise" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
+                </MenuItem.Header>
+            </MenuItem>
+
+        </ContextMenu>
+    </UserControl.Resources>
 
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="40" Background="#25A0DA">
@@ -22,7 +35,7 @@
         <ListBox x:Name="_CITERNES" Background="Beige" SelectedValuePath="CiterneGuid" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="OnCiterneSelectionChanged" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Margin="5,5" Width="320" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
+                    <DockPanel Margin="5,5" Width="320" ContextMenu="{StaticResource ContextMenu}" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
                         <Ellipse DockPanel.Dock="Left" Width="50" Height="50" VerticalAlignment="Center" Margin="5,0">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{StaticResource TankIcon}"/>

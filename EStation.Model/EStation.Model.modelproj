@@ -25,6 +25,9 @@
     <Content Include="ModelDefinition\Package_1300.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package_1526.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="UMLClassDiagram1.classdiagram">
       <SubType>Content</SubType>
     </Content>
@@ -32,15 +35,30 @@
       <SubType>Content</SubType>
       <DependentUpon>UMLClassDiagram1.classdiagram</DependentUpon>
     </Content>
+    <Content Include="UMLUseCaseDiagram.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLUseCaseDiagram.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLUseCaseDiagram.usecasediagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\EStation.Model.uml">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EStationCore\EStationCore.csproj">
-      <Name>EStationCore</Name>
+    <ProjectReference Include="..\..\ESchool\ESchool\CLib\CLib.csproj">
+      <Name>CLib</Name>
+      <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EStationCore\EStation.Core.csproj">
+      <Name>EStation.Core</Name>
       <Project>{c57f8245-b031-4f98-9b2c-e10eeaef1b1a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EStation\EStation.csproj">
+      <Name>EStation</Name>
+      <Project>{f73ec04f-d3a8-4ad2-b732-3b8c638385ef}</Project>
     </ProjectReference>
   </ItemGroup>
 </Project>

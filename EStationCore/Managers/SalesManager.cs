@@ -50,13 +50,21 @@ namespace EStationCore.Managers
             return result;
         }
 
-        public bool Delete(Guid companyGuid)
+        public async Task<bool> Delete(Guid companyGuid)
         {
             using (var db = new StationContext())
             {
-                db.Companies.Remove(db.Companies.Find(companyGuid));
-                return db.SaveChanges() > 0;
-            }
+                var myCompany= await db.Companies.FindAsync(companyGuid);
+
+                if (myCompany == null) throw new InvalidOperationException("COMPANY_NOT_FOUND");
+
+                myCompany.LastEditDate = DateTime.Now;
+                myCompany.IsDeleted = true;
+
+                db.Companies.Attach(myCompany);
+                db.Entry(myCompany).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
+            }         
         }
 
         public async Task<Company> Get(Guid companyGuid)
@@ -105,12 +113,20 @@ namespace EStationCore.Managers
             }
         }
 
-        public bool DeletePurchase(Guid purchaseGuid)
-        {
+        public async Task<bool> DeletePurchase(Guid purchaseGuid)
+        {         
             using (var db = new StationContext())
             {
-                db.Purchases.Remove(db.Purchases.Find(purchaseGuid));
-                return db.SaveChanges() > 0;
+                var myPurchase = await db.Purchases.FindAsync(purchaseGuid);
+
+                if (myPurchase == null)throw new InvalidOperationException("PURCHASE_NOT_FOUND");
+                
+                myPurchase.LastEditDate = DateTime.Now;
+                myPurchase.IsDeleted = true;
+
+                db.Purchases.Attach(myPurchase);
+                db.Entry(myPurchase).State = EntityState.Modified;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 
@@ -154,7 +170,7 @@ namespace EStationCore.Managers
                 {
                         var purchases = new List<Purchase>();
                         foreach (var companyPurchases in db.Companies.Where(f => companiesGuids.Contains(f.CompanyGuid)).Select(d => d.Purchases))
-                        purchases.AddRange(companyPurchases.Where(p => p.PurchaseDate.GetValueOrDefault().Date >= fromDate && p.PurchaseDate.GetValueOrDefault().Date <= toDate));
+                        purchases.AddRange(companyPurchases.Where(p => p.PurchaseDate.GetValueOrDefault().Date >= fromDate && p.PurchaseDate.GetValueOrDefault().Date <= toDate && !p.IsDeleted));
                     return purchases.OrderByDescending(p => p.PurchaseDate).Select(p => new PurchaseCard(p)).ToList();
                 } });           
         }
@@ -164,7 +180,7 @@ namespace EStationCore.Managers
         {
            return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Companies.ToList().Select(c=> new CompanyCard(c)).ToList();
+                return db.Companies.Where(c=> !c.IsDeleted).ToList().Select(c=> new CompanyCard(c)).ToList();
             });            
         }
 

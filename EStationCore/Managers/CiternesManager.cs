@@ -46,7 +46,15 @@ namespace EStationCore.Managers
         {
             using (var db = new StationContext())
             {
-                db.Citernes.Remove(db.Citernes.Find(citerneGuid));
+                var myObject = await db.Citernes.FindAsync(citerneGuid);
+
+                if (myObject == null) throw new InvalidOperationException("CITERNE_NOT_FOUND");
+
+                myObject.LastEditDate = DateTime.Now;
+                myObject.IsDeleted = true;
+
+                db.Citernes.Attach(myObject);
+                db.Entry(myObject).State = EntityState.Modified;
                 return await db.SaveChangesAsync() > 0;
             }
         }
@@ -104,7 +112,7 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Fuels.ToList().OrderByDescending(c => c.DateAdded).Select(c => new FuelCard(c)).ToList();
+                return db.Fuels.Where(f=> !f.IsDeleted).ToList().OrderByDescending(c => c.DateAdded).Select(c => new FuelCard(c)).ToList();
             });
         }
 
@@ -138,7 +146,7 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Citernes.ToList().OrderByDescending(c=> c.DateAdded).Select(c => new CiterneCard(c)).ToList();
+                return db.Citernes.Where(c=>!c.IsDeleted).ToList().OrderByDescending(c=> c.DateAdded).Select(c => new CiterneCard(c)).ToList();
            });
         }
 
@@ -147,16 +155,16 @@ namespace EStationCore.Managers
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Citernes.OrderByDescending(c=> c.DateAdded).ToList();
+                return db.Citernes.Where(c=> !c.IsDeleted).OrderByDescending(c=> c.DateAdded).ToList();
             });
         }
 
 
-        public async Task<List<StockCard>> GetCiterneStocks(Guid citerneGuid)
+        public async Task<List<FuelDeliveryCard>> GetCiterneStocks(Guid citerneGuid)
         {
             return await Task.Run(() => {
                 using (var db = new StationContext())
-                return db.Citernes.Find(citerneGuid)?.Deliveries.OrderByDescending(s=> s.DateAdded).ToList().Select(s => new StockCard(s)).ToList();
+                return db.Citernes.Find(citerneGuid)?.Deliveries.Where(d=> !d.IsDeleted).OrderByDescending(s=> s.DateAdded).ToList().Select(s => new FuelDeliveryCard(s)).ToList();
              });
         }
 

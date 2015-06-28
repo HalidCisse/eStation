@@ -15,7 +15,11 @@ namespace EStation.Views.Clients
     
 
     internal partial class AddPurchase 
-    {public AddPurchase(Guid companyGuid = default(Guid), bool isFuel = true)
+    {
+        private double _curPrice;
+        private readonly bool _isFuel;
+
+        public AddPurchase(Guid companyGuid = default(Guid), bool isFuel = true)
         {
             _isFuel = isFuel;
             InitializeComponent();
@@ -52,7 +56,8 @@ namespace EStation.Views.Clients
                     ProductType = isFuel ? ProductType.Fuel : ProductType.Oil,
                     ProductGuid = ((KeyValuePair<string, Guid>)_PRODUCT.Items.GetItemAt(0)).Value,
                     PurchaseDate = DateTime.Now,
-                    CompanyGuid = companyGuid
+                    CompanyGuid = companyGuid,
+                    PurchaseState = PurchaseState.UnPaid
                 };
                 _TITLE_TEXT.Text = $"Bon de {(await App.Store.Sales.Get(companyGuid)).Name}";
                 
@@ -105,11 +110,7 @@ namespace EStation.Views.Clients
             _curPrice = _isFuel?  await App.Store.Fuels.GetFuelActualPrice((Guid) _PRODUCT.SelectedValue) : (await App.Store.Oils.Get((Guid)_PRODUCT.SelectedValue)).CurrentUnitPrice;
             _MONTANT.Text = (_QUANTITY.Value.GetValueOrDefault()*_curPrice).ToString("0.##") + " DH";
         }
-        private double _curPrice;
-        private readonly bool _isFuel;
-
-
-        
+           
 
     }
 }

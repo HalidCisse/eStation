@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="c929de10-28a0-48a3-9066-bcd7b90ee25c" name="UMLUseCaseDiagram" linkedPackageId="c1f9ff39-21ab-4d4a-ad30-cc2fb8e9217d" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="30affed4-0a21-482b-aa3d-d3d5cb81f5cd">
+      <elementDefinition Id="016303fd-4596-4ad6-8bcd-65454b6d2021" />
+      <body>Use Case Responsable Ressouces Humaines</body>
+    </comment>
+    <comment Id="5f7f2d38-c717-4a05-9095-87bb7572e596">
+      <elementDefinition Id="e51f9397-6b85-4baf-a85c-366f7ef6ef3e" />
+      <body>Use Case Administrateur</body>
+    </comment>
+    <comment Id="4a17737d-d972-4c7f-9c1e-c2b3c07b437c">
+      <elementDefinition Id="69491672-4be2-4c2f-a76e-4b5b273dcaa8" />
+      <body>Use Case Comptable</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="0992a356-956c-42d5-b3f4-e763ea398c2b">
+      <profileInstance Id="825ad480-693a-439b-9c58-78b23ebf615f" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="a2743886-b735-41d4-a69b-5b011bfaddf7">
+      <profileInstance Id="e80ccec0-8d22-4b2b-ace7-503166b4f7af" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="342fddc5-802d-4dc3-974e-ee6bd7e72899" name="Administrateur" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="af325296-d2d7-4839-951b-0a85f90b2b45" />
+        <targetEnds>
+          <association Id="d59b18db-be00-4666-90e5-24d0903b11ba" isDerived="false" sourceEndRoleName="Administrateur" targetEndRoleName="Login" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="822e745b-67ad-4f44-9156-3bbafe4f7cd7" LastKnownName="Login" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="263e44d0-d02a-49c3-ae4e-be5164ff3985" name="Administrateur" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3df9a469-518e-46b2-ab08-d2f34e07ac92" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f4096750-dd9b-40e8-93f3-5c7d138d17d3" name="Login" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bdc09c72-a069-4f75-82de-a9fb7f590d3e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dc92967e-73a1-45a7-a6a8-2fbb4660a77c" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="b6c0496e-72df-4e52-8775-be8d564986ac" name="eStation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="50cdfeeb-144f-4ee6-b433-6daede627489" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="822e745b-67ad-4f44-9156-3bbafe4f7cd7" name="Login" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3b29d11d-8913-467d-8a59-d7a5e3af5c97" />
+        <suppliersInternal>
+          <dependency Id="da21dcc0-df72-44e7-9f04-4d75b6b59b2b">
+            <useCaseMoniker Id="a692eb89-1329-4a8e-95fa-b969451ee74d" LastKnownName="Saisie Carburants" />
+            <elementDefinition Id="fec7937b-99e1-41c4-8f08-ff0e0674b31d" />
+          </dependency>
+          <dependency Id="ee61ee41-ef41-4549-a7d1-7c47d90e3cb5">
+            <useCaseMoniker Id="03a54161-0655-4ba0-9b8e-af523db5ff80" LastKnownName="Preleve Carburants" />
+            <elementDefinition Id="a50d90a6-b765-42df-9f18-95e591e3b90f" />
+          </dependency>
+          <dependency Id="d3bdf3af-51a6-451a-9b57-2597bf387ff4">
+            <useCaseMoniker Id="cbcd1c2a-9cc9-44f2-964f-612a4d5fe1d8" LastKnownName="Saisie Huiles" />
+            <elementDefinition Id="661fc95a-87de-49b7-979d-2bdf033399c8" />
+          </dependency>
+          <dependency Id="215487a4-dbfd-46f4-8b41-e472adfecfcb">
+            <useCaseMoniker Id="f9a09050-7bb4-4edf-ad67-7cbeb3f26ed8" LastKnownName="Preleve Huiles" />
+            <elementDefinition Id="ff7512b9-c164-47f5-bcd8-2e9d39298e5f" />
+          </dependency>
+          <dependency Id="3b68f51d-fed6-4ea5-8b25-d26f6c414fec">
+            <useCaseMoniker Id="e39cf16d-f6e4-4aeb-9db7-fc2146e28ee5" LastKnownName="Saisie Bons Clients" />
+            <elementDefinition Id="cd7c100b-d01b-43f0-9932-3f28ceb76c90" />
+          </dependency>
+          <dependency Id="b3843397-a1f0-4b9b-954c-27a667c7f033">
+            <useCaseMoniker Id="63904e06-02a6-47f9-a5b4-c3814e50b13c" LastKnownName="Visualisation Graphiques des Ventes" />
+            <elementDefinition Id="6df5ed7c-8473-4836-8000-dc130ce3b691" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="cbcd1c2a-9cc9-44f2-964f-612a4d5fe1d8" name="Saisie Huiles" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ffc039d9-7a04-4b9f-a66e-ede2c445159f" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="a692eb89-1329-4a8e-95fa-b969451ee74d" name="Saisie Carburants" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="10a60f41-2b34-4364-a1a3-f29905f90e92" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="03a54161-0655-4ba0-9b8e-af523db5ff80" name="Preleve Carburants" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="28a9a5bf-769e-4b4c-88e3-42954621d52a" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="f9a09050-7bb4-4edf-ad67-7cbeb3f26ed8" name="Preleve Huiles" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2cf56429-09c3-4c8d-a504-eb5c85f25c4f" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="e39cf16d-f6e4-4aeb-9db7-fc2146e28ee5" name="Saisie Bons Clients" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f10d51fb-654a-42da-90da-533e43f1a5c7" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <actor Id="fc6d5eb7-b1b7-4631-8ac0-610891e3fee5" name="Responsable Ressource Humaine" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="eb83cfb2-0399-4bb6-961d-71f0cb55fca0" />
+        <targetEnds>
+          <association Id="87883ef3-f7b6-480f-a4e3-3bb7c33ad1ab" isDerived="false" sourceEndRoleName="Staff" targetEndRoleName="Registration des Staffs" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="92ca270d-db2e-4ebf-b68b-6ec27936e02d" LastKnownName="Recrutement des Staffs/Pompistes" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d90a57d6-34d6-4f85-bd92-b4654cb43bdb" name="Staff" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="84620be3-453a-41c4-ba33-2af6fe6c3527" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="962d14a8-59dc-48bc-86ed-8a282100f7df" name="Registration des Staffs" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2ec866cc-69b7-4d4d-89bc-9792e9569f2e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="715b600c-a7ff-40d2-89d2-44829a21080d" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" name="Ressources Humaines" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b530a170-b922-4351-9965-5fdd3cefcdb1" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="dbc04230-ffb4-4ced-bf25-a04bb65cf443" name="Gerer les Espaces/Roles des Staffs" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3ce07e77-bf0e-4860-a199-703eb9be605f" />
+        <subjects>
+          <subsystemMoniker Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" LastKnownName="Ressources Humaines" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="9de64269-6446-41c5-a41a-96365b79eb58" name="Creer/Blocker les Comptes des Staffs" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="27e8c6fb-d84b-48bb-b24d-eca8a196fa89" />
+        <suppliersInternal>
+          <dependency Id="cc0d4ad6-e7a9-47d7-84af-e6dabef30e21">
+            <useCaseMoniker Id="dbc04230-ffb4-4ced-bf25-a04bb65cf443" LastKnownName="Gerer les Espaces/Roles des Staffs" />
+            <elementDefinition Id="ff7eb2ca-2dea-4cf8-8325-05e11903a58c" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" LastKnownName="Ressources Humaines" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="92ca270d-db2e-4ebf-b68b-6ec27936e02d" name="Recrutement des Staffs/Pompistes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7f0554b6-9190-4e28-a0b0-2f1ab3a69610" />
+        <suppliersInternal>
+          <dependency Id="01df0e20-70c5-4044-8468-c635b735b737">
+            <useCaseMoniker Id="9de64269-6446-41c5-a41a-96365b79eb58" LastKnownName="Creer/Blocker les Comptes des Staffs" />
+            <elementDefinition Id="824f0d3b-bcce-49f9-9c0b-c1011ff96ad4" />
+          </dependency>
+          <dependency Id="849862ea-be20-4118-a5d5-f74d300ce652">
+            <useCaseMoniker Id="ba35c78b-626f-4b43-b063-0fcb3a739040" LastKnownName="Affecter les Postes des staffs" />
+            <elementDefinition Id="74fea204-09c2-42b5-8cb6-1dcb641b7e8f" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" LastKnownName="Ressources Humaines" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ba35c78b-626f-4b43-b063-0fcb3a739040" name="Affecter les Postes des staffs" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3014669b-bfbb-44ce-a191-6bef3027a1b2" />
+        <suppliersInternal>
+          <dependency Id="9d112413-296c-41ce-b276-1c7935e778ed">
+            <useCaseMoniker Id="a4cbb065-215c-4a10-9da4-9126a69f918b" LastKnownName="Affectation des Remunerations" />
+            <elementDefinition Id="afe5e84c-a1d9-44a7-a626-81a92bc0fe11" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" LastKnownName="Ressources Humaines" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="a4cbb065-215c-4a10-9da4-9126a69f918b" name="Affectation des Remunerations" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="442f5b3f-d271-42c0-b912-84ae06a52abd" />
+        <subjects>
+          <subsystemMoniker Id="8bbc95fa-f57f-4643-983b-b6fcea62e9f8" LastKnownName="Ressources Humaines" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" name="Economat" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6e65b107-f51f-405d-8019-5e0e20d21969" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f9e7014c-39b2-4529-a96f-e23b4aae7766" name="Controler les Salaires" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="31bb6bfb-9a57-4182-a7e0-fb3a57b53e51" />
+        <suppliersInternal>
+          <dependency Id="c79c6a81-2e4b-43f7-8d43-3645cb814c12">
+            <useCaseMoniker Id="b3b46fbe-418b-4c7c-8c68-6d8c1cc6147e" LastKnownName="Payer les Salaires" />
+            <elementDefinition Id="6e51137b-62f5-41d5-8367-a4e64333377f" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="e5f2d4fa-ff05-412a-9628-60aa3cde7e7c" name="Gerer les Ventes Huiles/Carburants" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b2aa383d-cde5-4bc8-8f27-0007edcf596f" />
+        <suppliersInternal>
+          <dependency Id="f523d002-c195-4267-9f51-19cf4db691f3">
+            <useCaseMoniker Id="7a038356-c650-4860-89b1-5aeda81eab53" LastKnownName="Recevoir Un Paiement" />
+            <elementDefinition Id="a9cbadb1-327a-412e-871a-c08c04bba27b" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="7a038356-c650-4860-89b1-5aeda81eab53" name="Recevoir Un Paiement" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6046b6e8-d9ae-4d1b-9a22-275865259ea9" />
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="7cd016f6-9008-4504-8e4e-7dec4965579c" name="Caisse" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="56fc3d25-2e49-435f-824e-d01cec3d1803" />
+        <suppliersInternal>
+          <dependency Id="5d9fdf96-f21b-40eb-9bfa-49622bcde609">
+            <useCaseMoniker Id="8fb5c0b4-c67f-4d31-bf4f-e43f5b3a4b67" LastKnownName="Definir les Recettes" />
+            <elementDefinition Id="5e1d7c41-711c-48bc-b1be-f3702ee2d7e9" />
+          </dependency>
+          <dependency Id="9304ba4d-697e-46b7-960e-1c98da540054">
+            <useCaseMoniker Id="87d5799b-3056-490b-986c-ce8d2c28de46" LastKnownName="Regler les Depense" />
+            <elementDefinition Id="88d6bc24-b663-4c09-b4bb-f1c4b5ad18ac" />
+          </dependency>
+          <dependency Id="e741091b-c846-48b5-9b35-d7336236af86">
+            <useCaseMoniker Id="87d5799b-3056-490b-986c-ce8d2c28de46" LastKnownName="Regler les Depense" />
+            <elementDefinition Id="b47ea36a-a67c-4663-9e4c-1ba9535aa7cf" />
+          </dependency>
+          <dependency Id="e24d6ca1-290d-4911-a98c-2dee013b6ecf">
+            <useCaseMoniker Id="69939e1f-6976-4a80-8568-9840605b665c" LastKnownName="Controler les Bons" />
+            <elementDefinition Id="caa65446-a181-4b40-98a3-523032ce1d02" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="87d5799b-3056-490b-986c-ce8d2c28de46" name="Regler les Depense" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4421b871-ca7c-46ad-87db-4fda092448a2" />
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8fb5c0b4-c67f-4d31-bf4f-e43f5b3a4b67" name="Definir les Recettes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8118d6b3-08eb-4ab1-87c6-c0ced396c680" />
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b3b46fbe-418b-4c7c-8c68-6d8c1cc6147e" name="Payer les Salaires" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6bf80a29-d226-4937-adfb-15f2673a246d" />
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="8eb89ae1-b816-44e3-a854-0a3d7528a5e2" name="Comptable" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d2a1b9cb-38c2-4fde-8b51-d82d671e8be4" />
+        <targetEnds>
+          <association Id="98ff07eb-c373-401b-a188-10b8e7d19b51" isDerived="false" sourceEndRoleName="Comptable" targetEndRoleName="Controler les Salaires" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f9e7014c-39b2-4529-a96f-e23b4aae7766" LastKnownName="Controler les Salaires" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c2646fc5-e0cc-4fc0-b111-f757157f1d80" name="Comptable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7c7a63b5-e8b3-4655-afcc-7903ac27776f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c6501244-e392-4895-8074-9011dbfc06f9" name="Controler les Salaires" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="af28fcc3-c6ac-499f-b9bf-53f55a0f8cc1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="e499580d-5ca3-4a73-8390-de467fc3b00a" />
+          </association>
+          <association Id="1f2e9aca-c65b-4bf9-8c9a-e2395ba88383" isDerived="false" sourceEndRoleName="Comptable" targetEndRoleName="Caisse" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7cd016f6-9008-4504-8e4e-7dec4965579c" LastKnownName="Caisse" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2c4c78e8-8652-41f1-8683-8fede930821d" name="Comptable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="af55f3ac-0c56-4cfc-824d-817426c4ee3b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a236fb2a-a8ff-4e7d-9c49-49a34b9a0ccf" name="Caisse" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="45d65f25-f58c-41a1-8b13-bd12b811022e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2d865b9f-9d41-470b-adac-6ba088365279" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="69939e1f-6976-4a80-8568-9840605b665c" name="Controler les Bons" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d8b30f98-6a21-4210-98d5-23c8da5477f7" />
+        <subjects>
+          <subsystemMoniker Id="9cb4e319-18d3-45cc-adc1-ca164f580c93" LastKnownName="Economat" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="63904e06-02a6-47f9-a5b4-c3814e50b13c" name="Visualisation Graphiques des Ventes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d1b39b52-d821-49bc-8984-78f50d1c879d" />
+        <subjects>
+          <subsystemMoniker Id="b6c0496e-72df-4e52-8775-be8d564986ac" LastKnownName="eStation" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="c1f9ff39-21ab-4d4a-ad30-cc2fb8e9217d" name="EStation.Model">
+    <elementDefinition Id="4ca22893-05a5-4ed6-bb9f-28a991c26924" />
+  </package>
+</useCaseModelRoot>
