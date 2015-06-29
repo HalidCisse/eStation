@@ -1,4 +1,5 @@
 using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Globalization;
@@ -17,13 +18,17 @@ namespace eStationCore.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+
+           #if (DEBUG)
+            AutomaticMigrationDataLossAllowed = false;
+           #endif
+
+           AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(StationContext context)
         {
-            //SeedFromSql(context);
+            SeedFromSql(context);
         }
 
         private static void SeedFromSql(StationContext ef)
@@ -34,15 +39,14 @@ namespace eStationCore.Migrations
             //Staff_SeedFromSql(context);
             //Student_SeedFromSql(context);
 
-            var sqlPeople = Resources.dbo_People_data;
-            var sqlStaffs = Resources.dbo_Staffs_data;
+            //var sqlPeople = Resources.dbo_People_data;
+            //var sqlStaffs = Resources.dbo_Staffs_data;
             
-            ef.Database.ExecuteSqlCommand("DELETE FROM Staffs");
-            ef.Database.ExecuteSqlCommand("DELETE FROM People");
+            //ef.Database.ExecuteSqlCommand("DELETE FROM Staffs");
+            //ef.Database.ExecuteSqlCommand("DELETE FROM People");
 
-
-            ef.Database.ExecuteSqlCommand(sqlPeople);
-            ef.Database.ExecuteSqlCommand(sqlStaffs);
+            //ef.Database.ExecuteSqlCommand(sqlPeople);
+            //ef.Database.ExecuteSqlCommand(sqlStaffs);
                     
 
             var admin = new Staff

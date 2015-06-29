@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eStationCore", "EStationCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLib", "..\ESchool\ESchool\CLib\CLib.csproj", "{E6B9D217-36D7-4656-B702-918FC31DB125}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "EStation.Model", "EStation.Model\EStation.Model.modelproj", "{A3067EB2-5B2D-4F1E-AF7E-8EC9AFDA97F9}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "EStation.Model", "EStation.Model\eStation.Model.modelproj", "{A3067EB2-5B2D-4F1E-AF7E-8EC9AFDA97F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,9 @@
                 <ResourceDictionary Source="Ressources/CoreStyles.xaml"/>
                 <ResourceDictionary Source="Ressources/MyForm.xaml"/>
                 <ResourceDictionary Source="Ressources/MyWindowStyle.xaml"/>
+
                 
+
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

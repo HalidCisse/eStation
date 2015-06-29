@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,9 +30,11 @@ namespace eStation.Views.Clients
 
 
         internal async Task Refresh()
-        {           
+        {
+            _BUSY_INDICATOR.IsBusy = true;
             _COMPANIES.ItemsSource = await App.Store.Sales.GetCompaniesCards();
-            _COMPANIES.SelectAll();           
+            _COMPANIES.SelectAll();
+            _BUSY_INDICATOR.IsBusy = false;
         }
 
         private async void AddButton_OnClick(object sender, RoutedEventArgs e)

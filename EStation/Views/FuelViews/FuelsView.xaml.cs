@@ -32,9 +32,11 @@ namespace eStation.Views.FuelViews
 
        
         internal async Task Refresh()
-        {         
+        {
+            _BUSY_INDICATOR.IsBusy = true;
             _CARBURANTS.ItemsSource = await App.Store.Fuels.GetFuelCards();
-            _CARBURANTS.SelectAll();          
+            _CARBURANTS.SelectAll();
+            _BUSY_INDICATOR.IsBusy = false;
         }
 
 

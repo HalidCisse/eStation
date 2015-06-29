@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security;
@@ -9,6 +10,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web.Security;
 using CLib;
+using eStationCore.Model;
 using eStationCore.Model.Common.Views;
 using eStationCore.Model.Security.Entity;
 using eStationCore.Model.Security.Enums;
@@ -31,29 +33,38 @@ namespace eStationCore.Managers
         {           
             try
             {
-                if (!Membership.ValidateUser(userName, userPassword))
-                {
-                    if (Membership.GetAllUsers().Count != 0) return false;
-                    MembershipCreateStatus status;
-                    Membership.CreateUser(
-                        "admin",
-                        "admin00.",
-                        "admin@gmail.com",
-                        "admin",
-                        "admin",
-                        true,
-                        new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
-                        out status);
-                    if (status != MembershipCreateStatus.Success) return false;
-                    Roles.CreateRole(AdminClearances.SuperUser.ToString());
-                    Roles.CreateRole(AdminClearances.StaffWrite.ToString());
-                    Roles.CreateRole(UserSpace.AdminSpace.ToString());
+                //using (var db = new StationContext())
+                //{
+                //    if (db.Database.Exists())
+                //    {
+                //        db.Database.Delete();
+                //        db.Database.Create();
+                //    }
+                //}
 
-                    Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
-                    Roles.AddUserToRole("admin", AdminClearances.StaffWrite.ToString());
-                    Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
-                    return false;
-                }
+                if (!Membership.ValidateUser(userName, userPassword))
+                    {
+                        if (Membership.GetAllUsers().Count != 0) return false;
+                        MembershipCreateStatus status;
+                        Membership.CreateUser(
+                            "admin",
+                            "admin00.",
+                            "admin@admin.com",
+                            "admin",
+                            "admin",
+                            true,
+                            new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
+                            out status);
+                        if (status != MembershipCreateStatus.Success) return false;
+                        Roles.CreateRole(AdminClearances.SuperUser.ToString());
+                        Roles.CreateRole(AdminClearances.StaffWrite.ToString());
+                        Roles.CreateRole(UserSpace.AdminSpace.ToString());
+
+                        Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
+                        Roles.AddUserToRole("admin", AdminClearances.StaffWrite.ToString());
+                        Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
+                        return false;
+                    }
 
                 var user = Membership.GetUser(userName);
                 if (user == null)
@@ -445,7 +456,16 @@ namespace eStationCore.Managers
         /// <param name="userName"></param>
         /// <returns></returns>
         public byte[] GetUserPic(string userName)
-        {          
+        {
+            //using (var db = new StationContext())
+            //{
+            //    if (db.Database.Exists())
+            //    {
+            //        db.Database.Delete();
+            //        db.Database.Create();
+            //    }               
+            //}
+            
             var membUserGuid = (Guid)Membership.GetUser(userName)?.ProviderUserKey;
             return HrManager.StaticGetStaffByGuid(membUserGuid)?.Person?.PhotoIdentity;           
         }

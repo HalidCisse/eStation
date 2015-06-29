@@ -20,11 +20,12 @@ namespace eStation.Views.FuelViews
 
         public async Task Refresh(Guid currentCiterne)
         {
+            _BUSY_INDICATOR.IsBusy = true;
             _currentCiterne = currentCiterne;
             
             _STOCKS.ItemsSource = await App.Store.Citernes.GetCiterneStocks(currentCiterne);
             _TITLE_TEXT.Text = "LIVRAISONS " +(await App.Store.Citernes.Get(currentCiterne))?.Libel.ToUpper();
-                   
+            _BUSY_INDICATOR.IsBusy = false;
         }
 
 

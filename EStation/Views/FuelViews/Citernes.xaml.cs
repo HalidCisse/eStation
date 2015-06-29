@@ -24,8 +24,12 @@ namespace eStation.Views.FuelViews
         }
 
 
-        internal async Task Refresh()           
-                => _CITERNES.ItemsSource = await App.Store.Citernes.GetCiternesCards();
+        internal async Task Refresh()
+        {
+            _BUSY_INDICATOR.IsBusy = true;
+            _CITERNES.ItemsSource = await App.Store.Citernes.GetCiternesCards();
+            _BUSY_INDICATOR.IsBusy = false;
+        }
 
 
         private async void AddButton_OnClick(object sender, RoutedEventArgs e)

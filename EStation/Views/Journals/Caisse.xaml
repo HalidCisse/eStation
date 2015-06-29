@@ -8,16 +8,7 @@
     
     <UserControl.Resources>
         <ContextMenu x:Key="CancelContext" HasDropShadow="True" Placement="Bottom" PlacementRectangle="10,10,10,10" HorizontalOffset="-100" VerticalOffset="15" >
-            <!--<MenuItem Height="50" Margin="10,0" Click="Paycheck_Click">
-                <MenuItem.Icon>
-                    <Image Source="{StaticResource PaycheckIcon}" Height="40" Width="40"/>
-                </MenuItem.Icon>
-
-                <MenuItem.Header>
-                    <TextBlock Text="Payer" Margin="5" FontWeight="ExtraLight" FontSize="15" VerticalAlignment="Center"/>
-                </MenuItem.Header>
-            </MenuItem>-->
-            
+           
             <MenuItem Height="50" Margin="10,0" Click="Annuler_Click">
                 <MenuItem.Icon>
                     <Image Source="{StaticResource PaycheckIcon}" Height="40" Width="40"/>
@@ -29,10 +20,7 @@
             </MenuItem>
             
         </ContextMenu>
-          
-        <!--<Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        </Style>-->
+       
     </UserControl.Resources>
     
     <DockPanel>
@@ -42,15 +30,16 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <TextBlock Text="TRANSACTIONS" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontFamily="League Gothic"/>
-            
+            <TextBlock Text="TRANSACTIONS" Style="{StaticResource TitleStyle}" />
+
             <Button Grid.Column="1" Name="_ADD_TRANSACTION" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Recettes et Dépenses"  Click="_ADD_TRANSACTION_OnClick"/>
+            <!--<Button Grid.Column="1" Name="_ADD_TRANSACTION" Content="&#xf067;" FontSize="35" FontFamily="pack://application:,,,/Ressources/Icon/#FontAwesome" Height="35" Width="35" Margin="10,0"  Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="Recettes et Dépenses"  Click="_ADD_TRANSACTION_OnClick"/>-->
         </Grid>
             
         <ListBox x:Name="_TRANS_LIST" Background="Beige" SelectedValuePath="TransactionGuid" BorderThickness="0" HorizontalAlignment="Center" ContextMenu="{StaticResource CancelContext}" ScrollViewer.CanContentScroll="False" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="640" Margin="5,5" Effect="{StaticResource Z-Depth1}" Background="Beige" HorizontalAlignment="Center" ToolTip="{Binding Description}">
+                    <Grid Width="710" Margin="5,5" Effect="{StaticResource Z-Depth1}" Background="Beige" HorizontalAlignment="Center" ToolTip="{Binding Description}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>

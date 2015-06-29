@@ -25,7 +25,12 @@ namespace eStation.Views.OilViews
         }
 
 
-        internal async Task Refresh() => _HUILES.ItemsSource = await App.Store.Oils.GetOilsCards();
+        internal async Task Refresh()
+        {
+            _BUSY_INDICATOR.IsBusy = true;
+            _HUILES.ItemsSource = await App.Store.Oils.GetOilsCards();
+            _BUSY_INDICATOR.IsBusy = false;
+        }
 
 
         private async void AddButton_OnClick(object sender, RoutedEventArgs e)

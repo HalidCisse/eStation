@@ -53,8 +53,8 @@ namespace eStation.Views.Clients
 
         private async void ClientList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (_CLIENT_LIST?.SelectedItem == null) return;
-            await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));           
+            //if (_CLIENT_LIST?.SelectedItem == null) return;
+            //await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));           
         }
 
         private async void AddButon_Click(object sender, RoutedEventArgs e)
@@ -66,9 +66,9 @@ namespace eStation.Views.Clients
 
         private async void Details_Click(object sender, RoutedEventArgs e)
         {
-            if (_CLIENT_LIST?.SelectedItem == null)
-                return;
-            await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));
+            //if (_CLIENT_LIST?.SelectedItem == null)
+            //    return;
+            //await Dispatcher.BeginInvoke(new Action(() => { NavigationService?.Navigate(new CustomerDetails((CustomerCard)_CLIENT_LIST.SelectedItem)); }));
            
         }
 

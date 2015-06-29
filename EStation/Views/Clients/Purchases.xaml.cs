@@ -28,6 +28,7 @@ namespace eStation.Views.Clients
 
         public async Task Refresh(List<Guid> companiesGuids, DateTime fromDate, DateTime toDate)
         {
+            _BUSY_INDICATOR.IsBusy = true;
             _companiesGuids = companiesGuids;
             _fromDate = fromDate;
             _toDate = toDate;
@@ -37,6 +38,7 @@ namespace eStation.Views.Clients
             _TITLE_TEXT.Text = "Bons de ";
             foreach (var companiesGuid in companiesGuids)
                 _TITLE_TEXT.Text += (await App.Store.Sales.Get(companiesGuid)).Name + " ";
+            _BUSY_INDICATOR.IsBusy = false;
         }
 
 

@@ -2,7 +2,7 @@
 
 namespace eStationCore
 {
-    public class Estation
+    public class EStation
     {
 
         /// <summary>

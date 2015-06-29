@@ -22,7 +22,9 @@ namespace eStation.Views.Journals
         }
 
         public async Task Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
-        {           
+        {
+            await Dispatcher.BeginInvoke(new Action(() => _BUSY_INDICATOR.IsBusy = true));
+
             List<eStationCore.Model.Fuel.Entity.Fuel> fuels;
 
             if (_isFistHit)
@@ -97,7 +99,12 @@ namespace eStation.Views.Journals
                 AxislineColor = OxyColors.Transparent,
                 IsZoomEnabled = false
             });
-            await Dispatcher.BeginInvoke(new Action(() => _PLOT_VIEW.Model = plotModel));
+
+            await Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _PLOT_VIEW.Model = plotModel;
+                _BUSY_INDICATOR.IsBusy = false;
+            }));
         }       
 
     }

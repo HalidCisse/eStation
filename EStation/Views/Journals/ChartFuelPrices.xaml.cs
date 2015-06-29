@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eStation.Ext;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -21,6 +20,7 @@ namespace eStation.Views.Journals
 
         public async Task Refresh(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate)
         {
+            await Dispatcher.BeginInvoke(new Action(() => _BUSY_INDICATOR.IsBusy = true));
             List<eStationCore.Model.Fuel.Entity.Fuel> fuels;
 
             if (!fuelsGuids.Any())
@@ -95,7 +95,11 @@ namespace eStation.Views.Journals
                 IsZoomEnabled = false
             });
 
-            await Dispatcher.BeginInvoke(new Action(() => _PLOT_VIEW.Model = plotModel));
+            await Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _PLOT_VIEW.Model = plotModel;
+                _BUSY_INDICATOR.IsBusy = false;
+            }));
         }
 
     }

@@ -23,6 +23,7 @@ namespace eStation.Views.OilViews
 
         public async Task Refresh(List<Guid> oilsGuids)
         {
+            _BUSY_INDICATOR.IsBusy = true;
             _currentOils = oilsGuids ;
            
             _PRELEVS.ItemsSource = await App.Store.Oils.GetPrelevCards(_currentOils, DateTime.Today.AddDays(-7), DateTime.Today);
@@ -31,6 +32,7 @@ namespace eStation.Views.OilViews
             foreach (var oilGuid in oilsGuids)
                 _TITLE_TEXT.Text += $" {(await App.Store.Oils.Get(oilGuid))?.Libel.ToUpper()}";
             _TITLE_TEXT.Text += ")";
+            _BUSY_INDICATOR.IsBusy = false;
         }
           
         private async void AddButton_OnClick(object sender, RoutedEventArgs e)

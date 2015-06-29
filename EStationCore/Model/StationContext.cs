@@ -13,8 +13,10 @@ namespace eStationCore.Model
 
         public StationContext() : base("name=DefaultConnection")
         {
-
-            //          Update-Database 
+            Database.CreateIfNotExists();
+            //if (Database.Exists()) return;
+            //Database.Delete();
+            //Database.Create();
         }
 
 

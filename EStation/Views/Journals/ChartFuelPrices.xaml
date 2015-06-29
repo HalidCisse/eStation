@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="740" x:ClassModifier="internal" Background="Beige" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-
+    <Grid>
     <oxy:PlotView Name="_PLOT_VIEW" Background="Beige" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <oxy:PlotView.DefaultTrackerTemplate>
             <ControlTemplate>
@@ -25,4 +26,8 @@
         </oxy:PlotView.DefaultTrackerTemplate>
     </oxy:PlotView>
 
+    <Grid>
+        <xctk:BusyIndicator Name="_BUSY_INDICATOR" IsBusy="True" Style="{DynamicResource BusyStyle}" BusyContent="Patientez ..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+    </Grid>
 </UserControl>

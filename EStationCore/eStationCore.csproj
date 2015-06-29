@@ -89,10 +89,6 @@
     <Compile Include="Managers\SalesManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
     <Compile Include="Managers\FinanceManager.cs" />
-    <Compile Include="Migrations\201505121758349_m-.cs" />
-    <Compile Include="Migrations\201505121758349_m-.Designer.cs">
-      <DependentUpon>201505121758349_m-.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Common\Entity\AboutCard.cs" />
     <Compile Include="Model\Common\Entity\Document.cs" />
@@ -188,9 +184,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505121758349_m-.resx">
-      <DependentUpon>201505121758349_m-.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

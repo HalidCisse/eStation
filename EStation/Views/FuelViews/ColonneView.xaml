@@ -201,16 +201,8 @@
             <ListBox Name="_COLONNES_LIST" Style="{DynamicResource ListOfGroupBoxStyle}" ScrollViewer.CanContentScroll="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <GroupBox Header="{Binding Path=Libel}" Style="{StaticResource GroupBoxStyle}">
-                        <!--Header="{Binding Path=Libel}" Style="{StaticResource GroupBoxStyle}"-->
-                        
-                        <!--<DockPanel Height="40" Background="Beige" Effect="{StaticResource Z-Depth1}" Width="690" Margin="10">                           
-                            <Border DockPanel.Dock="Top" Height="40" Background="#25A0DA">                               
-                                <TextBlock Text="{Binding Libel}" Margin="30,0,40,0" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="League Gothic"/>
-                            </Border>-->
-                            
+                        <GroupBox Header="{Binding Path=Libel}" Style="{StaticResource GroupBoxStyle}">                        
                             <ListBox x:Name="POMPS_LIST" Style="{DynamicResource PompeStyle}" ContextMenu="{DynamicResource PompContext}" MouseDoubleClick="Pomps_MouseDoubleClick" SelectionChanged="Pomps_SelectionChanged"/>
-                        <!--</DockPanel>-->
                         </GroupBox>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

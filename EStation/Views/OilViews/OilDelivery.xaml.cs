@@ -25,6 +25,7 @@ namespace eStation.Views.OilViews
 
         public async Task Refresh(List<Guid> currentOil)
         {
+            _BUSY_INDICATOR.IsBusy = true;
             _currentOils = currentOil;
             
             _STOCKS.ItemsSource = await App.Store.Oils.GetOilDeliveries(_currentOils, DateTime.Today.AddMonths(-3), DateTime.Today);
@@ -32,7 +33,8 @@ namespace eStation.Views.OilViews
 
             foreach (var oilGuid in currentOil)
                 _TITLE_TEXT.Text += $" { (await App.Store.Oils.Get(oilGuid))?.Libel.ToUpper()}";
-            _TITLE_TEXT.Text += ")";           
+            _TITLE_TEXT.Text += ")";
+            _BUSY_INDICATOR.IsBusy = false;
         }
 
 

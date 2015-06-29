@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="500" Width="520" x:ClassModifier="internal" Background="Beige">
-
+             d:DesignHeight="500" Width="350" x:ClassModifier="internal" Background="Beige">
+<!--520-->
     <UserControl.Resources>
         <ContextMenu x:Key="ContextMenu">
 
@@ -41,10 +42,14 @@
             <Button Grid.Column="1" Name="_ADD_BUTTON" Content="&#xf055;" FontSize="25" Margin="10,0" Height="25" Style="{DynamicResource ToolButtonStyle}" ToolTip="Carburant"  Click="AddButton_OnClick"/>
         </Grid>
 
-        <ListBox x:Name="_CARBURANTS" SelectionMode="Extended" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
+        <Grid>
+
+            <xctk:BusyIndicator Name="_BUSY_INDICATOR" IsBusy="True" Style="{DynamicResource BusyStyle}" BusyContent="Patientez ..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ListBox x:Name="_CARBURANTS" SelectionMode="Extended" Background="Beige" SelectedValuePath="FuelGuid" BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="CARBURANTS_OnSelectionChanged" MouseDoubleClick="CARBURANTS_OnMouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="480" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
+                    <DockPanel Margin="5,5" ContextMenu="{StaticResource ContextMenu}" Width="310" Effect="{StaticResource Z-Depth1}" Background="Gainsboro" HorizontalAlignment="Center">
                         <Ellipse DockPanel.Dock="Left" Width="50" Height="50" VerticalAlignment="Center" Margin="5,0">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{StaticResource BariqIcon}"/>
@@ -69,5 +74,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </DockPanel>
+    </Grid>
+        </DockPanel>
 </UserControl>

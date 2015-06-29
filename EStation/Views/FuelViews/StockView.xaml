@@ -29,7 +29,7 @@
         <TabControl Name="_MY_TAB_CONTROL" Background="Transparent" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
                     Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
 
-            <TabItem Header="      Carburants" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
+            <TabItem Header="           Carburants" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 

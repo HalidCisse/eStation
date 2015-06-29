@@ -21,7 +21,7 @@ namespace eStation
 
             try
             {               
-                Store = new Estation();
+                Store = new eStationCore.EStation();
             }
             catch (Exception e)
             {
@@ -38,7 +38,7 @@ namespace eStation
         /// <summary>
         /// Serveur de Donnees
         /// </summary>
-        internal static Estation Store { get; private set; }
+        internal static eStationCore.EStation Store { get; private set; }
 
 
         /// <summary>
