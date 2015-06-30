@@ -69,8 +69,8 @@
     <Grid Margin="2,-25,2,2">
 
         <StackPanel Orientation="Horizontal" Background="Transparent" Height="50" Margin="10,-25,100,0" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" ZIndex="2">
-            <Image Source="{StaticResource MainIcon}" Stretch="Fill" Height="45" Opacity=".4"/>
-            <Label Name="_APP_NAME" Content="eStation-beta" Foreground="#464343" FontSize="40" Margin="10,0"/>
+            <Image Source="{StaticResource MainIcon}" Stretch="Fill" Height="45" Opacity=".4" ToolTip="{Binding ElementName=_APP_NAME, Path=Text}"/>
+            <TextBlock Name="_APP_NAME" Text="eStation-beta" Visibility="Collapsed" Foreground="#464343" FontSize="13" Margin="10,0" VerticalAlignment="Center"/>
         </StackPanel>
 
         <DockPanel >
