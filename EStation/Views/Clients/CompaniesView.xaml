@@ -26,9 +26,9 @@
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                <clients:Companies x:Name="_COMPANIES" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="COMPANIES_OnSelectionChanged"/>
+                <clients:Companies x:Name="_COMPANIES" Effect="{StaticResource Z-Depth1}" Margin="10" SelectionChanged="COMPANIES_OnSelectionChanged"/>
 
-                <clients:Purchases x:Name="_PURCHASES" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                <clients:Purchases x:Name="_PURCHASES" Effect="{StaticResource Z-Depth1}" Margin="10"/>
 
             </StackPanel>
         </ScrollViewer>

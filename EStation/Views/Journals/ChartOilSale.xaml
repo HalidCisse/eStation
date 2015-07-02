@@ -6,7 +6,7 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="500" Width="740" x:ClassModifier="internal" Background="Beige">
+             d:DesignHeight="500" d:DesignWidth="740" x:ClassModifier="internal" Background="Beige">
 
 <Grid>
     <oxy:PlotView Name="_PLOT_VIEW" Background="Beige"/>

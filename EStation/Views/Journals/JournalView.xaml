@@ -29,36 +29,40 @@
                     Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
 
             <TabItem Header="                 Journal Carburants" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                    <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <journals:FuelPeriodCard x:Name="_FUEL_PERIOD" Effect="{StaticResource Z-Depth1}" Margin="10" SelectionChanged="FuelPeriodCard_OnSelectionChanged"/>
 
-                        <journals:FuelPeriodCard x:Name="_FUEL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="FuelPeriodCard_OnSelectionChanged"/>
-
-                        <journals:ChartFuelSale x:Name="_FUELS_SALES" Effect="{StaticResource Z-Depth2}" Margin="10"/>
-
-                    </StackPanel>
-                </ScrollViewer>
+                    <journals:ChartFuelSale Grid.Column="1" x:Name="_FUELS_SALES" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+                   
+                </Grid>
             </TabItem>
 
             <TabItem Header="      Journal Huiles" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                    <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <journals:OilPeriodCard x:Name="_OIL_PERIOD" Effect="{StaticResource Z-Depth1}" Margin="10" SelectionChanged="OilPeriodCard_OnSelectionChanged"/>
 
-                        <journals:OilPeriodCard x:Name="_OIL_PERIOD" Effect="{StaticResource Z-Depth2}" Margin="10" SelectionChanged="OilPeriodCard_OnSelectionChanged"/>
-
-                        <journals:ChartOilSale x:Name="ChartOilSale" Effect="{StaticResource Z-Depth2}" Margin="10"/>
+                    <journals:ChartOilSale Grid.Column="1" x:Name="ChartOilSale" Effect="{StaticResource Z-Depth1}" Margin="10"/>
                         
-                    </StackPanel>
-                </ScrollViewer>
+               </Grid>
             </TabItem>
 
             <TabItem Header="      Caisse" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <journals:FinanceDetails x:Name="FinanceCard" Effect="{StaticResource Z-Depth2}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
+                        <journals:FinanceDetails x:Name="FinanceCard" Effect="{StaticResource Z-Depth1}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
 
-                        <journals:CaisseTransactions x:Name="_TRANS_CARD" Effect="{StaticResource Z-Depth2}" Margin="10" Refreshed="CaisseTransactions_OnRefreshed"/>
+                        <journals:CaisseTransactions x:Name="_TRANS_CARD" Effect="{StaticResource Z-Depth1}" Margin="10" Refreshed="CaisseTransactions_OnRefreshed"/>
 
                     </StackPanel>
                 </ScrollViewer>

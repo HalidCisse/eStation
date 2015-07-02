@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="500" Width="730" x:ClassModifier="internal" Background="Beige">
+             d:DesignHeight="500" d:DesignWidth="730" Width="730" x:ClassModifier="internal" Background="Beige">
     
     <UserControl.Resources>
         <ContextMenu x:Key="CancelContext" HasDropShadow="True" Placement="Bottom" PlacementRectangle="10,10,10,10" HorizontalOffset="-100" VerticalOffset="15" >
@@ -39,7 +39,7 @@
         <ListBox x:Name="_TRANS_LIST" Background="Beige" SelectedValuePath="TransactionGuid" BorderThickness="0" HorizontalAlignment="Center" ContextMenu="{StaticResource CancelContext}" ScrollViewer.CanContentScroll="False" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="710" Margin="5,5" Effect="{StaticResource Z-Depth1}" Background="Beige" HorizontalAlignment="Center" ToolTip="{Binding Description}">
+                    <Grid Width="690" Margin="5,5" Effect="{StaticResource Z-Depth1}" Background="Beige" HorizontalAlignment="Center" ToolTip="{Binding Description}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
