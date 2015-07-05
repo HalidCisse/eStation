@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,20 +21,17 @@ namespace eStation.Views.FuelViews
         {
             InitializeComponent();
 
-            new Task(() =>
+            Dispatcher.BeginInvoke(new Action(async () =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                if (fuelToModGuid == Guid.Empty)
                 {
-                    if (fuelToModGuid == Guid.Empty)
-                    {
-                        _isAdd = true;
+                    _isAdd = true;
 
-                        _GRID.DataContext = new eStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
-                    }
-                    else
-                        _GRID.DataContext = App.Store.Fuels.Get(fuelToModGuid);
-                }));
-            }).Start();
+                    _GRID.DataContext = new eStationCore.Model.Fuel.Entity.Fuel {Threshold = 10};
+                }
+                else
+                    _GRID.DataContext =await  App.Store.Fuels.Get(fuelToModGuid);
+            }));
         }
 
 
@@ -55,14 +53,10 @@ namespace eStation.Views.FuelViews
         {
             try
             {
-                var newFuel =
-                    ((eStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
+                var newFuel = ((eStationCore.Model.Fuel.Entity.Fuel) _GRID.DataContext);
 
                 if (_UNIT_PRICE.Value != null)
-                    newFuel.Prices.Add(new Price
-                    {
-                        ActualPrice = (double)_UNIT_PRICE.Value
-                    });
+                    newFuel.Prices.Add(new Price{ActualPrice = (double)_UNIT_PRICE.Value});
 
                 if (_isAdd) {await App.Store.Fuels.Post(newFuel);}
                 else {await App.Store.Fuels.Put((eStationCore.Model.Fuel.Entity.Fuel)_GRID.DataContext);}

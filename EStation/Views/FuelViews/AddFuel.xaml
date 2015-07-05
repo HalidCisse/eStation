@@ -53,7 +53,7 @@
                     <TextBox.Text>
                         <Binding Path="Libel" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <ext:NameValidator Min="3" IsNullable="False" ValidatesOnTargetUpdated="True"/>
+                                <ext:NameValidator Min="2" IsNullable="False" ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

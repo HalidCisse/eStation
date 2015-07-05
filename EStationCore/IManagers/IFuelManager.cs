@@ -15,6 +15,8 @@ namespace eStationCore.IManagers
         Task<List<FuelCard>> GetFuelCards();
         Task<List<Fuel>> GetFuels(List<Guid> fuelsGuids);
         Task<List<Fuel>> GetFuels(DateTime date = default(DateTime));
+        Task<bool> Post(Fuel myFuel);
+        Task<bool> Put(Fuel myFuel);
         double GetLiterSold(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate);
         Task<double> GetLiterSoldAsync(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate);
         Task<List<KeyValuePair<DateTime, double>>> GetMonthlyIncome(DateTime fromDate, DateTime toDate);
@@ -23,7 +25,6 @@ namespace eStationCore.IManagers
         Task<double> GetSold(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate);
         Task<double> GetTotalDeliveryCost(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate);
         Task<double> GetTotalDeliveryLiter(List<Guid> fuelsGuids, DateTime fromDate, DateTime toDate);
-        Task<bool> Post(Fuel myFuel);
-        Task<bool> Put(Fuel myFuel);
+        
     }
 }
