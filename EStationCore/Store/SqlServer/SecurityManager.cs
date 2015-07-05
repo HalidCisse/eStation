@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security;
@@ -10,15 +9,22 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web.Security;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Views;
 using eStationCore.Model.Security.Entity;
 using eStationCore.Model.Security.Enums;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class SecurityManager
+    public class SecurityManager : ISecurityManager
     {
+        private readonly StationContext Db;
+
+        public SecurityManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

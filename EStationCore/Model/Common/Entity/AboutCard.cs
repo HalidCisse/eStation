@@ -1,4 +1,4 @@
-﻿using eStationCore.Managers;
+﻿using eStationCore.Store.SqlServer;
 
 namespace eStationCore.Model.Common.Entity
 {

@@ -6,16 +6,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using CLib;
 using CLib.Exceptions;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Oil.Entity;
 using eStationCore.Model.Oil.Views;
 using Humanizer;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class OilManager
+    public class OilManager : IOilManager
     {
+        private readonly StationContext Db;
 
+        public OilManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

@@ -4,15 +4,21 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Fuel.Entity;
 using eStationCore.Model.Fuel.Views;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class CiternesManager
+    public class CiternesManager : ICiternesManager
     {
+        private readonly StationContext Db;
 
+        public CiternesManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

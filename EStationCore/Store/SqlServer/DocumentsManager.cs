@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
 
-namespace eStationCore.Managers {
+namespace eStationCore.Store.SqlServer {
 
     /// <summary>
     /// Gestion des Documents
     /// </summary>
-    public sealed class DocumentsManager {
+    public sealed class DocumentsManager : IDocumentsManager
+    {
+        private readonly StationContext Db;
+
+        public DocumentsManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         /// <summary>
         /// Represente un enseignant, proff, staff, qui a la possibilite de se connecter a l'Eschool

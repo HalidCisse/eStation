@@ -6,16 +6,23 @@ using System.Linq;
 using System.Web.Security;
 using Bytes2you.Validation;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
 using eStationCore.Model.Customers.Entity;
 using eStationCore.Model.Customers.Views;
 using eStationCore.Model.Hr.Entity;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public sealed class CustomersManager
+    public sealed class CustomersManager : ICustomersManager
     {
+        private readonly StationContext Db;
+
+        public CustomersManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

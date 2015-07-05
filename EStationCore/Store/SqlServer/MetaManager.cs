@@ -1,11 +1,19 @@
 ﻿using System.Deployment.Application;
 using System.Reflection;
 using CLib;
+using eStationCore.IManagers;
+using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
 
-namespace eStationCore.Managers {
-    public class MetaManager
+namespace eStationCore.Store.SqlServer {
+    public class MetaManager : IMetaManager
     {
+        private readonly StationContext Db;
+
+        public MetaManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         public static string ProductName => "eStation";
 

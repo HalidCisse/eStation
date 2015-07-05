@@ -1,6 +1,6 @@
 ﻿using System;
-using eStationCore.Managers;
 using eStationCore.Model.Fuel.Entity;
+using eStationCore.Store.SqlServer;
 
 namespace eStationCore.Model.Fuel.Views
 {

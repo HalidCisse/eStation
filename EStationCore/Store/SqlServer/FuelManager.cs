@@ -4,14 +4,21 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Fuel.Entity;
 using eStationCore.Model.Fuel.Views;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class FuelManager
+    public class FuelManager : IFuelManager
     {
+        private readonly StationContext Db;
+
+        public FuelManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

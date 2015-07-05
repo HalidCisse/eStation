@@ -1,5 +1,5 @@
 ﻿using System;
-using eStationCore.Managers;
+using eStationCore.Store.SqlServer;
 using Humanizer;
 
 namespace eStationCore.Model.Oil.Views

@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using CLib;
 using CLib.Program;
 using eStationCore;
 using eStationCore.Model.Security.Entity;
+using eStationCore.Store;
+using eStationCore.Store.SqlServer;
+using Exceptionless;
 
 namespace eStation
 {
 
     public partial class App 
     {
-
         App()
         {
             if (_enforcer.ShouldApplicationExit()) Shutdown();
 
             try
             {               
-                Store = new eStationCore.EStation();
+                Store = new EStationStore(Storage.SqlServeur);
             }
             catch (Exception e)
             {
@@ -38,7 +41,7 @@ namespace eStation
         /// <summary>
         /// Serveur de Donnees
         /// </summary>
-        internal static eStationCore.EStation Store { get; private set; }
+        internal static EStationStore Store { get; private set; }
 
 
         /// <summary>
@@ -56,48 +59,58 @@ namespace eStation
         /// OnStartup
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
-
             base.OnStartup(e);
-            DispatcherUnhandledException += App_DispatcherUnhandledException;
-
+            await Task.Run(() =>
+            {
+                DispatcherUnhandledException += App_DispatcherUnhandledException;
+                ExceptionlessClient.Default.Register();
+                ExceptionlessClient.Default.SubmitFeatureUsage(
+                $"eStation {MetaManager.CurrentVersion}  {DateTime.UtcNow}");
+            });
         }
 
 
-        private void Application_Exit(object sender, ExitEventArgs e)
-        {
-            var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+        private async void Application_Exit(object sender, ExitEventArgs e)
+        {          
+            await Task.Run(() =>
+            {
+                var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
 
-            var directoryName = Path.Combine(systemPath, "Winxo");
-            var debugFile = Path.Combine(directoryName, "Debug.txt");
+                var directoryName = Path.Combine(systemPath, "eStation");
+                var debugFile = Path.Combine(directoryName, "Debug.txt");
 
-            DebugHelper.Logger.SaveLog(debugFile);
+                DebugHelper.Logger.SaveLog(debugFile);
+            });
         }
 
 
         // [DebuggerStepThrough]
-        static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        static async void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-
-            DebugHelper.Logger.WriteException(e.Exception);
-
-            if (e.Exception.GetType() == typeof(SecurityException))
-                MessageBox.Show("Permission Refusée");
-            else if (e.Exception.GetType() == typeof(InvalidOperationException))
-                MessageBox.Show(e.Exception.Message, "Not Handled Exception");
-            else if (e.Exception.GetType() == typeof(NullReferenceException))
+            await Task.Run(() =>
+            {
+                var loc = GeoHelpers.GetMyGeoLocation().Result;
+                e.Exception.ToExceptionless().MarkAsCritical().AddTags(MetaManager.ProductName).SetUserIdentity(CurrentUser.UserName, CurrentUser.EmailAdress).SetVersion(MetaManager.CurrentVersion).SetGeo(loc.Key, loc.Value).Submit();
                 DebugHelper.Logger.WriteException(e.Exception);
-            //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
-            else if (e.Exception.GetType() == typeof(ArgumentNullException))
-                DebugHelper.Logger.WriteException(e.Exception);
-            //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
-            else
-                MessageBox.Show(e.Exception.Message, "Not Handled Exception");
 
+                if (e.Exception.GetType() == typeof(SecurityException))
+                    MessageBox.Show("Permission Refusée");
+                else if (e.Exception.GetType() == typeof(InvalidOperationException))
+                    MessageBox.Show(e.Exception.Message, "Not Handled Exception");
+                else if (e.Exception.GetType() == typeof(NullReferenceException))
+                    DebugHelper.Logger.WriteException(e.Exception);
+                //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
+                else if (e.Exception.GetType() == typeof(ArgumentNullException))
+                    DebugHelper.Logger.WriteException(e.Exception);
+                //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
+                else
+                    MessageBox.Show(e.Exception.Message, "Not Handled Exception");
 
-            e.Handled = true;
-            //Current.Shutdown();
+                e.Handled = true;
+                //Current.Shutdown();              
+            });
         }
 
         #endregion

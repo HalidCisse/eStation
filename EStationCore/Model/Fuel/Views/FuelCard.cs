@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using eStationCore.Managers;
+using eStationCore.Store.SqlServer;
 using Humanizer;
 
 namespace eStationCore.Model.Fuel.Views

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using eStationCore.Managers;
 using eStationCore.Model.Common.Views;
 using eStationCore.Model.Hr.Entity;
 using eStationCore.Model.Hr.Enums;
+using eStationCore.Store.SqlServer;
 
 namespace eStationCore.Model.Hr.Views {
 

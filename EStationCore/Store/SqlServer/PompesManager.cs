@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Fuel.Entity;
 using eStationCore.Model.Fuel.Views;
 using Humanizer;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class PompesManager
+    public class PompesManager : IPompesManager
     {
+        private readonly StationContext Db;
+
+        public PompesManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
         

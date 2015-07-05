@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Hr.Views;
 using eStationCore.Model.Sale.Entity;
 using eStationCore.Model.Sale.Enums;
 
-namespace eStationCore.Managers {
+namespace eStationCore.Store.SqlServer {
 
     /// <summary>
     /// Tresorerie
     /// </summary>
-    public sealed class FinanceManager {
+    public sealed class FinanceManager : IFinanceManager
+    {
+        private readonly StationContext Db;
+
+        public FinanceManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

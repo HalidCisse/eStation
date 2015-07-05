@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Threading.Tasks;
 using CLib;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
 using eStationCore.Model.Common.Views;
@@ -14,11 +15,16 @@ using eStationCore.Model.Hr.Entity;
 using eStationCore.Model.Hr.Views;
 using eStationCore.Model.Security.Entity;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class HrManager
+    public class HrManager : IHrManager
     {
+        private readonly StationContext Db;
 
+        public HrManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

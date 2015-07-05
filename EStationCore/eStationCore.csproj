@@ -49,6 +49,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Exceptionless.Portable">
+      <HintPath>..\packages\Exceptionless.Portable.3.1.1349\lib\net45\Exceptionless.Portable.dll</HintPath>
+    </Reference>
     <Reference Include="Humanizer">
       <HintPath>..\packages\Humanizer.1.35.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
     </Reference>
@@ -72,23 +75,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Estation.cs" />
+    <Compile Include="EStationStore.cs" />
     <Compile Include="Helpers\MembershipUserCreateStatus.cs" />
     <Compile Include="Helpers\PayRollHelper.cs" />
-    <Compile Include="Managers\CiternesManager.cs" />
-    <Compile Include="Managers\CommManager.cs" />
-    <Compile Include="Managers\CustomersManager.cs" />
-    <Compile Include="Managers\DocumentsManager.cs" />
-    <Compile Include="Managers\EconomatManager.cs" />
-    <Compile Include="Managers\FuelManager.cs" />
-    <Compile Include="Managers\HrManager.cs" />
-    <Compile Include="Managers\MetaManager.cs" />
-    <Compile Include="Managers\OilManager.cs" />
-    <Compile Include="Managers\PayrollManager.cs" />
-    <Compile Include="Managers\PompesManager.cs" />
-    <Compile Include="Managers\SalesManager.cs" />
-    <Compile Include="Managers\SecurityManager.cs" />
-    <Compile Include="Managers\FinanceManager.cs" />
+    <Compile Include="Store\SqlServer\CiternesManager.cs" />
+    <Compile Include="Store\SqlServer\CommManager.cs" />
+    <Compile Include="Store\SqlServer\CustomersManager.cs" />
+    <Compile Include="Store\SqlServer\DocumentsManager.cs" />
+    <Compile Include="Store\SqlServer\EconomatManager.cs" />
+    <Compile Include="Store\SqlServer\FuelManager.cs" />
+    <Compile Include="Store\SqlServer\HrManager.cs" />
+    <Compile Include="IManagers\ICiternesManager.cs" />
+    <Compile Include="IManagers\ICommManager.cs" />
+    <Compile Include="IManagers\ICustomersManager.cs" />
+    <Compile Include="IManagers\IDocumentsManager.cs" />
+    <Compile Include="IManagers\IEconomatManager.cs" />
+    <Compile Include="IManagers\IFinanceManager.cs" />
+    <Compile Include="IManagers\IFuelManager.cs" />
+    <Compile Include="IManagers\IHrManager.cs" />
+    <Compile Include="IManagers\IMetaManager.cs" />
+    <Compile Include="IManagers\IOilManager.cs" />
+    <Compile Include="IManagers\IPayrollManager.cs" />
+    <Compile Include="IManagers\IPompesManager.cs" />
+    <Compile Include="IManagers\ISalesManager.cs" />
+    <Compile Include="IManagers\ISecurityManager.cs" />
+    <Compile Include="Store\SqlServer\MetaManager.cs" />
+    <Compile Include="Store\SqlServer\OilManager.cs" />
+    <Compile Include="Store\SqlServer\PayrollManager.cs" />
+    <Compile Include="Store\SqlServer\PompesManager.cs" />
+    <Compile Include="Store\SqlServer\SalesManager.cs" />
+    <Compile Include="Store\SqlServer\SecurityManager.cs" />
+    <Compile Include="Store\SqlServer\FinanceManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Common\Entity\AboutCard.cs" />
     <Compile Include="Model\Common\Entity\Document.cs" />
@@ -166,6 +183,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Store\Azure\EstationAzure.cs" />
+    <Compile Include="Store\IEstation.cs" />
+    <Compile Include="Store\SqlLite\EstationSqlLite.cs" />
+    <Compile Include="Store\SqlServer\EstationSqlServer.cs" />
+    <Compile Include="Store\Storage.cs" />
+    <Compile Include="Store\WebApi\EstationWebApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Customers\Enums\" />

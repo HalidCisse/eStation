@@ -6,18 +6,26 @@ using System.Security;
 using System.Web.Security;
 using CLib;
 using eStationCore.Helpers;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Hr.Entity;
 using eStationCore.Model.Hr.Views;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
 
     /// <summary>
     /// Gestion des Salaires des Staffs
     /// </summary>
-    public class PayrollManager
+    public class PayrollManager : IPayrollManager
     {
+        private readonly StationContext Db;
+
+        public PayrollManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
+
         /// <summary>
         /// Confirmer paiement d'un salaire
         /// </summary>

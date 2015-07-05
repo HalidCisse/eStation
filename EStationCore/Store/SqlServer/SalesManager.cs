@@ -5,17 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using CLib;
 using CLib.Database.Entity;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Sale.Entity;
 using eStationCore.Model.Sale.Enums;
 using eStationCore.Model.Sale.Views;
 using Humanizer;
 
-namespace eStationCore.Managers
+namespace eStationCore.Store.SqlServer
 {
-    public class SalesManager 
+    public class SalesManager : ISalesManager
     {
-
+        private StationContext Db { get; }
+        public SalesManager(StationContext stationContext)
+        {
+            Db = stationContext;
+        }
 
         #region CRUD
 

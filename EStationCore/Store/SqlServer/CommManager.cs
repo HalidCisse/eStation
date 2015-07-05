@@ -5,18 +5,20 @@ using System.Linq;
 using System.Net.Mail;
 using CLib;
 using CLib.Validation;
+using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Comm.Entity;
 using eStationCore.Model.Comm.Enums;
 using eStationCore.Model.Comm.Views;
 using eStationCore.Model.Common.Entity;
 
-namespace eStationCore.Managers {
+namespace eStationCore.Store.SqlServer {
 
     /// <summary>
     /// Manager des Messages, Annonces, Emails
     /// </summary>
-    public sealed class CommManager {
+    public sealed class CommManager : ICommManager
+    {
 
 
         #region CRUD Message
