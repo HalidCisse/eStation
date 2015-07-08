@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using eStationCore.Model.Common.Entity;
 using eStationCore.Model.Common.Views;
 using eStationCore.Model.Hr.Entity;
@@ -10,7 +11,7 @@ namespace eStationCore.IManagers
 {
     public interface IHrManager
     {
-        bool AddStaff(Staff myStaff);
+        Task<bool> AddStaff(Staff myStaff);
         IEnumerable AllBirthPlaces();
         IEnumerable AllCategories();
         IEnumerable AllDepartement();

@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using CLib.Database.Interfaces;
 using eStationCore.Model.Comm.Entity;
 using eStationCore.Model.Common.Enums;
+using FluentValidation;
+using FluentValidation.Results;
+using FluentValidation.Validators;
 
 namespace eStationCore.Model.Common.Entity
 {
-    public class Person : Tracable
+    public class Person : Tracable, IValidable
     {
         /// <summary>
         /// Guid de la personne Associer
@@ -87,7 +91,6 @@ namespace eStationCore.Model.Common.Entity
 
 
 
-
         
         /// <summary>
         /// Les Documents de la personne
@@ -99,5 +102,33 @@ namespace eStationCore.Model.Common.Entity
         /// </summary>
         public virtual ICollection<Chat> Chats { get; set; } = new HashSet<Chat>();
 
+
+
+        public async Task<List<ValidationFailure>> Validate()
+        {
+            var validationFailures = (await (new PersonValidator()).ValidateAsync(this)).Errors;
+            return validationFailures != null
+                ? validationFailures as List<ValidationFailure>
+                : new List<ValidationFailure>();
+        }
+
+        public async void ValidateAndThrow() => await (new PersonValidator()).ValidateAndThrowAsync(this);
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PersonValidator : AbstractValidator<Person>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public PersonValidator()
+        {
+            RuleFor(objt => objt.PersonGuid).NotEqual(Guid.Empty).WithMessage("Le Guid doit etre ne doit pas etre vide");
+            RuleFor(objt => objt.FirstName).NotEmpty().WithMessage("Le prenom n'est pas valide");
+            RuleFor(objt => objt.EmailAdress).SetValidator(new EmailValidator()).WithMessage("Adresse email non valide");
+        }
     }
 }

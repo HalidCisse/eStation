@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
@@ -79,6 +80,12 @@ namespace eStation.Views.Hr
                     App.Store.HumanResource.AddStaff(newStaff);
                 else
                     App.Store.HumanResource.UpdateStaff(newStaff);
+            }
+            catch (ValidationException validationException)
+            {              
+                ModernDialog.ShowMessage(validationException.Message, "ERREUR", MessageBoxButton.OK);
+                e.Handled = true;
+                return;
             } catch (SecurityException) {
                 ModernDialog.ShowMessage("Permission Refusée", "ERREUR", MessageBoxButton.OK);
                 e.Handled=true;

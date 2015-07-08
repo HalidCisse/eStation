@@ -37,10 +37,8 @@ namespace eStationCore.Store.SqlServer
         /// <exception cref="InvalidOperationException">CAN_NOT_CREAT_STAFF_PROFILE</exception>
         /// <returns></returns>
         [PrincipalPermission(SecurityAction.Demand, Role = SecurityClearances.StaffWrite)]
-        public bool AddStaff(Staff myStaff)
+        public async Task<bool> AddStaff(Staff myStaff)
         {
-
-
             using (var db = new StationContext())
             {
                 if (myStaff.StaffGuid == Guid.Empty)
@@ -48,9 +46,11 @@ namespace eStationCore.Store.SqlServer
                 if (myStaff.Person.PersonGuid == Guid.Empty)
                     myStaff.Person.PersonGuid = Guid.NewGuid();
 
+                await myStaff.Person.Validate();
+
                 db.Set<Person>().Add(myStaff.Person);
                 db.Staffs.Add(myStaff);
-                return db.SaveChanges() > 0;
+                return await db.SaveChangesAsync() > 0;
             }
         }
 

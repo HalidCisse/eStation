@@ -1,0 +1,53 @@
+﻿<Page x:Class="eStation.Views.Journals.ChartView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ext="clr-namespace:eStation.Ext"
+      xmlns:journals="clr-namespace:eStation.Views.Journals"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="1080" Background="Beige" x:ClassModifier="internal">
+
+    <Page.Resources>
+        <ext:TabItemWidthAdjustmentConverter x:Key="TabSizeConverter2" />
+
+    </Page.Resources>
+
+
+    <DockPanel Name="_MAIN_DOCK" >
+        <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Name="_BACK_BUTTON" Content="&#xf0a8;" Grid.Column="0" Width="30" Margin="0,0,0,0" FontSize="30" Height="30" Style="{DynamicResource ToolButtonStyle}" ToolTip="Retour" HorizontalAlignment="Center" Click="BACK_BUTTON_OnClick"/>
+            <TextBlock Grid.Column="1" Name="_TITLE_TEXT" Text="Statistiques" Style="{StaticResource TitleStyle}"/>
+        </Grid>
+
+        <TabControl Name="_MY_TAB_CONTROL" Background="Transparent" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"
+                    Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
+
+            <TabItem Header="         Revenues Financières" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">                
+                <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+            </TabItem>
+            
+            <TabItem Header="        Variations Prix Carburant" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
+                <journals:FuelVariations x:Name="_FUEL_CHART" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+            </TabItem>
+            
+            <TabItem Header="                 Variations Prix Huiles" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">
+                <journals:OilVariations x:Name="_OIL_CHART" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+            </TabItem>
+            
+            <TabControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/Elysium;component/Themes/Tabs/TabControl.xaml"/>
+                        <ResourceDictionary Source="/Elysium;component/Themes/Tabs/TabItem.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </TabControl.Resources>
+        </TabControl>
+    </DockPanel>
+</Page>

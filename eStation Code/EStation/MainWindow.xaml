@@ -1,0 +1,101 @@
+﻿<Window x:Class="eStation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"        
+        mc:Ignorable="d" Height="660" Width="1100" MinHeight="550" MinWidth="850" WindowStartupLocation="CenterScreen" Loaded="MainWindow_OnLoaded"
+        Background="Beige" Icon="{StaticResource MainIcon}" Style="{DynamicResource WindowStyle}" Effect="{StaticResource Z-Depth3}">
+
+    <Window.Resources>
+
+        <Popup x:Key="UserPopup" Placement="Bottom" PopupAnimation="Scroll" StaysOpen="False" HorizontalOffset="-250" VerticalOffset="5" Opened="UserPopup_OnOpened">
+            <Border Width="265" BorderThickness="1" BorderBrush="Peru">
+                <Grid  Effect="{StaticResource Z-Depth5}" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Image Source="{Binding PhotoIdentity}" Stretch="Fill" Width="45" Height="45"/>
+                        <StackPanel VerticalAlignment="Center" Margin="10,0">
+                            <TextBlock Text="{Binding FullName}" Foreground="Gray" FontFamily="{StaticResource NameFontFamily}" FontWeight="Bold" FontSize="15"/>
+                            <TextBlock Text="{Binding Description}" Foreground="LightGray" FontFamily="Verdana" FontWeight="Light" FontSize="10"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                        <Button  Margin="10,0" Content="&#xf084;" Style="{DynamicResource ToolButtonStyle}" ToolTip="Changer Mot de Passe" Click="_CHANGE_PASS_OnClick"/>
+                        <Button  Content="&#xf08b;" Style="{DynamicResource ToolButtonStyle}" ToolTip="Logout" Click="_LOGOUT_BUTTON_OnClick"/>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UserSpaces}" Background="White" SelectedValuePath="Value" SelectedIndex="-1" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Left"  SelectionChanged="_ESPACES_LIST_OnSelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="2,5" Width="155" Background="#25A0DA" BorderThickness=".1" BorderBrush="Gray" Effect="{StaticResource Z-Depth1}" CornerRadius="0" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Key, Mode=OneTime}" Margin="5" Foreground="White" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="Light" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Popup>
+
+
+
+        <Popup x:Key="AboutPopup" Placement="Center" PopupAnimation="Scroll" StaysOpen="False" Opened="AboutPopup_OnOpened">
+            <Border Width="500" Height="400" BorderThickness="1" BorderBrush="Gainsboro" Background="Beige">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Image Source="{Binding ProductIcon}" Margin="10" Stretch="Fill" Width="100" Height="100"/>
+                    <TextBlock Text="{Binding ProductName}" Margin="10" Foreground="Gray" FontFamily="{StaticResource DefaultFontFamily}" FontWeight="ExtraLight" FontSize="40" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding CurrentVersion}" Margin="5" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ProductDescription}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding CopyrightLicence}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Justify" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Copyright}" Margin="10" Foreground="Gray" FontFamily="Verdana" FontWeight="Light" FontSize="10" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock TextAlignment="Center">
+                       <Hyperlink NavigateUri="{Binding DevelopperEmail}" RequestNavigate="Hyperlink_OnRequestNavigate" Foreground="Gray" FontFamily="Verdana" FontWeight="Light">HalidCisse@gmail.com</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                
+            </Border>
+        </Popup>
+    </Window.Resources>
+
+
+    <Grid Margin="2,-25,2,2">
+
+        <StackPanel Orientation="Horizontal" Background="Transparent" Height="50" Margin="10,-25,100,0" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" ZIndex="2">
+            <Image Source="{StaticResource MainIcon}" Stretch="Fill" Height="45" Opacity=".4" ToolTip="{Binding ElementName=_APP_NAME, Path=Text}"/>
+            <TextBlock Name="_APP_NAME" Text="eStation-beta" Visibility="Collapsed" Foreground="#464343" FontSize="13" Margin="10,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <DockPanel >
+
+            <Grid Background="Transparent" DockPanel.Dock="Top" Height="30" Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="1" Name="_USER_NAME_LABEL" Content="Halid Cisse" Target="_POPUP_BUTTON" Foreground="Gray" FontSize="20" Margin="10,0" />
+                <Button Grid.Column="2" Name="_POPUP_BUTTON" Content="&#xf107;" Margin="-05,0,10,0" Style="{DynamicResource ToolButtonStyle}" ToolTip="More" Click="_POPUP_BUTTON_OnClick"/>
+                <Button Grid.Column="3" Name="_SETTING_BUTTON" Content="&#xf0eb;" Margin="10,0" Style="{DynamicResource ToolButtonStyle}" ToolTip="Parametres" Click="SettingButton_OnClick"/>
+            </Grid>
+            
+            <Frame x:Name="_MAIN_FRAME" Source="Login.xaml" NavigationUIVisibility="Hidden" >
+                <Frame.Template>
+                    <ControlTemplate TargetType="Frame">
+                        <mui:TransitioningContentControl Background="Beige" Content="{TemplateBinding Content}"/>
+                    </ControlTemplate>
+                </Frame.Template>
+            </Frame>
+        </DockPanel>      
+    </Grid>
+   
+</Window>

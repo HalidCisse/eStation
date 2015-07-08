@@ -1,0 +1,842 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="4ca22893-05a5-4ed6-bb9f-28a991c26924"
+  name="EStation.Model" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="016303fd-4596-4ad6-8bcd-65454b6d2021">
+      <body>Use Case Responsable Ressouces Humaines</body>
+    </comment>
+    <comment
+      Id="e51f9397-6b85-4baf-a85c-366f7ef6ef3e">
+      <body>Use Case Administrateur</body>
+    </comment>
+    <comment
+      Id="69491672-4be2-4c2f-a76e-4b5b273dcaa8">
+      <body>Use Case Comptable</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="136d3588-3e18-40a5-b6bd-19c3d086efa8"
+        LastKnownName="Package1"
+        LastKnownLocation="Package_1300.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="af325296-d2d7-4839-951b-0a85f90b2b45"
+        name="Administrateur"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="dc92967e-73a1-45a7-a6a8-2fbb4660a77c"
+            isDerived="false"
+            sourceEndRoleName="Administrateur"
+            targetEndRoleName="Login"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3b29d11d-8913-467d-8a59-d7a5e3af5c97"
+              LastKnownName="Login"
+              LastKnownLocation="EStation.Model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3df9a469-518e-46b2-ab08-d2f34e07ac92"
+                  name="Administrateur"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bdc09c72-a069-4f75-82de-a9fb7f590d3e"
+                  name="Login"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+        name="eStation"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3b29d11d-8913-467d-8a59-d7a5e3af5c97"
+        name="Login"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="fec7937b-99e1-41c4-8f08-ff0e0674b31d">
+            <useCaseMoniker
+              Id="10a60f41-2b34-4364-a1a3-f29905f90e92"
+              LastKnownName="Saisie Carburants"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="a50d90a6-b765-42df-9f18-95e591e3b90f">
+            <useCaseMoniker
+              Id="28a9a5bf-769e-4b4c-88e3-42954621d52a"
+              LastKnownName="Preleve Carburants"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="661fc95a-87de-49b7-979d-2bdf033399c8">
+            <useCaseMoniker
+              Id="ffc039d9-7a04-4b9f-a66e-ede2c445159f"
+              LastKnownName="Saisie Huiles"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="ff7512b9-c164-47f5-bcd8-2e9d39298e5f">
+            <useCaseMoniker
+              Id="2cf56429-09c3-4c8d-a504-eb5c85f25c4f"
+              LastKnownName="Preleve Huiles"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="cd7c100b-d01b-43f0-9932-3f28ceb76c90">
+            <useCaseMoniker
+              Id="f10d51fb-654a-42da-90da-533e43f1a5c7"
+              LastKnownName="Saisie Bons Clients"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="6df5ed7c-8473-4836-8000-dc130ce3b691">
+            <useCaseMoniker
+              Id="d1b39b52-d821-49bc-8984-78f50d1c879d"
+              LastKnownName="Visualisation Graphiques des Ventes"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ffc039d9-7a04-4b9f-a66e-ede2c445159f"
+        name="Saisie Huiles"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="10a60f41-2b34-4364-a1a3-f29905f90e92"
+        name="Saisie Carburants"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="28a9a5bf-769e-4b4c-88e3-42954621d52a"
+        name="Preleve Carburants"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2cf56429-09c3-4c8d-a504-eb5c85f25c4f"
+        name="Preleve Huiles"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f10d51fb-654a-42da-90da-533e43f1a5c7"
+        name="Saisie Bons Clients"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="eb83cfb2-0399-4bb6-961d-71f0cb55fca0"
+        name="Responsable Ressource Humaine"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="715b600c-a7ff-40d2-89d2-44829a21080d"
+            isDerived="false"
+            sourceEndRoleName="Staff"
+            targetEndRoleName="Registration des Staffs"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="7f0554b6-9190-4e28-a0b0-2f1ab3a69610"
+              LastKnownName="Recrutement des Staffs/Pompistes"
+              LastKnownLocation="EStation.Model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="84620be3-453a-41c4-ba33-2af6fe6c3527"
+                  name="Staff"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2ec866cc-69b7-4d4d-89bc-9792e9569f2e"
+                  name="Registration des Staffs"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d6d3df47-6f1d-4e30-b747-05dd4d86abd8"
+            isDerived="false"
+            sourceEndRoleName="Responsable Ressource Humaine"
+            targetEndRoleName="Controler la Ponctualite"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d1fb184c-adb4-4122-9afa-c10483654304"
+              LastKnownName="Controler la Ponctualite"
+              LastKnownLocation="EStation.Model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c431cd4f-8e3c-470a-aadc-5810122abdce"
+                  name="Responsable Ressource Humaine"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c2812866-7737-4d16-9d70-c86ef1c52bd9"
+                  name="Controler la Ponctualite"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+        name="Ressources Humaines"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3ce07e77-bf0e-4860-a199-703eb9be605f"
+        name="Gerer les Espaces/Roles des Staffs"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+            LastKnownName="Ressources Humaines"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="27e8c6fb-d84b-48bb-b24d-eca8a196fa89"
+        name="Creer/Blocker les Comptes des Staffs"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="ff7eb2ca-2dea-4cf8-8325-05e11903a58c">
+            <useCaseMoniker
+              Id="3ce07e77-bf0e-4860-a199-703eb9be605f"
+              LastKnownName="Gerer les Espaces/Roles des Staffs"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+            LastKnownName="Ressources Humaines"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="7f0554b6-9190-4e28-a0b0-2f1ab3a69610"
+        name="Recrutement des Staffs/Pompistes"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="824f0d3b-bcce-49f9-9c0b-c1011ff96ad4">
+            <useCaseMoniker
+              Id="27e8c6fb-d84b-48bb-b24d-eca8a196fa89"
+              LastKnownName="Creer/Blocker les Comptes des Staffs"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="c3a01337-dd40-4fec-95d4-9b5c832c41de">
+            <useCaseMoniker
+              Id="6b88b98c-eb36-4192-b887-0b6328ae6f8d"
+              LastKnownName="Affectation  des Specialites"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="74fea204-09c2-42b5-8cb6-1dcb641b7e8f">
+            <useCaseMoniker
+              Id="3014669b-bfbb-44ce-a191-6bef3027a1b2"
+              LastKnownName="Affecter les Postes des staffs"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+            LastKnownName="Ressources Humaines"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6b88b98c-eb36-4192-b887-0b6328ae6f8d"
+        name="Affectation  des Specialites"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d1fb184c-adb4-4122-9afa-c10483654304"
+        name="Controler la Ponctualite"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3014669b-bfbb-44ce-a191-6bef3027a1b2"
+        name="Affecter les Postes des staffs"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="afe5e84c-a1d9-44a7-a626-81a92bc0fe11">
+            <useCaseMoniker
+              Id="442f5b3f-d271-42c0-b912-84ae06a52abd"
+              LastKnownName="Affectation des Remunerations"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+            LastKnownName="Ressources Humaines"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="442f5b3f-d271-42c0-b912-84ae06a52abd"
+        name="Affectation des Remunerations"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="b530a170-b922-4351-9965-5fdd3cefcdb1"
+            LastKnownName="Ressources Humaines"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+        name="Economat"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="31bb6bfb-9a57-4182-a7e0-fb3a57b53e51"
+        name="Controler les Salaires"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="6e51137b-62f5-41d5-8367-a4e64333377f">
+            <useCaseMoniker
+              Id="6bf80a29-d226-4937-adfb-15f2673a246d"
+              LastKnownName="Payer les Salaires"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b2aa383d-cde5-4bc8-8f27-0007edcf596f"
+        name="Gerer les Ventes Huiles/Carburants"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="a9cbadb1-327a-412e-871a-c08c04bba27b">
+            <useCaseMoniker
+              Id="6046b6e8-d9ae-4d1b-9a22-275865259ea9"
+              LastKnownName="Recevoir Un Paiement"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6046b6e8-d9ae-4d1b-9a22-275865259ea9"
+        name="Recevoir Un Paiement"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="3c19108b-7d48-4ca9-a54b-0a20a2dac3f2">
+            <useCaseMoniker
+              Id="eea46152-c098-4143-9c4a-a55e8e3c22e1"
+              LastKnownName="Cash"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="8873e696-7433-4c3e-a77f-3ad1e51e501d">
+            <useCaseMoniker
+              Id="6d6690ca-580e-46ac-a93f-3709b40999f8"
+              LastKnownName="Virement"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="a98c82e5-4af8-4db1-8949-48bb71d2688d">
+            <useCaseMoniker
+              Id="42f741e0-0f27-409d-8b22-f516d9ec70b7"
+              LastKnownName="Cheque"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="56fc3d25-2e49-435f-824e-d01cec3d1803"
+        name="Caisse"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="5e1d7c41-711c-48bc-b1be-f3702ee2d7e9">
+            <useCaseMoniker
+              Id="8118d6b3-08eb-4ab1-87c6-c0ced396c680"
+              LastKnownName="Definir les Recettes"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="88d6bc24-b663-4c09-b4bb-f1c4b5ad18ac">
+            <useCaseMoniker
+              Id="4421b871-ca7c-46ad-87db-4fda092448a2"
+              LastKnownName="Regler les Depense"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="b47ea36a-a67c-4663-9e4c-1ba9535aa7cf">
+            <useCaseMoniker
+              Id="4421b871-ca7c-46ad-87db-4fda092448a2"
+              LastKnownName="Regler les Depense"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="caa65446-a181-4b40-98a3-523032ce1d02">
+            <useCaseMoniker
+              Id="d8b30f98-6a21-4210-98d5-23c8da5477f7"
+              LastKnownName="Controler les Bons"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4421b871-ca7c-46ad-87db-4fda092448a2"
+        name="Regler les Depense"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="28380e2c-52ce-49d5-9266-663a7592e632">
+            <useCaseMoniker
+              Id="6d6690ca-580e-46ac-a93f-3709b40999f8"
+              LastKnownName="Virement"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="6199ed12-6353-40de-8f8c-ec552e87e777">
+            <useCaseMoniker
+              Id="eea46152-c098-4143-9c4a-a55e8e3c22e1"
+              LastKnownName="Cash"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="b0f05326-f59e-465d-a3b3-9f88964ddb5b">
+            <useCaseMoniker
+              Id="42f741e0-0f27-409d-8b22-f516d9ec70b7"
+              LastKnownName="Cheque"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8118d6b3-08eb-4ab1-87c6-c0ced396c680"
+        name="Definir les Recettes"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6d6690ca-580e-46ac-a93f-3709b40999f8"
+        name="Virement"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="eea46152-c098-4143-9c4a-a55e8e3c22e1"
+        name="Cash"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="42f741e0-0f27-409d-8b22-f516d9ec70b7"
+        name="Cheque"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6bf80a29-d226-4937-adfb-15f2673a246d"
+        name="Payer les Salaires"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="75b93461-d75c-448e-a26d-b011e09c2c99">
+            <useCaseMoniker
+              Id="6d6690ca-580e-46ac-a93f-3709b40999f8"
+              LastKnownName="Virement"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="fe823195-dbea-432c-9227-c3ee000311e0">
+            <useCaseMoniker
+              Id="eea46152-c098-4143-9c4a-a55e8e3c22e1"
+              LastKnownName="Cash"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+          <dependency
+            Id="fbb8fc1a-870f-4ea8-be43-75e4d3ae0487">
+            <useCaseMoniker
+              Id="42f741e0-0f27-409d-8b22-f516d9ec70b7"
+              LastKnownName="Cheque"
+              LastKnownLocation="EStation.Model.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="d2a1b9cb-38c2-4fde-8b51-d82d671e8be4"
+        name="Comptable"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="e499580d-5ca3-4a73-8390-de467fc3b00a"
+            isDerived="false"
+            sourceEndRoleName="Comptable"
+            targetEndRoleName="Controler les Salaires"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="31bb6bfb-9a57-4182-a7e0-fb3a57b53e51"
+              LastKnownName="Controler les Salaires"
+              LastKnownLocation="EStation.Model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7c7a63b5-e8b3-4655-afcc-7903ac27776f"
+                  name="Comptable"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="af28fcc3-c6ac-499f-b9bf-53f55a0f8cc1"
+                  name="Controler les Salaires"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2d865b9f-9d41-470b-adac-6ba088365279"
+            isDerived="false"
+            sourceEndRoleName="Comptable"
+            targetEndRoleName="Caisse"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="56fc3d25-2e49-435f-824e-d01cec3d1803"
+              LastKnownName="Caisse"
+              LastKnownLocation="EStation.Model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="af55f3ac-0c56-4cfc-824d-817426c4ee3b"
+                  name="Comptable"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="45d65f25-f58c-41a1-8b13-bd12b811022e"
+                  name="Caisse"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d8b30f98-6a21-4210-98d5-23c8da5477f7"
+        name="Controler les Bons"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="6e65b107-f51f-405d-8019-5e0e20d21969"
+            LastKnownName="Economat"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d1b39b52-d821-49bc-8984-78f50d1c879d"
+        name="Visualisation Graphiques des Ventes"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="50cdfeeb-144f-4ee6-b433-6daede627489"
+            LastKnownName="eStation"
+            LastKnownLocation="EStation.Model.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="6564b26b-1944-4288-8107-6bc43bfa24b8"
+        LastKnownName="Package2"
+        LastKnownLocation="Package_1526.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="159c2007-ffad-4c05-8e37-297565780af2"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

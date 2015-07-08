@@ -1,0 +1,84 @@
+﻿<Window x:Class="eStation.Views.Clients.AddPurchaseService"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ext="clr-namespace:eStation.Ext"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" Style="{StaticResource MyForm}"
+       Height="400" Width="600" FontFamily="Helvetica" x:ClassModifier="internal">
+
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+
+    </Window.Resources>
+
+    <AdornerDecorator>
+        <Grid Name="_GRID" Margin="10,-30,10,20" >
+            <Grid.CommandBindings>
+                <CommandBinding Command="Save" CanExecute="Save_CanExecute" Executed="save_Executed" />
+            </Grid.CommandBindings>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,10">
+                <TextBlock Name="_TITLE_TEXT" Text="BON" Foreground="Gray" VerticalAlignment="Top" FontSize="25" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Service" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBox x:Name="_LIBEL"  HorizontalAlignment="Left" Width="250" Height="30" FontSize="20" Validation.ErrorTemplate ="{DynamicResource ValidationErrorTemplate}" Validation.Error="Validation_Error">
+                    <TextBox.Text>
+                        <Binding Path="Description" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <ext:NameValidator Min="2" IsNullable="False" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Name="_QUANTITY_LABEL" Text="Montant" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <xctk:DoubleUpDown Name="_QUANTITY" FormatString="C0" Increment="100" Minimum="0" Value="{Binding Sum}" HorizontalAlignment="Left" Width="250" Height="30"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock Text="Status" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <ComboBox Name="_STATUS" SelectedValue="{Binding PurchaseState, UpdateSourceTrigger=PropertyChanged}" Width="250" VerticalAlignment="Bottom" HorizontalAlignment="Right" SelectedValuePath="Value" DisplayMemberPath="Key" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Text="Date" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <DatePicker Name="_DATE" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged}" Width="250" Height="30" FontSize="20" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Montant : "/>
+                <TextBlock Text="{Binding ElementName=_QUANTITY, Path=Value, StringFormat=C0}" />
+                <!--<TextBlock Text=" DH" />-->
+            </StackPanel>
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="0,0">
+                <Button Name="_ANNULER" Content="Annuler" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Click="Annuler_Click"/>
+                <Button Content="Enregistrer" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Right" Command="Save" />
+            </Grid>
+
+        </Grid>
+    </AdornerDecorator>
+</Window>
