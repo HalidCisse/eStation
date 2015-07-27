@@ -1,4 +1,5 @@
-﻿using eStationCore.IManagers;
+﻿using CLib.Database.Interfaces;
+using eStationCore.IManagers;
 using eStationCore.Store;
 using eStationCore.Store.Azure;
 using eStationCore.Store.SqlLite;

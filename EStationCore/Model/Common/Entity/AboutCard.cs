@@ -1,8 +1,9 @@
-﻿using eStationCore.Store.SqlServer;
+﻿using CLib.Database.Interfaces;
+using eStationCore.Store.SqlServer;
 
 namespace eStationCore.Model.Common.Entity
 {
-    public class AboutCard
+    public class AboutCard : IAboutCard
     {
         public AboutCard()
         {

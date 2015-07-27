@@ -1,30 +1,37 @@
 ﻿using System.Deployment.Application;
 using System.Reflection;
 using CLib;
-using eStationCore.IManagers;
-using eStationCore.Model;
+using CLib.Database.Interfaces;
 using eStationCore.Model.Common.Entity;
+using eStationCore.Properties;
 
 namespace eStationCore.Store.SqlServer {
     public class MetaManager : IMetaManager
-    {
-        private readonly StationContext Db;
+    {       
+        
+        string IMetaManager.ProductDescription => ProductDescription;
+        byte[] IMetaManager.ProductIcon => ProductIcon;
+        string IMetaManager.DevelopperEmail => DevelopperEmail;
+        string IMetaManager.ProductName => ProductName;        
+        public IAboutCard About { get; } = new AboutCard();
+        string IMetaManager.AssemblyProductVersion => AssemblyProductVersion;
+        bool IMetaManager.IsBeta => IsBeta;
+        string IMetaManager.CurrentVersion => CurrentVersion;
+        string IMetaManager.VersionNumber => VersionNumber;
+        string IMetaManager.CompanyName => CompanyName;
+        string IMetaManager.DevelopperName => DevelopperName;
+        string[] IMetaManager.CopyrightLicence => CopyrightLicence;
+        int IMetaManager.CopyrightStartYear => CopyrightStartYear;
 
-        public MetaManager(StationContext stationContext)
-        {
-            Db = stationContext;
-        }
 
-        public static string ProductName => "eStation";
 
-        public static string ProductDescription => "Logiciel de Gestion de Station Service";
 
-        public static byte[] ProductIcon => ImagesHelper.ImageToByteArray(Properties.Resources.mainicon);
 
-        public static string DevelopperEmail => "HalidCisse@gmail.com";
 
-        public AboutCard About => new AboutCard();
-
+        public static string ProductName { get; } = "eStation";
+        public static string ProductDescription { get; } = "Logiciel de Gestion de Station Service";
+        public static byte[] ProductIcon { get; } = ImagesHelper.ImageToByteArray(Resources.mainicon);
+        public static string DevelopperEmail { get; } = "HalidCisse@gmail.com";
         public static string AssemblyProductVersion {
             get {
                 var attributes = Assembly.GetExecutingAssembly()
@@ -34,33 +41,14 @@ namespace eStationCore.Store.SqlServer {
                     ((AssemblyInformationalVersionAttribute)attributes[0]).InformationalVersion;
             }
         }
-
-        public static bool IsBeta => true;
-
-        public static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed
+        public static bool IsBeta { get; } = true;
+        public static string CurrentVersion { get; } = ApplicationDeployment.IsNetworkDeployed
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
             : Assembly.GetExecutingAssembly().GetName().Version.ToString();
-     
-        public static string VersionNumber => Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-
-        /// <summary>
-        /// Gets the company name.
-        /// </summary>
-        public static string CompanyName => "Matrix Technology";
-
-
-        /// <summary>
-        /// Gets the developper name.
-        /// </summary>
-        public static string DevelopperName => "Halidou Cisse";
-
-
-        /// <summary>
-        /// Gets the copyright banner.
-        /// </summary>
-        public static string[] CopyrightLicence => new[]
-        {
+        public static string VersionNumber { get; } = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string CompanyName { get; } = "Matrix Technology";        
+        public static string DevelopperName { get; } = "Halidou Cisse";
+        public static string[] CopyrightLicence { get; } = {
             "Licensed under the Apache License, Version 2.0 (the \"License\");",
             "you may not use this file except in compliance with the License.",
             "You may obtain a copy of the License at",
@@ -73,7 +61,7 @@ namespace eStationCore.Store.SqlServer {
             "See the License for the specific language governing permissions and",
             "limitations under the License."
         };
-
-        public static int CopyrightStartYear => 2015;
+        public static int CopyrightStartYear { get; } = 2015;
+       
     }
 }

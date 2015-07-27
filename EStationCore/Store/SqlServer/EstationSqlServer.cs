@@ -1,4 +1,5 @@
-﻿using eStationCore.IManagers;
+﻿using CLib.Database.Interfaces;
+using eStationCore.IManagers;
 using eStationCore.Model;
 
 namespace eStationCore.Store.SqlServer
@@ -22,6 +23,6 @@ namespace eStationCore.Store.SqlServer
         public ISecurityManager Authentication { get; } = new SecurityManager(new StationContext());
         public IEconomatManager Economat { get; } = new EconomatManager(new StationContext());
         public IDocumentsManager Documents { get; } = new DocumentsManager(new StationContext());
-        public IMetaManager Meta { get; } = new MetaManager(new StationContext());
+        public IMetaManager Meta { get; } = new MetaManager();
     }
 }

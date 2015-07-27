@@ -16,6 +16,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <DontImportPostSharp>True</DontImportPostSharp>
     <PublishUrl>C:\Users\HALID\Documents\GitHub\Publish\EStation\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -38,8 +39,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <DontImportPostSharp>True</DontImportPostSharp>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,7 +47,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -64,13 +64,14 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D77BE4986CE106868BB10A3FA6E29D6C848D7489</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3F00EE6EB57D109A371CB6710078B17533A8EF4E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>EStation_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
@@ -80,6 +81,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>EStation_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elysium">
@@ -94,13 +101,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless.Extras">
-      <HintPath>..\packages\Exceptionless.Wpf.3.1.1349\lib\net45\Exceptionless.Extras.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.Wpf.3.1.1380\lib\net45\Exceptionless.Extras.dll</HintPath>
     </Reference>
     <Reference Include="Exceptionless.Portable">
-      <HintPath>..\packages\Exceptionless.Portable.3.1.1349\lib\net45\Exceptionless.Portable.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.Portable.3.1.1380\lib\net45\Exceptionless.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Exceptionless.Wpf">
-      <HintPath>..\packages\Exceptionless.Wpf.3.1.1349\lib\net45\Exceptionless.Wpf.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.Wpf.3.1.1380\lib\net45\Exceptionless.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.6.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
@@ -123,10 +130,6 @@
     </Reference>
     <Reference Include="OxyPlot.Xps">
       <HintPath>..\packages\OxyPlot.Wpf.2015.1.893-alpha\lib\net45\OxyPlot.Xps.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp, Version=4.1.15.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\PostSharp.4.1.15\lib\net35-client\PostSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -695,6 +698,7 @@
     </EmbeddedResource>
     <None Include="EStation_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -708,7 +712,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ESchool\ESchool\CLib\CLib.csproj">
+    <ProjectReference Include="..\..\CLib\CLib.csproj">
       <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
       <Name>CLib</Name>
     </ProjectReference>
@@ -750,6 +754,11 @@
     <None Include="Resources\yes.png" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>

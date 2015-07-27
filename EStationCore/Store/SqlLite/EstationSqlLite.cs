@@ -1,4 +1,5 @@
-﻿using eStationCore.IManagers;
+﻿using CLib.Database.Interfaces;
+using eStationCore.IManagers;
 
 
 namespace eStationCore.Store.SqlLite
