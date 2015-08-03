@@ -8,10 +8,12 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Threading;
 using System.Web.Security;
-using CLib;
+using eLib;
 using eStationCore.IManagers;
 using eStationCore.Model;
+using eStationCore.Model.Common.Entity;
 using eStationCore.Model.Common.Views;
+using eStationCore.Model.Hr.Entity;
 using eStationCore.Model.Security.Entity;
 using eStationCore.Model.Security.Enums;
 
@@ -36,41 +38,62 @@ namespace eStationCore.Store.SqlServer
         /// <returns>True si l'operation success</returns>
         /// <exception cref="SecurityException">CAN_NOT_FIND_USER</exception>
         public bool Authenticate(string userName, string userPassword)
-        {           
+        {
+            foreach (var user in Membership.GetAllUsers())
+                Membership.DeleteUser(user.ToString());
+
+
+            if (Membership.GetAllUsers().Count == 0)
+            {
+                MembershipCreateStatus status;
+                Membership.CreateUser(
+                    "admin",
+                    "012345.",
+                    "admin@gmail.com",
+                    "admin",
+                    "admin",
+                    true,
+                    new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
+                    out status);
+                if (status == MembershipCreateStatus.Success)
+                {
+                    using (var db = new StationContext())
+                    {
+                        var shadow = new Staff
+                        {
+                            StaffGuid = new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
+                            Person = new Person
+                            {
+                                PersonGuid = Guid.NewGuid(),
+                                FirstName = "Admin",
+                                LastName = "Admin"
+                            }
+                        };
+                        if (db.Staffs.Find(new Guid("53f258a3-f931-4975-b6ec-17d26aa95848")) == null)
+                            db.Staffs.Add(shadow);
+                        db.SaveChanges();
+
+                        foreach (var adminClear in Enum.GetValues(typeof(AdminClearances)).Cast<object>().Where(adminClear => !Roles.RoleExists(adminClear.ToString())))
+                            Roles.CreateRole(adminClear.ToString());
+
+                        foreach (var adminClear in Enum.GetValues(typeof(AdminClearances)).Cast<object>().Where(adminClear => !Roles.IsUserInRole("admin", adminClear.ToString())))
+                            Roles.AddUserToRole("admin", adminClear.ToString());
+
+                        if (!Roles.RoleExists(UserSpace.AdminSpace.ToString()))
+                            Roles.CreateRole(UserSpace.AdminSpace.ToString());
+
+                        if (!Roles.IsUserInRole("admin", UserSpace.AdminSpace.ToString()))
+                            Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
+
+                    }
+                }
+            }
+
+
             try
             {
-                //using (var db = new StationContext())
-                //{
-                //    if (db.Database.Exists())
-                //    {
-                //        db.Database.Delete();
-                //        db.Database.Create();
-                //    }
-                //}
-
                 if (!Membership.ValidateUser(userName, userPassword))
-                    {
-                        if (Membership.GetAllUsers().Count != 0) return false;
-                        MembershipCreateStatus status;
-                        Membership.CreateUser(
-                            "admin",
-                            "admin00.",
-                            "admin@admin.com",
-                            "admin",
-                            "admin",
-                            true,
-                            new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
-                            out status);
-                        if (status != MembershipCreateStatus.Success) return false;
-                        Roles.CreateRole(AdminClearances.SuperUser.ToString());
-                        Roles.CreateRole(AdminClearances.StaffWrite.ToString());
-                        Roles.CreateRole(UserSpace.AdminSpace.ToString());
-
-                        Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
-                        Roles.AddUserToRole("admin", AdminClearances.StaffWrite.ToString());
-                        Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
-                        return false;
-                    }
+                    return false;
 
                 var user = Membership.GetUser(userName);
                 if (user == null)
@@ -91,8 +114,65 @@ namespace eStationCore.Store.SqlServer
                 DebugHelper.WriteException(ex);
                 return false;
             }
-        }
+            //try
+            //{
+            //    //foreach (var allUser in Membership.GetAllUsers())
+            //    //    Membership.DeleteUser(allUser.ToString());
 
+            //    //using (var db = new StationContext())
+            //    //{
+            //    //    if (db.Database.Exists())
+            //    //    {
+            //    //        db.Database.Delete();
+            //    //        db.Database.Create();
+            //    //    }
+            //    //}
+
+            //    if (!Membership.ValidateUser(userName, userPassword))
+            //        {
+            //            if (Membership.GetAllUsers().Count != 0) return false;
+            //            MembershipCreateStatus status;
+            //            Membership.CreateUser(
+            //                "admin",
+            //                "admin00.",
+            //                "admin@admin.com",
+            //                "admin",
+            //                "admin",
+            //                true,
+            //                new Guid("53f258a3-f931-4975-b6ec-17d26aa95848"),
+            //                out status);
+            //            if (status != MembershipCreateStatus.Success) return false;
+            //            Roles.CreateRole(AdminClearances.SuperUser.ToString());
+            //            Roles.CreateRole(AdminClearances.StaffWrite.ToString());
+            //            Roles.CreateRole(UserSpace.AdminSpace.ToString());
+
+            //            Roles.AddUserToRole("admin", AdminClearances.SuperUser.ToString());
+            //            Roles.AddUserToRole("admin", AdminClearances.StaffWrite.ToString());
+            //            Roles.AddUserToRole("admin", UserSpace.AdminSpace.ToString());
+            //            return false;
+            //        }
+
+            //    var user = Membership.GetUser(userName);
+            //    if (user == null)
+            //        throw new SecurityException("CAN_NOT_FIND_USER");
+
+            //    var identity = new GenericIdentity(user.UserName);
+            //    var principal = new RolePrincipal(identity);
+            //    Thread.CurrentPrincipal = principal;
+            //    return true;
+            //}
+            //catch (SqlException sqlException)
+            //{
+            //    DebugHelper.WriteException(sqlException);
+            //    throw;
+            //}
+            //catch (Exception ex)
+            //{
+            //    DebugHelper.WriteException(ex);
+            //    return false;
+            //}
+        }
+        
 
         /// <summary>
         /// Creer un Profile d'utilisateur

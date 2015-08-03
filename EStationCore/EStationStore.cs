@@ -1,4 +1,4 @@
-﻿using CLib.Database.Interfaces;
+﻿using eLib.Database.Interfaces;
 using eStationCore.IManagers;
 using eStationCore.Store;
 using eStationCore.Store.Azure;

@@ -1,11 +1,10 @@
 using System;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using CLib;
+using eLib;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
 using eStationCore.Model.Common.Enums;
@@ -91,7 +90,7 @@ namespace eStationCore.Migrations
 
             var img = (Image)Resources.ResourceManager.GetObject(imgName, CultureInfo.InvariantCulture);
 
-            return img == null ? null : ImagesHelper.ImageToByteArray(img);
+            return img?.ToByteArray();
         }
 
 

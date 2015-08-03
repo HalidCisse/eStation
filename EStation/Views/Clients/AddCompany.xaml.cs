@@ -3,7 +3,7 @@ using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CLib.Database.Entity;
+using eLib.Database.Model;
 using eStationCore.Model.Sale.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 

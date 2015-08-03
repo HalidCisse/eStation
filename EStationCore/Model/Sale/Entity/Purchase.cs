@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
 using eStationCore.Model.Sale.Enums;
 
 namespace eStationCore.Model.Sale.Entity

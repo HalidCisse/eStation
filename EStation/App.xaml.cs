@@ -5,8 +5,8 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using CLib;
-using CLib.Program;
+using eLib;
+using eLib.Program;
 using eStationCore;
 using eStationCore.Model.Security.Entity;
 using eStationCore.Store;
@@ -81,7 +81,7 @@ namespace eStation
                 var directoryName = Path.Combine(systemPath, "eStation");
                 var debugFile = Path.Combine(directoryName, "Debug.txt");
 
-                DebugHelper.Logger.SaveLog(debugFile);
+                DebugHelper.SaveLog(debugFile);
             });
         }
 
@@ -93,17 +93,17 @@ namespace eStation
             {
                 var loc = GeoHelpers.GetMyGeoLocation().Result;
                 e.Exception.ToExceptionless().MarkAsCritical().AddTags(MetaManager.ProductName).SetUserIdentity(CurrentUser.UserName, CurrentUser.EmailAdress).SetVersion(MetaManager.CurrentVersion).SetGeo(loc.Key, loc.Value).Submit();
-                DebugHelper.Logger.WriteException(e.Exception);
+                DebugHelper.WriteException(e.Exception);
 
                 if (e.Exception.GetType() == typeof(SecurityException))
                     MessageBox.Show("Permission Refusée");
                 else if (e.Exception.GetType() == typeof(InvalidOperationException))
                     MessageBox.Show(e.Exception.Message, "Not Handled Exception");
                 else if (e.Exception.GetType() == typeof(NullReferenceException))
-                    DebugHelper.Logger.WriteException(e.Exception);
+                    DebugHelper.WriteException(e.Exception);
                 //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
                 else if (e.Exception.GetType() == typeof(ArgumentNullException))
-                    DebugHelper.Logger.WriteException(e.Exception);
+                    DebugHelper.WriteException(e.Exception);
                 //MessageBox.Show(e.Exception.Message, "Not Handled Exception");
                 else
                     MessageBox.Show(e.Exception.Message, "Not Handled Exception");

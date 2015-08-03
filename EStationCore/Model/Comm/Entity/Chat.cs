@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
 using eStationCore.Model.Common.Entity;
 
 namespace eStationCore.Model.Comm.Entity {

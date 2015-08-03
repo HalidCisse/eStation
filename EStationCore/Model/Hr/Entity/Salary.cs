@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
 
 namespace eStationCore.Model.Hr.Entity
 {

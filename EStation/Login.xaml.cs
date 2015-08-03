@@ -7,7 +7,7 @@ using System.Web.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CLib;
+using eLib;
 using eStation.Views.Common;
 using eStation.Views.Security;
 using eStationCore.Model.Security.Enums;
@@ -35,7 +35,7 @@ namespace eStation
                     #if (DEBUG)
                     {
                         _PSEUDO.Text = "admin";   //"halid";
-                        _PASSWORD.Password = "admin00."; //"halid5.";
+                        _PASSWORD.Password = "012345."; //"halid5.";
                     }
                     #endif                   
                 }));

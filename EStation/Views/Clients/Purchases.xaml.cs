@@ -5,7 +5,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CLib;
+using eLib;
 using eStation.Ext;
 using eStationCore.Model.Sale.Enums;
 using eStationCore.Model.Sale.Views;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
 using eStationCore.Model.Comm.Entity;
 using eStationCore.Model.Common.Enums;
 using FluentValidation;

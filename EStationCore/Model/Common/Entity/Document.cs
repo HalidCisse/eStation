@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database.Interfaces;
-using CLib.Enums;
+using eLib.Database.Interfaces;
+using eLib.Enums;
 
 namespace eStationCore.Model.Common.Entity
 {

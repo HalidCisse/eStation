@@ -3,7 +3,7 @@ using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CLib;
+using eLib;
 using eStationCore.Model.Sale.Entity;
 using eStationCore.Model.Sale.Enums;
 using FirstFloor.ModernUI.Windows.Controls;

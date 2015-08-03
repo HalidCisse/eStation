@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CLib.Database.Entity;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
+using eLib.Database.Model;
 using eStationCore.Model.Common.Enums;
 
 namespace eStationCore.Model.Sale.Entity

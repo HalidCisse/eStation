@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Security;
 using Bytes2you.Validation;
-using CLib;
+using eLib;
 using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;
@@ -159,7 +159,7 @@ namespace eStationCore.Store.SqlServer
         public Staff GetStaffByGuid(Guid staffGuid)
         {
             using (var db = new StationContext())
-                return QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
+                return db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
         }
 
         
@@ -180,7 +180,7 @@ namespace eStationCore.Store.SqlServer
         public Staff GetCustomerByEmail(string email)
         {
             using (var db = new StationContext())
-                return QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.Person.EmailAdress.Equals(email));
+                return db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.Person.EmailAdress.Equals(email));
         }
 
         
@@ -336,7 +336,7 @@ namespace eStationCore.Store.SqlServer
             {
                 using (var db = new StationContext())
                 {
-                    var x = QueryableExtensions.Include(db.Staffs, s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
+                    var x = db.Staffs.Include(s => s.Person).FirstOrDefault(s => s.StaffGuid == staffGuid);
                     return x;
                 }
             }

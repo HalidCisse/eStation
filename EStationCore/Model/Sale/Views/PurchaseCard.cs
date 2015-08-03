@@ -1,5 +1,5 @@
 ﻿using System;
-using CLib;
+using eLib;
 using eStationCore.Model.Sale.Entity;
 using eStationCore.Model.Sale.Enums;
 using eStationCore.Properties;
@@ -25,11 +25,11 @@ namespace eStationCore.Model.Sale.Views
             switch (purchase.PurchaseState)
             {
                 case PurchaseState.Paid:
-                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.yes);
+                    YesNoImage = Resources.yes.ToByteArray();
                     
                     break;
                 case PurchaseState.UnPaid:
-                    YesNoImage = ImagesHelper.ImageToByteArray(Resources.No);
+                    YesNoImage = Resources.No.ToByteArray();
                     break;
                 case PurchaseState.NotPaying:
                     YesNoImage = null;

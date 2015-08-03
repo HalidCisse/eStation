@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using CLib;
+using System.Windows.Navigation;
+using eLib;
 using eStation.Views.Common;
 using eStation.Views.Security;
 using eStationCore.Model.Security.Enums;
@@ -107,13 +109,13 @@ namespace eStation
             wind.ShowDialog();
         }
 
-        private void Hyperlink_OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             var hyperlink = sender as Hyperlink;
             if (hyperlink == null) return;
             if (!Regex.IsMatch(hyperlink.NavigateUri.ToString(), @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")) return;
             var address = string.Concat("mailto:", hyperlink.NavigateUri.ToString(), "?subject=eStation&body=Bonjour,");
-            try { System.Diagnostics.Process.Start(address); }
+            try { Process.Start(address); }
             catch { MessageBox.Show("Addresse e-mail invalide.", "E-mail error"); }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CLib.Database.Interfaces;
+using eLib.Database.Interfaces;
 
 namespace eStationCore.Model.Oil.Entity
 {

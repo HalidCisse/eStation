@@ -3,7 +3,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CLib;
+using eLib;
 using eStationCore.Model.Common.Views;
 using eStationCore.Model.Security.Enums;
 using FirstFloor.ModernUI.Windows.Controls;

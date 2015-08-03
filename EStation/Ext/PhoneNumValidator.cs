@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
-using CLib.Validation;
+using eLib.Validation;
 
 namespace eStation.Ext {
     internal class PhoneNumValidator:ValidationRule {

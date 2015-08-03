@@ -35,7 +35,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>EStation_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
@@ -59,6 +60,7 @@
     <Reference Include="Humanizer">
       <HintPath>..\packages\Humanizer.1.35.0\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -200,7 +202,6 @@
     <Folder Include="Model\Security\Views\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EStation_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +310,9 @@
     <None Include="Resources\mainicon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CLib\CLib.csproj">
-      <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
-      <Name>CLib</Name>
+    <ProjectReference Include="..\..\eSchool\eLib\eLib.csproj">
+      <Project>{671a74ce-da4a-4c94-8a5f-6e4e47e8da99}</Project>
+      <Name>eLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

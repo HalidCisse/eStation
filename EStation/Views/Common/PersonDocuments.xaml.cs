@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using CLib;
-using CLib.FilesHelper;
+using eLib;
+using eLib.FilesHelper;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace eStation.Views.Common {

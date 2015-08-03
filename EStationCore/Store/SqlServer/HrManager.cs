@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Permissions;
 using System.Threading.Tasks;
-using CLib;
+using eLib;
 using eStationCore.IManagers;
 using eStationCore.Model;
 using eStationCore.Model.Common.Entity;

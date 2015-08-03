@@ -1,6 +1,4 @@
-﻿using eStationCore.Store.SqlServer;
-
-namespace eStationCore.IManagers
+﻿namespace eStationCore.IManagers
 {
     public interface IEconomatManager
     {

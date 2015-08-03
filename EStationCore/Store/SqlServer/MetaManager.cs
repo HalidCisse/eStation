@@ -1,7 +1,7 @@
 ﻿using System.Deployment.Application;
 using System.Reflection;
-using CLib;
-using CLib.Database.Interfaces;
+using eLib;
+using eLib.Database.Interfaces;
 using eStationCore.Model.Common.Entity;
 using eStationCore.Properties;
 
@@ -30,7 +30,7 @@ namespace eStationCore.Store.SqlServer {
 
         public static string ProductName { get; } = "eStation";
         public static string ProductDescription { get; } = "Logiciel de Gestion de Station Service";
-        public static byte[] ProductIcon { get; } = ImagesHelper.ImageToByteArray(Resources.mainicon);
+        public static byte[] ProductIcon { get; } = Resources.mainicon.ToByteArray();
         public static string DevelopperEmail { get; } = "HalidCisse@gmail.com";
         public static string AssemblyProductVersion {
             get {

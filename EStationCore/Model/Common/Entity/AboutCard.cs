@@ -1,4 +1,4 @@
-﻿using CLib.Database.Interfaces;
+﻿using eLib.Database.Interfaces;
 using eStationCore.Store.SqlServer;
 
 namespace eStationCore.Model.Common.Entity

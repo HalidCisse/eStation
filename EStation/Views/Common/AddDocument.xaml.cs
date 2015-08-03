@@ -4,9 +4,9 @@ using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CLib;
-using CLib.Enums;
-using CLib.FilesHelper;
+using eLib;
+using eLib.Enums;
+using eLib.FilesHelper;
 using eStationCore.Model.Common.Entity;
 using FirstFloor.ModernUI.Windows.Controls;
 
@@ -81,8 +81,8 @@ namespace eStation.Views.Common {
 
         private void OpenFile_Click (object sender, RoutedEventArgs e)
         {
-            if (!FilesHelper.BrowseDocuments("Choisir un Document", _FILE_PATH)) return;
-            _documentPath=_FILE_PATH.Text;
+            //if (!) return;
+            _documentPath = FilesHelper.BrowseDocuments("Choisir un Document", _FILE_PATH.Text); //_FILE_PATH.Text;
             _FILE_VALIDATOR.FilePath=_documentPath;
             _FILE_PATH.Text=Path.GetFileName(_documentPath);
         }

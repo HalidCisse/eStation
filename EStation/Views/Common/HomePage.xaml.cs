@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using eStation.Views.Clients;
-using eStation.Views.Fuel;
 using eStation.Views.FuelViews;
 using eStation.Views.Hr;
 using eStation.Views.Journals;

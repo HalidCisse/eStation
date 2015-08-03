@@ -1,5 +1,5 @@
 ﻿using System;
-using CLib;
+using eLib;
 using eStationCore.Model.Hr.Entity;
 
 namespace eStationCore.Model.Hr.Views

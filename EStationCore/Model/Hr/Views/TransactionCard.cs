@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using CLib;
+using eLib;
 using eStationCore.Model.Sale.Entity;
 using eStationCore.Properties;
+using static eLib.ImagesHelper;
 
 namespace eStationCore.Model.Hr.Views {
 
@@ -28,12 +29,12 @@ namespace eStationCore.Model.Hr.Views {
             if (transaction.Amount > 0)
             {
                 AmountString=transaction.Amount.ToString("0.##", CultureInfo.CurrentCulture)+" dhs";
-                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Down);
+                UpDownImage=Resources.Down.ToByteArray();
             }
             else
             {
                 AmountString= (-transaction.Amount).ToString("0.##", CultureInfo.CurrentCulture)+" dhs";
-                UpDownImage=ImagesHelper.ImageToByteArray(Resources.Up);
+                UpDownImage=Resources.Up.ToByteArray();
             }           
         }
 

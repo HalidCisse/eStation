@@ -64,11 +64,10 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3F00EE6EB57D109A371CB6710078B17533A8EF4E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CBFA9274680DDBE579CA924901FE95A7F0887A93</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>eStation_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
@@ -80,7 +79,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>EStation_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -696,7 +696,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="EStation_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -712,9 +711,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CLib\CLib.csproj">
-      <Project>{e6b9d217-36d7-4656-b702-918fc31db125}</Project>
-      <Name>CLib</Name>
+    <ProjectReference Include="..\..\eSchool\eLib\eLib.csproj">
+      <Project>{671a74ce-da4a-4c94-8a5f-6e4e47e8da99}</Project>
+      <Name>eLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\EStationCore\eStationCore.csproj">
       <Project>{c57f8245-b031-4f98-9b2c-e10eeaef1b1a}</Project>
