@@ -39,8 +39,8 @@ namespace eStationCore.Store.SqlServer
         /// <exception cref="SecurityException">CAN_NOT_FIND_USER</exception>
         public bool Authenticate(string userName, string userPassword)
         {
-            foreach (var user in Membership.GetAllUsers())
-                Membership.DeleteUser(user.ToString());
+            //foreach (var user in Membership.GetAllUsers())
+            //    Membership.DeleteUser(user.ToString());
 
 
             if (Membership.GetAllUsers().Count == 0)
@@ -48,7 +48,7 @@ namespace eStationCore.Store.SqlServer
                 MembershipCreateStatus status;
                 Membership.CreateUser(
                     "admin",
-                    "012345.",
+                    "admin00.",
                     "admin@gmail.com",
                     "admin",
                     "admin",

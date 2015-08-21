@@ -35,7 +35,7 @@ namespace eStation
                     #if (DEBUG)
                     {
                         _PSEUDO.Text = "admin";   //"halid";
-                        _PASSWORD.Password = "012345."; //"halid5.";
+                        _PASSWORD.Password = "admin00."; //"halid5.";
                     }
                     #endif                   
                 }));

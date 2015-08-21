@@ -35,8 +35,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>eStationCore.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
@@ -202,6 +201,8 @@
     <Folder Include="Model\Security\Views\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="eStation.snk" />
+    <None Include="eStationCore.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

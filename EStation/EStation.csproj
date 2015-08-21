@@ -64,23 +64,22 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CBFA9274680DDBE579CA924901FE95A7F0887A93</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5A7449D0AAE84CCFEF0EFCE3A06A45630202B207</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>eStation_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>eStation_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>eStation_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -218,9 +217,6 @@
     </Compile>
     <Compile Include="Views\Clients\Purchases.xaml.cs">
       <DependentUpon>Purchases.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Common\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\AddDocument.xaml.cs">
       <DependentUpon>AddDocument.xaml</DependentUpon>
@@ -444,10 +440,6 @@
     <Page Include="Views\Clients\Purchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Common\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Common\AddDocument.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -696,6 +688,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="eStation.snk" />
+    <None Include="eStation_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -767,14 +761,7 @@
   <ItemGroup>
     <Resource Include="favicon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <FileAssociation Include=".es">
-      <Visible>False</Visible>
-      <Description>EStation Database</Description>
-      <Progid>EStation</Progid>
-      <DefaultIcon>favicon.ico</DefaultIcon>
-    </FileAssociation>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Ressources\Icon\Doc.png" />
     <Resource Include="Ressources\Icon\finance.png" />
