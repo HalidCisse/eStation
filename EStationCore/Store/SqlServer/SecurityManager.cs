@@ -21,11 +21,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class SecurityManager : ISecurityManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public SecurityManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

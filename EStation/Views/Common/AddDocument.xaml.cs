@@ -81,7 +81,6 @@ namespace eStation.Views.Common {
 
         private void OpenFile_Click (object sender, RoutedEventArgs e)
         {
-            //if (!) return;
             _documentPath = FilesHelper.BrowseDocuments("Choisir un Document", _FILE_PATH.Text); //_FILE_PATH.Text;
             _FILE_VALIDATOR.FilePath=_documentPath;
             _FILE_PATH.Text=Path.GetFileName(_documentPath);

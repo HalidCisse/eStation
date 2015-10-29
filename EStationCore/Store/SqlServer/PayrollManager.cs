@@ -19,11 +19,11 @@ namespace eStationCore.Store.SqlServer
     /// </summary>
     public class PayrollManager : IPayrollManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public PayrollManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         /// <summary>

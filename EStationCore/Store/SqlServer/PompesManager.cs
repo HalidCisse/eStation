@@ -14,11 +14,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class PompesManager : IPompesManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public PompesManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

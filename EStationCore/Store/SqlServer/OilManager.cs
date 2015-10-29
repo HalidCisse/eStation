@@ -16,11 +16,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class OilManager : IOilManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public OilManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

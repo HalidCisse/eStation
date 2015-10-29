@@ -17,11 +17,11 @@ namespace eStationCore.Store.SqlServer {
     /// </summary>
     public sealed class FinanceManager : IFinanceManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public FinanceManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD
@@ -198,7 +198,7 @@ namespace eStationCore.Store.SqlServer {
         #region Analytic
 
       
-        public async Task<List<KeyValuePair<DateTime, double>>> MonthlySalary(DateTime fromDate, DateTime toDate)
+        public async Task<IEnumerable<KeyValuePair<DateTime, double>>> MonthlySalary(DateTime fromDate, DateTime toDate)
         {           
             var points = new List<KeyValuePair<DateTime, double>>();
             foreach (var date in DateTimeHelper.EachMonth(new DateTime(fromDate.Year, fromDate.Month, 1), new DateTime(toDate.Year, toDate.Month, 1)))

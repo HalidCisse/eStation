@@ -12,11 +12,11 @@ namespace eStationCore.Store.SqlServer {
     /// </summary>
     public sealed class DocumentsManager : IDocumentsManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public DocumentsManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         /// <summary>

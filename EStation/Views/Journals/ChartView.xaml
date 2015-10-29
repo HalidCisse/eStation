@@ -29,7 +29,7 @@
                     Tag="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource TabSizeConverter2}, ConverterParameter=3}">
 
             <TabItem Header="         Revenues Financières" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">                
-                <journals:ChartFinance x:Name="ChartFinance" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+                <journals:ChartFinance x:Name="_CHART_FINANCE" Effect="{StaticResource Z-Depth1}" Margin="10"/>
             </TabItem>
             
             <TabItem Header="        Variations Prix Carburant" Width="{Binding ElementName=_MY_TAB_CONTROL, Path=Tag}">

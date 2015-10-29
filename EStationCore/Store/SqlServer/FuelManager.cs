@@ -13,11 +13,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class FuelManager : IFuelManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public FuelManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

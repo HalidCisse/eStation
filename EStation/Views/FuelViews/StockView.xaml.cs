@@ -28,7 +28,7 @@ namespace eStation.Views.FuelViews
         {
             if (sender == null) return;
 
-            await OilDeliveries.Refresh((List<Guid>)sender);
+            await _OIL_DELIVERIES.Refresh((List<Guid>)sender);
             await _OIL_PRELEVS.Refresh((List<Guid>) sender);
         }
 

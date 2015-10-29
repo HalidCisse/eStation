@@ -60,7 +60,7 @@ namespace eStation.Views.Journals
                     ItemsSource = (await App.Store.Fuels.GetMonthlySales(new List<Guid> { fuel.FuelGuid }, fromDate, toDate)),
                     ValueField = "Value",
                     Title = fuel.Libel.ToUpper(),
-                    FillColor = OxyColor.FromArgb(col.A, col.R, col.G, col.B) ,            //OxyColors.LightGreen,
+                    FillColor = OxyColor.FromArgb(col.A, col.R, col.G, col.B) ,            
                     LabelPlacement = LabelPlacement.Outside,
                     LabelFormatString = "{0:f0}",
                     TextColor = OxyColors.DimGray,

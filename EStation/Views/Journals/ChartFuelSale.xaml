@@ -12,7 +12,7 @@
     <Grid>
     <oxy:PlotView Name="_PLOT_VIEW" Background="Beige"/>
     <Grid>
-        <xctk:BusyIndicator Name="_BUSY_INDICATOR" IsBusy="True" Style="{DynamicResource BusyStyle}" BusyContent="Patientez ..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <xctk:BusyIndicator Name="_BUSY_INDICATOR" IsBusy="False" Style="{DynamicResource BusyStyle}" BusyContent="Patientez ..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
     </Grid>
 </UserControl>

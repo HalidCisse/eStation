@@ -50,7 +50,7 @@
 
                         <oilViews:OilPrelev x:Name="_OIL_PRELEVS" Effect="{StaticResource Z-Depth1}" Margin="10"/>
 
-                        <oilViews:OilDeliveries x:Name="OilDeliveries" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+                        <oilViews:OilDeliveries x:Name="_OIL_DELIVERIES" Effect="{StaticResource Z-Depth1}" Margin="10"/>
 
                     </StackPanel>
                 </ScrollViewer>

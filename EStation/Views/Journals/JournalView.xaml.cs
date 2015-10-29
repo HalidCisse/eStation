@@ -20,7 +20,7 @@ namespace eStation.Views.Journals
         {
             await _FUEL_PERIOD.Refresh(fromDate, toDate)
             .ContinueWith(task => _OIL_PERIOD.Refresh(fromDate, toDate))
-            .ContinueWith(task => FinanceCard.Refresh(fromDate: fromDate, toDate: toDate));
+            .ContinueWith(task => _FINANCE_CARD.Refresh(fromDate: fromDate, toDate: toDate));
         }
 
         private async void BACK_BUTTON_OnClick(object sender, RoutedEventArgs e) 
@@ -30,13 +30,13 @@ namespace eStation.Views.Journals
                 => await _FUELS_SALES.Refresh(_FUEL_PERIOD.SelectedFuels, _FUEL_PERIOD.FromDate,_FUEL_PERIOD.ToDate);
 
         private async void OilPeriodCard_OnSelectionChanged(object sender, EventArgs e)            
-                => await ChartOilSale.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate);
+                => await _CHART_OIL_SALE.Refresh(_OIL_PERIOD.SelectedOils, _OIL_PERIOD.FromDate, _OIL_PERIOD.ToDate);
 
         private async void CaisseDetails_OnDateSelectionChanged(object sender, EventArgs e) 
-                => await _TRANS_CARD.Refresh(FinanceCard.FromDate, FinanceCard.ToDate);
+                => await _TRANS_CARD.Refresh(_FINANCE_CARD.FromDate, _FINANCE_CARD.ToDate);
 
         private async void CaisseTransactions_OnRefreshed(object sender, EventArgs e) 
-                =>await FinanceCard.Refresh(false);        
+                =>await _FINANCE_CARD.Refresh(false);        
 
     }
 }

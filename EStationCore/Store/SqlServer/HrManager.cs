@@ -19,11 +19,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class HrManager : IHrManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public HrManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

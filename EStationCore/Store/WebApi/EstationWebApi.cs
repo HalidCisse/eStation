@@ -5,11 +5,11 @@ namespace eStationCore.Store.WebApi
 {
     public class EstationWebApi : IEstation
     {
-        private string path;
+        private string _path;
 
         public EstationWebApi(string path)
         {
-            this.path = path;
+            this._path = path;
         }
 
         public ISalesManager Sales { get; }

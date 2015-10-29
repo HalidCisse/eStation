@@ -5,11 +5,11 @@ namespace eStationCore.Store.Azure
 {
     public class EstationAzure : IEstation
     {
-        private string path;
+        private string _path;
 
         public EstationAzure(string path)
         {
-            this.path = path;
+            this._path = path;
         }
 
         public ISalesManager Sales { get; }

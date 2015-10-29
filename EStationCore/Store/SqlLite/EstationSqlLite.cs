@@ -5,11 +5,11 @@ namespace eStationCore.Store.SqlLite
 {
     public class EstationSqlLite : IEstation
     {
-        private string path;
+        private string _path;
 
         public EstationSqlLite(string path)
         {
-            this.path = path;
+            this._path = path;
         }
 
         public ISalesManager Sales { get; }

@@ -13,11 +13,11 @@ namespace eStationCore.Store.SqlServer
 {
     public class CiternesManager : ICiternesManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public CiternesManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

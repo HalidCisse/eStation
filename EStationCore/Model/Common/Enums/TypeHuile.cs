@@ -8,7 +8,7 @@ namespace eStationCore.Model.Common.Enums
         /// SAE50
         /// </summary>
         [Description("SAE50")]
-        SAE50,
+        Sae50,
 
 
     }

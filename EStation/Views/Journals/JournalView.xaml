@@ -51,7 +51,7 @@
                     
                     <journals:OilPeriodCard x:Name="_OIL_PERIOD" Effect="{StaticResource Z-Depth1}" Margin="10" SelectionChanged="OilPeriodCard_OnSelectionChanged"/>
 
-                    <journals:ChartOilSale Grid.Column="1" x:Name="ChartOilSale" Effect="{StaticResource Z-Depth1}" Margin="10"/>
+                    <journals:ChartOilSale Grid.Column="1" x:Name="_CHART_OIL_SALE" Effect="{StaticResource Z-Depth1}" Margin="10"/>
                         
                </Grid>
             </TabItem>
@@ -60,7 +60,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
 
-                        <journals:FinanceDetails x:Name="FinanceCard" Effect="{StaticResource Z-Depth1}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
+                        <journals:FinanceDetails x:Name="_FINANCE_CARD" Effect="{StaticResource Z-Depth1}" Margin="10" DateSelectionChanged="CaisseDetails_OnDateSelectionChanged"/>
 
                         <journals:CaisseTransactions x:Name="_TRANS_CARD" Effect="{StaticResource Z-Depth1}" Margin="10" Refreshed="CaisseTransactions_OnRefreshed"/>
 

@@ -17,11 +17,11 @@ namespace eStationCore.Store.SqlServer
 {
     public sealed class CustomersManager : ICustomersManager
     {
-        private readonly StationContext Db;
+        private readonly StationContext _db;
 
         public CustomersManager(StationContext stationContext)
         {
-            Db = stationContext;
+            _db = stationContext;
         }
 
         #region CRUD

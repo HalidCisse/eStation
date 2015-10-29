@@ -19,7 +19,7 @@ namespace eStationCore.IManagers
         Task<List<KeyValuePair<DateTime, double>>> MonthlyExpense(DateTime fromDate, DateTime toDate);
         Task<List<KeyValuePair<DateTime, double>>> MonthlyIncome(DateTime fromDate, DateTime toDate);
         Task<List<KeyValuePair<DateTime, double>>> MonthlyRecette(DateTime fromDate, DateTime toDate);
-        Task<List<KeyValuePair<DateTime, double>>> MonthlySalary(DateTime fromDate, DateTime toDate);
+        Task<IEnumerable<KeyValuePair<DateTime, double>>> MonthlySalary(DateTime fromDate, DateTime toDate);
         bool NewTransaction(Transaction newTransaction);
         bool RefTransactionExist(string theReference);
     }
